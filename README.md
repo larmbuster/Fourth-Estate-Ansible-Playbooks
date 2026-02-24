@@ -32,6 +32,7 @@ This repository provides production-ready Ansible automation for network infrast
 - [Compliance and Security](#compliance-and-security)
 - [Contribution Guidelines](#contribution-guidelines)
 - [Where to Get Help](#where-to-get-help)
+- [**DISA STIG & NIST 800-53 Compliance Mapping**](./COMPLIANCE_MAPPING.md)
 
 ## Repository Purpose
 
@@ -567,6 +568,9 @@ Each technology should have:
 - **Production** - Controlled deployments with change management
 
 ## Compliance and Security
+
+> For a full role-by-role mapping to specific DISA STIG findings and NIST 800-53 Rev 5
+> controls, see **[COMPLIANCE_MAPPING.md](./COMPLIANCE_MAPPING.md)**.
 
 ### DoD Security Technical Implementation Guides (STIGs)
 
