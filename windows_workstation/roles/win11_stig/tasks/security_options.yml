@@ -1,0 +1,657 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - Security Options
+# WN11-SO-* rules
+# Enforced via ansible.windows.win_regedit and
+# community.windows.win_security_policy
+# =========================================
+
+# -----------------------------------------
+# WN11-SO-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000010 | The built-in guest account must be disabled."
+  ansible.windows.win_user:
+    name: Guest
+    account_disabled: true
+  tags:
+    - WN11-SO-000010
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000015 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000015 | Local accounts with blank passwords must be restricted to prevent access from the network."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: LimitBlankPasswordUse
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000015
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000020 | The built-in administrator account must be renamed."
+  community.windows.win_security_policy:
+    section: System Access
+    key: NewAdministratorName
+    value: "{{ win11_stig_renamed_admin_account }}"
+  tags:
+    - WN11-SO-000020
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000025 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000025 | The built-in guest account must be renamed."
+  community.windows.win_security_policy:
+    section: System Access
+    key: NewGuestName
+    value: "{{ win11_stig_renamed_guest_account }}"
+  tags:
+    - WN11-SO-000025
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000030 | Audit policy using subcategories must be enabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: SCENoApplyLegacyAuditPolicy
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000030
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000035 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000035 | Outgoing secure channel traffic must be encrypted or signed."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters
+    name: RequireSignOrSeal
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000035
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000040 | Outgoing secure channel traffic must be encrypted."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters
+    name: SealSecureChannel
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000040
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000045 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000045 | Outgoing secure channel traffic must be signed."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters
+    name: SignSecureChannel
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000045
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000050 - LOW
+# -----------------------------------------
+
+- name: "WN11-SO-000050 | The computer account password must not be prevented from being reset."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters
+    name: DisablePasswordChange
+    data: 0
+    type: dword
+  tags:
+    - WN11-SO-000050
+    - cat3
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000055 - LOW
+# -----------------------------------------
+
+- name: "WN11-SO-000055 | The maximum age for machine account passwords must be configured to 30 days or less."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters
+    name: MaximumPasswordAge
+    data: 30
+    type: dword
+  tags:
+    - WN11-SO-000055
+    - cat3
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000060 | The system must be configured to require a strong session key."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters
+    name: RequireStrongKey
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000060
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000070 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000070 | The machine inactivity limit must be set to 15 minutes, locking the system with the screensaver."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: InactivityTimeoutSecs
+    data: "{{ win11_stig_inactivity_timeout }}"
+    type: dword
+  tags:
+    - WN11-SO-000070
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000075 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000075 | The required legal notice must be configured to display before console logon."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: LegalNoticeText
+    data: "{{ win11_stig_legal_notice_text }}"
+    type: string
+  tags:
+    - WN11-SO-000075
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000080 - LOW
+# -----------------------------------------
+
+- name: "WN11-SO-000080 | The Windows message title for the legal notice must be configured."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: LegalNoticeCaption
+    data: "{{ win11_stig_legal_notice_caption }}"
+    type: string
+  tags:
+    - WN11-SO-000080
+    - cat3
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000085 - LOW
+# -----------------------------------------
+
+- name: "WN11-SO-000085 | Caching of logon credentials must be limited."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: CachedLogonsCount
+    data: "{{ win11_stig_cached_logons }}"
+    type: string
+  tags:
+    - WN11-SO-000085
+    - cat3
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000095 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000095 | The Smart Card removal option must be configured to Force Logoff or Lock Workstation."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: SCRemoveOption
+    data: "1"
+    type: string
+  tags:
+    - WN11-SO-000095
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000100 | The Windows SMB client must be configured to always perform SMB packet signing."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
+    name: RequireSecuritySignature
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000100
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000110 | Unencrypted passwords must not be sent to third-party SMB Servers."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
+    name: EnablePlainTextPassword
+    data: 0
+    type: dword
+  tags:
+    - WN11-SO-000110
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000120 | The Windows SMB server must be configured to always perform SMB packet signing."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: RequireSecuritySignature
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000120
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000140 - HIGH
+# -----------------------------------------
+
+- name: "WN11-SO-000140 | Anonymous SID/Name translation must not be allowed."
+  community.windows.win_security_policy:
+    section: System Access
+    key: LSAAnonymousNameLookup
+    value: 0
+  tags:
+    - WN11-SO-000140
+    - cat1
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000145 - HIGH
+# -----------------------------------------
+
+- name: "WN11-SO-000145 | Anonymous enumeration of SAM accounts must not be allowed."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RestrictAnonymousSAM
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000145
+    - cat1
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000150 - HIGH
+# -----------------------------------------
+
+- name: "WN11-SO-000150 | Anonymous enumeration of shares must be restricted."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RestrictAnonymous
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000150
+    - cat1
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000160 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000160 | The system must be configured to prevent anonymous users from having the same rights as the Everyone group."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: EveryoneIncludesAnonymous
+    data: 0
+    type: dword
+  tags:
+    - WN11-SO-000160
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000165 - HIGH
+# -----------------------------------------
+
+- name: "WN11-SO-000165 | Anonymous access to Named Pipes and Shares must be restricted."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: RestrictNullSessAccess
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000165
+    - cat1
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000167 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000167 | Remote calls to the Security Account Manager (SAM) must be restricted to Administrators."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: RestrictRemoteSAM
+    data: "O:BAG:BAD:(A;;RC;;;BA)"
+    type: string
+  tags:
+    - WN11-SO-000167
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000180 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000180 | NTLM must be prevented from falling back to a Null session."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    name: allownullsessionfallback
+    data: 0
+    type: dword
+  tags:
+    - WN11-SO-000180
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000185 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000185 | PKU2U authentication using online identities must be prevented."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\pku2u
+    name: AllowOnlineID
+    data: 0
+    type: dword
+  tags:
+    - WN11-SO-000185
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000190 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000190 | Kerberos encryption types must be configured to prevent the use of DES and RC4 encryption suites."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters
+    name: SupportedEncryptionTypes
+    data: 2147483640
+    type: dword
+  tags:
+    - WN11-SO-000190
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000195 - HIGH
+# -----------------------------------------
+
+- name: "WN11-SO-000195 | The system must be configured to prevent the storage of the LAN Manager hash of passwords."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: NoLMHash
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000195
+    - cat1
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000205 - HIGH
+# -----------------------------------------
+
+- name: "WN11-SO-000205 | The LanMan authentication level must be set to send NTLMv2 response only, and to refuse LM and NTLM."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    name: LmCompatibilityLevel
+    data: 5
+    type: dword
+  tags:
+    - WN11-SO-000205
+    - cat1
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000210 | The system must be configured to the required LDAP client signing level."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LDAP
+    name: LDAPClientIntegrity
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000210
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000215 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000215 | The system must be configured to meet the minimum session security requirement for NTLM SSP based clients."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    name: NTLMMinClientSec
+    data: 537395200
+    type: dword
+  tags:
+    - WN11-SO-000215
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000220 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000220 | The system must be configured to meet the minimum session security requirement for NTLM SSP based servers."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    name: NTLMMinServerSec
+    data: 537395200
+    type: dword
+  tags:
+    - WN11-SO-000220
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000230 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000230 | The system must be configured to use FIPS-compliant algorithms for encryption, hashing, and signing."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy
+    name: Enabled
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000230
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000240 - LOW
+# -----------------------------------------
+
+- name: "WN11-SO-000240 | The default permissions of global system objects must be increased."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager
+    name: ProtectionMode
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000240
+    - cat3
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000245 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000245 | User Account Control approval mode for the built-in Administrator must be enabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: FilterAdministratorToken
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000245
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000250 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000250 | User Account Control must prompt administrators for consent on the secure desktop."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: ConsentPromptBehaviorAdmin
+    data: 2
+    type: dword
+  tags:
+    - WN11-SO-000250
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000251 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000251 | MANUAL CHECK - Windows 11 must use multifactor authentication for local and network access."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify multifactor authentication is configured for local and network access to all accounts."
+  tags:
+    - WN11-SO-000251
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000255 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000255 | User Account Control must automatically deny elevation requests for standard users."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: ConsentPromptBehaviorUser
+    data: 0
+    type: dword
+  tags:
+    - WN11-SO-000255
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000260 | User Account Control must be configured to detect application installations and prompt for elevation."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: EnableInstallerDetection
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000260
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000265 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000265 | User Account Control must only elevate UIAccess applications that are installed in secure locations."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: EnableSecureUIAPaths
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000265
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000270 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000270 | User Account Control must run all administrators in Admin Approval Mode, enabling UAC."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: EnableLUA
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000270
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000275 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000275 | User Account Control must virtualize file and registry write failures to per-user locations."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: EnableVirtualization
+    data: 1
+    type: dword
+  tags:
+    - WN11-SO-000275
+    - cat2
+    - security_options
+
+# -----------------------------------------
+# WN11-SO-000280 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-SO-000280 | MANUAL CHECK - Passwords for enabled local Administrator accounts must be changed at least every 60 days."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify passwords for enabled local Administrator accounts are changed at least every 60 days."
+  tags:
+    - WN11-SO-000280
+    - cat2
+    - security_options
+

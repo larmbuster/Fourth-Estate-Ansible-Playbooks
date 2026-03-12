@@ -1,0 +1,156 @@
+---
+argument_specs:
+  main:
+    short_description: Windows 11 DISA STIG V2R6 hardening
+    description:
+      - Applies DISA STIG V2R6 hardening to domain-joined Windows 11 workstations.
+    options:
+      win11_stig_lockout_duration:
+        type: int
+        default: 15
+        description: Account lockout duration in minutes (STIG minimum 15).
+      win11_stig_lockout_threshold:
+        type: int
+        default: 3
+        description: Failed logon attempts before lockout (STIG maximum 3).
+      win11_stig_lockout_reset_counter:
+        type: int
+        default: 15
+        description: Minutes before lockout counter resets (STIG minimum 15).
+      win11_stig_password_history:
+        type: int
+        default: 24
+        description: Number of passwords remembered (STIG minimum 24).
+      win11_stig_max_password_age:
+        type: int
+        default: 60
+        description: Maximum password age in days (STIG maximum 60).
+      win11_stig_min_password_age:
+        type: int
+        default: 1
+        description: Minimum password age in days (STIG minimum 1).
+      win11_stig_min_password_length:
+        type: int
+        default: 14
+        description: Minimum password length in characters (STIG minimum 14).
+      win11_stig_renamed_admin_account:
+        type: str
+        default: adminaccount
+        description: Name to assign the built-in Administrator account.
+      win11_stig_renamed_guest_account:
+        type: str
+        default: guestaccount
+        description: Name to assign the built-in Guest account.
+      win11_stig_inactivity_timeout:
+        type: int
+        default: 900
+        description: Machine inactivity timeout in seconds (STIG maximum 900).
+      win11_stig_legal_notice_caption:
+        type: str
+        default: "DoD Notice and Consent Banner"
+        description: Title for the pre-logon legal notice dialog.
+      win11_stig_legal_notice_text:
+        type: str
+        default: >-
+          You are accessing a U.S. Government (USG) Information System (IS) that is
+          provided for USG-authorized use only. By using this IS (which includes any
+          device attached to this IS), you consent to the following conditions:
+          -The USG routinely intercepts and monitors communications on this IS for
+          purposes including, but not limited to, penetration testing, COMSEC
+          monitoring, network operations and defense, personnel misconduct (PM), law
+          enforcement (LE), and counterintelligence (CI) investigations.
+          -At any time, the USG may inspect and seize data stored on this IS.
+          -Communications using, or data stored on, this IS are not private, are
+          subject to routine monitoring, interception, and search, and may be
+          disclosed or used for any USG-authorized purpose.
+          -This IS includes security measures (e.g., authentication and access
+          controls) to protect USG interests--not for your personal benefit or
+          privacy.
+          -Notwithstanding the above, using this IS does not constitute consent to
+          PM, LE or CI investigative searching or monitoring of the content of
+          privileged communications, or work product, related to personal
+          representation or services by attorneys, psychotherapists, or clergy, and
+          their assistants. Such communications and work product are private and
+          confidential. See User Agreement for details.
+        description: Body text for the pre-logon legal notice dialog.
+      win11_stig_cached_logons:
+        type: int
+        default: 4
+        description: Number of cached logon credentials (STIG maximum 4).
+      win11_stig_bitlocker_min_pin:
+        type: int
+        default: 6
+        description: BitLocker minimum PIN length in digits (STIG minimum 6).
+      win11_stig_telemetry_level:
+        type: int
+        default: 0
+        description: Windows telemetry level (0=Security/Enterprise, 1=Basic).
+      win11_stig_network_access_groups:
+        type: list
+        elements: str
+        default:
+          - Administrators
+          - Remote Desktop Users
+        description: Groups allowed to access this computer from the network.
+      win11_stig_logon_locally_groups:
+        type: list
+        elements: str
+        default:
+          - Administrators
+          - Users
+        description: Groups allowed to log on locally.
+      win11_stig_deny_network_access_groups:
+        type: list
+        elements: str
+        default:
+          - Enterprise Admins
+          - Domain Admins
+          - Guests
+          - Local account
+        description: Groups denied access to this computer from the network.
+      win11_stig_deny_batch_logon_groups:
+        type: list
+        elements: str
+        default:
+          - Enterprise Admins
+          - Domain Admins
+          - Guests
+        description: Groups denied logon as a batch job.
+      win11_stig_deny_service_logon_groups:
+        type: list
+        elements: str
+        default:
+          - Enterprise Admins
+          - Domain Admins
+        description: Groups denied logon as a service.
+      win11_stig_deny_local_logon_groups:
+        type: list
+        elements: str
+        default:
+          - Enterprise Admins
+          - Domain Admins
+          - Guests
+        description: Groups denied local logon.
+      win11_stig_deny_rdp_groups:
+        type: list
+        elements: str
+        default:
+          - Enterprise Admins
+          - Domain Admins
+          - Guests
+          - Local account
+        description: Groups denied logon through Remote Desktop Services.
+      win11_stig_remote_shutdown_groups:
+        type: list
+        elements: str
+        default:
+          - Administrators
+        description: Groups allowed to force shutdown from a remote system.
+      win11_stig_min_os_build:
+        type: str
+        default: "22621.380"
+        description: Minimum required OS build for verification.
+      win11_stig_auto_reboot:
+        type: bool
+        default: false
+        description: Automatically reboot after changes that require it.

@@ -1,0 +1,95 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - Public Key / Certificates
+# WN11-PK-* rules
+# Verification tasks querying certificate stores via
+# ansible.windows.win_certificate_info
+# =========================================
+
+# -----------------------------------------
+# WN11-PK-000005 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-PK-000005 | The DoD Root CA certificates must be installed in the Trusted Root Store"
+  ansible.windows.win_certificate_info:
+    store_name: Root
+    store_location: LocalMachine
+  register: wn11_pk_000005_result
+  tags:
+    - WN11-PK-000005
+    - cat2
+    - public_key
+
+- name: "WN11-PK-000005 | Display DoD Root CA certificates"
+  ansible.builtin.debug:
+    msg: "{{ wn11_pk_000005_result.certificates | selectattr('subject', 'search', 'DoD') | list }}"
+  tags:
+    - WN11-PK-000005
+    - cat2
+    - public_key
+
+# -----------------------------------------
+# WN11-PK-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-PK-000010 | The External Root CA certificates must be installed in the Trusted Root Store on unclassified systems"
+  ansible.windows.win_certificate_info:
+    store_name: Root
+    store_location: LocalMachine
+  register: wn11_pk_000010_result
+  tags:
+    - WN11-PK-000010
+    - cat2
+    - public_key
+
+- name: "WN11-PK-000010 | Display External Root CA certificates"
+  ansible.builtin.debug:
+    msg: "{{ wn11_pk_000010_result.certificates | selectattr('subject', 'search', 'ECA') | list }}"
+  tags:
+    - WN11-PK-000010
+    - cat2
+    - public_key
+
+# -----------------------------------------
+# WN11-PK-000015 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-PK-000015 | The DoD Interoperability Root CA cross-certificates must be installed in the Untrusted Certificates Store on unclassified systems"
+  ansible.windows.win_certificate_info:
+    store_name: Disallowed
+    store_location: LocalMachine
+  register: wn11_pk_000015_result
+  tags:
+    - WN11-PK-000015
+    - cat2
+    - public_key
+
+- name: "WN11-PK-000015 | Display DoD Interoperability cross-certificates"
+  ansible.builtin.debug:
+    msg: "{{ wn11_pk_000015_result.certificates | selectattr('issuer', 'search', 'DoD Interoperability') | selectattr('subject', 'search', 'DoD') | list }}"
+  tags:
+    - WN11-PK-000015
+    - cat2
+    - public_key
+
+# -----------------------------------------
+# WN11-PK-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-PK-000020 | The US DOD CCEB Interoperability Root CA cross-certificates must be installed in the Untrusted Certificates Store on unclassified systems"
+  ansible.windows.win_certificate_info:
+    store_name: Disallowed
+    store_location: LocalMachine
+  register: wn11_pk_000020_result
+  tags:
+    - WN11-PK-000020
+    - cat2
+    - public_key
+
+- name: "WN11-PK-000020 | Display US DOD CCEB cross-certificates"
+  ansible.builtin.debug:
+    msg: "{{ wn11_pk_000020_result.certificates | selectattr('issuer', 'search', 'CCEB Interoperability') | list }}"
+  tags:
+    - WN11-PK-000020
+    - cat2
+    - public_key

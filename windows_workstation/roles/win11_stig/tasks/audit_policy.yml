@@ -1,0 +1,503 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - Audit Policy
+# WN11-AU-* rules
+# Audit subcategories enforced via
+# ansible.windows.win_audit_policy_system
+# Event log sizes enforced via
+# ansible.windows.win_regedit
+# =========================================
+
+# -----------------------------------------
+# WN11-AU-000005 / WN11-AU-000010 - MEDIUM
+# Credential Validation - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000005/000010 | The system must be configured to audit Account Logon - Credential Validation successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Credential Validation
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000005
+    - WN11-AU-000010
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000030 | The system must be configured to audit Account Management - Security Group Management successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Security Group Management
+    audit_type: success
+  tags:
+    - WN11-AU-000030
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000035 / WN11-AU-000040 - MEDIUM
+# User Account Management - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000035/000040 | The system must be configured to audit Account Management - User Account Management successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: User Account Management
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000035
+    - WN11-AU-000040
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000045 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000045 | The system must be configured to audit Detailed Tracking - PNP Activity successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Plug and Play Events
+    audit_type: success
+  tags:
+    - WN11-AU-000045
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000050 | The system must be configured to audit Detailed Tracking - Process Creation successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Process Creation
+    audit_type: success
+  tags:
+    - WN11-AU-000050
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000054 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000054 | The system must be configured to audit Logon/Logoff - Account Lockout failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Account Lockout
+    audit_type: failure
+  tags:
+    - WN11-AU-000054
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000060 | The system must be configured to audit Logon/Logoff - Group Membership successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Group Membership
+    audit_type: success
+  tags:
+    - WN11-AU-000060
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000065 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000065 | The system must be configured to audit Logon/Logoff - Logoff successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Logoff
+    audit_type: success
+  tags:
+    - WN11-AU-000065
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000070 / WN11-AU-000075 - MEDIUM
+# Logon - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000070/000075 | The system must be configured to audit Logon/Logoff - Logon successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Logon
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000070
+    - WN11-AU-000075
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000080 | The system must be configured to audit Logon/Logoff - Special Logon successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Special Logon
+    audit_type: success
+  tags:
+    - WN11-AU-000080
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000081 / WN11-AU-000082 - MEDIUM
+# File Share - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000081/000082 | Windows 11 must be configured to audit Object Access - File Share successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: File Share
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000081
+    - WN11-AU-000082
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000083 / WN11-AU-000084 - MEDIUM
+# Other Object Access Events - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000083/000084 | Windows 11 must be configured to audit Object Access - Other Object Access Events successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Other Object Access Events
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000083
+    - WN11-AU-000084
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000085 / WN11-AU-000090 - MEDIUM
+# Removable Storage - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000085/000090 | The system must be configured to audit Object Access - Removable Storage successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Removable Storage
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000085
+    - WN11-AU-000090
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000100 | The system must be configured to audit Policy Change - Audit Policy Change successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Audit Policy Change
+    audit_type: success
+  tags:
+    - WN11-AU-000100
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000105 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000105 | The system must be configured to audit Policy Change - Authentication Policy Change successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Authentication Policy Change
+    audit_type: success
+  tags:
+    - WN11-AU-000105
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000107 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000107 | The system must be configured to audit Policy Change - Authorization Policy Change successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Authorization Policy Change
+    audit_type: success
+  tags:
+    - WN11-AU-000107
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000110 / WN11-AU-000115 / WN11-AU-000587 / WN11-AU-000588 - MEDIUM
+# Sensitive Privilege Use - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000110/000115 | The system must be configured to audit Privilege Use - Sensitive Privilege Use successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Sensitive Privilege Use
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000110
+    - WN11-AU-000115
+    - WN11-AU-000587
+    - WN11-AU-000588
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000120 | The system must be configured to audit System - IPsec Driver failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: IPsec Driver
+    audit_type: failure
+  tags:
+    - WN11-AU-000120
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000130 / WN11-AU-000135 - MEDIUM
+# Other System Events - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000130/000135 | The system must be configured to audit System - Other System Events successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Other System Events
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000130
+    - WN11-AU-000135
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000140 | The system must be configured to audit System - Security State Change successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Security State Change
+    audit_type: success
+  tags:
+    - WN11-AU-000140
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000150 | The system must be configured to audit System - Security System Extension successes."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Security System Extension
+    audit_type: success
+  tags:
+    - WN11-AU-000150
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000155 / WN11-AU-000160 - MEDIUM
+# System Integrity - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000155/000160 | The system must be configured to audit System - System Integrity successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: System Integrity
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000155
+    - WN11-AU-000160
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000500 | The Application event log size must be configured to 32768 KB or greater."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application
+    name: MaxSize
+    data: 32768
+    type: dword
+  tags:
+    - WN11-AU-000500
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000505 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000505 | The Security event log size must be configured to 1024000 KB or greater."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security
+    name: MaxSize
+    data: 1024000
+    type: dword
+  tags:
+    - WN11-AU-000505
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000510 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000510 | The System event log size must be configured to 32768 KB or greater."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\System
+    name: MaxSize
+    data: 32768
+    type: dword
+  tags:
+    - WN11-AU-000510
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000515 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000515 | MANUAL CHECK - Windows 11 permissions for the Application event log must prevent access by non-privileged accounts."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify default permissions on the Application event log have not been modified to allow non-privileged access."
+  tags:
+    - WN11-AU-000515
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000520 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000520 | MANUAL CHECK - Windows 11 permissions for the Security event log must prevent access by non-privileged accounts."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify default permissions on the Security event log have not been modified to allow non-privileged access."
+  tags:
+    - WN11-AU-000520
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000525 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000525 | MANUAL CHECK - Windows 11 permissions for the System event log must prevent access by non-privileged accounts."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify default permissions on the System event log have not been modified to allow non-privileged access."
+  tags:
+    - WN11-AU-000525
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000555 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000555 | Windows 11 must be configured to audit Other Policy Change Events Failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Other Policy Change Events
+    audit_type: failure
+  tags:
+    - WN11-AU-000555
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000560 / WN11-AU-000565 - MEDIUM
+# Other Logon/Logoff Events - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000560/000565 | Windows 11 must be configured to audit Other Logon/Logoff Events successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Other Logon/Logoff Events
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000560
+    - WN11-AU-000565
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000570 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AU-000570 | Windows 11 must be configured to audit Detailed File Share Failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Detailed File Share
+    audit_type: failure
+  tags:
+    - WN11-AU-000570
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000575 / WN11-AU-000580 - MEDIUM
+# MPSSVC Rule-Level Policy Change - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000575/000580 | Windows 11 must be configured to audit MPSSVC Rule-Level Policy Change successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: MPSSVC Rule-Level Policy Change
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000575
+    - WN11-AU-000580
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000581 / WN11-AU-000582 - MEDIUM
+# File System - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000581/000582 | Windows 11 must be configured to audit File System successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: File System
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000581
+    - WN11-AU-000582
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000583 / WN11-AU-000584 - MEDIUM
+# Handle Manipulation - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000583/000584 | Windows 11 must be configured to audit Handle Manipulation successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Handle Manipulation
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000583
+    - WN11-AU-000584
+    - cat2
+    - audit_policy
+
+# -----------------------------------------
+# WN11-AU-000585 - MEDIUM
+# Consolidated with WN11-CC-000066 in admin_templates.yml
+# (same registry key: ProcessCreationIncludeCmdLine_Enabled)
+# -----------------------------------------
+
+# -----------------------------------------
+# WN11-AU-000586 / WN11-AU-000589 - MEDIUM
+# Registry - success and failure
+# -----------------------------------------
+
+- name: "WN11-AU-000586/000589 | Windows 11 must be configured to audit Registry successes and failures."
+  ansible.windows.win_audit_policy_system:
+    subcategory: Registry
+    audit_type: success,failure
+  tags:
+    - WN11-AU-000586
+    - WN11-AU-000589
+    - cat2
+    - audit_policy

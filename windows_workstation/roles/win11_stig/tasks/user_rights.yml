@@ -1,0 +1,420 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - User Rights Assignment
+# WN11-UR-* rules
+# Enforced via ansible.windows.win_user_right
+# =========================================
+
+# -----------------------------------------
+# WN11-UR-000005 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000005 | The \"Access Credential Manager as a trusted caller\" user right must not be assigned to any groups or accounts."
+  ansible.windows.win_user_right:
+    name: SeTrustedCredManAccessPrivilege
+    users: []
+    action: set
+  tags:
+    - WN11-UR-000005
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000010 | The \"Access this computer from the network\" user right must only be assigned to the Administrators and Remote Desktop Users groups."
+  ansible.windows.win_user_right:
+    name: SeNetworkLogonRight
+    users: "{{ win11_stig_network_access_groups }}"
+    action: set
+  tags:
+    - WN11-UR-000010
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000015 - HIGH
+# -----------------------------------------
+
+- name: "WN11-UR-000015 | The \"Act as part of the operating system\" user right must not be assigned to any groups or accounts."
+  ansible.windows.win_user_right:
+    name: SeTcbPrivilege
+    users: []
+    action: set
+  tags:
+    - WN11-UR-000015
+    - cat1
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000025 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000025 | The \"Allow log on locally\" user right must only be assigned to the Administrators and Users groups."
+  ansible.windows.win_user_right:
+    name: SeInteractiveLogonRight
+    users: "{{ win11_stig_logon_locally_groups }}"
+    action: set
+  tags:
+    - WN11-UR-000025
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000030 | The \"Back up files and directories\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeBackupPrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000030
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000035 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000035 | The \"Change the system time\" user right must only be assigned to Administrators and Local Service."
+  ansible.windows.win_user_right:
+    name: SeSystemtimePrivilege
+    users:
+      - Administrators
+      - LOCAL SERVICE
+    action: set
+  tags:
+    - WN11-UR-000035
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000040 | The \"Create a pagefile\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeCreatePagefilePrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000040
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000045 - HIGH
+# -----------------------------------------
+
+- name: "WN11-UR-000045 | The \"Create a token object\" user right must not be assigned to any groups or accounts."
+  ansible.windows.win_user_right:
+    name: SeCreateTokenPrivilege
+    users: []
+    action: set
+  tags:
+    - WN11-UR-000045
+    - cat1
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000050 | The \"Create global objects\" user right must only be assigned to Administrators, Service, Local Service, and Network Service."
+  ansible.windows.win_user_right:
+    name: SeCreateGlobalPrivilege
+    users:
+      - Administrators
+      - SERVICE
+      - LOCAL SERVICE
+      - NETWORK SERVICE
+    action: set
+  tags:
+    - WN11-UR-000050
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000055 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000055 | The \"Create permanent shared objects\" user right must not be assigned to any groups or accounts."
+  ansible.windows.win_user_right:
+    name: SeCreatePermanentPrivilege
+    users: []
+    action: set
+  tags:
+    - WN11-UR-000055
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000060 | The \"Create symbolic links\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeCreateSymbolicLinkPrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000060
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000065 - HIGH
+# -----------------------------------------
+
+- name: "WN11-UR-000065 | The \"Debug programs\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeDebugPrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000065
+    - cat1
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000070 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000070 | The \"Deny access to this computer from the network\" user right on workstations must be configured to prevent access from highly privileged domain accounts and local accounts on domain systems and unauthenticated access on all systems."
+  ansible.windows.win_user_right:
+    name: SeDenyNetworkLogonRight
+    users: "{{ win11_stig_deny_network_access_groups }}"
+    action: set
+  tags:
+    - WN11-UR-000070
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000075 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000075 | The \"Deny log on as a batch job\" user right on domain-joined workstations must be configured to prevent access from highly privileged domain accounts."
+  ansible.windows.win_user_right:
+    name: SeDenyBatchLogonRight
+    users: "{{ win11_stig_deny_batch_logon_groups }}"
+    action: set
+  tags:
+    - WN11-UR-000075
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000080 | The \"Deny log on as a service\" user right on Windows 11 domain-joined workstations must be configured to prevent access from highly privileged domain accounts."
+  ansible.windows.win_user_right:
+    name: SeDenyServiceLogonRight
+    users: "{{ win11_stig_deny_service_logon_groups }}"
+    action: set
+  tags:
+    - WN11-UR-000080
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000085 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000085 | The \"Deny log on locally\" user right on workstations must be configured to prevent access from highly privileged domain accounts on domain systems and unauthenticated access on all systems."
+  ansible.windows.win_user_right:
+    name: SeDenyInteractiveLogonRight
+    users: "{{ win11_stig_deny_local_logon_groups }}"
+    action: set
+  tags:
+    - WN11-UR-000085
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000090 | The \"Deny log on through Remote Desktop Services\" user right on Windows 11 workstations must be configured to prevent access from highly privileged domain accounts and local accounts on domain systems and unauthenticated access on all systems."
+  ansible.windows.win_user_right:
+    name: SeDenyRemoteInteractiveLogonRight
+    users: "{{ win11_stig_deny_rdp_groups }}"
+    action: set
+  tags:
+    - WN11-UR-000090
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000095 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000095 | The \"Enable computer and user accounts to be trusted for delegation\" user right must not be assigned to any groups or accounts."
+  ansible.windows.win_user_right:
+    name: SeEnableDelegationPrivilege
+    users: []
+    action: set
+  tags:
+    - WN11-UR-000095
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000100 | The \"Force shutdown from a remote system\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeRemoteShutdownPrivilege
+    users: "{{ win11_stig_remote_shutdown_groups }}"
+    action: set
+  tags:
+    - WN11-UR-000100
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000110 | The \"Impersonate a client after authentication\" user right must only be assigned to Administrators, Service, Local Service, and Network Service."
+  ansible.windows.win_user_right:
+    name: SeImpersonatePrivilege
+    users:
+      - Administrators
+      - SERVICE
+      - LOCAL SERVICE
+      - NETWORK SERVICE
+    action: set
+  tags:
+    - WN11-UR-000110
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000120 | The \"Load and unload device drivers\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeLoadDriverPrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000120
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000125 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000125 | The \"Lock pages in memory\" user right must not be assigned to any groups or accounts."
+  ansible.windows.win_user_right:
+    name: SeLockMemoryPrivilege
+    users: []
+    action: set
+  tags:
+    - WN11-UR-000125
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000130 | The \"Manage auditing and security log\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeSecurityPrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000130
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000140 | The \"Modify firmware environment values\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeSystemEnvironmentPrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000140
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000145 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000145 | The \"Perform volume maintenance tasks\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeManageVolumePrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000145
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000150 | The \"Profile single process\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeProfileSingleProcessPrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000150
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000160 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000160 | The \"Restore files and directories\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeRestorePrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000160
+    - cat2
+    - user_rights
+
+# -----------------------------------------
+# WN11-UR-000165 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UR-000165 | The \"Take ownership of files or other objects\" user right must only be assigned to the Administrators group."
+  ansible.windows.win_user_right:
+    name: SeTakeOwnershipPrivilege
+    users:
+      - Administrators
+    action: set
+  tags:
+    - WN11-UR-000165
+    - cat2
+    - user_rights
+

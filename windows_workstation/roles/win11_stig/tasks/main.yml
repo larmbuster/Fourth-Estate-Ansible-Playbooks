@@ -1,0 +1,76 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Usage:
+#   --tags general_checks      WN11-00-* (45 rules)
+#   --tags account_policies    WN11-AC-* (9 rules)
+#   --tags audit_policy        WN11-AU-* (52 rules, consolidated tasks)
+#   --tags admin_templates     WN11-CC-* + WN11-EP/UC (81 rules)
+#   --tags security_options    WN11-SO-* (44 rules)
+#   --tags user_rights         WN11-UR-* (28 rules)
+#   --tags public_key          WN11-PK-* (4 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags WN11-CC-000005      Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is a domain-joined Windows workstation"
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == 'Windows'
+      - ansible_windows_domain_role is defined
+      - ansible_windows_domain_role == 'member-workstation' or ansible_windows_domain_role == 'member-server'
+    fail_msg: >-
+      This role targets domain-joined Windows workstations only.
+      Detected OS family '{{ ansible_os_family | default("unknown") }}'
+      with domain role '{{ ansible_windows_domain_role | default("unknown") }}'.
+    quiet: true
+  tags:
+    - always
+
+- name: "WN11-00 | General OS Checks"
+  ansible.builtin.import_tasks: general_checks.yml
+  tags:
+    - general_checks
+    - wn11_00
+
+- name: "WN11-AC | Account Policies"
+  ansible.builtin.import_tasks: account_policies.yml
+  tags:
+    - account_policies
+    - wn11_ac
+
+- name: "WN11-AU | Audit Policy"
+  ansible.builtin.import_tasks: audit_policy.yml
+  tags:
+    - audit_policy
+    - wn11_au
+
+- name: "WN11-CC | Administrative Templates"
+  ansible.builtin.import_tasks: admin_templates.yml
+  tags:
+    - admin_templates
+    - wn11_cc
+
+- name: "WN11-SO | Security Options"
+  ansible.builtin.import_tasks: security_options.yml
+  tags:
+    - security_options
+    - wn11_so
+
+- name: "WN11-UR | User Rights Assignment"
+  ansible.builtin.import_tasks: user_rights.yml
+  tags:
+    - user_rights
+    - wn11_ur
+
+- name: "WN11-PK | Public Key / Certificates"
+  ansible.builtin.import_tasks: public_key.yml
+  tags:
+    - public_key
+    - wn11_pk

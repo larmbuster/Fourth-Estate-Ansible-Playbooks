@@ -1,0 +1,1269 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - Administrative Templates
+# WN11-CC-* rules (+ WN11-EP-*, WN11-UC-*)
+# Enforced via ansible.windows.win_regedit
+# =========================================
+
+# -----------------------------------------
+# WN11-CC-000005 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000005 | Camera access from the lock screen must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization
+    name: NoLockScreenCamera
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000005
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000007 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000007 | MANUAL CHECK - Windows 11 must cover or disable the built-in or attached camera when not in use."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify the built-in or attached camera is covered or disabled when not in use."
+  tags:
+    - WN11-CC-000007
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000010 | The display of slide shows on the lock screen must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization
+    name: NoLockScreenSlideshow
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000010
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000020 | IPv6 source routing must be configured to highest protection."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
+    name: DisableIpSourceRouting
+    data: 2
+    type: dword
+  tags:
+    - WN11-CC-000020
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000025 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000025 | The system must be configured to prevent IP source routing."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+    name: DisableIPSourceRouting
+    data: 2
+    type: dword
+  tags:
+    - WN11-CC-000025
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000030 - LOW
+# -----------------------------------------
+
+- name: "WN11-CC-000030 | The system must be configured to prevent Internet Control Message Protocol (ICMP) redirects from overriding Open Shortest Path First (OSPF) generated routes."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+    name: EnableICMPRedirect
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000030
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000035 - LOW
+# -----------------------------------------
+
+- name: "WN11-CC-000035 | The system must be configured to ignore NetBIOS name release requests except from WINS servers."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Netbt\Parameters
+    name: NoNameReleaseOnDemand
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000035
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000037 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000037 | Local administrator accounts must have their privileged token filtered to prevent elevated privileges from being used over the network on domain systems."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: LocalAccountTokenFilterPolicy
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000037
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000038 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000038 | WDigest Authentication must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest
+    name: UseLogonCredential
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000038
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000039 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000039 | MANUAL CHECK - Run as different user must be removed from context menus."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify 'Run as different user' is removed from context menus."
+  tags:
+    - WN11-CC-000039
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000040 | Insecure logons to an SMB server must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation
+    name: AllowInsecureGuestAuth
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000040
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000044 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000044 | Internet connection sharing must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections
+    name: NC_ShowSharedAccessUI
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000044
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000050 | Hardened UNC Paths must require mutual authentication and integrity (NETLOGON)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths
+    name: "\\\\*\\NETLOGON"
+    data: "RequireMutualAuthentication=1, RequireIntegrity=1"
+    type: string
+  tags:
+    - WN11-CC-000050
+    - cat2
+    - admin_templates
+
+- name: "WN11-CC-000050 | Hardened UNC Paths must require mutual authentication and integrity (SYSVOL)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths
+    name: "\\\\*\\SYSVOL"
+    data: "RequireMutualAuthentication=1, RequireIntegrity=1"
+    type: string
+  tags:
+    - WN11-CC-000050
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000052 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000052 | Windows 11 must be configured to prioritize ECC Curves with longer key lengths first."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002
+    name: EccCurves
+    data:
+      - NistP384
+      - NistP256
+    type: multistring
+  tags:
+    - WN11-CC-000052
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000055 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000055 | Simultaneous connections to the internet or a Windows domain must be limited."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy
+    name: fMinimizeConnections
+    data: 3
+    type: dword
+  tags:
+    - WN11-CC-000055
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000060 | Connections to non-domain networks when connected to a domain authenticated network must be blocked."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy
+    name: fBlockNonDomain
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000060
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000063 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000063 | MANUAL CHECK - Windows 11 systems must use either Group Policy or an approved MDM product to enforce STIG compliance."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify Group Policy or an approved MDM product is used to enforce STIG compliance."
+  tags:
+    - WN11-CC-000063
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000065 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000065 | Wi-Fi Sense must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config
+    name: AutoConnectAllowedOEM
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000065
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000066 / WN11-AU-000585 - MEDIUM
+# Both STIG IDs map to the same registry key
+# -----------------------------------------
+
+- name: "WN11-CC-000066/AU-000585 | Command line data must be included in process creation events."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit
+    name: ProcessCreationIncludeCmdLine_Enabled
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000066
+    - WN11-AU-000585
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000068 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000068 | Windows 11 must be configured to enable Remote host allows delegation of non-exportable credentials."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation
+    name: AllowProtectedCreds
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000068
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000070 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000070 | Virtualization-based Security must be enabled on Windows 11 with the platform security level configured to Secure Boot or Secure Boot with DMA Protection. (EnableVirtualizationBasedSecurity)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: EnableVirtualizationBasedSecurity
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000070
+    - cat2
+    - admin_templates
+
+- name: "WN11-CC-000070 | Virtualization-based Security must be enabled on Windows 11 with the platform security level configured to Secure Boot or Secure Boot with DMA Protection. (RequirePlatformSecurityFeatures)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: RequirePlatformSecurityFeatures
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000070
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000075 - HIGH
+# -----------------------------------------
+
+- name: "WN11-CC-000075 | Credential Guard must be running on Windows 11 domain-joined systems."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: LsaCfgFlags
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000075
+    - cat1
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000080 | Virtualization-based protection of code integrity must be enabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+    name: HypervisorEnforcedCodeIntegrity
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000080
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000085 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000085 | Early Launch Antimalware, Boot-Start Driver Initialization Policy must prevent boot drivers."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch
+    name: DriverLoadPolicy
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000085
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000090 | Group Policy objects must be reprocessed even if they have not changed."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}
+    name: NoGPOListChanges
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000090
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000100 | Downloading print driver packages over HTTP must be prevented."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers
+    name: DisableWebPnPDownload
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000100
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000105 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000105 | Web publishing and online ordering wizards must be prevented from downloading a list of providers."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
+    name: NoWebServices
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000105
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000110 | Printing over HTTP must be prevented."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers
+    name: DisableHTTPPrinting
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000110
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000115 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000115 | Systems must at least attempt device authentication using certificates."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters
+    name: DevicePKInitEnabled
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000115
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000120 | The network selection user interface (UI) must not be displayed on the logon screen."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: DontDisplayNetworkSelectionUI
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000120
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000130 | Local users on domain-joined computers must not be enumerated."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: EnumerateLocalUsers
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000130
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000145 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000145 | Users must be prompted for a password on resume from sleep (on battery)."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
+    name: DCSettingIndex
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000145
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000150 | The user must be prompted for a password on resume from sleep (plugged in)."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
+    name: ACSettingIndex
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000150
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000155 - HIGH
+# -----------------------------------------
+
+- name: "WN11-CC-000155 | Solicited Remote Assistance must not be allowed."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fAllowToGetHelp
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000155
+    - cat1
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000165 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000165 | Unauthenticated RPC clients must be restricted from connecting to the RPC server."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Rpc
+    name: RestrictRemoteClients
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000165
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000170 - LOW
+# -----------------------------------------
+
+- name: "WN11-CC-000170 | The setting to allow Microsoft accounts to be optional for modern style apps must be enabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: MSAOptional
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000170
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000175 - LOW
+# -----------------------------------------
+
+- name: "WN11-CC-000175 | The Application Compatibility Program Inventory must be prevented from collecting data and sending the information to Microsoft."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat
+    name: DisableInventory
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000175
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000180 - HIGH
+# -----------------------------------------
+
+- name: "WN11-CC-000180 | Autoplay must be turned off for non-volume devices."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer
+    name: NoAutoplayfornonVolume
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000180
+    - cat1
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000185 - HIGH
+# -----------------------------------------
+
+- name: "WN11-CC-000185 | The default autorun behavior must be configured to prevent autorun commands."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
+    name: NoAutorun
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000185
+    - cat1
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000190 - HIGH
+# -----------------------------------------
+
+- name: "WN11-CC-000190 | Autoplay must be disabled for all drives."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
+    name: NoDriveTypeAutoRun
+    data: 255
+    type: dword
+  tags:
+    - WN11-CC-000190
+    - cat1
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000195 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000195 | Enhanced anti-spoofing for facial recognition must be enabled on Windows 11."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Biometrics\FacialFeatures
+    name: EnhancedAntiSpoofing
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000195
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000197 - LOW
+# -----------------------------------------
+
+- name: "WN11-CC-000197 | Microsoft consumer experiences must be turned off."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
+    name: DisableWindowsConsumerFeatures
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000197
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000200 | Administrator accounts must not be enumerated during elevation."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI
+    name: EnumerateAdministrators
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000200
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000204 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000204 | Enhanced diagnostic data must be limited to the minimum required to support Windows Analytics."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
+    name: LimitEnhancedDiagnosticDataWindowsAnalytics
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000204
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000205 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000205 | Windows Telemetry must not be configured to Full."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
+    name: AllowTelemetry
+    data: "{{ win11_stig_telemetry_level }}"
+    type: dword
+  tags:
+    - WN11-CC-000205
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000206 - LOW
+# -----------------------------------------
+
+- name: "WN11-CC-000206 | Windows Update must not obtain updates from other PCs on the internet. (DODownloadMode)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization
+    name: DODownloadMode
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000206
+    - cat3
+    - admin_templates
+
+- name: "WN11-CC-000206 | Windows Update must not obtain updates from other PCs on the internet. (DODownloadMode Config)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config
+    name: DODownloadMode
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000206
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000210 | The Microsoft Defender SmartScreen for Explorer must be enabled. (EnableSmartScreen)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: EnableSmartScreen
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000210
+    - cat2
+    - admin_templates
+
+- name: "WN11-CC-000210 | The Microsoft Defender SmartScreen for Explorer must be enabled. (ShellSmartScreenLevel)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: ShellSmartScreenLevel
+    data: Block
+    type: string
+  tags:
+    - WN11-CC-000210
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000215 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000215 | Explorer Data Execution Prevention must be enabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer
+    name: NoDataExecutionPrevention
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000215
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000220 - LOW
+# -----------------------------------------
+
+- name: "WN11-CC-000220 | File Explorer heap termination on corruption must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer
+    name: NoHeapTerminationOnCorruption
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000220
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000225 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000225 | File Explorer shell protocol must run in protected mode."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
+    name: PreXPSP2ShellProtocolBehavior
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000225
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000252 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000252 | Windows 11 must be configured to disable Windows Game Recording and Broadcasting."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR
+    name: AllowGameDVR
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000252
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000255 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000255 | The use of a hardware security device with Windows Hello for Business must be enabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\PassportForWork
+    name: RequireSecurityDevice
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000255
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000260 | Windows 11 must be configured to require a minimum pin length of six characters or greater."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\PassportForWork\PINComplexity
+    name: MinimumPINLength
+    data: 6
+    type: dword
+  tags:
+    - WN11-CC-000260
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000270 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000270 | Passwords must not be saved in the Remote Desktop Client."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: DisablePasswordSaving
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000270
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000275 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000275 | Local drives must be prevented from sharing with Remote Desktop Session Hosts."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fDisableCdm
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000275
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000280 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000280 | Remote Desktop Services must always prompt a client for passwords upon connection."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fPromptForPassword
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000280
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000285 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000285 | The Remote Desktop Session Host must require secure RPC communications."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: fEncryptRPCTraffic
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000285
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000290 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000290 | Remote Desktop Services must be configured with the client connection encryption set to the required level."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    name: MinEncryptionLevel
+    data: 3
+    type: dword
+  tags:
+    - WN11-CC-000290
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000295 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000295 | Attachments must be prevented from being downloaded from RSS feeds."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds
+    name: DisableEnclosureDownload
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000295
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000300 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000300 | Basic authentication for RSS feeds over HTTP must not be used."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds
+    name: AllowBasicAuthInClear
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000300
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000305 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000305 | Indexing of encrypted files must be turned off."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search
+    name: AllowIndexingEncryptedStoresOrItems
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000305
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000310 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000310 | Users must be prevented from changing installation options."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Installer
+    name: EnableUserControl
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000310
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000315 - HIGH
+# -----------------------------------------
+
+- name: "WN11-CC-000315 | The Windows Installer feature \"Always install with elevated privileges\" must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Installer
+    name: AlwaysInstallElevated
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000315
+    - cat1
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000320 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000320 | Users must be notified if a web-based program attempts to install software."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Installer
+    name: SafeForScripting
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000320
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000325 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000325 | Automatically signing in the last interactive user after a system-initiated restart must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: DisableAutomaticRestartSignOn
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000325
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000326 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000326 | PowerShell script block logging must be enabled on Windows 11."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging
+    name: EnableScriptBlockLogging
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000326
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000327 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000327 | PowerShell Transcription must be enabled on Windows 11."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription
+    name: EnableTranscripting
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000327
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000330 - HIGH
+# -----------------------------------------
+
+- name: "WN11-CC-000330 | The Windows Remote Management (WinRM) client must not use Basic authentication."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client
+    name: AllowBasic
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000330
+    - cat1
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000335 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000335 | The Windows Remote Management (WinRM) client must not allow unencrypted traffic."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client
+    name: AllowUnencryptedTraffic
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000335
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000345 - HIGH
+# -----------------------------------------
+
+- name: "WN11-CC-000345 | The Windows Remote Management (WinRM) service must not use Basic authentication."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service
+    name: AllowBasic
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000345
+    - cat1
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000350 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000350 | The Windows Remote Management (WinRM) service must not allow unencrypted traffic."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service
+    name: AllowUnencryptedTraffic
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000350
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000355 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000355 | The Windows Remote Management (WinRM) service must not store RunAs credentials."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service
+    name: DisableRunAs
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000355
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000360 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000360 | The Windows Remote Management (WinRM) client must not use Digest authentication."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client
+    name: AllowDigest
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000360
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000365 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000365 | Windows 11 must be configured to prevent Windows apps from being activated by voice while the system is locked. (LetAppsActivateWithVoiceAboveLock)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
+    name: LetAppsActivateWithVoiceAboveLock
+    data: 2
+    type: dword
+  tags:
+    - WN11-CC-000365
+    - cat2
+    - admin_templates
+
+- name: "WN11-CC-000365 | Windows 11 must be configured to prevent Windows apps from being activated by voice while the system is locked. (LetAppsActivateWithVoice)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
+    name: LetAppsActivateWithVoice
+    data: 2
+    type: dword
+  tags:
+    - WN11-CC-000365
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000370 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000370 | The convenience PIN for Windows 11 must be disabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: AllowDomainPINLogon
+    data: 0
+    type: dword
+  tags:
+    - WN11-CC-000370
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000385 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000385 | Windows Ink Workspace must be configured to disallow access above the lock."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace
+    name: AllowWindowsInkWorkspace
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000385
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000390 - LOW
+# -----------------------------------------
+
+- name: "WN11-CC-000390 | Windows 11 must be configured to prevent users from receiving suggestions for third-party or additional applications."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
+    name: DisableThirdPartySuggestions
+    data: 1
+    type: dword
+  tags:
+    - WN11-CC-000390
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-CC-000391 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-CC-000391 | MANUAL CHECK - Internet Explorer must be disabled for Windows 11."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify Internet Explorer 11 is disabled or not present on this system."
+  tags:
+    - WN11-CC-000391
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-EP-000310 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-EP-000310 | Windows 11 Kernel (Direct Memory Access) DMA Protection must be enabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Kernel DMA Protection
+    name: DeviceEnumerationPolicy
+    data: 0
+    type: dword
+  tags:
+    - WN11-EP-000310
+    - cat2
+    - admin_templates
+
+# -----------------------------------------
+# WN11-UC-000015 - LOW
+# -----------------------------------------
+
+- name: "WN11-UC-000015 | Toast notifications to the lock screen must be turned off."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications
+    name: NoToastApplicationNotificationOnLockScreen
+    data: 1
+    type: dword
+  tags:
+    - WN11-UC-000015
+    - cat3
+    - admin_templates
+
+# -----------------------------------------
+# WN11-UC-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-UC-000020 | Zone information must be preserved when saving attachments."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments
+    name: SaveZoneInformation
+    data: 2
+    type: dword
+  tags:
+    - WN11-UC-000020
+    - cat2
+    - admin_templates
+

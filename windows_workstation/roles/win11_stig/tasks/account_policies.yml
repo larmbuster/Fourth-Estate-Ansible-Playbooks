@@ -1,0 +1,133 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - Account Policies
+# WN11-AC-* rules
+# Enforced via community.windows.win_security_policy
+# =========================================
+
+# -----------------------------------------
+# WN11-AC-000005 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AC-000005 | Windows 11 account lockout duration must be configured to 15 minutes or greater."
+  community.windows.win_security_policy:
+    section: System Access
+    key: LockoutDuration
+    value: "{{ win11_stig_lockout_duration }}"
+  tags:
+    - WN11-AC-000005
+    - cat2
+    - account_policies
+
+# -----------------------------------------
+# WN11-AC-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AC-000010 | The number of allowed bad logon attempts must be configured to three or less."
+  community.windows.win_security_policy:
+    section: System Access
+    key: LockoutBadCount
+    value: "{{ win11_stig_lockout_threshold }}"
+  tags:
+    - WN11-AC-000010
+    - cat2
+    - account_policies
+
+# -----------------------------------------
+# WN11-AC-000015 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AC-000015 | The period of time before the bad logon counter is reset must be configured to 15 minutes."
+  community.windows.win_security_policy:
+    section: System Access
+    key: ResetLockoutCount
+    value: "{{ win11_stig_lockout_reset_counter }}"
+  tags:
+    - WN11-AC-000015
+    - cat2
+    - account_policies
+
+# -----------------------------------------
+# WN11-AC-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AC-000020 | The password history must be configured to 24 passwords remembered."
+  community.windows.win_security_policy:
+    section: System Access
+    key: PasswordHistorySize
+    value: "{{ win11_stig_password_history }}"
+  tags:
+    - WN11-AC-000020
+    - cat2
+    - account_policies
+
+# -----------------------------------------
+# WN11-AC-000025 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AC-000025 | The maximum password age must be configured to 60 days or less."
+  community.windows.win_security_policy:
+    section: System Access
+    key: MaximumPasswordAge
+    value: "{{ win11_stig_max_password_age }}"
+  tags:
+    - WN11-AC-000025
+    - cat2
+    - account_policies
+
+# -----------------------------------------
+# WN11-AC-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AC-000030 | The minimum password age must be configured to at least 1 day."
+  community.windows.win_security_policy:
+    section: System Access
+    key: MinimumPasswordAge
+    value: "{{ win11_stig_min_password_age }}"
+  tags:
+    - WN11-AC-000030
+    - cat2
+    - account_policies
+
+# -----------------------------------------
+# WN11-AC-000035 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AC-000035 | Passwords must, at a minimum, be 14 characters."
+  community.windows.win_security_policy:
+    section: System Access
+    key: MinimumPasswordLength
+    value: "{{ win11_stig_min_password_length }}"
+  tags:
+    - WN11-AC-000035
+    - cat2
+    - account_policies
+
+# -----------------------------------------
+# WN11-AC-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-AC-000040 | The built-in Microsoft password complexity filter must be enabled."
+  community.windows.win_security_policy:
+    section: System Access
+    key: PasswordComplexity
+    value: 1
+  tags:
+    - WN11-AC-000040
+    - cat2
+    - account_policies
+
+# -----------------------------------------
+# WN11-AC-000045 - HIGH
+# -----------------------------------------
+
+- name: "WN11-AC-000045 | Reversible password encryption must be disabled."
+  community.windows.win_security_policy:
+    section: System Access
+    key: ClearTextPassword
+    value: 0
+  tags:
+    - WN11-AC-000045
+    - cat1
+    - account_policies
+

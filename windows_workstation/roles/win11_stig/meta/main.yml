@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: win11_stig
+  author: Fourth Estate
+  description: >-
+    Windows 11 DISA STIG V2R6 hardening role for domain-joined workstations.
+    Implements 263 XCCDF rules across account policies, audit policies,
+    administrative templates, security options, user rights, and certificate checks.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Windows
+      versions:
+        - "11"
+  galaxy_tags:
+    - windows
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []

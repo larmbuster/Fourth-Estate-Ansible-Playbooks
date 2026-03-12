@@ -1,0 +1,147 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Account Policies (WN11-AC)
+# -----------------------------------------
+
+# WN11-AC-000005: Account lockout duration (minutes). STIG minimum: 15
+win11_stig_lockout_duration: 15
+
+# WN11-AC-000010: Max failed logon attempts before lockout. STIG max: 3
+win11_stig_lockout_threshold: 3
+
+# WN11-AC-000015: Minutes before lockout counter resets. STIG minimum: 15
+win11_stig_lockout_reset_counter: 15
+
+# WN11-AC-000020: Number of passwords remembered. STIG minimum: 24
+win11_stig_password_history: 24
+
+# WN11-AC-000025: Maximum password age (days). STIG max: 60
+win11_stig_max_password_age: 60
+
+# WN11-AC-000030: Minimum password age (days). STIG minimum: 1
+win11_stig_min_password_age: 1
+
+# WN11-AC-000035: Minimum password length (characters). STIG minimum: 14
+win11_stig_min_password_length: 14
+
+# -----------------------------------------
+# Security Options (WN11-SO)
+# -----------------------------------------
+
+# WN11-SO-000020: Renamed Administrator account
+win11_stig_renamed_admin_account: "adminaccount"
+
+# WN11-SO-000025: Renamed Guest account
+win11_stig_renamed_guest_account: "guestaccount"
+
+# WN11-SO-000070: Machine inactivity timeout (seconds). STIG max: 900
+win11_stig_inactivity_timeout: 900
+
+# WN11-SO-000080: Legal notice dialog box title
+win11_stig_legal_notice_caption: "DoD Notice and Consent Banner"
+
+# WN11-SO-000075: Legal notice dialog box text
+win11_stig_legal_notice_text: >-
+  You are accessing a U.S. Government (USG) Information System (IS) that is
+  provided for USG-authorized use only. By using this IS (which includes any
+  device attached to this IS), you consent to the following conditions:
+  -The USG routinely intercepts and monitors communications on this IS for
+  purposes including, but not limited to, penetration testing, COMSEC
+  monitoring, network operations and defense, personnel misconduct (PM), law
+  enforcement (LE), and counterintelligence (CI) investigations.
+  -At any time, the USG may inspect and seize data stored on this IS.
+  -Communications using, or data stored on, this IS are not private, are
+  subject to routine monitoring, interception, and search, and may be
+  disclosed or used for any USG-authorized purpose.
+  -This IS includes security measures (e.g., authentication and access
+  controls) to protect USG interests--not for your personal benefit or
+  privacy.
+  -Notwithstanding the above, using this IS does not constitute consent to
+  PM, LE or CI investigative searching or monitoring of the content of
+  privileged communications, or work product, related to personal
+  representation or services by attorneys, psychotherapists, or clergy, and
+  their assistants. Such communications and work product are private and
+  confidential. See User Agreement for details.
+
+# WN11-SO-000085: Number of previous logons cached. STIG max: 4
+win11_stig_cached_logons: 4
+
+# -----------------------------------------
+# Administrative Templates (WN11-CC)
+# -----------------------------------------
+
+# WN11-00-000032: BitLocker minimum PIN length. STIG minimum: 6
+win11_stig_bitlocker_min_pin: 6
+
+# WN11-CC-000205: Telemetry level. 0 = Security (Enterprise), 1 = Basic
+win11_stig_telemetry_level: 0
+
+# -----------------------------------------
+# User Rights Assignment (WN11-UR)
+# -----------------------------------------
+
+# WN11-UR-000010: Access this computer from the network
+win11_stig_network_access_groups:
+  - Administrators
+  - Remote Desktop Users
+
+# WN11-UR-000025: Allow log on locally
+win11_stig_logon_locally_groups:
+  - Administrators
+  - Users
+
+# WN11-UR-000070: Deny access to this computer from the network
+win11_stig_deny_network_access_groups:
+  - Enterprise Admins
+  - Domain Admins
+  - Guests
+  - Local account
+
+# WN11-UR-000075: Deny log on as a batch job
+win11_stig_deny_batch_logon_groups:
+  - Enterprise Admins
+  - Domain Admins
+  - Guests
+
+# WN11-UR-000080: Deny log on as a service
+win11_stig_deny_service_logon_groups:
+  - Enterprise Admins
+  - Domain Admins
+
+# WN11-UR-000085: Deny log on locally
+win11_stig_deny_local_logon_groups:
+  - Enterprise Admins
+  - Domain Admins
+  - Guests
+
+# WN11-UR-000090: Deny log on through Remote Desktop Services
+win11_stig_deny_rdp_groups:
+  - Enterprise Admins
+  - Domain Admins
+  - Guests
+  - Local account
+
+# WN11-UR-000100: Force shutdown from a remote system
+win11_stig_remote_shutdown_groups:
+  - Administrators
+
+# -----------------------------------------
+# General Checks (WN11-00)
+# -----------------------------------------
+
+# WN11-00-000040: Minimum supported OS build
+win11_stig_min_os_build: "22621.380"
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+
+# Automatically reboot after changes that require it
+win11_stig_auto_reboot: false

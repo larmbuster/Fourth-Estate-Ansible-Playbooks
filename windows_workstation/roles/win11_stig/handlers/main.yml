@@ -1,0 +1,6 @@
+---
+- name: Reboot required
+  ansible.windows.win_reboot:
+    reboot_timeout: 600
+    msg: "STIG hardening requires a reboot."
+  when: win11_stig_auto_reboot | default(false) | bool

@@ -1,0 +1,818 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 - General OS Checks
+# WN11-00-* rules (+ WN11-RG-*)
+# Verification/reporting and automatable remediations
+# =========================================
+
+# -----------------------------------------
+# WN11-00-000005 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000005 | Domain-joined systems must use Windows 11 Enterprise Edition 64-bit version."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      (Get-WindowsEdition -Online).Edition
+  register: wn11_00_000005_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000005
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000005 | Display result"
+  ansible.builtin.debug:
+    msg: "Windows Edition: {{ wn11_00_000005_result.output | default(['UNKNOWN']) | first }}"
+  tags:
+    - WN11-00-000005
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000010 | Windows 11 domain-joined systems must have a Trusted Platform Module (TPM) enabled."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-Tpm | Select-Object TpmPresent, TpmReady, TpmEnabled
+  register: wn11_00_000010_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000010
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000010 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000010_result.output
+  tags:
+    - WN11-00-000010
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000015 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000015 | Windows 11 systems must have Unified Extensible Firmware Interface (UEFI) firmware and be configured to run in UEFI mode, not Legacy BIOS."
+  ansible.windows.win_reg_stat:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control
+    name: PEFirmwareType
+  register: wn11_00_000015_result
+  tags:
+    - WN11-00-000015
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000015 | Display result (value 2 = UEFI)"
+  ansible.builtin.debug:
+    msg: "PEFirmwareType = {{ wn11_00_000015_result.value | default('NOT FOUND') }} (expected: 2 for UEFI)"
+  tags:
+    - WN11-00-000015
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000020 | Secure Boot must be enabled on Windows 11 systems."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Confirm-SecureBootUEFI
+  register: wn11_00_000020_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000020
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000020 | Display result"
+  ansible.builtin.debug:
+    msg: "Secure Boot enabled: {{ wn11_00_000020_result.output | default(['UNKNOWN']) | first }}"
+  tags:
+    - WN11-00-000020
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000025 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000025 | MANUAL CHECK - Verify DOD-approved ESS software is installed and operational."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify DOD-approved ESS software is installed and operational."
+  tags:
+    - WN11-00-000025
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000030 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000030 | Windows 11 information systems must use BitLocker to encrypt all disks to protect the confidentiality and integrity of all information at rest."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-BitLockerVolume | Select-Object MountPoint, VolumeStatus, EncryptionPercentage, ProtectionStatus
+  register: wn11_00_000030_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000030
+    - cat1
+    - general_checks
+
+- name: "WN11-00-000030 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000030_result.output
+  tags:
+    - WN11-00-000030
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000031 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000031 | Windows 11 systems must use a BitLocker PIN for pre-boot authentication. (UseAdvancedStartup)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+    name: UseAdvancedStartup
+    data: 1
+    type: dword
+  tags:
+    - WN11-00-000031
+    - cat1
+    - general_checks
+
+- name: "WN11-00-000031 | Windows 11 systems must use a BitLocker PIN for pre-boot authentication. (UseTPMPIN)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+    name: UseTPMPIN
+    data: 1
+    type: dword
+  tags:
+    - WN11-00-000031
+    - cat1
+    - general_checks
+
+- name: "WN11-00-000031 | Windows 11 systems must use a BitLocker PIN for pre-boot authentication. (UseTPMKeyPIN)"
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+    name: UseTPMKeyPIN
+    data: 1
+    type: dword
+  tags:
+    - WN11-00-000031
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000032 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000032 | Windows 11 systems must use a BitLocker PIN with a minimum length of six digits for pre-boot authentication."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+    name: MinimumPIN
+    data: "{{ win11_stig_bitlocker_min_pin }}"
+    type: dword
+  tags:
+    - WN11-00-000032
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000035 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000035 | MANUAL CHECK - The operating system must employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify application whitelisting (e.g., AppLocker or WDAC) is configured with a deny-all, permit-by-exception policy."
+  tags:
+    - WN11-00-000035
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000040 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000040 | Windows 11 systems must be maintained at a supported servicing level."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      $ver = Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+      "$($ver.DisplayVersion) (OS Build $($ver.CurrentBuildNumber).$($ver.UBR))"
+  register: wn11_00_000040_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000040
+    - cat1
+    - general_checks
+
+- name: "WN11-00-000040 | Display result"
+  ansible.builtin.debug:
+    msg: "OS Version: {{ wn11_00_000040_result.output | default(['UNKNOWN']) | first }} (STIG minimum build: {{ win11_stig_min_os_build }})"
+  tags:
+    - WN11-00-000040
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000045 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000045 | The Windows 11 system must use an antivirus program."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-MpComputerStatus | Select-Object AntivirusEnabled, RealTimeProtectionEnabled, AntivirusSignatureLastUpdated
+  register: wn11_00_000045_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000045
+    - cat1
+    - general_checks
+
+- name: "WN11-00-000045 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000045_result.output
+  tags:
+    - WN11-00-000045
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000050 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000050 | Local volumes must be formatted using NTFS."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-Volume | Where-Object { $_.DriveLetter } | Select-Object DriveLetter, FileSystemType
+  register: wn11_00_000050_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000050
+    - cat1
+    - general_checks
+
+- name: "WN11-00-000050 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000050_result.output
+  tags:
+    - WN11-00-000050
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000055 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000055 | MANUAL CHECK - Alternate operating systems must not be permitted on the same system."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify no alternate operating systems are installed on this system."
+  tags:
+    - WN11-00-000055
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000060 | Non-system-created file shares on a system must limit access to groups that require it."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-SmbShare | Where-Object { $_.Name -notin @('ADMIN$','C$','IPC$') } | Select-Object Name, Path
+  register: wn11_00_000060_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000060
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000060 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000060_result.output
+  tags:
+    - WN11-00-000060
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000065 - LOW
+# -----------------------------------------
+
+- name: "WN11-00-000065 | MANUAL CHECK - Unused accounts must be disabled or removed from the system after 35 days of inactivity."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify unused accounts are disabled or removed after 35 days of inactivity."
+  tags:
+    - WN11-00-000065
+    - cat3
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000070 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000070 | Only accounts responsible for the administration of a system must have Administrator rights on the system."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-LocalGroupMember -Group Administrators | Select-Object Name, ObjectClass, PrincipalSource
+  register: wn11_00_000070_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000070
+    - cat1
+    - general_checks
+
+- name: "WN11-00-000070 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000070_result.output
+  tags:
+    - WN11-00-000070
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000075 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000075 | Only accounts responsible for the backup operations must be members of the Backup Operators group."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-LocalGroupMember -Group 'Backup Operators' -ErrorAction SilentlyContinue | Select-Object Name, ObjectClass
+  register: wn11_00_000075_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000075
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000075 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000075_result.output
+  tags:
+    - WN11-00-000075
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000080 | Only authorized user accounts must be allowed to create or run virtual machines on Windows 11 systems."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-LocalGroupMember -Group 'Hyper-V Administrators' -ErrorAction SilentlyContinue | Select-Object Name, ObjectClass
+  register: wn11_00_000080_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000080
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000080 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000080_result.output
+  tags:
+    - WN11-00-000080
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000085 - LOW
+# -----------------------------------------
+
+- name: "WN11-00-000085 | MANUAL CHECK - Standard local user accounts must not exist on a system in a domain."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify no standard local user accounts exist on this domain-joined system."
+  tags:
+    - WN11-00-000085
+    - cat3
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000090 | Accounts must be configured to require password expiration."
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      Get-LocalUser | Where-Object { $_.Enabled -eq $true } | Select-Object Name, PasswordExpires, PasswordNeverExpires
+  register: wn11_00_000090_result
+  check_mode: false
+  failed_when: false
+  tags:
+    - WN11-00-000090
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000090 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000090_result.output
+  tags:
+    - WN11-00-000090
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000095 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000095 | MANUAL CHECK - Permissions for system files and directories must conform to minimum requirements."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify default permissions for system files and directories have not been modified."
+  tags:
+    - WN11-00-000095
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000100 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000100 | Internet Information System (IIS) or its subcomponents must not be installed on a workstation."
+  ansible.windows.win_optional_feature:
+    name: IIS-WebServerRole
+    state: absent
+  notify: Reboot required
+  tags:
+    - WN11-00-000100
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000105 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000105 | Simple Network Management Protocol (SNMP) must not be installed on the system."
+  ansible.windows.win_optional_feature:
+    name: SNMP
+    state: absent
+  notify: Reboot required
+  tags:
+    - WN11-00-000105
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000110 | Simple TCP/IP Services must not be installed on the system."
+  ansible.windows.win_optional_feature:
+    name: SimpleTCPIP
+    state: absent
+  notify: Reboot required
+  tags:
+    - WN11-00-000110
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000115 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000115 | The Telnet Client must not be installed on the system."
+  ansible.windows.win_optional_feature:
+    name: TelnetClient
+    state: absent
+  notify: Reboot required
+  tags:
+    - WN11-00-000115
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000120 | The TFTP Client must not be installed on the system."
+  ansible.windows.win_optional_feature:
+    name: TFTP
+    state: absent
+  notify: Reboot required
+  tags:
+    - WN11-00-000120
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000125 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000125 | Copilot must be disabled for Windows 11."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot
+    name: TurnOffWindowsCopilot
+    data: 1
+    type: dword
+  tags:
+    - WN11-00-000125
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000126 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000126 | Windows 11 systems must block consumer account user authentication."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftAccount
+    name: DisableUserAuth
+    data: 1
+    type: dword
+  tags:
+    - WN11-00-000126
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000130 | Software certificate installation files must be removed from Windows 11."
+  ansible.windows.win_find:
+    paths: 'C:\'
+    patterns:
+      - '*.p12'
+      - '*.pfx'
+      - '*.p7b'
+      - '*.cer'
+    recurse: true
+    get_checksum: false
+  register: wn11_00_000130_result
+  tags:
+    - WN11-00-000130
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000130 | Display result"
+  ansible.builtin.debug:
+    msg: "Found {{ wn11_00_000130_result.matched }} certificate files: {{ wn11_00_000130_result.files | map(attribute='path') | list }}"
+  tags:
+    - WN11-00-000130
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000135 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000135 | A host-based firewall must be installed and enabled on the system."
+  ansible.windows.win_firewall:
+    state: enabled
+    profiles:
+      - Domain
+      - Private
+      - Public
+  tags:
+    - WN11-00-000135
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000140 | MANUAL CHECK - Inbound exceptions to the firewall on Windows 11 domain workstations must only allow authorized remote management hosts."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify inbound firewall exceptions only allow authorized remote management hosts."
+  tags:
+    - WN11-00-000140
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000150 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000150 | Structured Exception Handling Overwrite Protection (SEHOP) must be enabled."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\kernel
+    name: DisableExceptionChainValidation
+    data: 0
+    type: dword
+  tags:
+    - WN11-00-000150
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000155 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000155 | The Windows PowerShell 2.0 feature must be disabled on the system."
+  ansible.windows.win_optional_feature:
+    name: MicrosoftWindowsPowerShellV2Root
+    state: absent
+  notify: Reboot required
+  tags:
+    - WN11-00-000155
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000160 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000160 | The Server Message Block (SMB) v1 protocol must be disabled on the system."
+  ansible.windows.win_optional_feature:
+    name: SMB1Protocol
+    state: absent
+  notify: Reboot required
+  tags:
+    - WN11-00-000160
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000165 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000165 | The Server Message Block (SMB) v1 protocol must be disabled on the SMB server."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+    name: SMB1
+    data: 0
+    type: dword
+  tags:
+    - WN11-00-000165
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000170 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000170 | The Server Message Block (SMB) v1 protocol must be disabled on the SMB client."
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\mrxsmb10
+    name: Start
+    data: 4
+    type: dword
+  tags:
+    - WN11-00-000170
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000175 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000175 | The Secondary Logon service must be disabled on Windows 11."
+  ansible.windows.win_service:
+    name: seclogon
+    start_mode: disabled
+    state: stopped
+  tags:
+    - WN11-00-000175
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000190 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000190 | MANUAL CHECK - Orphaned security identifiers (SIDs) must be removed from user rights on Windows 11."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify no orphaned SIDs exist in user rights assignments (Local Security Policy > User Rights Assignment)."
+  tags:
+    - WN11-00-000190
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000210 | Bluetooth must be turned off unless approved by the organization."
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Connectivity
+    name: AllowBluetooth
+    data: 0
+    type: dword
+  tags:
+    - WN11-00-000210
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000230 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000230 | MANUAL CHECK - The system must notify the user when a Bluetooth device attempts to connect."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify Bluetooth notification settings alert users when a device attempts to connect."
+  tags:
+    - WN11-00-000230
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000240 - HIGH
+# -----------------------------------------
+
+- name: "WN11-00-000240 | MANUAL CHECK - Administrative accounts must not be used with applications that access the internet."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify organizational policy prohibits admin accounts from using internet-facing applications (browsers, email)."
+  tags:
+    - WN11-00-000240
+    - cat1
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000250 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000250 | MANUAL CHECK - Windows 11 nonpersistent VM sessions must not exceed 24 hours."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify nonpersistent VM sessions do not exceed 24 hours."
+  tags:
+    - WN11-00-000250
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000260 - LOW
+# -----------------------------------------
+
+- name: "WN11-00-000260 | The Windows 11 time service must synchronize with an appropriate DOD time source."
+  ansible.windows.win_command: w32tm /query /configuration
+  register: wn11_00_000260_result
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  tags:
+    - WN11-00-000260
+    - cat3
+    - general_checks
+
+- name: "WN11-00-000260 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000260_result.stdout_lines
+  tags:
+    - WN11-00-000260
+    - cat3
+    - general_checks
+
+# -----------------------------------------
+# WN11-00-000395 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-00-000395 | Windows 11 must not have portproxy enabled or in use."
+  ansible.windows.win_command: netsh interface portproxy show all
+  register: wn11_00_000395_result
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  tags:
+    - WN11-00-000395
+    - cat2
+    - general_checks
+
+- name: "WN11-00-000395 | Display result"
+  ansible.builtin.debug:
+    var: wn11_00_000395_result.stdout_lines
+  tags:
+    - WN11-00-000395
+    - cat2
+    - general_checks
+
+# -----------------------------------------
+# WN11-RG-000005 - MEDIUM
+# -----------------------------------------
+
+- name: "WN11-RG-000005 | MANUAL CHECK - Default permissions for the HKEY_LOCAL_MACHINE registry hive must be maintained."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify default permissions on HKLM registry hive have not been modified."
+  tags:
+    - WN11-RG-000005
+    - cat2
+    - general_checks
+

@@ -1,0 +1,51 @@
+---
+# =========================================
+# Windows 11 DISA STIG V2R6 Hardening Playbook
+# Entry point for Windows 11 workstation STIG automation
+#
+# Usage:
+#   ansible-galaxy collection install -r requirements.yml
+#   ansible-playbook -i inventory site.yml [--ask-vault-pass]
+#
+# Tags:
+#   - general_checks:    WN11-00-* General OS verification (45 rules)
+#   - account_policies:  WN11-AC-* Password/lockout policies (9 rules)
+#   - audit_policy:      WN11-AU-* Audit subcategories (52 rules)
+#   - admin_templates:   WN11-CC-* Registry-based GPO settings (81 rules)
+#   - security_options:  WN11-SO-* Security options (44 rules)
+#   - user_rights:       WN11-UR-* User rights assignment (28 rules)
+#   - public_key:        WN11-PK-* DoD certificate checks (4 rules)
+#   - cat1:              All CAT I (high) findings
+#   - cat2:              All CAT II (medium) findings
+#   - cat3:              All CAT III (low) findings
+#   - WN11-XX-NNNNNN:   Any single STIG finding by ID
+# =========================================
+
+- name: Windows 11 DISA STIG V2R6 Hardening
+  hosts: windows_workstations
+  gather_facts: true
+
+  roles:
+    - role: win11_stig
+
+# =========================================
+# Summary Play
+# =========================================
+
+- name: STIG Hardening Summary
+  hosts: windows_workstations
+  gather_facts: false
+  tags:
+    - always
+
+  tasks:
+    - name: Display hardening summary
+      ansible.builtin.debug:
+        msg:
+          - "================================================"
+          - "Windows 11 DISA STIG V2R6 hardening complete"
+          - "Target: {{ inventory_hostname }}"
+          - "================================================"
+          - "Review any verification tasks that reported findings."
+          - "Manual checks require administrator review."
+          - "================================================"

@@ -1,0 +1,16 @@
+# =========================================
+# Windows 11 STIG Hardening Inventory
+# Copy this file to 'inventory' and customize
+# =========================================
+
+[windows_workstations]
+# workstation01 ansible_host=192.168.1.10
+# workstation02 ansible_host=192.168.1.11
+
+[windows_workstations:vars]
+ansible_connection=winrm
+ansible_winrm_transport=kerberos
+ansible_port=5986
+ansible_winrm_server_cert_validation=ignore
+# ansible_user={{ vault_winrm_user }}
+# ansible_password={{ vault_winrm_password }}
