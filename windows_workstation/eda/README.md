@@ -21,12 +21,14 @@ There are two ways to send events from Splunk to EDA. Both deliver the same aler
 ## Architecture
 
 ```
-┌──────────────────┐    Event Logs     ┌──────────────┐   Webhook POST   ┌────────────────┐   run_job_template   ┌────────────────┐
-│    Windows 11    │ ───────────────>  │    Splunk     │ ──────────────>  │ EDA Controller │ ──────────────────>  │ AAP Controller │
-│   Workstation    │                   │  (Alert on    │                  │  (Rulebook      │                     │ (Job Template   │
-│                  │ <──────────────── │  EventID 6005)│                  │   evaluates     │                     │  runs site.yml) │
-│                  │   WinRM / STIG    │              │                   │   condition)    │                     │                 │
-└──────────────────┘   hardening       └──────────────┘                  └────────────────┘                     └────────────────┘
+                 Event Logs               Webhook POST              run_job_template
+┌──────────────┐ ─────────> ┌──────────────┐ ─────────> ┌──────────────┐ ─────────> ┌──────────────┐
+│  Windows 11  │            │    Splunk    │            │     EDA      │            │     AAP      │
+│  Workstation │            │  (Alert on   │            │  Controller  │            │  Controller  │
+│              │            │ EventID 6005)│            │  (Rulebook)  │            │(Job Template)│
+└──────────────┘            └──────────────┘            └──────────────┘            └──────────────┘
+       ^                                                                                   │
+       └───────────────────────────── WinRM / STIG hardening ─────────────────────────────┘
 ```
 
 1. A Windows workstation powers on, generating **Event ID 6005** ("The Event Log service was started") in the System event log.
