@@ -1,0 +1,276 @@
+---
+# =========================================
+# Cisco IOS-XE Switch RTR STIG - Routing
+# 18 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000050 | The Cisco switch must be configured to enable routing protocol authentication using FIPS 198-1 algorithms with keys not exceeding 180 days of lifetime."
+  cisco.ios.ios_config:
+    lines:
+      - "key chain <KEY-CHAIN-NAME> tcp"
+      - "key <KEY-ID>"
+      - "router bgp <ASN>"
+      - "no synchronization"
+      - "key chain OSPF_KEY_CHAIN"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000050
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000470 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000470 | The Cisco BGP switch must be configured to enable the Generalized TTL Security Mechanism (GTSM)."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000470
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000480 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000480 | The Cisco BGP switch must be configured to use a unique key for each autonomous system (AS) that it peers with."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000480
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000490 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000490 | The Cisco BGP switch must be configured to reject inbound route advertisements for any Bogon prefixes."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER deny 0.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER deny 10.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER deny 100.64.0.0/10 le 32"
+      - "ip prefix-list PREFIX_FILTER deny 127.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER deny 169.254.0.0/16 le 32"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000490
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000500 | The Cisco BGP switch must be configured to reject inbound route advertisements for any prefixes belonging to the local autonomous system (AS)."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER seq 74 deny {{ peer_address }}/24 le 32"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000500
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000510 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000510 | The Cisco BGP switch must be configured to reject inbound route advertisements from a customer edge (CE) switch for prefixes that are not allocated to that customer."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER_CUST1 permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list PREFIX_FILTER_CUST1 deny 0.0.0.0/0 ge 8"
+      - "ip prefix-list PREFIX_FILTER_CUST2 permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list PREFIX_FILTER_CUST2 deny 0.0.0.0/0 ge 8"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000510
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000520 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000520 | The Cisco BGP switch must be configured to reject outbound route advertisements for any prefixes that do not belong to any customers or the local autonomous system (AS)."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS deny 0.0.0.0/0 ge 8"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000520
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000530 | The Cisco BGP switch must be configured to reject outbound route advertisements for any prefixes belonging to the IP core."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list FILTER_CORE_PREFIXES deny {{ peer_address }}/24 le 32"
+      - "ip prefix-list FILTER _CORE_PREFIXES deny {{ peer_address }}/24 le 32"
+      - "ip prefix-list FILTER _CORE_PREFIXES permit 0.0.0.0/0 ge 8"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000530
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000540 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000540 | The Cisco BGP switch must be configured to reject route advertisements from BGP peers that do not list their autonomous system (AS) number as the first AS in the AS_PATH attribute."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000540
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000560 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000560 | The Cisco BGP switch must be configured to use the maximum prefixes feature to protect against route table flooding and prefix de-aggregation attacks."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000560
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000570 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000570 | The Cisco BGP switch must be configured to limit the prefix size on any inbound route advertisement to /24, or the least significant prefixes issued to the customer."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list FILTER_PREFIX_LENGTH permit 0.0.0.0/0 ge 8 le 24"
+      - "ip prefix-list FILTER_PREFIX_LENGTH deny 0.0.0.0/0 le 32"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000570
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000580 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000580 | The Cisco BGP switch must be configured to use its loopback address as the source address for iBGP peering sessions."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000580
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000590 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000590 | MANUAL CHECK - The Cisco MPLS switch must be configured to use its loopback address as the source address for LDP peering sessions."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000590
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000600 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000600 | The Cisco MPLS switch must be configured to synchronize Interior Gateway Protocol (IGP) and LDP to minimize packet loss when an IGP adjacency is established prior to LDP peers completing label exch..."
+  cisco.ios.ios_config:
+    lines:
+      - "router ospf 1"
+      - "router isis"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000600
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000640 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000640 | The Cisco PE switch must be configured to have each Virtual Routing and Forwarding (VRF) instance with the appropriate Route Target (RT)."
+  cisco.ios.ios_config:
+    lines:
+      - "ip vrf CUST1"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000640
+    - cat1
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000650 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000650 | The Cisco PE switch must be configured to have each VRF with the appropriate Route Distinguisher (RD)."
+  cisco.ios.ios_config:
+    lines:
+      - "ip vrf CUST1"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000650
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000690 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000690 | MANUAL CHECK - The Cisco PE switch must be configured to enforce the split-horizon rule for all pseudowires within a Virtual Private LAN Services (VPLS) bridge domai"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000690
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000236 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000236 | The Cisco switch must be configured to advertise a hop limit of at least 32 in Switch Advertisement messages for IPv6 stateless auto-configuration deployments."
+  cisco.ios.ios_config:
+    lines:
+      - "ipv6 hop-limit 128"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000236
+    - cat3
+    - routing
+

@@ -1,0 +1,75 @@
+---
+# =========================================
+# Palo Alto PAN-OS IDPS STIG - Authorization
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-IP-000046 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000046 | MANUAL CHECK - The Palo Alto Networks security platform must detect use of network services that have not been authorized or approved by the ISSM and ISSO, at a minimum."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Obtain the list of network services that have not been authorized or approved by the ISSM and ISSO. For each prohibited network service, configure a security policy that denies traffic associated w..."
+  tags:
+    - PANW-IP-000046
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-IP-000047 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000047 | MANUAL CHECK - The Palo Alto Networks security platform must generate a log record when unauthorized network services are detected."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Obtain the list of network services that have not been authorized or approved by the ISSM and ISSO. For each prohibited network service, configure a security policy that denies traffic associated w..."
+  tags:
+    - PANW-IP-000047
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-IP-000049 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000049 | The Palo Alto Networks security platform must continuously monitor inbound communications traffic for unusual/unauthorized activities or conditions."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000049_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000049_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000049
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-IP-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000050 | The Palo Alto Networks security platform must continuously monitor outbound communications traffic for unusual/unauthorized activities or conditions."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000050_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000050_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000050
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-IP-000053 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000053 | The Palo Alto Networks security platform must generate an alert to, at a minimum, the ISSO and ISSM when rootkits or other malicious software which allows unauthorized privileged or non-privileged ..."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000053_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000053_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000053
+    - cat2
+    - authorization
+

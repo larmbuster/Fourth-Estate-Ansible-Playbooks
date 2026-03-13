@@ -1,0 +1,30 @@
+---
+# =========================================
+# Cisco ASA IPS STIG - Authorization
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-IP-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000500 | MANUAL CHECK - The Cisco ASA must be configured to block inbound traffic containing unauthorized activities or conditions."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure access control rules to block non-compliant traffic. Step 1: Navigate to Configuration >> ASA FirePOWER Configuration >> Policies >> Access Control Policy. The Access Control Policy page ..."
+  tags:
+    - CASA-IP-000500
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CASA-IP-000510 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000510 | MANUAL CHECK - The Cisco ASA must be configured to block outbound traffic containing unauthorized activities or conditions."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure access control rules to block non-compliant traffic. Step 1: Navigate to Configuration >> ASA FirePOWER Configuration >> Policies >> Access Control Policy. The Access Control Policy page ..."
+  tags:
+    - CASA-IP-000510
+    - cat2
+    - authorization
+

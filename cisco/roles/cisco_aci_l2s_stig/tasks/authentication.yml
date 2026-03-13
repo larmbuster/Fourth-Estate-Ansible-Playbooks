@@ -1,0 +1,21 @@
+---
+# =========================================
+# Cisco ACI L2S STIG - Authentication
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-L2-000004 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-L2-000004 | The Cisco ACI layer 2 switch must authenticate all network-connected endpoint devices before establishing any connection."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_l2s_stig_caci_l2_000004_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_l2s_stig_caci_l2_000004_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-L2-000004
+    - cat2
+    - authentication
+

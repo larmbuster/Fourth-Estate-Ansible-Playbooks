@@ -1,0 +1,30 @@
+---
+# =========================================
+# Cisco IOS-XR Router NDM STIG - Network Services
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-001030 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001030 | MANUAL CHECK - The Cisco router must be configured to synchronize its clock with the primary and secondary time sources using redundant authoritative time sources."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001030
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-ND-001410 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001410 | MANUAL CHECK - The Cisco router must be configured to back up the configuration when changes occur."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001410
+    - cat2
+    - network_services
+

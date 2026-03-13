@@ -1,0 +1,75 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG STIG - Access Control
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-AG-000015 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000015 | MANUAL CHECK - The Palo Alto Networks security platform, if used to provide intermediary services for remote access communications traffic (TLS or SSL decryption), must ensure inbound and outbound traffic is moni..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Note: These instructions assume that certificates have already been loaded on the device. Multiple decryption policies can be configured; these instructions explain the steps involved but do not pr..."
+  tags:
+    - PANW-AG-000015
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# PANW-AG-000035 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000035 | The Palo Alto Networks security platform must only enable User-ID on trusted zones."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000035_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000035_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000035
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# PANW-AG-000044 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000044 | The Palo Alto Networks security platform that provides intermediary services for TLS must validate certificates used for TLS functions by performing RFC 5280-compliant certification path validation."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000044_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000044_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000044
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# PANW-AG-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000050 | MANUAL CHECK - The Palo Alto Networks security platform must deny outbound IP packets that contain an illegitimate address in the source address field."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Create an anti-spoofing policy for each outgoing zone that drops any traffic when the source IP does not match the list of allowed IP ranges for each outgoing zone. Navigate to the “Zone Protection..."
+  tags:
+    - PANW-AG-000050
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# PANW-AG-000051 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000051 | The Palo Alto Networks security platform must deny network communications traffic by default and allow network communications traffic by exception (i.e., deny all, permit by exception)."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000051_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000051_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000051
+    - cat2
+    - access_control
+

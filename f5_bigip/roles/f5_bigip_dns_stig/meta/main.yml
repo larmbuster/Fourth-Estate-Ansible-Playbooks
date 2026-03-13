@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: f5_bigip_dns_stig
+  author: Fourth Estate
+  description: >-
+    F5 BIG-IP DNS DISA STIG V1 hardening role.
+    Implements 12 XCCDF rules across access control, authentication, network services, session management.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - f5_bigip
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

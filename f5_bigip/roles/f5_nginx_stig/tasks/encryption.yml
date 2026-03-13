@@ -1,0 +1,81 @@
+---
+# =========================================
+# F5 NGINX Web Server STIG - Encryption
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# NGNX-APP-000040 - HIGH
+# -----------------------------------------
+
+- name: "NGNX-APP-000040 | NGINX must use TLS 1.2, at a minimum, to protect data confidentiality using remote access."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000040"
+    line: "# STIG NGNX-APP-000040 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000040
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# NGNX-APP-000510 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000510 | NGINX must be configured to prohibit or restrict using ports, protocols, and/or services."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000510"
+    line: "# STIG NGNX-APP-000510 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000510
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# NGNX-APP-001960 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001960 | NGINX must be configured to use FIPS-approved algorithms to protect the confidentiality and integrity of transmitted information."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001960"
+    line: "# STIG NGNX-APP-001960 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001960
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# NGNX-APP-002660 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-002660 | NGINX must be configured to use a FIPS-validated cryptographic module for confidentiality and integrity."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-002660"
+    line: "# STIG NGNX-APP-002660 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-002660
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# NGNX-APP-003220 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-003220 | NGINX must generate, manage, and protect from disclosure and misuse the cryptographic keys that protect access tokens."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-003220"
+    line: "# STIG NGNX-APP-003220 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-003220
+    - cat2
+    - encryption
+

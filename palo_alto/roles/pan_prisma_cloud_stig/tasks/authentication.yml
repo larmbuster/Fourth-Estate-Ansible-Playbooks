@@ -1,0 +1,96 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud STIG - Authentication
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CNTR-PC-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000120 | Users requiring access to Prisma Cloud Compute's Credential Store must be assigned and accessed by the appropriate role holders."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000120
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CNTR-PC-000510 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000510 | All Prisma Cloud Compute users must have a unique, individual account."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000510
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CNTR-PC-000590 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000590 | Prisma Cloud Compute must be configured with unique user accounts."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000590
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CNTR-PC-000640 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000640 | Prisma Cloud Compute local accounts must enforce strong password requirements."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000640
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CNTR-PC-000750 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000750 | Prisma Cloud Compute must be configured to require local user accounts to use x.509 multifactor authentication."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000750
+    - cat2
+    - authentication
+

@@ -1,0 +1,51 @@
+---
+# =========================================
+# F5 NGINX Web Server STIG - Session Management
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# NGNX-APP-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000010 | NGINX must limit the number of concurrent sessions to an organization-defined number for all accounts and/or account types."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000010"
+    line: "# STIG NGNX-APP-000010 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000010
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# NGNX-APP-001030 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001030 | NGINX must restrict the ability of individuals to launch denial-of-service (DoS) attacks against other information systems."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001030"
+    line: "# STIG NGNX-APP-001030 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001030
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# NGNX-APP-001640 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001640 | NGINX must be configured to require SSL sessions to reauthenticate no longer than 15 minutes."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001640"
+    line: "# STIG NGNX-APP-001640 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001640
+    - cat2
+    - session_management
+

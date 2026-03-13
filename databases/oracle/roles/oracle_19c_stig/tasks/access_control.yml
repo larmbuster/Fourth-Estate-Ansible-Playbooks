@@ -1,0 +1,178 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - Access Control
+# 11 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-008400 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-008400 | Oracle Database must be configured in accordance with the security configuration settings based on DOD security configuration and implementation guidance, including STIGs, NSA configuration guides,..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-008400
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-008600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-008600 | Oracle instance names must not contain Oracle version numbers."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-008600
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-009200 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-009200 | The Oracle REMOTE_OS_ROLES parameter must be set to FALSE."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER SYSTEM SET remote_os_roles = FALSE scope=spfile;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009200
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-009300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-009300 | The Oracle SQL92_SECURITY parameter must be set to TRUE."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "alter system set sql92_security = TRUE scope = spfile;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009300
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-009900 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-009900 | The Oracle Listener must be configured to require administration authentication."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009900
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# O19C-00-010500 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-010500 | The Oracle _TRACE_FILES_PUBLIC parameter if present must be set to FALSE."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-010500
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-010600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-010600 | Oracle Database production application and data directories must be protected from developers on shared production/development database management system (DBMS) host systems."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-010600
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-011600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-011600 | Remote administration must be disabled for the Oracle connection manager."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-011600
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-012900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-012900 | Oracle Database default demonstration and sample databases, database objects, and applications must be removed."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "DROP USER BI CASCADE;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-012900
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-013000 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013000 | Unused database components, database management system (DBMS) software, and database objects must be removed."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-013000
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# O19C-00-017900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-017900 | MANUAL CHECK - Oracle Database must check the validity of data inputs."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify that application code and database constraints (CHECK, NOT NULL, foreign keys) validate all data inputs. Create or modify tables to include appropriate constraints for data integrity."
+  tags:
+    - O19C-00-017900
+    - cat2
+    - access_control
+

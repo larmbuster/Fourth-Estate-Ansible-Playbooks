@@ -1,0 +1,12 @@
+---
+# =========================================
+# MS SQL Server 2016 Database DISA STIG V3 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+mssql_2016_database_stig_stig_version: "3"
+mssql_2016_database_stig_stig_release_info: "Release: 4 Benchmark Date: 05 Jan 2026"
+mssql_2016_database_stig_stig_benchmark_id: "MS_SQL_Server_2016_Database_STIG"
+mssql_2016_database_stig_stig_total_rules: 23
+

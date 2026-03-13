@@ -1,0 +1,76 @@
+---
+# =========================================
+# Cisco ISE NDM STIG - System Hardening
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NM-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000260 | VERIFY - The Cisco ISE must enforce access restrictions associated with changes to the firmware, OS, and hardware components."
+  ansible.builtin.debug:
+    msg: "VERIFY: Determine if groups with access such as Helpdesk Admin, Network Device Admin, SuperAdmin, and System Admin (at a minimum) are assigned unauthorized users. 1. Choose Administration >> System >> Admi..."
+  tags:
+    - CSCO-NM-000260
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CSCO-NM-000280 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000280 | VERIFY - The Cisco ISE must be running an operating system release that is currently supported by the vendor."
+  ansible.builtin.debug:
+    msg: "VERIFY: To display information about the software version, type the following at the CLI: show version View details about the installed version of Cisco ADE-OS software running in the Cisco ISE server and ..."
+  tags:
+    - CSCO-NM-000280
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CSCO-NM-000350 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000350 | The Cisco ISE must be configured to prohibit the use of all unnecessary and/or nonsecure functions, ports, protocols, and/or services."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000350
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CSCO-NM-000360 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000360 | The Cisco ISE must be configured to disable Wireless Setup for production systems."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000360
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CSCO-NM-000500 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000500 | VERIFY - The Cisco ISE must verify the checksum value of any software download, including install files (ISO or OVA), patch files, and upgrade bundles."
+  ansible.builtin.debug:
+    msg: "VERIFY: Verify the SSP requires a process for verifying the checksum for software download and install ISO files. If a local documented process does not require that the checksum value of any software down..."
+  tags:
+    - CSCO-NM-000500
+    - cat1
+    - system_hardening
+

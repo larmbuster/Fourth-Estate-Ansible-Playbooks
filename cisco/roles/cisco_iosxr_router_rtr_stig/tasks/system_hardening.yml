@@ -1,0 +1,18 @@
+---
+# =========================================
+# Cisco IOS-XR Router RTR STIG - System Hardening
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000070 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000070 | MANUAL CHECK - The Cisco router must be configured to have all non-essential capabilities disabled."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000070
+    - cat3
+    - system_hardening
+

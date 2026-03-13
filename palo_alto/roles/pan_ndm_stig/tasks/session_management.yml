@@ -1,0 +1,19 @@
+---
+# =========================================
+# Palo Alto PAN-OS NDM STIG - Session Management
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-NM-000069 - HIGH
+# -----------------------------------------
+
+- name: "PANW-NM-000069 | The Palo Alto Networks security platform must terminate management sessions after 10 minutes of inactivity except to fulfill documented and validated mission requirements."
+  paloaltonetworks.panos.panos_mgtconfig:
+    provider: "{{ panos_provider }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000069
+    - cat1
+    - session_management
+

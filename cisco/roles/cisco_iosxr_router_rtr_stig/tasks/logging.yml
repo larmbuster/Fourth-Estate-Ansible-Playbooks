@@ -1,0 +1,18 @@
+---
+# =========================================
+# Cisco IOS-XR Router RTR STIG - Logging
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000890 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000890 | MANUAL CHECK - The Cisco multicast Designated Router (DR) must be configured to set the shortest-path tree (SPT) threshold to infinity to minimalize source-group (S,"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000890
+    - cat2
+    - logging
+

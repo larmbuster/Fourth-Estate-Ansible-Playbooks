@@ -1,0 +1,248 @@
+---
+# =========================================
+# Cisco ISE NDM STIG - Authentication
+# 16 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NM-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000020 | The Cisco ISE must change the password for the local CLI and web-based account when members who have access to the password leave the role and are no longer authorized access."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000020
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000080 | The Cisco ISE must be configured with only one local web-based account to be used as the account of last resort in the event the authentication server is unavailable."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000080
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000110 | VERIFY - The Cisco ISE must be configured to enforce the limit of three consecutive invalid logon attempts, after which time it must lock out the user account from accessing the device for 15 minutes."
+  ansible.builtin.debug:
+    msg: "VERIFY: Verify ISE will disable accounts for at least 15 minutes after a maximum of three consecutive invalid logon attempts. From web admin portal: 1. Choose Administration >> System >> Admin Access >> Au..."
+  tags:
+    - CSCO-NM-000110
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000120 | VERIFY - For the local account of last resort, the Cisco ISE must display the Standard Mandatory DoD Notice and Consent Banner before granting access to the device."
+  ansible.builtin.debug:
+    msg: "VERIFY: Determine if the network device is configured to present a DoD-approved banner that is formatted in accordance with DTM-08-060. In the configuration, view the \"banner login\" configuration. If suc..."
+  tags:
+    - CSCO-NM-000120
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000230 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000230 | The Cisco ISE must be configured to synchronize internal information system clocks using redundant authoritative time sources."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000230
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000270 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000270 | VERIFY - The Cisco ISE must be configured to use an external authentication server to authenticate administrators prior to granting administrative access."
+  ansible.builtin.debug:
+    msg: "VERIFY: Verify an external authentication identity source is configured. 1. Choose Administration >> System >> Admin Access >> Administrators >> Admin Groups. 2. View the External Group configuration. If t..."
+  tags:
+    - CSCO-NM-000270
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000340 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000340 | MANUAL CHECK - The Cisco ISE must use DoD-approved PKI rather than proprietary or self-signed device certificates."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Replace the self-signed certificate with a CA-signed certificates for greater security. To obtain a CA-signed certificate: A. Generate a certificate signing request (CSR) to obtain a CA-signed cert..."
+  tags:
+    - CSCO-NM-000340
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000370 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000370 | For accounts using password authentication, the Cisco ISE must implement replay-resistant authentication mechanisms for network access to privileged accounts."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000370
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000390 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000390 | VERIFY - The Cisco ISE must authenticate Network Time Protocol (NTP) sources using authentication that is cryptographically based."
+  ansible.builtin.debug:
+    msg: "VERIFY: 1. Choose Administration >> System >> Settings >> System Time. 2. Review the configuration of the NTP servers. 3. Verify \"Only allow authenticated NTP servers\" is checked. If the Cisco ISE is not..."
+  tags:
+    - CSCO-NM-000390
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000400 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000400 | For accounts using password authentication, the Cisco ISE must enforce a minimum 15-character password length."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000400
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000410 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000410 | For accounts using password authentication, the Cisco ISE must enforce password complexity by requiring that at least one uppercase character be used."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000410
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000420 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000420 | For accounts using password authentication, the Cisco ISE must enforce password complexity by requiring that at least one lowercase character be used."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000420
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000430 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000430 | For accounts using password authentication, the Cisco ISE must enforce password complexity by requiring that at least one digit be used."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000430
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000440 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000440 | For accounts using password authentication, the Cisco ISE must enforce password complexity by requiring that at least one special character be used."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000440
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000460 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000460 | VERIFY - For accounts using password authentication, the Cisco ISE must use FIPS-validated SHA-2 or later protocol to protect the integrity of the password authentication process."
+  ansible.builtin.debug:
+    msg: "VERIFY: Navigate to Administration >> System >> Settings >> FIPS Mode. Verify FIPS Mode is enabled. If FIPS Mode is enabled, this is not a finding. If FIPS mode is not configured, but the Cisco ISE is conf..."
+  tags:
+    - CSCO-NM-000460
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CSCO-NM-000470 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000470 | The Cisco ISE must prohibit the use of cached authenticators after an organization-defined time period."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000470
+    - cat2
+    - authentication
+

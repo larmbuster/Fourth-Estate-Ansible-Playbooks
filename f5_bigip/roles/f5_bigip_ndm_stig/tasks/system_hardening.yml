@@ -1,0 +1,48 @@
+---
+# =========================================
+# F5 BIG-IP NDM STIG - System Hardening
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DM-300039 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300039 | The F5 BIG-IP appliance must be configured to prevent the installation of patches, service packs, or application components without verification the software component has been digitally signed usi..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_ndm_stig_f5bi_dm_300039_key }}"
+    value: "{{ f5_bigip_ndm_stig_f5bi_dm_300039_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300039
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# F5BI-DM-300041 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DM-300041 | The F5 BIG-IP appliance must be running an operating system release that is currently supported by the vendor."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_ndm_stig_f5bi_dm_300041_key }}"
+    value: "{{ f5_bigip_ndm_stig_f5bi_dm_300041_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300041
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# F5BI-DM-300045 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DM-300045 | The F5 BIG-IP appliance must be configured to prohibit the use of all unnecessary and/or nonsecure functions, ports, protocols, and/or services."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_ndm_stig_f5bi_dm_300045_key }}"
+    value: "{{ f5_bigip_ndm_stig_f5bi_dm_300045_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300045
+    - cat1
+    - system_hardening
+

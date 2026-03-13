@@ -1,0 +1,21 @@
+---
+# =========================================
+# Palo Alto PAN-OS IDPS STIG - Routing
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-IP-000031 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000031 | The Palo Alto Networks security platform must block malicious ICMP packets."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000031_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000031_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000031
+    - cat2
+    - routing
+

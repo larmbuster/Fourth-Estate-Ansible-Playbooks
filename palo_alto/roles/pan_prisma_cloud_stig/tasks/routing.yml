@@ -1,0 +1,24 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud STIG - Routing
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CNTR-PC-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000530 | Prisma Cloud Compute Console must run as nonroot user (uid 2674)."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000530
+    - cat2
+    - routing
+

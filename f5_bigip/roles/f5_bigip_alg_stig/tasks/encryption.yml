@@ -1,0 +1,62 @@
+---
+# =========================================
+# F5 BIG-IP ALG STIG - Encryption
+# 4 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-AP-300003 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300003 | The F5 BIG-IP appliance providing intermediary services for remote access must use FIPS-validated cryptographic algorithms, including TLS 1.2 at a minimum."
+  f5networks.f5_modules.bigip_profile_client_ssl:
+    name: "{{ f5_bigip_alg_stig_ssl_profile | default('stig-clientssl') }}"
+    ciphers: "{{ f5_bigip_alg_stig_tls_ciphers }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300003
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-AP-300159 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300159 | The F5 BIG-IP appliance must be configured to use cryptographic algorithms approved by NSA to protect NSS for remote access to a classified network."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300159_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300159_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300159
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-AP-300161 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300161 | MANUAL CHECK - The F5 BIG-IP appliance providing remote access intermediary services must disable split-tunneling for remote clients' VPNs."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Obtain the Network Access name in the Access Profile: From the BIG-IP GUI: 1. Access. 2. Profiles/Policies. 3. Access Profiles. 4. Click the name of the Access Profile. 5. Click the Access Policy t..."
+  tags:
+    - F5BI-AP-300161
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# F5BI-AP-300163 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300163 | The VPN Gateway must use Always On VPN connections for remote computing."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_alg_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_alg_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300163
+    - cat2
+    - encryption
+

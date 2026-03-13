@@ -1,0 +1,79 @@
+---
+# =========================================
+# Cisco IOS-XR Router NDM DISA STIG V3 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 27 (CAT I: 7, CAT II: 20, CAT III: 0)
+#
+# Usage:
+#   --tags access_control           (2 rules)
+#   --tags authentication           (5 rules)
+#   --tags authorization            (1 rules)
+#   --tags encryption               (4 rules)
+#   --tags logging                  (8 rules)
+#   --tags network_services         (2 rules)
+#   --tags routing                  (1 rules)
+#   --tags session_management       (3 rules)
+#   --tags system_hardening         (1 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CISC-ND-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco IOS-XR Router"
+  ansible.builtin.assert:
+    that:
+      - ansible_network_os == "cisco.iosxr.iosxr"
+    fail_msg: >-
+      This role targets Cisco IOS-XR Router only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CISC-ND | Access Control (2 rules)"
+  ansible.builtin.import_tasks: access_control.yml
+  tags:
+    - access_control
+
+- name: "CISC-ND | Authentication (5 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "CISC-ND | Authorization (1 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "CISC-ND | Encryption (4 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "CISC-ND | Logging (8 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "CISC-ND | Network Services (2 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "CISC-ND | Routing (1 rules)"
+  ansible.builtin.import_tasks: routing.yml
+  tags:
+    - routing
+
+- name: "CISC-ND | Session Management (3 rules)"
+  ansible.builtin.import_tasks: session_management.yml
+  tags:
+    - session_management
+
+- name: "CISC-ND | System Hardening (1 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

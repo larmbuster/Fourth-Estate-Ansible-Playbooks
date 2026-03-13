@@ -1,0 +1,49 @@
+---
+# =========================================
+# Cisco ASA Firewall DISA STIG V2 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 21 (CAT I: 2, CAT II: 19, CAT III: 0)
+#
+# Usage:
+#   --tags access_control           (10 rules)
+#   --tags encryption               (1 rules)
+#   --tags logging                  (7 rules)
+#   --tags system_hardening         (3 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CASA-FW-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco ASA"
+  ansible.builtin.assert:
+    that:
+      - ansible_network_os == "cisco.asa.asa"
+    fail_msg: >-
+      This role targets Cisco ASA only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CASA-FW | Access Control (10 rules)"
+  ansible.builtin.import_tasks: access_control.yml
+  tags:
+    - access_control
+
+- name: "CASA-FW | Encryption (1 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "CASA-FW | Logging (7 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "CASA-FW | System Hardening (3 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

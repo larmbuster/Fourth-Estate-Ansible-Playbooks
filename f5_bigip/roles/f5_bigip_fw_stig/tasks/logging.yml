@@ -1,0 +1,46 @@
+---
+# =========================================
+# F5 BIG-IP Firewall STIG - Logging
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-FW-300012 - LOW
+# -----------------------------------------
+
+- name: "F5BI-FW-300012 | In the event that communication with the central audit server is lost, the F5 BIG-IP appliance must continue to queue traffic log records locally."
+  f5networks.f5_modules.bigip_remote_syslog:
+    remote_host: "{{ f5_bigip_fw_stig_syslog_server }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300012
+    - cat3
+    - logging
+
+# -----------------------------------------
+# F5BI-FW-300013 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300013 | The F5 BIG-IP appliance must be configured to use TCP when sending log records to the central audit server."
+  f5networks.f5_modules.bigip_remote_syslog:
+    remote_host: "{{ f5_bigip_fw_stig_syslog_server }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300013
+    - cat2
+    - logging
+
+# -----------------------------------------
+# F5BI-FW-300021 - LOW
+# -----------------------------------------
+
+- name: "F5BI-FW-300021 | The F5 BIG-IP appliance must generate an alert that can be forwarded to, at a minimum, the information system security officer (ISSO) and information system security manager (ISSM) when denial-of-s..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_fw_stig_f5bi_fw_300021_key }}"
+    value: "{{ f5_bigip_fw_stig_f5bi_fw_300021_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300021
+    - cat3
+    - logging
+

@@ -1,0 +1,51 @@
+---
+# =========================================
+# Cisco ACI NDM STIG - System Hardening
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-ND-000005 - HIGH
+# -----------------------------------------
+
+- name: "CACI-ND-000005 | The Cisco ACI must be configured to prohibit the use of all unnecessary and/or nonsecure functions, ports, protocols, and/or services."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_ndm_stig_caci_nd_000005_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_ndm_stig_caci_nd_000005_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000005
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CACI-ND-000011 - HIGH
+# -----------------------------------------
+
+- name: "CACI-ND-000011 | The Cisco ACI must be running an operating system release that is currently supported by the vendor."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_ndm_stig_caci_nd_000011_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_ndm_stig_caci_nd_000011_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000011
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CACI-ND-000057 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000057 | The Cisco ACI must be configured to disable the auxiliary USB port."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_ndm_stig_caci_nd_000057_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_ndm_stig_caci_nd_000057_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000057
+    - cat2
+    - system_hardening
+

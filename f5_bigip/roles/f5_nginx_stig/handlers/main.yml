@@ -1,0 +1,7 @@
+---
+- name: Reload NGINX
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded
+  when: f5_nginx_stig_auto_reload | default(true) | bool
+

@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Cisco ISE NDM DISA STIG V2 hardening
+    description:
+      - Applies Cisco ISE NDM STIG hardening configuration.
+    options:
+      cisco_ise_ndm_stig_auto_save:
+        type: bool
+        default: true
+        description: Automatically save configuration after changes.
+

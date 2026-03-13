@@ -1,0 +1,90 @@
+---
+# =========================================
+# Cisco ACI L2S STIG - Switching
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-L2-000001 - HIGH
+# -----------------------------------------
+
+- name: "CACI-L2-000001 | The Cisco ACI layer 2 switch must uniquely identify all network-connected endpoint devices before establishing any connection."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_l2s_stig_caci_l2_000001_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_l2s_stig_caci_l2_000001_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-L2-000001
+    - cat1
+    - switching
+
+# -----------------------------------------
+# CACI-L2-000005 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-L2-000005 | MANUAL CHECK - The Cisco ACI layer 2 switch must have Unknown Unicast Flood Blocking (UUFB) set to \"Hardware Proxy\"."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure each Bridge Domain to handle unknown unicast flood blocking. 1. Navigate to Tenant >> Networking >> Bridge Domains >> Policy >> General. 2. Expand Networking and right-click \"Create Brid..."
+  tags:
+    - CACI-L2-000005
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CACI-L2-000009 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-L2-000009 | MANUAL CHECK - The Cisco ACI layer 2 switch must enable port security."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Create a port security policy. The port security policy can be created new or chosen from the list of available port security policies. Path to use Port Security setting: Fabric >> Access Policies ..."
+  tags:
+    - CACI-L2-000009
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CACI-L2-000010 - LOW
+# -----------------------------------------
+
+- name: "CACI-L2-000010 | The Cisco ACI layer 2 switch must have Storm Control configured on all host-facing switch ports."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_l2s_stig_caci_l2_000010_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_l2s_stig_caci_l2_000010_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-L2-000010
+    - cat3
+    - switching
+
+# -----------------------------------------
+# CACI-L2-000011 - LOW
+# -----------------------------------------
+
+- name: "CACI-L2-000011 | The Cisco ACI layer 2 switch must have Internet Group Management Protocol (IGMP) or Multicast Listener Discovery (MLD) snooping configured on all VLANs."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_l2s_stig_caci_l2_000011_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_l2s_stig_caci_l2_000011_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-L2-000011
+    - cat3
+    - switching
+
+# -----------------------------------------
+# CACI-L2-000017 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-L2-000017 | The Cisco ACI layer 2 switch must employ a first-hop-security (FHS) policy to protect against denial-of-service (DoS) attacks."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_l2s_stig_caci_l2_000017_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_l2s_stig_caci_l2_000017_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-L2-000017
+    - cat2
+    - switching
+

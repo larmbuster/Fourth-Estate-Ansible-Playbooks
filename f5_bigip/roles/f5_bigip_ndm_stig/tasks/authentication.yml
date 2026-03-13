@@ -1,0 +1,216 @@
+---
+# =========================================
+# F5 BIG-IP NDM STIG - Authentication
+# 16 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DM-300003 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300003 | The F5 BIG-IP appliance must terminate shared/group account credentials when members leave the group."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_ndm_stig_f5bi_dm_300003_key }}"
+    value: "{{ f5_bigip_ndm_stig_f5bi_dm_300003_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300003
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300009 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300009 | The F5 BIG-IP appliance must be configured with only one local account to be used as the account of last resort in the event the authentication server is unavailable."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300009
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300010 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DM-300010 | The F5 BIG-IP appliance must be configured to assign appropriate user roles or access levels to authenticated users."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300010
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300013 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300013 | The F5 BIG-IP appliance must be configured to enforce the limit of three consecutive invalid logon attempts, after which time it must block any login attempt for at least 15 minutes."
+  f5networks.f5_modules.bigip_device_syslog:
+    log_level: informational
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300013
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300040 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DM-300040 | The F5 BIG-IP appliance must be configured to use at least two authentication servers to authenticate administrative users."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300040
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300044 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300044 | The F5 BIG-IP appliance must obtain its public key certificates from an appropriate certificate policy through an approved service provider."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_ndm_stig_f5bi_dm_300044_key }}"
+    value: "{{ f5_bigip_ndm_stig_f5bi_dm_300044_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300044
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300046 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DM-300046 | The F5 BIG-IP appliance must be configured to use multifactor authentication (MFA) for interactive logins."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300046
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300048 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300048 | The F5 BIG-IP appliance must authenticate Network Time Protocol (NTP) sources using authentication that is cryptographically based."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300048
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300049 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300049 | The F5 BIG-IP appliance must enforce a minimum 15-character password length."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300049
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300050 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300050 | The F5 BIG-IP appliance must enforce password complexity by requiring that at least one uppercase character be used."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300050
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300051 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300051 | The F5 BIG-IP appliance must enforce password complexity by requiring that at least one lowercase character be used."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300051
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300052 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300052 | The F5 BIG-IP appliance must enforce password complexity by requiring that at least one numeric character be used."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300052
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300053 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300053 | The F5 BIG-IP appliance must enforce password complexity by requiring that at least one special character be used."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300053
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300054 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300054 | The F5 BIG-IP appliance must require that when a password is changed, the characters are changed in at least eight of the positions within the password."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300054
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300055 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300055 | The F5 BIG-IP appliance must prohibit the use of cached authenticators after eight hours or less."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300055
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-DM-300056 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DM-300056 | The F5 BIG-IP appliance must be configured to use DOD approved OCSP responders or CRLs to validate certificates used for PKI-based authentication."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300056
+    - cat1
+    - authentication
+

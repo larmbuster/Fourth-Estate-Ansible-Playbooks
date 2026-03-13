@@ -1,0 +1,334 @@
+---
+# =========================================
+# Cisco ASA VPN STIG - Encryption
+# 23 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-VN-000150 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000150 | The Cisco ASA must be configured to use Internet Key Exchange (IKE) for all IPsec security associations."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 1"
+      - "crypto ikev2 enable OUTSIDE"
+      - "crypto ipsec ikev2 ipsec-proposal IPSEC_TRANS"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000150
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000160 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000160 | The Cisco ASA must be configured to use Internet Key Exchange v2 (IKEv2) for all IPsec security associations."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 1"
+      - "crypto ikev2 enable OUTSIDE"
+      - "crypto ipsec ikev2 ipsec-proposal IPSEC_TRANS"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000160
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000170 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000170 | The Cisco ASA must be configured to use NIST FIPS-validated cryptography for Internet Key Exchange (IKE) Phase 1."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 1"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000170
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000180 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000180 | The Cisco ASA must be configured to specify Perfect Forward Secrecy (PFS) for the IPsec Security Association (SA) during IKE Phase 2 negotiation."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto map IPSEC_CRYPTO_MAP 1 set pfs group5"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000180
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000190 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000190 | The Cisco ASA must be configured to use a FIPS-validated cryptographic module to generate cryptographic hashes."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 1"
+      - "crypto ipsec ikev2 ipsec-proposal IPSEC_TRANS"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000190
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000200 | The Cisco ASA must be configured to use a FIPS-validated cryptographic module to implement IPsec encryption services."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ipsec ikev2 ipsec-proposal IPSEC_TRANS"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000200
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000210 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000210 | The Cisco ASA must be configured to use a Diffie-Hellman (DH) Group of 16 or greater for Internet Key Exchange (IKE) Phase 1."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 1"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000210
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000230 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000230 | The Cisco ASA must be configured to use FIPS-validated SHA-2 at 384 bits or higher for Internet Key Exchange (IKE) Phase 1."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 1"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000230
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000240 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000240 | The Cisco ASA must be configured to use FIPS-validated SHA-2 or higher for Internet Key Exchange (IKE) Phase 2."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ipsec ikev2 ipsec-proposal AES_SHA"
+      - "crypto map IPSEC_MAP 10 set ikev2 ipsec-proposal"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000240
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000300 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000300 | The Cisco ASA VPN gateway must be configured to restrict what traffic is transported via the IPsec tunnel according to flow control policies."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_vpn_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000300
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000310 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000310 | The Cisco ASA VPN gateway must be configured to identify all peers before establishing a connection."
+  cisco.asa.asa_config:
+    lines:
+      - "tunnel-group x.x.x.x type ipsec-l2l"
+      - "tunnel-group x.x.x.x ipsec-attributes"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000310
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000340 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000340 | The Cisco ASA VPN gateway must use cryptographic algorithms approved by NSA to protect NSS when transporting classified traffic across an unclassified network."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 2"
+      - "crypto map CSNA_MAP 10 set ikev2 ipsec-proposal AES-256"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000340
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000350 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000350 | The Cisco ASA VPN gateway must be configured to renegotiate the IPsec Security Association after eight hours or less."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto map IPSEC_MAP 10 set security-association lifetime seconds 28800"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000350
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000360 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000360 | The Cisco ASA VPN gateway must be configured to renegotiate the IKE security association after 24 hours or less."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 2"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000360
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000550 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000550 | The Cisco ASA remote access VPN server must be configured to use TLS 1.2 or higher to protect the confidentiality of remote access connections."
+  cisco.asa.asa_config:
+    lines:
+      - "ssl server-version tlsv1.2 dtlsv1.2"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000550
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000560 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000560 | The Cisco ASA remote access VPN server must be configured to use a FIPS-validated algorithm and hash function to protect the integrity of TLS remote access sessions."
+  cisco.asa.asa_config:
+    lines:
+      - "ssl cipher tlsv1.2 fips"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000560
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000610 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000610 | MANUAL CHECK - The Cisco ASA remote access VPN server must be configured to generate unique session identifiers using a FIPS-validated Random Number Generator (RNG)"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-VN-000610
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000630 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000630 | The Cisco ASA remote access VPN server must be configured to use SHA-2 at 384 bits or greater for hashing to protect the integrity of IPsec remote access sessions."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 1"
+      - "crypto ipsec ikev2 ipsec-proposal IPSEC_TRANS"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000630
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000640 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000640 | The Cisco VPN remote access server must be configured to use AES256 or greater encryption for the Internet Key Exchange (IKE) Phase 1 to protect confidentiality of remote access sessions."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 1"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000640
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000650 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000650 | The Cisco ASA VPN remote access server must be configured to use AES256 or greater encryption for the IPsec security association to protect the confidentiality of remote access sessions."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ipsec ikev2 ipsec-proposal IPSEC_TRANS"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000650
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000700 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000700 | MANUAL CHECK - The Cisco ASA VPN remote access server must be configured to disable split-tunneling for remote clients."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-VN-000700
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000730 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000730 | The Cisco ASA VPN remote access server must be configured to validate certificates used for Transport Layer Security (TLS) functions by performing RFC 5280-compliant certification path validation."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ca trustpoint CA_X"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000730
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-VN-000760 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000760 | The Cisco ASA VPN remote access server must be configured to use an approved High Assurance Commercial Solution for Classified (CSfC) cryptographic algorithm for remote access to a classified network."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ikev2 policy 2"
+      - "crypto map CSNA_MAP 10 set ikev2 ipsec-proposal AES-256"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000760
+    - cat1
+    - encryption
+

@@ -1,0 +1,148 @@
+---
+# =========================================
+# Palo Alto PAN-OS NDM STIG - Logging
+# 10 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-NM-000024 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000024 | The Palo Alto Networks security platform must generate audit records when successful/unsuccessful attempts to access privileges occur."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000024_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000024_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000024
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000029 - LOW
+# -----------------------------------------
+
+- name: "PANW-NM-000029 | The Palo Alto Networks security platform must produce audit log records containing information (FQDN, unique hostname, management IP address) to establish the source of events."
+  paloaltonetworks.panos.panos_syslog_profile:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_ndm_stig_syslog_profile }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000029
+    - cat3
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000075 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000075 | Administrators in the role of Security Administrator, Cryptographic Administrator, or Audit Administrator must not also have the role of Audit Administrator."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000075
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000096 - LOW
+# -----------------------------------------
+
+- name: "PANW-NM-000096 | The Palo Alto Networks security platform must generate an immediate alert when allocated audit record storage volume reaches 75% of repository maximum audit record storage capacity."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000096_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000096_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000096
+    - cat3
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000097 - LOW
+# -----------------------------------------
+
+- name: "PANW-NM-000097 | The Palo Alto Networks security platform must have alarms enabled."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000097_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000097_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000097
+    - cat3
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000101 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000101 | The Palo Alto Networks security platform must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT)."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000101_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000101_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000101
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000117 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000117 | The Palo Alto Networks security platform must only allow the use of secure protocols that implement cryptographic mechanisms to protect the integrity of maintenance and diagnostic communications fo..."
+  paloaltonetworks.panos.panos_mgtconfig:
+    provider: "{{ panos_provider }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000117
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000118 - HIGH
+# -----------------------------------------
+
+- name: "PANW-NM-000118 | MANUAL CHECK - The Palo Alto Networks security platform must not use SNMP Versions 1 or 2."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Go to Device >> Setup >> Operations; in the Miscellaneous pane, select SNMP Setup. In the SNMP Setup window, complete the required fields. For the Version, select V3. Configure a view and assign it..."
+  tags:
+    - PANW-NM-000118
+    - cat1
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000128 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000128 | The Palo Alto Networks security platform must off-load audit records onto a different system or media than the system being audited."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000128_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000128_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000128
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-NM-000144 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000144 | The Palo Alto Networks security platform must generate an audit log record when the Data Plane CPU utilization is 100%."
+  paloaltonetworks.panos.panos_syslog_profile:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_ndm_stig_syslog_profile }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000144
+    - cat2
+    - logging
+

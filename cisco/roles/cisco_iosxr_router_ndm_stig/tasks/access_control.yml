@@ -1,0 +1,34 @@
+---
+# =========================================
+# Cisco IOS-XR Router NDM STIG - Access Control
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000140 | The Cisco router must be configured to enforce approved authorizations for controlling the flow of management information within the device based on control policies."
+  cisco.iosxr.iosxr_acls:
+    config: "{{ cisco_iosxr_router_ndm_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000140
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-ND-000290 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000290 | The Cisco router must produce audit records containing information to establish where the events occurred."
+  cisco.iosxr.iosxr_acls:
+    config: "{{ cisco_iosxr_router_ndm_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000290
+    - cat2
+    - access_control
+

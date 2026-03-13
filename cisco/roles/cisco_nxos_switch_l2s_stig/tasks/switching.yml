@@ -1,0 +1,167 @@
+---
+# =========================================
+# Cisco NX-OS Switch L2S STIG - Switching
+# 12 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000090 - LOW
+# -----------------------------------------
+
+- name: "CISC-L2-000090 | The Cisco switch must have Root Guard enabled on all switch ports connecting to access layer switches and hosts."
+  cisco.nxos.nxos_config:
+    lines:
+      - "spanning-tree guard root"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000090
+    - cat3
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000100 | The Cisco switch must have BPDU Guard enabled on all user-facing or untrusted access switch ports."
+  cisco.nxos.nxos_config:
+    lines:
+      - "spanning-tree bpduguard enable"
+      - "spanning-tree port type edge bpduguard default"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000100
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000110 | MANUAL CHECK - The Cisco switch must have STP Loop Guard enabled."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-L2-000110
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000120 | The Cisco switch must have Unknown Unicast Flood Blocking (UUFB) enabled."
+  cisco.nxos.nxos_config:
+    lines:
+      - "switchport block unicast"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000120
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000150 | MANUAL CHECK - The Cisco switch must have Dynamic Address Resolution Protocol (ARP) Inspection (DAI) enabled on all user VLANs."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the switch to have Dynamic Address Resolution Protocol (ARP) Inspection (DAI) enabled on all user VLANs as shown in the example below: SW1(config)# ip arp inspection vlan 2,4-8,11"
+  tags:
+    - CISC-L2-000150
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000160 - LOW
+# -----------------------------------------
+
+- name: "CISC-L2-000160 | The Cisco switch must have Storm Control configured on all host-facing switchports."
+  cisco.nxos.nxos_config:
+    lines:
+      - "storm-control unicast level 50"
+      - "storm-control broadcast level 40"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000160
+    - cat3
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000210 | The Cisco switch must have all disabled switch ports assigned to an unused VLAN."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000210
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000220 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000220 | The Cisco switch must not have the default VLAN assigned to any host-facing switch ports."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000220
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000230 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000230 | The Cisco switch must have the default VLAN pruned from all trunk ports that do not require it."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000230
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000250 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000250 | The Cisco switch must have all user-facing or untrusted ports configured as access switch ports."
+  cisco.nxos.nxos_config:
+    lines:
+      - "switchport mode access"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000250
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000260 | The Cisco switch must have the native VLAN assigned to an ID other than the default VLAN for all 802.1q trunk links."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000260
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000270 - LOW
+# -----------------------------------------
+
+- name: "CISC-L2-000270 | The Cisco switch must not have any switchports assigned to the native VLAN."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000270
+    - cat3
+    - switching
+

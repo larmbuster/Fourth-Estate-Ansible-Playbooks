@@ -1,0 +1,22 @@
+# =========================================
+# MS SQL Server STIG Hardening Inventory
+# Copy this file to 'inventory' and customize
+# =========================================
+
+[mssql_2022_servers]
+# sql2022-01 ansible_host=192.168.1.50
+
+[mssql_2016_servers]
+# sql2016-01 ansible_host=192.168.1.60
+
+[mssql_2022_servers:vars]
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+# ansible_user={{ vault_mssql_user }}
+# ansible_password={{ vault_mssql_password }}
+
+[mssql_2016_servers:vars]
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+# ansible_user={{ vault_mssql_user }}
+# ansible_password={{ vault_mssql_password }}

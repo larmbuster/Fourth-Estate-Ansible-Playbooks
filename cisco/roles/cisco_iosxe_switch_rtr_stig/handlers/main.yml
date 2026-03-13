@@ -1,0 +1,6 @@
+---
+- name: Save running configuration
+  cisco.ios.ios_config:
+    save_when: always
+  when: cisco_iosxe_switch_rtr_stig_auto_save | default(true) | bool
+

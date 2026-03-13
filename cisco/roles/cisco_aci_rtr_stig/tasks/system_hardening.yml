@@ -1,0 +1,21 @@
+---
+# =========================================
+# Cisco ACI RTR STIG - System Hardening
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-RT-000016 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000016 | The Cisco ACI must not be configured to have any feature enabled that calls home to the vendor."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000016_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000016_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000016
+    - cat2
+    - system_hardening
+

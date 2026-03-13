@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: pan_idps_stig
+  author: Fourth Estate
+  description: >-
+    Palo Alto PAN-OS IDPS DISA STIG V3 hardening role.
+    Implements 29 XCCDF rules across authorization, logging, network services, routing, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - palo_alto
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

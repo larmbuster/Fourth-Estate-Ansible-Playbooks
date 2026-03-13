@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: F5 NGINX Web Server DISA STIG V1 hardening
+    description:
+      - Applies F5 NGINX Web Server STIG hardening configuration.
+    options:
+      f5_nginx_stig_auto_reload:
+        type: bool
+        default: true
+        description: Automatically reload service after changes.
+

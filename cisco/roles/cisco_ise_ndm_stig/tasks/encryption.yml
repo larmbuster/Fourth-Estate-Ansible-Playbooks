@@ -1,0 +1,76 @@
+---
+# =========================================
+# Cisco ISE NDM STIG - Encryption
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NM-000380 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000380 | VERIFY - The Cisco ISE must be configured to authenticate SNMP messages using a FIPS-validated Keyed-Hash Message Authentication Code (HMAC)."
+  ansible.builtin.debug:
+    msg: "VERIFY: Navigate to Administration >> System >> Settings >> FIPS Mode. Verify FIPS Mode is enabled. If FIPS Mode is enabled, this is not a finding. If FIPS mode is not configured, but the Cisco ISE is conf..."
+  tags:
+    - CSCO-NM-000380
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CSCO-NM-000480 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000480 | The Cisco ISE must use FIPS-validated SHA-2 (or greater) to protect the integrity of hash message authentication code (HMAC), Key Derivation Functions (KDFs), Random Bit Generation, and hash-only a..."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000480
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CSCO-NM-000490 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000490 | VERIFY - The Cisco ISE must use FIPS-validated Keyed-Hash Message Authentication Code (HMAC) to protect the integrity of nonlocal maintenance and diagnostic communications."
+  ansible.builtin.debug:
+    msg: "VERIFY: Navigate to Administration >> System >> Settings >> FIPS Mode. Verify FIPS Mode is enabled. If FIPS Mode is enabled, this is not a finding. If FIPS mode is not configured, but the Cisco ISE is conf..."
+  tags:
+    - CSCO-NM-000490
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CSCO-NM-000510 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000510 | VERIFY - The Cisco ISE must be configured to implement cryptographic mechanisms using a FIPS 140-2 validated algorithm to protect the confidentiality of remote maintenance sessions."
+  ansible.builtin.debug:
+    msg: "VERIFY: Navigate to Administration >> System >> Settings >> FIPS Mode. Verify FIPS Mode is enabled. If FIPS Mode is enabled, this is not a finding. If FIPS mode is not configured, but the Cisco ISE is conf..."
+  tags:
+    - CSCO-NM-000510
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CSCO-NM-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000530 | The Cisco ISE must generate unique session identifiers using a FIPS 140-2 approved Random Number Generator (RNG) using DRGB."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000530
+    - cat2
+    - encryption
+

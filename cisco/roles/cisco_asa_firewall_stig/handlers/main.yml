@@ -1,0 +1,6 @@
+---
+- name: Save running configuration
+  cisco.asa.asa_config:
+    save_when: always
+  when: cisco_asa_firewall_stig_auto_save | default(true) | bool
+

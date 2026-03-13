@@ -1,0 +1,275 @@
+---
+# =========================================
+# Palo Alto PAN-OS NDM STIG - Authentication
+# 19 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-NM-000015 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000015 | The Palo Alto Networks security platform must enforce the limit of three consecutive invalid logon attempts."
+  paloaltonetworks.panos.panos_syslog_profile:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_ndm_stig_syslog_profile }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000015
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000016 - LOW
+# -----------------------------------------
+
+- name: "PANW-NM-000016 | The Palo Alto Networks security platform must display the Standard Mandatory DoD Notice and Consent Banner before granting access to the device."
+  paloaltonetworks.panos.panos_mgtconfig:
+    provider: "{{ panos_provider }}"
+    login_banner: "{{ pan_ndm_stig_banner_text }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000016
+    - cat3
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000051 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000051 | The Palo Alto Networks security platform must implement replay-resistant authentication mechanisms for network access to privileged accounts."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000051
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000053 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000053 | If multifactor authentication is not available and passwords must be used, the Palo Alto Networks security platform must enforce a minimum 15-character password length."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000053
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000055 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000055 | If multifactor authentication is not available and passwords must be used, the Palo Alto Networks security platform must enforce password complexity by requiring that at least one uppercase charact..."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000055
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000056 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000056 | If multifactor authentication is not available and passwords must be used, the Palo Alto Networks security platform must enforce password complexity by requiring that at least one lowercase charact..."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000056
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000057 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000057 | If multifactor authentication is not available and passwords must be used, the Palo Alto Networks security platform must enforce password complexity by requiring that at least one numeric character..."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000057
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000058 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000058 | If multifactor authentication is not available and passwords must be used, the Palo Alto Networks security platform must enforce password complexity by requiring that at least one special character..."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000058
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000059 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000059 | If multifactor authentication is not available and passwords must be used, the Palo Alto Networks security platform must require that when a password is changed, the characters are changed in at le..."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000059
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000092 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000092 | The Palo Alto Networks security platform must automatically lock the account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are exceeded."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000092
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000098 - LOW
+# -----------------------------------------
+
+- name: "PANW-NM-000098 | The Palo Alto Networks security platform must compare internal information system clocks at least every 24 hours with an authoritative time server."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000098_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000098_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000098
+    - cat3
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000110 | The Palo Alto Networks security platform must accept and verify Personal Identity Verification (PIV) credentials."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000110_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000110_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000110
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000131 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000131 | The Palo Alto Networks security platform must use automated mechanisms to alert security personnel to threats identified by authoritative sources (e.g., CTOs) and IAW CJCSM 6510.01B."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000131_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000131_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000131
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000136 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000136 | The Palo Alto Networks security platform must employ centrally managed authentication server(s)."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000136_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000136_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000136
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000141 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000141 | MANUAL CHECK - The Palo Alto Networks security platform must use DoD-approved PKI rather than proprietary or self-signed device certificates."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Obtain a Device Certificate from the DoD PKI or from a DoD-approved PKI: Go to Device >> Certificate Management >> Certificates Select \"Import\" (at the bottom of the pane). In the \"Import Certif..."
+  tags:
+    - PANW-NM-000141
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000142 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000142 | The Palo Alto Networks security platform must not use Password Profiles."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000142
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000143 - HIGH
+# -----------------------------------------
+
+- name: "PANW-NM-000143 | The Palo Alto Networks security platform must not use the default admin account password."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000143
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000145 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000145 | The Palo Alto Networks security platform must authenticate Network Time Protocol sources."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000145_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000145_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000145
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# PANW-NM-000048 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000048 | The Palo Alto device must be configured with only one local account to be used as the account of last resort in the event the authentication server is unavailable."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000048
+    - cat2
+    - authentication
+

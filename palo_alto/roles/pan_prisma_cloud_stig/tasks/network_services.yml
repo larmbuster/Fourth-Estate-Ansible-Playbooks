@@ -1,0 +1,114 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud STIG - Network Services
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# CNTR-PC-000480 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000480 | Images stored within the container registry must contain only images to be run as containers within the container platform."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000480
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CNTR-PC-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000500 | Prisma Cloud Compute must use TCP ports above 1024."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000500
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CNTR-PC-001440 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-001440 | Prisma Cloud Compute must be running the latest release."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001440
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CNTR-PC-001470 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-001470 | Prisma Cloud Compute's Intelligence Stream must be kept up to date."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001470
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CNTR-PC-001490 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-001490 | Configuration of Prisma Cloud Compute must be continuously verified."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001490
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CNTR-PC-001770 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-001770 | Prisma Cloud Compute release tar distributions must have an associated SHA-256 digest."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001770
+    - cat2
+    - network_services
+

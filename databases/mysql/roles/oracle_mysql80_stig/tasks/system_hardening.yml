@@ -1,0 +1,211 @@
+---
+# =========================================
+# Oracle MySQL 8.0 Database STIG - System Hardening
+# 14 rules
+# =========================================
+
+# -----------------------------------------
+# MYS8-00-005500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-005500 | MANUAL CHECK - The MySQL Database Server 8.0 must be configured in accordance with the security configuration settings based on DoD security configuration and implementation guidance, including STIGs, NSA configu..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify that MySQL configuration settings align with DoD security configuration guidance. Review my.cnf and runtime variables against the applicable STIG checklist."
+  tags:
+    - MYS8-00-005500
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-005600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-005600 | Default demonstration and sample databases, database objects, and applications must be removed."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-005600
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-005800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-005800 | Unused database components which are integrated in the MySQL Database Server 8.0 and cannot be uninstalled must be disabled."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-005800
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-006000 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-006000 | The MySQL Database Server 8.0 must be configured to prohibit or restrict the use of organization-defined functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability a..."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-006000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-007300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-007300 | The MySQL Database Server 8.0 must check the validity of all data inputs except those specifically identified by the organization."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-007300
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-007400 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-007400 | The MySQL Database Server 8.0 and associated applications must reserve the use of dynamic code execution for situations that require it."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-007400
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-008500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-008500 | Database software, including MySQL Database Server 8.0 configuration files, must be stored in dedicated directories, or DASD pools (remove), separate from the host OS and other applications."
+  community.mysql.mysql_variables:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    variable: "datadir"
+    value: "{{ oracle_mysql80_stig_datadir | default('/var/lib/mysql/') }}"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-008500
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-009000 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-009000 | The MySQL Database Server 8.0 must disable network functions, ports, protocols, and services deemed by the organization to be nonsecure, in accord with the Ports, Protocols, and Services Management..."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-009000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-010800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-010800 | The MySQL Database Server 8.0 must associate organization-defined types of security labels having organization-defined security label values with information in storage."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-010800
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-010900 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-010900 | The MySQL Database Server 8.0 must associate organization-defined types of security labels having organization-defined security label values with information in process."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-010900
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-011000 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-011000 | The MySQL Database Server 8.0 must associate organization-defined types of security labels having organization-defined security label values with information in transmission."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-011000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-012300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-012300 | Security-relevant software updates to the MySQL Database Server 8.0 must be installed within the time period directed by an authoritative source (e.g., IAVM, CTOs, DTMs, and STIGs)."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-012300
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-012500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-012500 | MANUAL CHECK - When invalid inputs are received, the MySQL Database Server 8.0 must behave in a predictable and documented manner that reflects organizational and system objectives."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the MySQL Server to behave in a predictable and documented manner that reflects organizational and system objectives when invalid inputs are received. To validate data at the database tab..."
+  tags:
+    - MYS8-00-012500
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# MYS8-00-012600 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-012600 | MySQL database products must be a version supported by the vendor."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-012600
+    - cat1
+    - system_hardening
+

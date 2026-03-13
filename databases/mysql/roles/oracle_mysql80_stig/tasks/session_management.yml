@@ -1,0 +1,22 @@
+---
+# =========================================
+# Oracle MySQL 8.0 Database STIG - Session Management
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# MYS8-00-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-000200 | MySQL Database Server 8.0 must limit the number of concurrent sessions to an organization-defined number per user for all accounts and/or account types."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_000200_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-000200
+    - cat2
+    - session_management
+

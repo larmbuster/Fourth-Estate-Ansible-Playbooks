@@ -1,0 +1,93 @@
+---
+# =========================================
+# F5 NGINX Web Server STIG - Authorization
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# NGNX-APP-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000150 | The NGINX service account must be configured to not have admin group access."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000150"
+    line: "# STIG NGNX-APP-000150 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000150
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# NGNX-APP-000180 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000180 | MANUAL CHECK - NGINX must display the Standard Mandatory DOD Notice and Consent Banner before granting access to the application."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Note: The default NGINX configuration is \"/etc/nginx/nginx.conf\", though various files may also be included. Configure nginx.conf for a section that verifies that user consent has been given. Set..."
+  tags:
+    - NGNX-APP-000180
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# NGNX-APP-000250 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000250 | NGINX must allow only the information system security manager (ISSM) (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000250"
+    line: "# STIG NGNX-APP-000250 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000250
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# NGNX-APP-000370 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000370 | NGINX must prevent the execution of unapproved modules."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000370"
+    line: "# STIG NGNX-APP-000370 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000370
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# NGNX-APP-000400 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000400 | NGINX must protect audit information from unauthorized access."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000400"
+    line: "# STIG NGNX-APP-000400 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# NGNX-APP-001590 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001590 | NGINX must restrict access to configuration files."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001590"
+    line: "# STIG NGNX-APP-001590 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001590
+    - cat2
+    - authorization
+

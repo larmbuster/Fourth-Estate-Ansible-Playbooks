@@ -1,0 +1,141 @@
+---
+# =========================================
+# Cisco ACI RTR STIG - Routing
+# 9 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-RT-000002 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000002 | The BGP Cisco ACI must be configured to reject inbound route advertisements for any prefixes belonging to the local autonomous system (AS)."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000002_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000002_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000002
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CACI-RT-000003 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000003 | The BGP Cisco ACI must be configured to reject outbound route advertisements for any prefixes that do not belong to any customers or the local autonomous system (AS)."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000003_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000003_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000003
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CACI-RT-000004 - LOW
+# -----------------------------------------
+
+- name: "CACI-RT-000004 | The BGP Cisco ACI must be configured to reject route advertisements from BGP peers that do not list their autonomous system (AS) number as the first AS in the AS_PATH attribute."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000004_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000004_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000004
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CACI-RT-000017 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000017 | The Cisco ACI must be configured to use encryption for routing protocol authentication."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000017_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000017_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000017
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CACI-RT-000018 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000018 | The Cisco ACI must be configured to authenticate all routing protocol messages using a NIST-validated FIPS 198-1 message authentication code algorithm."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000018_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000018_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000018
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CACI-RT-000028 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000028 | The BGP Cisco ACI must be configured to use the maximum prefixes feature to protect against route table flooding and prefix de-aggregation attacks."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000028_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000028_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000028
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CACI-RT-000029 - LOW
+# -----------------------------------------
+
+- name: "CACI-RT-000029 | The BGP Cisco ACI must be configured to limit the prefix size on any inbound route advertisement to /24 or the least significant prefixes issued to the customer."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000029_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000029_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000029
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CACI-RT-000034 - LOW
+# -----------------------------------------
+
+- name: "CACI-RT-000034 | Cisco ACI must be configured so the BGP neighbor is directly connected and will not connect a BGP session to a directly connected neighbor device's loopback address."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000034_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000034_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000034
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CACI-RT-000038 - LOW
+# -----------------------------------------
+
+- name: "CACI-RT-000038 | The Cisco ACI must be configured to use its loopback address as the source address for internal Border Gateway Protocol (iBGP) peering sessions."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000038_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000038_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000038
+    - cat3
+    - routing
+

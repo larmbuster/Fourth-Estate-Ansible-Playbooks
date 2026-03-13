@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: oracle_mysql80_stig
+  author: Fourth Estate
+  description: >-
+    Oracle MySQL 8.0 Database DISA STIG V2 hardening role.
+    Implements 100 XCCDF rules across authentication, authorization, encryption, logging, session management, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - mysql
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

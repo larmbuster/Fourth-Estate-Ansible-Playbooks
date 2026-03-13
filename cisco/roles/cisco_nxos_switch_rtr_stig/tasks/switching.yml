@@ -1,0 +1,31 @@
+---
+# =========================================
+# Cisco NX-OS Switch RTR STIG - Switching
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000680 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000680 | The Cisco PE switch providing Virtual Private LAN Services (VPLS) must be configured to have all attachment circuits defined to the virtual forwarding instance (VFI) with the globally unique VPN ID..."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000680
+    - cat1
+    - switching
+
+# -----------------------------------------
+# CISC-RT-000720 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000720 | MANUAL CHECK - The Cisco PE switch must be configured to limit the number of MAC addresses it can learn for each Virtual Private LAN Services (VPLS) bridge domain."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000720
+    - cat2
+    - switching
+

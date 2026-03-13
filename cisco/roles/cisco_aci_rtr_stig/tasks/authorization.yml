@@ -1,0 +1,36 @@
+---
+# =========================================
+# Cisco ACI RTR STIG - Authorization
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-RT-000001 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000001 | The Cisco ACI must be configured to enforce approved authorizations for controlling the flow of information within the network based on organization-defined information flow control policies."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000001_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000001_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000001
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CACI-RT-000041 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000041 | The Cisco ACI must not be configured to use IPv6 site local unicast addresses."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000041_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000041_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000041
+    - cat2
+    - authorization
+

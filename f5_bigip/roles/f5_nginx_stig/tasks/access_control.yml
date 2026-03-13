@@ -1,0 +1,33 @@
+---
+# =========================================
+# F5 NGINX Web Server STIG - Access Control
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# NGNX-APP-000850 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000850 | NGINX must identify prohibited mobile code."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000850"
+    line: "# STIG NGNX-APP-000850 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000850
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# NGNX-APP-001630 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001630 | MANUAL CHECK - NGINX must be configured with a deny-all, permit-by-exception policy to allow the execution of authorized software programs."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Determine the path to NGINX config file(s): # nginx -qT | grep \"# configuration\" # configuration file /etc/nginx/nginx.conf: Note: The default NGINX configuration is \"/etc/nginx/nginx.conf\", th..."
+  tags:
+    - NGNX-APP-001630
+    - cat2
+    - access_control
+

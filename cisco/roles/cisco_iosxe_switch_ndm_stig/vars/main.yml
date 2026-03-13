@@ -1,0 +1,12 @@
+---
+# =========================================
+# Cisco IOS-XE Switch NDM DISA STIG V3 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+cisco_iosxe_switch_ndm_stig_stig_version: "3"
+cisco_iosxe_switch_ndm_stig_stig_release_info: "Release: 5 Benchmark Date: 05 Jan 2026"
+cisco_iosxe_switch_ndm_stig_stig_benchmark_id: "Cisco_IOS_XE_Switch_NDM_STIG"
+cisco_iosxe_switch_ndm_stig_stig_total_rules: 42
+

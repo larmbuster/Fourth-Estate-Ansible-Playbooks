@@ -1,0 +1,157 @@
+---
+# =========================================
+# Cisco NX-OS Switch RTR STIG - Network Services
+# 10 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000160 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000160 | The Cisco switch must be configured to have IP directed broadcast disabled on all interfaces."
+  cisco.nxos.nxos_config:
+    lines:
+      - "no ip directed-broadcast"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000160
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000380 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000380 | The Cisco perimeter switch must be configured to have Proxy ARP disabled on all external interfaces."
+  cisco.nxos.nxos_config:
+    lines:
+      - "no ip proxy-arp"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000380
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000700 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000700 | The Cisco PE switch providing Virtual Private LAN Services (VPLS) must be configured to have traffic storm control thresholds on CE-facing interfaces."
+  cisco.nxos.nxos_config:
+    lines:
+      - "storm-control broadcast level 40"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000700
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000710 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000710 | The Cisco PE switch must be configured to implement Internet Group Management Protocol (IGMP) or Multicast Listener Discovery (MLD) snooping for each Virtual Private LAN Services (VPLS) bridge domain."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip igmp snooping"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000710
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000760 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000760 | The Cisco PE switch must be configured to enforce a Quality-of-Service (QoS) policy to provide preferred treatment for mission-critical applications."
+  cisco.nxos.nxos_config:
+    lines:
+      - "class-map match-all C2_VOICE"
+      - "match ip dscp 47"
+      - "class-map match-all VOICE"
+      - "match ip dscp ef"
+      - "class-map match-all VIDEO"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000760
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000770 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000770 | The Cisco P switch must be configured to enforce a Quality-of-Service (QoS) policy to provide preferred treatment for mission-critical applications."
+  cisco.nxos.nxos_config:
+    lines:
+      - "class-map match-all C2_VOICE"
+      - "match ip dscp 47"
+      - "class-map match-all VOICE"
+      - "match ip dscp ef"
+      - "class-map match-all VIDEO"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000770
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000780 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000780 | The Cisco switch must be configured to enforce a Quality-of-Service (QoS) policy to limit the effects of packet flooding denial-of-service (DoS) attacks."
+  cisco.nxos.nxos_config:
+    lines:
+      - "class-map match-all SCAVENGER"
+      - "match ip dscp cs1"
+      - "policy-map QOS_POLICY"
+      - "no class class-default"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000780
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000880 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000880 | The Cisco multicast Designated switch (DR) must be configured to limit the number of mroute states resulting from Internet Group Management Protocol (IGMP) and Multicast Listener Discovery (MLD) Ho..."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip igmp state-limit 44"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000880
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000940 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000940 | The Cisco Multicast Source Discovery Protocol (MSDP) switch must be configured to limit the amount of source-active messages it accepts on a per-peer basis."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip msdp sa-limit {{ peer_address }} {{ numeric_value }}"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000940
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000950 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000950 | The Cisco Multicast Source Discovery Protocol (MSDP) switch must be configured to use a loopback address as the source address when originating MSDP traffic."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip msdp peer {{ peer_address }} connect-source lo12 remote-as {{ numeric_value }}"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000950
+    - cat3
+    - network_services
+

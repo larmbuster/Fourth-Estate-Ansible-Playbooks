@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: pan_prisma_cloud_stig
+  author: Fourth Estate
+  description: >-
+    Palo Alto Prisma Cloud Compute Cloud DISA STIG V2 hardening role.
+    Implements 31 XCCDF rules across access control, authentication, authorization, logging, network services, routing, session management, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - palo_alto
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

@@ -1,0 +1,22 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - Backup Recovery
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-016700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-016700 | Oracle Database must preserve any organization-defined system state information in the event of a system failure."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "alter database archivelog; -- Enable ArchiveLog"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-016700
+    - cat2
+    - backup_recovery
+

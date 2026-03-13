@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: F5 BIG-IP ALG DISA STIG V1 hardening
+    description:
+      - Applies F5 BIG-IP ALG STIG hardening configuration.
+    options:
+      f5_bigip_alg_stig_auto_save:
+        type: bool
+        default: true
+        description: Automatically save configuration after changes.
+

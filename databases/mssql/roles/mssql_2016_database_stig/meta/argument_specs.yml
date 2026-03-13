@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: MS SQL Server 2016 Database DISA STIG V3 hardening
+    description:
+      - Applies MS SQL Server 2016 Database STIG hardening configuration.
+    options:
+      mssql_2016_database_stig_auto_restart:
+        type: bool
+        default: false
+        description: Automatically restart service after changes.
+

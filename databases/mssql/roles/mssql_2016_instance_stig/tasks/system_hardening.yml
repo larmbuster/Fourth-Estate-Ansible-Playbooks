@@ -1,0 +1,253 @@
+---
+# =========================================
+# MS SQL Server 2016 Instance STIG - System Hardening
+# 16 rules
+# =========================================
+
+# -----------------------------------------
+# SQL6-D0-006800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-006800 | Database software, including DBMS configuration files, must be stored in dedicated directories, separate from the host OS and other applications."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-006800
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-006900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-006900 | Default demonstration and sample databases, database objects, and applications must be removed."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-006900
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-007000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-007000 | Unused database components, DBMS software, and database objects must be removed."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-007000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-007100 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-007100 | Unused database components that are integrated in SQL Server and cannot be uninstalled must be disabled."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-007100
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-007400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-007400 | MANUAL CHECK - Access to Non-Standard extended stored procedures must be disabled or restricted, unless specifically required and approved."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Remove any Non-Standard extended stored procedures that are not documented and approved. sp_dropextendedproc 'proc name'"
+  tags:
+    - SQL6-D0-007400
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-007600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-007600 | MANUAL CHECK - SQL Server must be configured to prohibit or restrict the use of organization-defined protocols as defined in the Ports, Protocols, and Services Management (PPSM) Category Assurance List (CAL) and ..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: In SQL Server Configuration Manager >> SQL Server Network Configuration >> Protocols, right-click each listed protocol that is enabled but not authorized and Select \"Disable\"."
+  tags:
+    - SQL6-D0-007600
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-008000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-008000 | Contained databases must use Windows principals."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-008000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-009900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-009900 | MANUAL CHECK - SQL Server must prevent unauthorized and unintended information transfer via Instant File Initialization (IFI)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If IFI is not documented as being required, disable instant file initialization for the instance of SQL Server by removing the SQL Service SID and/or service account from the \"Perform volume maint..."
+  tags:
+    - SQL6-D0-009900
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-012300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-012300 | SQL Server must maintain a separate execution domain for each executing process."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      EXEC sp_configure 'clr enabled', 0
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-012300
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-012700 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-012700 | When updates are applied to SQL Server software, any software components that have been replaced or made unnecessary must be removed."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-012700
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-012800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-012800 | Security-relevant software updates to SQL Server must be installed within the time period directed by an authoritative source (e.g. IAVM, CTOs, DTMs, and STIGs)."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-012800
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-016000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-016000 | SQL Server must configure Customer Feedback and Error Reporting."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-016000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-016400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-016400 | MANUAL CHECK - Execution of startup stored procedures must be restricted to necessary cases only."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: To disable start up stored procedure(s), run the following in Master for each undocumented procedure: sp_procoption @procname = '<procedure name>', @OptionName = 'Startup', @optionValue = 'Off'"
+  tags:
+    - SQL6-D0-016400
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-016800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-016800 | Filestream must be disabled, unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      EXEC sp_configure filestream_access_level, 0
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-016800
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-017800 - LOW
+# -----------------------------------------
+
+- name: "SQL6-D0-017800 | MANUAL CHECK - The SQL Server Browser service must be disabled unless specifically required and approved."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If SQL Server Browser is needed, document the justification and obtain the appropriate authorization. Where SQL Server Browser is judged unnecessary, the Service can be disabled. To disable, in the..."
+  tags:
+    - SQL6-D0-017800
+    - cat3
+    - system_hardening
+
+# -----------------------------------------
+# SQL6-D0-018300 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-018300 | Microsoft SQL Server products must be a version supported by the vendor."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-018300
+    - cat1
+    - system_hardening
+

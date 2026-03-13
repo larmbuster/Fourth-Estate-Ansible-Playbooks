@@ -1,0 +1,45 @@
+---
+# =========================================
+# Cisco ASA Firewall STIG - System Hardening
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-FW-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000130 | The Cisco ASA must be configured to disable or remove unnecessary network services and functions that are not used as part of its role in the architecture."
+  cisco.asa.asa_config:
+    lines:
+      - "no http server enable"
+      - "no telnet 10.1.22.2 255.255.255.255 INSIDE"
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000130
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CASA-FW-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000150 | MANUAL CHECK - The Cisco ASA must be configured to enable threat detection to mitigate risks of denial-of-service (DoS) attacks."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-FW-000150
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CASA-FW-000220 - HIGH
+# -----------------------------------------
+
+- name: "CASA-FW-000220 | MANUAL CHECK - The Cisco ASA must be configured to implement scanning threat detection."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-FW-000220
+    - cat1
+    - system_hardening
+

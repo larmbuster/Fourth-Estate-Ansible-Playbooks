@@ -1,0 +1,19 @@
+---
+# =========================================
+# F5 BIG-IP VPN STIG - Authentication
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-VN-300033 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-VN-300033 | For accounts using password authentication, the F5 BIG-IP appliance site-to-site IPsec VPN Gateway must use SHA-2 or later protocol to protect the integrity of the password authentication process."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300033
+    - cat1
+    - authentication
+

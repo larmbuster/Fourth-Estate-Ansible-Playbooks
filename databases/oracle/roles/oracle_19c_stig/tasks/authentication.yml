@@ -1,0 +1,362 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - Authentication
+# 23 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-000800 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-000800 | MANUAL CHECK - Oracle Database must integrate with an organization-level authentication/access mechanism providing account management and automation for all users, groups, roles, and any other principals."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Integrate database management system (DBMS) security with an organization-level authentication/access mechanism providing account management for all users, groups, roles, and any other principals. ..."
+  tags:
+    - O19C-00-000800
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# O19C-00-009000 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-009000 | The Oracle WITH GRANT OPTION privilege must be limited when granted to nondatabase administrator (DBA) or nonapplication administrator user accounts."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009000
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-009400 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-009400 | The Oracle password file ownership and permissions should be limited and the REMOTE_LOGIN_PASSWORDFILE parameter must be set to EXCLUSIVE or NONE."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "alter system set REMOTE_LOGIN_PASSWORDFILE = 'EXCLUSIVE' scope = spfile;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009400
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-011900 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-011900 | Oracle Database default accounts must be assigned custom passwords."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-011900
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# O19C-00-012000 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-012000 | Oracle Database must provide a mechanism to automatically identify accounts designated as temporary or emergency accounts."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER SYSTEM SET RESOURCE_LIMIT = TRUE;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-012000
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-012100 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-012100 | Oracle Database must provide a mechanism to automatically remove or disable temporary user accounts after 72 hours."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-012100
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-012300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-012300 | Oracle Database must verify account lockouts persist until reset by an administrator."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER PROFILE ORA_STIG_PROFILE LIMIT PASSWORD_LOCK_TIME UNLIMITED;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-012300
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-012400 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-012400 | Oracle Database must set the maximum number of consecutive invalid logon attempts to three."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER PROFILE {{ oracle_19c_stig_profile_name }} LIMIT FAILED_LOGIN_ATTEMPTS {{ oracle_19c_stig_failed_login_attempts }};"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-012400
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-012500 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-012500 | Oracle Database must disable user accounts after 35 days of inactivity."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER PROFILE {{ oracle_19c_stig_profile_name }} LIMIT INACTIVE_ACCOUNT_TIME {{ oracle_19c_stig_inactive_account_time }};"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-012500
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-013700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013700 | Oracle Database must ensure users are authenticated with an individual authenticator prior to using a shared authenticator."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-013700
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-013800 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013800 | Oracle Database must uniquely identify and authenticate organizational users (or processes acting on behalf of organizational users)."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-013800
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-013900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013900 | Oracle Database must enforce the DOD standards for password complexity."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-013900
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-014600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-014600 | Procedures for establishing temporary passwords that meet DOD password requirements for new accounts must be defined, documented, and implemented."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-014600
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-014700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-014700 | MANUAL CHECK - Oracle Database must enforce password maximum lifetime restrictions."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: For user accounts managed by Oracle, modify DBMS settings to force users to periodically change their passwords. For example, using \"PPPPPP\" to stand for a profile name: ALTER PROFILE PPPPPP LIMI..."
+  tags:
+    - O19C-00-014700
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-014800 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-014800 | Oracle Database must, for password-based authentication, store passwords using an approved salted key derivation function, preferably using a keyed hash."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-014800
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# O19C-00-014900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-014900 | If passwords are used for authentication, the Oracle Database must transmit only encrypted representations of passwords."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-014900
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-015200 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-015200 | Oracle Database, when using public key infrastructure (PKI)-based authentication, must enforce authorized access to the corresponding private key."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-015200
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# O19C-00-015300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-015300 | Oracle Database must map the authenticated identity to the user account using public key infrastructure (PKI)-based authentication."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-015300
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-015400 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-015400 | MANUAL CHECK - When using command-line tools such as Oracle SQL*Plus, which can accept a plain-text password, users must use an alternative logon method that does not expose the password."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: For Oracle SQL*Plus, which cannot be configured not to accept a plain-text password, and any other essential tool with the same limitation: 1. Document the need for it, who uses it, and any relevan..."
+  tags:
+    - O19C-00-015400
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# O19C-00-015600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-015600 | Oracle Database must uniquely identify and authenticate nonorganizational users (or processes acting on behalf of nonorganizational users)."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-015600
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-019800 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-019800 | Oracle Database must, for password-based authentication, verify that when users create or update passwords, the passwords are not found on the list of commonly used, expected, or compromised passwo..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-019800
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-019900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-019900 | Oracle Database must, for password-based authentication, require immediate selection of a new password upon account recovery."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER USER {{ oracle_19c_stig_target_username }} PASSWORD EXPIRE;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-019900
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# O19C-00-020400 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-020400 | Oracle Database must include only approved trust anchors in trust stores or certificate stores managed by the organization."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-020400
+    - cat2
+    - authentication
+

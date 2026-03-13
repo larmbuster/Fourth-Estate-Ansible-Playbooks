@@ -1,0 +1,215 @@
+---
+# =========================================
+# Cisco IOS Switch L2S STIG - Switching
+# 15 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000090 - LOW
+# -----------------------------------------
+
+- name: "CISC-L2-000090 | The Cisco switch must have Root Guard enabled on all switch ports connecting to access layer switches."
+  cisco.ios.ios_config:
+    lines:
+      - "spanning-tree guard root"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000090
+    - cat3
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000100 | The Cisco switch must have Bridge Protocol Data Unit (BPDU) Guard enabled on all user-facing or untrusted access switch ports."
+  cisco.ios.ios_config:
+    lines:
+      - "Enable BPDU Guard on all user-facing or untrusted access switch ports as shown in the configuration example below:"
+      - "spanning-tree bpduguard enable"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000100
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000110 | MANUAL CHECK - The Cisco switch must have Spanning Tree Protocol (STP) Loop Guard enabled."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-L2-000110
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000120 | The Cisco switch must have Unknown Unicast Flood Blocking (UUFB) enabled."
+  cisco.ios.ios_config:
+    lines:
+      - "switchport block unicast"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000120
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000150 | MANUAL CHECK - The Cisco switch must have Dynamic Address Resolution Protocol (ARP) Inspection (DAI) enabled on all user VLANs."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the switch to have DAI enabled on all user VLANs as shown in the example below: SW2(config)#ip arp inspection vlan 2,4-8,11"
+  tags:
+    - CISC-L2-000150
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000160 - LOW
+# -----------------------------------------
+
+- name: "CISC-L2-000160 | The Cisco switch must have Storm Control configured on all host-facing switchports."
+  cisco.ios.ios_config:
+    lines:
+      - "storm-control unicast bps 62000000"
+      - "storm-control broadcast level bps 20000000"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000160
+    - cat3
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000180 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000180 | The Cisco switch must implement Rapid Spanning Tree Protocol (STP) where VLANs span multiple switches with redundant links."
+  cisco.ios.ios_config:
+    lines:
+      - "spanning-tree mode rapid-pvst"
+      - "spanning-tree mode mst"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000180
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000200 | The Cisco switch must have all trunk links enabled statically."
+  cisco.ios.ios_config:
+    lines:
+      - "switchport trunk encapsulation dot1q"
+      - "switchport mode trunk"
+      - "switchport nonegotiate"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000200
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000210 | The Cisco switch must have all disabled switch ports assigned to an unused VLAN."
+  cisco.ios.ios_config:
+    lines:
+      - "switchport access vlan 999"
+      - "switchport trunk allowed vlan except 999"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000210
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000220 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000220 | MANUAL CHECK - The Cisco switch must not have the default VLAN assigned to any host-facing switch ports."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device as required."
+  tags:
+    - CISC-L2-000220
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000230 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000230 | The Cisco switch must have the default VLAN pruned from all trunk ports that do not require it."
+  cisco.ios.ios_config:
+    lines:
+      - "switchport trunk allowed vlan except 1"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000230
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000240 | The Cisco switch must not use the default VLAN for management traffic."
+  cisco.ios.ios_config:
+    lines:
+      - "ip add 10.1.22.3 255.255.255.0"
+      - "no shut"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000240
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000250 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000250 | The Cisco switch must have all user-facing or untrusted ports configured as access switch ports."
+  cisco.ios.ios_config:
+    lines:
+      - "switchport mode access"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000250
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000260 | The Cisco switch must have the native VLAN assigned to an ID other than the default VLAN for all 802.1q trunk links."
+  cisco.ios.ios_config:
+    lines:
+      - "switchport trunk native vlan 44"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000260
+    - cat2
+    - switching
+
+# -----------------------------------------
+# CISC-L2-000270 - LOW
+# -----------------------------------------
+
+- name: "CISC-L2-000270 | MANUAL CHECK - The Cisco switch must not have any switchports assigned to the native VLAN."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device as required."
+  tags:
+    - CISC-L2-000270
+    - cat3
+    - switching
+

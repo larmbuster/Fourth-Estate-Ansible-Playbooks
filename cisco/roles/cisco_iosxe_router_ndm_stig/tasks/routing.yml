@@ -1,0 +1,18 @@
+---
+# =========================================
+# Cisco IOS-XE Router NDM STIG - Routing
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-001470 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001470 | MANUAL CHECK - The Cisco router must be running an IOS release that is currently supported by Cisco Systems."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001470
+    - cat1
+    - routing
+

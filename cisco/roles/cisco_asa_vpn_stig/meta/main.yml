@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: cisco_asa_vpn_stig
+  author: Fourth Estate
+  description: >-
+    Cisco ASA VPN DISA STIG V2 hardening role.
+    Implements 41 XCCDF rules across authentication, encryption, logging, session management.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

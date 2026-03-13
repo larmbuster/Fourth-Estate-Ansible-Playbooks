@@ -1,0 +1,12 @@
+---
+# =========================================
+# F5 BIG-IP Firewall DISA STIG V1 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+f5_bigip_fw_stig_stig_version: "1"
+f5_bigip_fw_stig_stig_release_info: "Release: 1 Benchmark Date: 26 Sep 2024"
+f5_bigip_fw_stig_stig_benchmark_id: "F5_BIG-IP_TMOS_FW_STIG"
+f5_bigip_fw_stig_stig_total_rules: 14
+

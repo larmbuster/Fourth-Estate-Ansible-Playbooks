@@ -1,0 +1,93 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG STIG - Network Services
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-AG-000037 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000037 | The Palo Alto Networks security platform must not enable the DNS proxy."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000037_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000037_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000037
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# PANW-AG-000062 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000062 | The Palo Alto Networks security platform must drop malicious code upon detection."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000062_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000062_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000062
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# PANW-AG-000063 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000063 | The Palo Alto Networks security platform must delete or quarantine malicious code in response to malicious code detection."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000063_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000063_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000063
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# PANW-AG-000073 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000073 | The Palo Alto Networks security platform must deny or restrict detected prohibited mobile code."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000073_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000073_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000073
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# PANW-AG-000074 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000074 | The Palo Alto Networks security platform must prevent the download of prohibited mobile code."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000074_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000074_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000074
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# PANW-AG-000148 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000148 | MANUAL CHECK - The Palo Alto Networks security platform must inspect inbound and outbound FTP and FTPS communications traffic (if authorized) for protocol compliance and protocol anomalies."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If FTP and FTPS is authorized for use in the site's System Security Plan (SSP), configure a security policy to allow it and inspect it. Since Secure File Transfer Protocol is a form of FTP that add..."
+  tags:
+    - PANW-AG-000148
+    - cat2
+    - network_services
+

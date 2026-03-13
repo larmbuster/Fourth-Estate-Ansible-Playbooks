@@ -1,0 +1,6 @@
+---
+- name: Commit PAN-OS configuration
+  paloaltonetworks.panos.panos_commit:
+    provider: "{{ panos_provider }}"
+  when: pan_idps_stig_auto_commit | default(false) | bool
+

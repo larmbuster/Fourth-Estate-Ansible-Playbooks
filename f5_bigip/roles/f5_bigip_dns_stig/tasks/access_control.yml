@@ -1,0 +1,20 @@
+---
+# =========================================
+# F5 BIG-IP DNS STIG - Access Control
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DN-300039 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300039 | The F5 BIG-IP DNS server implementation must manage excess capacity, bandwidth, or other redundancy to limit the effects of information flooding types of denial-of-service (DoS) attacks."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300039
+    - cat2
+    - access_control
+

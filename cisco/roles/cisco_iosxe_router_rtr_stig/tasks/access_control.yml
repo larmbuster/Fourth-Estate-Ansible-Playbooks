@@ -1,0 +1,669 @@
+---
+# =========================================
+# Cisco IOS-XE Router RTR STIG - Access Control
+# 47 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000010 | The Cisco router must be configured to enforce approved authorizations for controlling the flow of information within the network based on organization-defined information flow control policies."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000010
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000060 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000060 | The Cisco router must be configured to have all inactive interfaces disabled."
+  cisco.ios.ios_config:
+    lines:
+      - "interface GigabitEthernet3"
+      - "shutdown"
+      - "interface GigabitEthernet4"
+      - "shutdown"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000060
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000120 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000120 | The Cisco router must be configured to protect against or limit the effects of denial-of-service (DoS) attacks by employing control plane protection."
+  cisco.ios.ios_ntp_global:
+    config:
+      servers:
+        - server: "{{ cisco_iosxe_router_rtr_stig_ntp_server_primary }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000120
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000150 | The Cisco router must be configured to have Gratuitous ARP disabled on all external interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "no ip gratuitous-arps"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000150
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000170 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000170 | The Cisco router must be configured to have Internet Control Message Protocol (ICMP) unreachable messages disabled on all external interfaces."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000170
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000180 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000180 | The Cisco router must be configured to have Internet Control Message Protocol (ICMP) mask reply messages disabled on all external interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "no ip mask-reply"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000180
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000190 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000190 | The Cisco router must be configured to have Internet Control Message Protocol (ICMP) redirect messages disabled on all external interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "no ip redirects"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000190
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000200 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000200 | The Cisco router must be configured to log all packets that have been dropped at interfaces via ACL."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000200
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000210 | The Cisco router must be configured to produce audit records containing information to establish where the events occurred."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000210
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000220 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000220 | The Cisco router must be configured to produce audit records containing information to establish the source of the events."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000220
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000240 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000240 | The Cisco perimeter router must be configured to deny network traffic by default and allow network traffic by exception."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000240
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000250 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000250 | The Cisco perimeter router must be configured to enforce approved authorizations for controlling the flow of information between interconnected networks in accordance with applicable policy."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000250
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000260 | The Cisco perimeter router must be configured to only allow incoming communications from authorized sources to be routed to authorized destinations."
+  cisco.ios.ios_ntp_global:
+    config:
+      servers:
+        - server: "{{ cisco_iosxe_router_rtr_stig_ntp_server_primary }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000260
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000270 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000270 | The Cisco perimeter router must be configured to block inbound packets with source Bogon IP address prefixes."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000270
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000280 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000280 | The Cisco perimeter router must be configured to protect an enclave connected to an alternate gateway by using an inbound filter that only permits packets with destination addresses within the site..."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000280
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000320 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000320 | The Cisco perimeter router must be configured to filter traffic destined to the enclave in accordance with the guidelines contained in DoD Instruction 8551.1."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000320
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000330 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000330 | The Cisco perimeter router must be configured to filter ingress traffic at the external interface on an inbound direction."
+  cisco.ios.ios_config:
+    lines:
+      - "ip access-group EXTERNAL_ACL_INBOUND in"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000330
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000340 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000340 | The Cisco perimeter router must be configured to filter egress traffic at the internal interface on an inbound direction."
+  cisco.ios.ios_config:
+    lines:
+      - "ip access-group EGRESS_FILTER in"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000340
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000360 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000360 | The Cisco perimeter router must be configured to have Link Layer Discovery Protocol (LLDP) disabled on all external interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "no lldp transmit"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000360
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000370 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000370 | MANUAL CHECK - The Cisco perimeter router must be configured to have Cisco Discovery Protocol (CDP) disabled on all external interfaces."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device as required."
+  tags:
+    - CISC-RT-000370
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000390 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000390 | The Cisco perimeter router must be configured to block all outbound management traffic."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000390
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000410 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000410 | The Cisco out-of-band management (OOBM) gateway router must be configured to forward only authorized management traffic to the Network Operations Center (NOC)."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000410
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000440 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000440 | The Cisco out-of-band management (OOBM) gateway router must be configured to block any traffic destined to itself that is not sourced from the OOBM network or the Network Operations Center (NOC)."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000440
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000450 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000450 | The Cisco router must be configured to only permit management traffic that ingresses and egresses the out-of-band management (OOBM) interface."
+  cisco.ios.ios_ntp_global:
+    config:
+      servers:
+        - server: "{{ cisco_iosxe_router_rtr_stig_ntp_server_primary }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000450
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000550 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000550 | The Cisco BGP router must be configured to reject route advertisements from CE routers with an originating AS in the AS_PATH attribute that does not belong to that customer."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000550
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000730 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000730 | The Cisco PE router must be configured to block any traffic that is destined to IP core infrastructure."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000730
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000740 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000740 | The Cisco PE router must be configured with Unicast Reverse Path Forwarding (uRPF) loose mode enabled on all CE-facing interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "ip verify unicast source reachable-via any"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000740
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000800 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000800 | MANUAL CHECK - The Cisco multicast router must be configured to bind a Protocol Independent Multicast (PIM) neighbor filter to interfaces that have PIM enabled."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: This requirement is not applicable for the DODIN Backbone. Configure neighbor ACLs to only accept PIM control plane traffic from documented PIM neighbors. Bind neighbor ACLs to all PIM enabled inte..."
+  tags:
+    - CISC-RT-000800
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000810 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000810 | The Cisco multicast edge router must be configured to establish boundaries for administratively scoped multicast traffic."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000810
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000820 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000820 | The Cisco multicast Rendezvous Point (RP) router must be configured to limit the multicast forwarding cache so that its resources are not saturated by managing an overwhelming number of Protocol In..."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000820
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000830 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000830 | The Cisco multicast Rendezvous Point (RP) router must be configured to filter Protocol Independent Multicast (PIM) Register messages received from the Designated Router (DR) for any undesirable mul..."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000830
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000840 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000840 | The Cisco multicast Rendezvous Point (RP) router must be configured to filter Protocol Independent Multicast (PIM) Join messages received from the Designated Router (DR) for any undesirable multica..."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000840
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000860 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000860 | The Cisco multicast Designated Router (DR) must be configured to filter the Internet Group Management Protocol (IGMP) and Multicast Listener Discovery (MLD) Report messages to allow hosts to join o..."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000860
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000870 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000870 | The Cisco multicast Designated Router (DR) must be configured to filter the Internet Group Management Protocol (IGMP) and Multicast Listener Discovery (MLD) Report messages to allow hosts to join a..."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000870
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000900 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000900 | The Cisco Multicast Source Discovery Protocol (MSDP) router must be configured to only accept MSDP packets from known MSDP peers."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000900
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000920 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000920 | The Cisco Multicast Source Discovery Protocol (MSDP) router must be configured to filter received source-active multicast advertisements for any undesirable multicast groups and sources."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000920
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000930 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000930 | The Cisco Multicast Source Discovery Protocol (MSDP) router must be configured to filter source-active multicast advertisements to external MSDP peers to avoid global visibility of local-only multi..."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000930
+    - cat3
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000310 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000310 | The Cisco perimeter router must be configured to restrict it from accepting outbound IP packets that contain an illegitimate address in the source address field via egress filter or by enabling Uni..."
+  cisco.ios.ios_config:
+    lines:
+      - "ip verify unicast source reachable-via rx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000310
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000350 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000350 | The Cisco perimeter router must be configured to block all packets with any IP options."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000350
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000391 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000391 | The Cisco perimeter router must be configured to suppress Router Advertisements on all external IPv6-enabled interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "ipv6 nd ra suppress"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000391
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000392 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000392 | The Cisco perimeter router must be configured to drop IPv6 undetermined transport packets."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000392
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000393 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000393 | The Cisco perimeter router must be configured drop IPv6 packets with a Routing Header type 0, 1, or 3–255."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000393
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000394 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000394 | The Cisco perimeter router must be configured to drop IPv6 packets containing a Hop-by-Hop header with invalid option type values."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000394
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000395 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000395 | The Cisco perimeter router must be configured to drop IPv6 packets containing a Destination Option header with invalid option type values."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000395
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000396 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000396 | The Cisco perimeter router must be configured to drop IPv6 packets containing an extension header with the Endpoint Identification option."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000396
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000397 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000397 | The Cisco perimeter router must be configured to drop IPv6 packets containing the NSAP address option within Destination Option header."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000397
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-RT-000398 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000398 | The Cisco perimeter router must be configured to drop IPv6 packets containing a Hop-by-Hop or Destination Option extension header with an undefined option type."
+  cisco.ios.ios_acls:
+    config: "{{ cisco_iosxe_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000398
+    - cat2
+    - access_control
+

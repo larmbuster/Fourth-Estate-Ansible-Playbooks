@@ -1,0 +1,36 @@
+---
+# =========================================
+# Palo Alto PAN-OS NDM STIG - System Hardening
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-NM-000099 - LOW
+# -----------------------------------------
+
+- name: "PANW-NM-000099 | The Palo Alto Networks security platform must synchronize internal information system clocks to the authoritative time source when the time difference is greater than one second."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000099_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000099_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000099
+    - cat3
+    - system_hardening
+
+# -----------------------------------------
+# PANW-NM-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000100 | The Palo Alto Networks security platform must be configured to synchronize internal information system clocks with the primary and secondary time sources located in different geographic regions usi..."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000100_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000100_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000100
+    - cat2
+    - system_hardening
+

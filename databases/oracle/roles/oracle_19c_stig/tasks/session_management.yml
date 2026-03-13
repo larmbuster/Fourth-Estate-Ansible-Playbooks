@@ -1,0 +1,38 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - Session Management
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-000100 | Oracle Database must limit the number of concurrent sessions for each system account to an organization-defined number of sessions."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER PROFILE {{ oracle_19c_stig_profile_name }} LIMIT SESSIONS_PER_USER {{ oracle_19c_stig_sessions_per_user }};"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-000100
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# O19C-00-000300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-000300 | Oracle Database must automatically terminate a user session after organization-defined conditions or trigger events requiring session disconnect."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER SYSTEM SET max_idle_time = 15"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-000300
+    - cat2
+    - session_management
+

@@ -1,0 +1,67 @@
+---
+# =========================================
+# Cisco ACI RTR DISA STIG V1 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 26 (CAT I: 0, CAT II: 18, CAT III: 8)
+#
+# Usage:
+#   --tags access_control           (8 rules)
+#   --tags authorization            (2 rules)
+#   --tags encryption               (1 rules)
+#   --tags logging                  (2 rules)
+#   --tags network_services         (3 rules)
+#   --tags routing                  (9 rules)
+#   --tags system_hardening         (1 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CACI-RT-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco ACI"
+  ansible.builtin.assert:
+    that:
+      - ansible_network_os is defined
+    fail_msg: >-
+      This role targets Cisco ACI only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CACI-RT | Access Control (8 rules)"
+  ansible.builtin.import_tasks: access_control.yml
+  tags:
+    - access_control
+
+- name: "CACI-RT | Authorization (2 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "CACI-RT | Encryption (1 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "CACI-RT | Logging (2 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "CACI-RT | Network Services (3 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "CACI-RT | Routing (9 rules)"
+  ansible.builtin.import_tasks: routing.yml
+  tags:
+    - routing
+
+- name: "CACI-RT | System Hardening (1 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

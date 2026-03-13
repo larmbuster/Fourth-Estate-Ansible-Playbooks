@@ -1,0 +1,36 @@
+---
+# =========================================
+# Cisco IOS-XE Switch NDM STIG - System Hardening
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000470 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-000470 | The Cisco switch must be configured to prohibit the use of all unnecessary and nonsecure functions and services."
+  cisco.ios.ios_config:
+    lines:
+      - "no boot network"
+      - "no ip boot server"
+      - "no ip bootp server"
+      - "no ip dns server"
+      - "no ip identd"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000470
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CISC-ND-001470 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001470 | MANUAL CHECK - The Cisco switch must be running an IOS release that is currently supported by Cisco Systems."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001470
+    - cat1
+    - system_hardening
+

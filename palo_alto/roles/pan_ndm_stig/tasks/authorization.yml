@@ -1,0 +1,20 @@
+---
+# =========================================
+# Palo Alto PAN-OS NDM STIG - Authorization
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-NM-000061 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000061 | The Palo Alto Networks security platform must prohibit the use of unencrypted protocols for network access to privileged accounts."
+  paloaltonetworks.panos.panos_administrator:
+    provider: "{{ panos_provider }}"
+    admin_username: "{{ pan_ndm_stig_admin_user }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000061
+    - cat2
+    - authorization
+

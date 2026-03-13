@@ -1,0 +1,143 @@
+---
+# =========================================
+# Cisco ASA NDM STIG - Authentication
+# 10 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-ND-000450 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000450 | The Cisco ASA must be configured with only one local account to be used as the account of last resort in the event the authentication server is unavailable."
+  cisco.asa.asa_config:
+    lines:
+      - "username LAST_RESORT privilege 15"
+      - "username LAST_RESORT password {{ secret_key }}"
+      - "key {{ secret_key }}"
+      - "aaa authentication serial console RADIUS_GROUP LOCAL"
+      - "aaa authentication ssh console RADIUS_GROUP LOCAL"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000450
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-000490 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000490 | MANUAL CHECK - The Cisco ASA must be configured to enforce a minimum 15-character password length."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-000490
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-000520 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000520 | MANUAL CHECK - The Cisco ASA must be configured to enforce password complexity by requiring that at least one uppercase character be used."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-000520
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000530 | MANUAL CHECK - The Cisco ASA must be configured to enforce password complexity by requiring that at least one lowercase character be used."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-000530
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-000550 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000550 | MANUAL CHECK - The Cisco ASA must be configured to enforce password complexity by requiring that at least one numeric character be used."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-000550
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-000570 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000570 | MANUAL CHECK - The Cisco ASA must be configured to enforce password complexity by requiring that at least one special character be used."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-000570
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-000580 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000580 | MANUAL CHECK - The Cisco ASA must be configured to require that when a password is changed, the characters are changed in at least eight of the positions within the"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-000580
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-001080 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001080 | The Cisco ASA must be configured to authenticate Network Time Protocol (NTP) sources using authentication with FIPS-compliant algorithms."
+  cisco.asa.asa_config:
+    lines:
+      - "ntp authenticate"
+      - "ntp trusted-key 1"
+      - "ntp authentication-key 1 sha256 {{ secret_key }}"
+      - "ntp server 10.1.12.2 key 1 prefer"
+      - "ntp server 10.1.48.10 key 1"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001080
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-001310 - HIGH
+# -----------------------------------------
+
+- name: "CASA-ND-001310 | The Cisco ASA must be configured to use at least two authentication servers to authenticate users prior to granting administrative access."
+  cisco.asa.asa_config:
+    lines:
+      - "key bobby"
+      - "key bobby2"
+      - "aaa authentication serial console RADIUS_GROUP LOCAL"
+      - "aaa authentication ssh console RADIUS_GROUP LOCAL"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001310
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CASA-ND-001370 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001370 | MANUAL CHECK - The Cisco ASA must be configured to obtain its public key certificates from an appropriate certificate policy through an approved service provider."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-001370
+    - cat2
+    - authentication
+

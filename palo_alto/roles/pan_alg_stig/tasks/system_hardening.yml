@@ -1,0 +1,21 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG STIG - System Hardening
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-AG-000036 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000036 | The Palo Alto Networks security platform must disable WMI probing if it is not used."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000036_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000036_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000036
+    - cat2
+    - system_hardening
+

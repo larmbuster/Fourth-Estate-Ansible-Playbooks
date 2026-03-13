@@ -1,0 +1,67 @@
+---
+# =========================================
+# MS SQL Server 2022 Instance DISA STIG V1 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 80 (CAT I: 14, CAT II: 66, CAT III: 0)
+#
+# Usage:
+#   --tags authentication           (16 rules)
+#   --tags authorization            (21 rules)
+#   --tags encryption               (4 rules)
+#   --tags logging                  (13 rules)
+#   --tags network_services         (6 rules)
+#   --tags routing                  (1 rules)
+#   --tags system_hardening         (19 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags SQLI-22-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is MS SQL Server 2022"
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == "Windows"
+    fail_msg: >-
+      This role targets MS SQL Server 2022 only.
+    quiet: true
+  tags:
+    - always
+
+- name: "SQLI-22 | Authentication (16 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "SQLI-22 | Authorization (21 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "SQLI-22 | Encryption (4 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "SQLI-22 | Logging (13 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "SQLI-22 | Network Services (6 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "SQLI-22 | Routing (1 rules)"
+  ansible.builtin.import_tasks: routing.yml
+  tags:
+    - routing
+
+- name: "SQLI-22 | System Hardening (19 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

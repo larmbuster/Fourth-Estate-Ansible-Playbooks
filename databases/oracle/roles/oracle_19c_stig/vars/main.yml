@@ -1,0 +1,12 @@
+---
+# =========================================
+# Oracle Database 19c Database DISA STIG V1 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+oracle_19c_stig_stig_version: "1"
+oracle_19c_stig_stig_release_info: "Release: 4 Benchmark Date: 05 Jan 2026"
+oracle_19c_stig_stig_benchmark_id: "Oracle_Database_19c_STIG"
+oracle_19c_stig_stig_total_rules: 96
+

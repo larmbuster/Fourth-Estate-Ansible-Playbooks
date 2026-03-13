@@ -1,0 +1,12 @@
+---
+# =========================================
+# Cisco ISE NAC DISA STIG V2 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+cisco_ise_nac_stig_stig_version: "2"
+cisco_ise_nac_stig_stig_release_info: "Release: 3 Benchmark Date: 05 Jan 2026"
+cisco_ise_nac_stig_stig_benchmark_id: "Cisco_ISE_NAC_STIG"
+cisco_ise_nac_stig_stig_total_rules: 30
+

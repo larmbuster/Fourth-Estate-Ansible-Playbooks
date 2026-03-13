@@ -1,0 +1,78 @@
+---
+# =========================================
+# Cisco NX-OS Switch NDM STIG - Encryption
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000530 | The Cisco switch must be configured to implement replay-resistant authentication mechanisms for network access to privileged accounts."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ssh macs hmac-sha2-256 hmac-sha2-512"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000530
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001130 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001130 | The Cisco switch must be configured to authenticate SNMP messages using a FIPS-validated Keyed-Hash Message Authentication Code (HMAC)."
+  cisco.nxos.nxos_snmp_server:
+    config:
+      communities: []
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001130
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001140 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001140 | The Cisco switch must be configured to encrypt SNMP messages using a FIPS 140-2 approved algorithm."
+  cisco.nxos.nxos_snmp_server:
+    config:
+      communities: []
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001140
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001200 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001200 | The Cisco switch must be configured to use FIPS-validated Keyed-Hash Message Authentication Code (HMAC) to protect the integrity of remote maintenance sessions."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ssh macs hmac-sha2-256 hmac-sha2-512"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001200
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001210 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001210 | The Cisco switch must be configured to implement cryptographic mechanisms to protect the confidentiality of remote maintenance sessions."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ssh ciphers aes128-ctr aes256-ctr"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001210
+    - cat1
+    - encryption
+

@@ -1,0 +1,475 @@
+---
+# =========================================
+# Oracle MySQL 8.0 Database STIG - Logging
+# 31 rules
+# =========================================
+
+# -----------------------------------------
+# MYS8-00-000300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-000300 | MySQL Database Server 8.0 must produce audit records containing sufficient information to establish what type of events occurred."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT PLUGIN_NAME, PLUGIN_STATUS FROM information_schema.plugins WHERE PLUGIN_NAME LIKE 'audit%';"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-000300
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-000800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-000800 | The MySQL Database Server 8.0 must include additional, more detailed, organizationally defined information in the audit records for audit events identified by type, location, or subject."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT audit_log_filter_set_filter('log_all', '{ \"filter\": { \"log\": true } }');"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-000800
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-001500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-001500 | The MySQL Database Server 8.0 must protect against a user falsely repudiating having performed organization-defined actions."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_001500_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-001500
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-001600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-001600 | The MySQL Database Server 8.0 must be configured to provide audit record generation capability for DoD-defined auditable events within all database components."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT audit_log_encryption_password_set(password);"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-001600
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-002000 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002000 | The MySQL Database Server 8.0 must be able to generate audit records when security objects are accessed."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002000
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-002200 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002200 | The MySQL Database Server 8.0 must generate audit records when categories of information (e.g., classification levels/security levels) are accessed."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "create schema test_trigger;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002200
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-002300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002300 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to access categories of information (e.g., classification levels/security levels) occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002300
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-002800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002800 | The MySQL Database Server 8.0 must generate audit records when security objects are modified."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002800
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-002900 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002900 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to modify security objects occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002900
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-003000 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003000 | The MySQL Database Server 8.0 must generate audit records when categories of information (e.g., classification levels/security levels) are modified."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "create schema test_trigger;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003000
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-003100 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003100 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to modify categories of information (e.g., classification levels/security levels) occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "create schema test_trigger;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-003400 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003400 | The MySQL Database Server 8.0 must generate audit records when security objects are deleted."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003400
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-003500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003500 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to delete security objects occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003500
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-003600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003600 | The MySQL Database Server 8.0 must generate audit records when categories of information (e.g., classification levels/security levels) are deleted."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003600
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-003700 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003700 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to delete categories of information (e.g., classification levels/security levels) occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "create schema test_trigger;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003700
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-003800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003800 | The MySQL Database Server 8.0 must generate audit records when successful logons or connections occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003800
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-003900 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003900 | The MySQL Database Server 8.0 must generate audit records when unsuccessful logons or connection attempts occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003900
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-004200 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004200 | The MySQL Database Server 8.0 must generate audit records showing starting and ending time for user access to the database(s)."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_004200_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004200
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-004300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004300 | The MySQL Database Server 8.0 must generate audit records when concurrent logons/connections by the same user from different workstations."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_004300_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004300
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-004400 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004400 | The MySQL Database Server 8.0 must be able to generate audit records when successful accesses to objects occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004400
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-004500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004500 | The MySQL Database Server 8.0 must generate audit records when unsuccessful accesses to objects occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004500
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-004600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004600 | The MySQL Database Server 8.0 must generate audit records for all direct access to the database(s)."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004600
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-005700 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-005700 | Unused database components, MySQL Database Server 8.0 software, and database objects must be removed."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-005700
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-007200 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-007200 | The MySQL Database Server 8.0 must protect the confidentiality and integrity of all information at rest."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "set persist binlog_encryption=ON;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-007200
+    - cat1
+    - logging
+
+# -----------------------------------------
+# MYS8-00-007500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-007500 | The MySQL Database Server 8.0 and associated applications, when making use of dynamic code execution, must scan input data for invalid values that may indicate a code injection attack."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-007500
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-007800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-007800 | The MySQL Database Server 8.0 must initiate session auditing upon startup."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-007800
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-009300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-009300 | The MySQL Database Server 8.0 must produce audit records of its enforcement of access restrictions associated with changes to the configuration of the MySQL Database Server 8.0 or database(s)."
+  community.mysql.mysql_variables:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    variable: "audit_log_policy"
+    value: "{{ oracle_mysql80_stig_audit_log_policy | default('ALL') }}"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-009300
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-009600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-009600 | The MySQL Database Server 8.0 must allocate audit record storage capacity in accordance with organization-defined audit record storage requirements."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-009600
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-009700 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-009700 | The MySQL Database Server 8.0 must off-load audit data to a separate log management facility; this must be continuous and in near real time for systems with a network connection to the storage faci..."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "set persist audit_log_rotate_on_size=1024*1024*1024;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-009700
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-009800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-009800 | The MySQL Database Server 8.0 must provide a warning to appropriate support staff when allocated audit record storage volume reaches 75 percent of maximum audit record storage capacity."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-009800
+    - cat2
+    - logging
+
+# -----------------------------------------
+# MYS8-00-009900 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-009900 | The MySQL Database Server 8.0 must provide an immediate real-time alert to appropriate support staff of all audit log failures."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-009900
+    - cat2
+    - logging
+

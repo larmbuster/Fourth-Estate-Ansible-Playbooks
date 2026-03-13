@@ -1,0 +1,35 @@
+---
+# =========================================
+# Cisco ISE NDM STIG - Authorization
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NM-000090 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000090 | VERIFY - The Cisco ISE must prevent non-privileged users from executing privileged functions to include disabling, circumventing, or altering implemented security safeguards/countermeasures."
+  ansible.builtin.debug:
+    msg: "VERIFY: Verify that only administrator accounts are located in administrative groups. From the web Admin portal: 1. Navigate to Administration >> System >> Admin Access >> Authorization >> Permissions >> P..."
+  tags:
+    - CSCO-NM-000090
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# CSCO-NM-000540 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000540 | The Cisco ISE must only allow authorized administrators to view or change the device configuration, system files, and other files stored."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000540
+    - cat1
+    - authorization
+

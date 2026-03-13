@@ -1,0 +1,21 @@
+---
+# =========================================
+# Cisco ASA NDM STIG - Network Services
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-ND-000940 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000940 | The Cisco ASA must be configured to synchronize its clock with the primary and secondary time sources using redundant authoritative time sources."
+  cisco.asa.asa_config:
+    lines:
+      - "ntp server 10.1.48.8 prefer"
+      - "ntp server 10.1.22.2"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000940
+    - cat2
+    - network_services
+

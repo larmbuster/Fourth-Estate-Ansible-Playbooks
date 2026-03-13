@@ -1,0 +1,190 @@
+---
+# =========================================
+# Cisco NX-OS Switch NDM STIG - Logging
+# 12 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000090 | The Cisco switch must be configured to automatically audit account creation."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000090
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000100 | The Cisco switch must be configured to automatically audit account modification."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000110 | The Cisco switch must be configured to automatically audit account disabling actions."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000110
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000120 | The Cisco switch must be configured to automatically audit account removal actions."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000120
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000980 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000980 | The Cisco switch must be configured to allocate audit record storage capacity in accordance with organization-defined audit record storage requirements."
+  cisco.nxos.nxos_config:
+    lines:
+      - "logging logfile LOGFILE1 6 size {{ numeric_value }}"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000980
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001000 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001000 | The Cisco switch must be configured to generate an alert for all audit failure events."
+  cisco.nxos.nxos_config:
+    lines:
+      - "logging server 10.1.48.10 2"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001000
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001050 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001050 | The Cisco switch must be configured to record time stamps for log records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT)."
+  cisco.nxos.nxos_config:
+    lines:
+      - "clock timezone EST -5 0"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001050
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001260 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001260 | The Cisco switch must be configured to generate audit records when successful/unsuccessful logon attempts occur."
+  cisco.nxos.nxos_logging_global:
+    config:
+      hosts:
+        - hostname: "{{ cisco_nxos_switch_ndm_stig_syslog_server }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001260
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001280 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001280 | The Cisco switch must generate audit records showing starting and ending time for administrator access to the system."
+  cisco.nxos.nxos_config:
+    lines:
+      - "logging level authpriv 6"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001280
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001310 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001310 | The Cisco switch must be configured to off-load log records onto a different system than the system being audited."
+  cisco.nxos.nxos_logging_global:
+    config:
+      hosts:
+        - hostname: "{{ cisco_nxos_switch_ndm_stig_syslog_server }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001310
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001410 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001410 | MANUAL CHECK - The Cisco switch must be configured to support organizational requirements to conduct backups of the configuration when changes occur."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001410
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001450 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001450 | The Cisco switch must be configured to send log data to at least two central log servers for the purpose of forwarding alerts to the administrators and the information system security officer (ISSO)."
+  cisco.nxos.nxos_logging_global:
+    config:
+      hosts:
+        - hostname: "{{ cisco_nxos_switch_ndm_stig_syslog_server }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001450
+    - cat1
+    - logging
+

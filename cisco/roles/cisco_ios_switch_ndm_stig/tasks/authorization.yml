@@ -1,0 +1,54 @@
+---
+# =========================================
+# Cisco IOS Switch NDM STIG - Authorization
+# 4 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000160 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000160 | MANUAL CHECK - The Cisco switch must be configured to display the Standard Mandatory DoD Notice and Consent Banner before granting access to the device."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the Cisco switch to display the Standard Mandatory DoD Notice and Consent Banner before granting access as shown in the following example: SW1(config)#banner login # Enter TEXT message. E..."
+  tags:
+    - CISC-ND-000160
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CISC-ND-000380 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000380 | MANUAL CHECK - The Cisco switch must be configured to protect audit information from unauthorized modification."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000380
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CISC-ND-000390 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000390 | MANUAL CHECK - The Cisco switch must be configured to protect audit information from unauthorized deletion."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000390
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CISC-ND-000460 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000460 | MANUAL CHECK - The Cisco switch must be configured to limit privileges to change the software resident within software libraries."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000460
+    - cat2
+    - authorization
+

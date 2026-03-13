@@ -1,0 +1,38 @@
+---
+# =========================================
+# Cisco IOS Switch RTR STIG - Routing
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000050 | The Cisco switch must be configured to enable routing protocol authentication using FIPS 198-1 algorithms with keys not exceeding 180 days of lifetime."
+  cisco.ios.ios_config:
+    lines:
+      - "key chain <KEY-CHAIN-NAME> tcp"
+      - "key <KEY-ID>"
+      - "router bgp <ASN>"
+      - "no synchronization"
+      - "key chain OSPF_KEY_CHAIN"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000050
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000236 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000236 | The Cisco switch must be configured to advertise a hop limit of at least 32 in Switch Advertisement messages for IPv6 stateless auto-configuration deployments."
+  cisco.ios.ios_config:
+    lines:
+      - "ipv6 hop-limit 128"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000236
+    - cat3
+    - routing
+

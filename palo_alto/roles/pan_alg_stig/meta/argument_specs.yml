@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Palo Alto PAN-OS ALG DISA STIG V3 hardening
+    description:
+      - Applies Palo Alto PAN-OS ALG STIG hardening configuration.
+    options:
+      pan_alg_stig_auto_commit:
+        type: bool
+        default: false
+        description: Automatically commit configuration after changes.
+

@@ -1,0 +1,42 @@
+---
+# =========================================
+# Cisco IOS-XR Router NDM STIG - Session Management
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000010 | MANUAL CHECK - The Cisco router must be configured to limit the number of concurrent management sessions to an organization-defined number."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000010
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# CISC-ND-000720 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-000720 | MANUAL CHECK - The Cisco router must be configured to terminate all network connections associated with device management after five minutes of inactivity."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000720
+    - cat1
+    - session_management
+
+# -----------------------------------------
+# CISC-ND-001210 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001210 | MANUAL CHECK - The Cisco router must be configured to implement cryptographic mechanisms to protect the confidentiality of remote maintenance sessions."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001210
+    - cat1
+    - session_management
+

@@ -1,0 +1,36 @@
+---
+# =========================================
+# F5 NGINX Web Server STIG - Logging
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# NGNX-APP-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000240 | NGINX must provide audit records for DOD-defined auditable events."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000240"
+    line: "# STIG NGNX-APP-000240 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000240
+    - cat2
+    - logging
+
+# -----------------------------------------
+# NGNX-APP-001400 - HIGH
+# -----------------------------------------
+
+- name: "NGNX-APP-001400 | NGINX must off-load audit records to a central log server."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001400"
+    line: "# STIG NGNX-APP-001400 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001400
+    - cat1
+    - logging
+

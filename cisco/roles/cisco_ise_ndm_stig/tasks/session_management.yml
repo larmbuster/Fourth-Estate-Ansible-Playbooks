@@ -1,0 +1,40 @@
+---
+# =========================================
+# Cisco ISE NDM STIG - Session Management
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NM-000010 - LOW
+# -----------------------------------------
+
+- name: "CSCO-NM-000010 | The Cisco ISE must limit the number of CLI and GUI sessions to an organization-defined number."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000010
+    - cat3
+    - session_management
+
+# -----------------------------------------
+# CSCO-NM-000520 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NM-000520 | The Cisco ISE must terminate all network connections associated with a device management session at the end of the session, or the session must be terminated after six minutes of inactivity, except..."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000520
+    - cat1
+    - session_management
+

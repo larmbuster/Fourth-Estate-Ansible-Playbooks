@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Cisco ACI RTR DISA STIG V1 hardening
+    description:
+      - Applies Cisco ACI RTR STIG hardening configuration.
+    options:
+      cisco_aci_rtr_stig_auto_save:
+        type: bool
+        default: true
+        description: Automatically save configuration after changes.
+

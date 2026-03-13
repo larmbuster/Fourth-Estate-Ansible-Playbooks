@@ -1,0 +1,24 @@
+---
+# =========================================
+# Cisco IOS-XE Router NDM STIG - System Hardening
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000470 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-000470 | The Cisco router must be configured to prohibit the use of all unnecessary and nonsecure functions and services."
+  cisco.ios.ios_config:
+    lines:
+      - "no boot network"
+      - "no ip boot server"
+      - "no ip bootp server"
+      - "no ip dns server"
+      - "no ip identd"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000470
+    - cat1
+    - system_hardening
+

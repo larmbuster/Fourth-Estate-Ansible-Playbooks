@@ -1,0 +1,52 @@
+---
+# =========================================
+# MS SQL Server 2022 Database STIG - Authentication
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# SQLD-22-000100 - HIGH
+# -----------------------------------------
+
+- name: "SQLD-22-000100 | MANUAL CHECK - SQL Server must integrate with an organization-level authentication/access mechanism providing account management and automation for all users, groups, roles, and any other principals."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If mixed mode is required, document the need and justification; describe the measures taken to ensure the use of SQL Server authentication is kept to a minimum; describe the measures taken to safeg..."
+  tags:
+    - SQLD-22-000100
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQLD-22-001800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-001800 | The certificate used for encryption must be backed up and stored in a secure location that is not on the SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-001800
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLD-22-003200 - HIGH
+# -----------------------------------------
+
+- name: "SQLD-22-003200 | SQL Server must use NSA-approved cryptography to protect classified information in accordance with the data owner’s requirements."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      USE master;
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-003200
+    - cat1
+    - authentication
+

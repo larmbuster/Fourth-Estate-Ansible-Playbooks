@@ -1,0 +1,6 @@
+---
+- name: Commit Prisma Cloud configuration
+  ansible.builtin.debug:
+    msg: "Prisma Cloud changes applied via API."
+  when: pan_prisma_cloud_stig_auto_commit | default(false) | bool
+

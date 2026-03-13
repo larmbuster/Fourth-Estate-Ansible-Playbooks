@@ -1,0 +1,66 @@
+---
+# =========================================
+# Cisco ASA IPS STIG - Network Services
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-IP-000190 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000190 | MANUAL CHECK - The Cisco ASA must be configured to use Advanced Malware Protection (AMP) features to detect and block the transmission of malicious software and malware."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Step 1: Select Configuration >> ASA FirePOWER Configuration >> Policies >> Files. The File Policies page appears. Step 2: Enter a Name and optional Description for your new policy, then click Save...."
+  tags:
+    - CASA-IP-000190
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CASA-IP-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000200 | MANUAL CHECK - The Cisco ASA must block any prohibited mobile code at the enclave boundary when it is detected."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Create a file policy. Step 1: Select Configuration >> ASA FirePOWER Configuration> > Policies >> Files. The File Policies page appears. Step 2: Enter a Name and optional Description for your new po..."
+  tags:
+    - CASA-IP-000200
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CASA-IP-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000240 | MANUAL CHECK - The Cisco ASA must be configured to install updates for signature definitions and vendor-provided rules."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000240
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CASA-IP-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000260 | MANUAL CHECK - The Cisco ASA must be configured to block malicious code."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Create a file policy. Step 1: Navigate to Configuration >> ASA FirePOWER Configuration >> Policies >> Files. The File Policies page appears. Step 2: Enter a Name and optional Description for your n..."
+  tags:
+    - CASA-IP-000260
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CASA-IP-000290 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000290 | MANUAL CHECK - The Cisco ASA must be configured to automatically install updates to signature definitions and vendor-provided rules."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000290
+    - cat2
+    - network_services
+

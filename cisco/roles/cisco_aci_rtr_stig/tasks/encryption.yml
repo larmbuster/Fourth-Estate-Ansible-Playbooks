@@ -1,0 +1,21 @@
+---
+# =========================================
+# Cisco ACI RTR STIG - Encryption
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-RT-000022 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000022 | The Cisco ACI must be configured to implement message authentication and secure communications for all control plane protocols."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000022_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000022_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000022
+    - cat2
+    - encryption
+

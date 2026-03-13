@@ -1,0 +1,6 @@
+---
+- name: Save F5 configuration
+  f5networks.f5_modules.bigip_config:
+    save: true
+  when: f5_bigip_alg_stig_auto_save | default(true) | bool
+

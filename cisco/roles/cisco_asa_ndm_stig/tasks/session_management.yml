@@ -1,0 +1,33 @@
+---
+# =========================================
+# Cisco ASA NDM STIG - Session Management
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-ND-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000010 | MANUAL CHECK - The Cisco ASA must be configured to limit the number of concurrent management sessions to an organization-defined number."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-000010
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# CASA-ND-000690 - HIGH
+# -----------------------------------------
+
+- name: "CASA-ND-000690 | The Cisco ASA must be configured to terminate all network connections associated with a device management session at the end of the session, or the session must be terminated after five minutes of ..."
+  cisco.asa.asa_config:
+    lines:
+      - "ssh timeout 5"
+      - "http server idle-timeout 5"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000690
+    - cat1
+    - session_management
+

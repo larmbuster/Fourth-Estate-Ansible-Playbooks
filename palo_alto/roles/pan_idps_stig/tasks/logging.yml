@@ -1,0 +1,282 @@
+---
+# =========================================
+# Palo Alto PAN-OS IDPS STIG - Logging
+# 19 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-IP-000007 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000007 | The Palo Alto Networks security platform must produce audit records containing information to establish the source of the event, including, at a minimum, originating source address."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000007_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000007_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000007
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000008 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000008 | The Palo Alto Networks security platform must capture traffic of detected/dropped malicious code."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000008_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000008_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000008
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000010 | In the event of a logging failure caused by the lack of audit record storage capacity, the Palo Alto Networks security platform must continue generating and storing audit records if possible, overw..."
+  paloaltonetworks.panos.panos_syslog_profile:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_idps_stig_syslog_profile }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000010
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000018 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000018 | The Palo Alto Networks security platform must have a denial-of-service (DoS) Protection Profile for outbound traffic applied to a policy for traffic originating from the internal zone going to the ..."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000018_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000018_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000018
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000024 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000024 | MANUAL CHECK - The Palo Alto Networks security platform must install updates for application software files, signature definitions, detection heuristics, and vendor-provided rules when new releases are available ..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Go to Device >> Dynamic Updates. Select \"Check Now\" at the bottom of the page to retrieve the latest signatures. To schedule automatic signature updates. Note: the steps provided below do not acc..."
+  tags:
+    - PANW-IP-000024
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000028 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000028 | The Palo Alto Networks security platform must send an immediate (within seconds) alert to, at a minimum, the SA when malicious code is detected."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000028_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000028_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000028
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000029 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000029 | The Palo Alto Networks security platform must automatically install updates to signature definitions, detection heuristics, and vendor-provided rules."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000029_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000029_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000029
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000032 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000032 | To protect against unauthorized data mining, the Palo Alto Networks security platform must detect and prevent SQL and other code injection attacks launched against data storage objects, including, ..."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000032_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000032_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000032
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000033 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000033 | To protect against unauthorized data mining, the Palo Alto Networks security platform must detect and prevent code injection attacks launched against application objects including, at a minimum, ap..."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000033_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000033_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000033
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000039 - LOW
+# -----------------------------------------
+
+- name: "PANW-IP-000039 | The Palo Alto Networks security platform must off-load log records to a centralized log server."
+  paloaltonetworks.panos.panos_syslog_profile:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_idps_stig_syslog_profile }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000039
+    - cat3
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000041 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000041 | The Palo Alto Networks security platform must protect against or limit the effects of known and unknown types of denial-of-service (DoS) attacks by employing rate-based attack prevention behavior a..."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000041_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000041_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000041
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000043 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000043 | The Palo Alto Networks security platform must use a Vulnerability Protection Profile that blocks any critical, high, or medium threats."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000043_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000043_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000043
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000045 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000045 | Palo Alto Networks security platform components, including sensors, event databases, and management consoles must integrate with a network-wide monitoring capability."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000045_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000045_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000045
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000048 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000048 | MANUAL CHECK - The Palo Alto Networks security platform must generate an alert to the ISSO and ISSM, at a minimum, when unauthorized network services are detected."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Obtain the list of network services that have not been authorized or approved by the ISSM and ISSO. For each prohibited network service, configure a security policy that generates an alert to, at a..."
+  tags:
+    - PANW-IP-000048
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000051 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000051 | The Palo Alto Networks security platform must send an alert to, at a minimum, the ISSO and ISSM when intrusion detection events are detected which indicate a compromise or potential for compromise."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000051_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000051_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000051
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000052 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000052 | The Palo Alto Networks security platform must send an alert to, at a minimum, the ISSO and ISSM when threats identified by authoritative sources (e.g., IAVMs or CTOs) are detected."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000052_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000052_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000052
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000055 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000055 | The Palo Alto Networks security platform must send an alert to, at a minimum, the ISSO and ISSM when denial of service incidents are detected."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000055_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000055_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000055
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000056 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000056 | The Palo Alto Networks security platform must generate an alert to, at a minimum, the ISSO and ISSM when new active propagation of malware infecting DoD systems or malicious code adversely affectin..."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000056_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000056_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000056
+    - cat2
+    - logging
+
+# -----------------------------------------
+# PANW-IP-000058 - LOW
+# -----------------------------------------
+
+- name: "PANW-IP-000058 | The Palo Alto Networks security platform must off-load log records to a centralized log server in real-time."
+  paloaltonetworks.panos.panos_syslog_profile:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_idps_stig_syslog_profile }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000058
+    - cat3
+    - logging
+

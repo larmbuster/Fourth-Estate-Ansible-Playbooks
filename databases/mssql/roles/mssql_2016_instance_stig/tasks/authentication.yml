@@ -1,0 +1,248 @@
+---
+# =========================================
+# MS SQL Server 2016 Instance STIG - Authentication
+# 16 rules
+# =========================================
+
+# -----------------------------------------
+# SQL6-D0-003600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-003600 | MANUAL CHECK - SQL Server must limit the number of concurrent sessions to an organization-defined number per user for all accounts and/or account types."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If a trigger consumes too much CPU, an example alternative method for limiting the concurrent users is setting the max connection limit on SQL Server. In SQL Server Management Studio's Object Explo..."
+  tags:
+    - SQL6-D0-003600
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-003700 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-003700 | MANUAL CHECK - SQL Server must integrate with an organization-level authentication/access mechanism providing account management and automation for all users, groups, roles, and any other principals."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If mixed mode is required, document the need and justification; describe the measures taken to ensure the use of SQL Server authentication is kept to a minimum; describe the measures taken to safeg..."
+  tags:
+    - SQL6-D0-003700
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-004200 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-004200 | SQL Server must protect against a user falsely repudiating by ensuring only clearly unique Active Directory user accounts can connect to the instance."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-004200
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-007500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-007500 | Access to linked servers must be disabled or restricted, unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      EXEC sp_droplinkedsrvlogin 'LoginName', NULL;
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-007500
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-007900 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-007900 | If DBMS authentication using passwords is employed, SQL Server must enforce the DOD standards for password complexity and lifetime."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      CREATE LOGIN {{ login_name }} WITH PASSWORD= {{ enterstrongpasswordhere }}, CHECK_EXPIRATION = ON, CHECK_POLICY = ON;
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-007900
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-008200 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-008200 | MANUAL CHECK - If passwords are used for authentication, SQL Server must transmit only encrypted representations of passwords."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure SQL Server to encrypt authentication data for remote connections using DOD-approved cryptography. Deploy encryption to the SQL Server Network Connections. From a command prompt, open SQL ..."
+  tags:
+    - SQL6-D0-008200
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-008800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-008800 | MANUAL CHECK - SQL Server must uniquely identify and authenticate non-organizational users (or processes acting on behalf of non-organizational users)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Ensure all logins are uniquely identifiable and authenticate all non-organizational users who log onto the system. This likely would be done via a combination of the operating system with unique ac..."
+  tags:
+    - SQL6-D0-008800
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-009600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-009600 | The Service Master Key must be backed up and stored in a secure location that is not on the SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-009600
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-009700 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-009700 | The Master Key must be backed up and stored in a secure location that is not on the SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-009700
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-010500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-010500 | Use of credentials and proxies must be restricted to necessary cases only."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      DROP CREDENTIAL {{ credential_name }}
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-010500
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-011800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-011800 | SQL Server must produce audit records when attempts to modify SQL Server configuration and privileges occur within the database(s)."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      USE [master];
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-011800
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-014800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-014800 | MANUAL CHECK - SQL Server must generate audit records when successful and unsuccessful logons or connection attempts occur."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Add both \"SUCCESSFUL_LOGIN_GROUP\" and \"FAILED_LOGIN_GROUP\" to the server audit specification. USE [master]; GO ALTER SERVER AUDIT SPECIFICATION STIG_AUDIT_SERVER_SPECIFICATION WITH (STATE = OFF..."
+  tags:
+    - SQL6-D0-014800
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-016200 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-016200 | The SQL Server default account [sa] must be disabled."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      USE master;
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-016200
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-016300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-016300 | SQL Server default account [sa] must have its name changed."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      USE master;
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-016300
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-018100 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-018100 | MANUAL CHECK - When using command-line tools such as SQLCMD in a mixed-mode authentication environment, users must use a logon method that does not expose the password."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Where possible, change the login mode to Windows-only: USE [master] GO EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\\Microsoft\\MSSQLServer\\MSSQLServer', N'LoginMode', REG_DWORD, 1;..."
+  tags:
+    - SQL6-D0-018100
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQL6-D0-018200 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-018200 | Applications must obscure feedback of authentication information during the authentication process to protect the information from possible exploitation/use by unauthorized individuals."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-018200
+    - cat1
+    - authentication
+

@@ -1,0 +1,80 @@
+---
+# =========================================
+# Cisco IOS Router NDM STIG - Encryption
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000620 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-000620 | The Cisco router must only store cryptographic representations of passwords."
+  cisco.ios.ios_config:
+    lines:
+      - "service password-encryption"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000620
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001130 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001130 | The Cisco router must be configured to authenticate SNMP messages using a FIPS-validated Keyed-Hash Message Authentication Code (HMAC)."
+  cisco.ios.ios_snmp_server:
+    config:
+      communities: []
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001130
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001140 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001140 | The Cisco router must be configured to encrypt SNMP messages using a FIPS 140-2 approved algorithm."
+  cisco.ios.ios_snmp_server:
+    config:
+      communities: []
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001140
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001200 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001200 | The Cisco router must be configured to use FIPS-validated Keyed-Hash Message Authentication Code (HMAC) to protect the integrity of remote maintenance sessions."
+  cisco.ios.ios_config:
+    lines:
+      - "ip ssh version 2"
+      - "ip ssh server algorithm mac hmac-sha2-256"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001200
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001210 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001210 | The Cisco router must be configured to implement cryptographic mechanisms to protect the confidentiality of remote maintenance sessions."
+  cisco.ios.ios_config:
+    lines:
+      - "ip ssh server algorithm encryption aes256-ctr aes192-ctr aes128-ctr"
+      - "ip http secure-ciphersuite aes-128-cbc-sha"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001210
+    - cat1
+    - encryption
+

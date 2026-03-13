@@ -1,0 +1,304 @@
+---
+# =========================================
+# MS SQL Server 2022 Instance STIG - System Hardening
+# 19 rules
+# =========================================
+
+# -----------------------------------------
+# SQLI-22-006800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-006800 | Database software, including DBMS configuration files, must be stored in dedicated directories, separate from the host OS and other applications."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-006800
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-006900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-006900 | Default demonstration and sample databases, database objects, and applications must be removed."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-006900
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-007000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-007000 | Unused database components, DBMS software, and database objects must be removed."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-007000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-017900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-017900 | The SQL Server Replication Xps feature must be disabled unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC SP_CONFIGURE 'show advanced options', 1;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-017900
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-017500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-017500 | The \"Allow Polybase Export\" feature must be disabled, unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC SP_CONFIGURE 'Allow Polybase Export', 0;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-017500
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-017400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-017400 | The \"Hadoop Connectivity\" feature must be disabled unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC SP_CONFIGURE  'hadoop connectivity', 0;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-017400
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-007400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-007400 | MANUAL CHECK - Access to nonstandard, extended stored procedures must be disabled or restricted, unless specifically required and approved."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Remove any nonstandard extended stored procedures that are not documented and approved using the following: sp_dropextendedproc 'proc name'"
+  tags:
+    - SQLI-22-007400
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-007200 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-007200 | Access to xp_cmdshell must be disabled unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC SP_CONFIGURE 'show advanced options', 1;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-007200
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-007700 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-007700 | MANUAL CHECK - SQL Server must be configured to prohibit or restrict the use of organization-defined ports, as defined in the Ports, Protocols, and Services Management (PPSM) Category Assurance List (CAL) and vul..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Use SQL Server Configuration to change the ports used by SQL Server to comply with PPSM guidance, or document the need for other ports, and obtain written approval. Close ports no longer needed."
+  tags:
+    - SQLI-22-007700
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-007600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-007600 | MANUAL CHECK - SQL Server must be configured to prohibit or restrict the use of organization-defined protocols as defined in the Ports, Protocols, and Services Management (PPSM) Category Assurance List (CAL) and ..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Navigate to SQL Server Configuration Manager >> SQL Server Network Configuration >> Protocols, then right-click on each listed protocol that is enabled but not authorized and select \"Disable\"."
+  tags:
+    - SQLI-22-007600
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-010010 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-010010 | SQL Server and associated applications must reserve the use of dynamic code execution for situations that require it."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-010010
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-010020 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-010020 | SQL Server and associated applications, when making use of dynamic code execution, must scan input data for invalid values that may indicate a code injection attack."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-010020
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-012600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-012600 | When invalid inputs are received, the SQL Server must behave in a predictable and documented manner that reflects organizational and system objectives."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-012600
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-012800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-012800 | Security-relevant software updates to SQL Server must be installed within the time period directed by an authoritative source (e.g., IAVM, CTOs, DTMs, and STIGs)."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-012800
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-018300 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-018300 | Microsoft SQL Server products must be a version supported by the vendor."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-018300
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-017800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-017800 | MANUAL CHECK - The SQL Server Browser service must be disabled unless specifically required and approved."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If SQL Server Browser is needed, document the justification and obtain the appropriate authorization. Where SQL Server Browser is judged unnecessary, the Service can be disabled. To disable, in the..."
+  tags:
+    - SQLI-22-017800
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-016000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-016000 | SQL Server must configure Customer Feedback and Error Reporting."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-016000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-016400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-016400 | MANUAL CHECK - Execution of startup stored procedures must be restricted to necessary cases only."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: To disable startup stored procedure(s), run the following in Master for each undocumented procedure: sp_procoption @procname = '<procedure name>', @OptionName = 'Startup', @optionValue = 'Off'"
+  tags:
+    - SQLI-22-016400
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLI-22-016800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-016800 | Filestream must be disabled unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC sp_configure filestream_access_level, 0
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-016800
+    - cat2
+    - system_hardening
+

@@ -1,0 +1,67 @@
+---
+# =========================================
+# Cisco ASA NDM DISA STIG V2 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 47 (CAT I: 7, CAT II: 40, CAT III: 0)
+#
+# Usage:
+#   --tags authentication           (10 rules)
+#   --tags authorization            (2 rules)
+#   --tags encryption               (5 rules)
+#   --tags logging                  (24 rules)
+#   --tags network_services         (1 rules)
+#   --tags session_management       (2 rules)
+#   --tags system_hardening         (3 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CASA-ND-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco ASA"
+  ansible.builtin.assert:
+    that:
+      - ansible_network_os == "cisco.asa.asa"
+    fail_msg: >-
+      This role targets Cisco ASA only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CASA-ND | Authentication (10 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "CASA-ND | Authorization (2 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "CASA-ND | Encryption (5 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "CASA-ND | Logging (24 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "CASA-ND | Network Services (1 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "CASA-ND | Session Management (2 rules)"
+  ansible.builtin.import_tasks: session_management.yml
+  tags:
+    - session_management
+
+- name: "CASA-ND | System Hardening (3 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

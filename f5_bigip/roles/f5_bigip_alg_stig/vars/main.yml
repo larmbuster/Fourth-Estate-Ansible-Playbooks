@@ -1,0 +1,12 @@
+---
+# =========================================
+# F5 BIG-IP ALG DISA STIG V1 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+f5_bigip_alg_stig_stig_version: "1"
+f5_bigip_alg_stig_stig_release_info: "Release: 2 Benchmark Date: 02 Jul 2025"
+f5_bigip_alg_stig_stig_benchmark_id: "F5_BIG-IP_TMOS_ALG_STIG"
+f5_bigip_alg_stig_stig_total_rules: 37
+

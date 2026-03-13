@@ -1,0 +1,61 @@
+---
+# =========================================
+# MS SQL Server 2022 Database DISA STIG V1 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 22 (CAT I: 4, CAT II: 18, CAT III: 0)
+#
+# Usage:
+#   --tags authentication           (3 rules)
+#   --tags authorization            (8 rules)
+#   --tags backup_recovery          (1 rules)
+#   --tags logging                  (1 rules)
+#   --tags network_services         (6 rules)
+#   --tags system_hardening         (3 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags SQLD-22-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is MS SQL Server 2022"
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == "Windows"
+    fail_msg: >-
+      This role targets MS SQL Server 2022 only.
+    quiet: true
+  tags:
+    - always
+
+- name: "SQLD-22 | Authentication (3 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "SQLD-22 | Authorization (8 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "SQLD-22 | Backup Recovery (1 rules)"
+  ansible.builtin.import_tasks: backup_recovery.yml
+  tags:
+    - backup_recovery
+
+- name: "SQLD-22 | Logging (1 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "SQLD-22 | Network Services (6 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "SQLD-22 | System Hardening (3 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

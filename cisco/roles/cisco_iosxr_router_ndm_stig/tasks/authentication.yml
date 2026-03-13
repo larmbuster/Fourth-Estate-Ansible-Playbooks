@@ -1,0 +1,66 @@
+---
+# =========================================
+# Cisco IOS-XR Router NDM STIG - Authentication
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000150 | MANUAL CHECK - The Cisco router must be configured to enforce the limit of three consecutive invalid logon attempts after which time lock out the user account from a"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000150
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000490 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000490 | MANUAL CHECK - The Cisco router must be configured with only one local account to be used as the account of last resort in the event the authentication server is una"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000490
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000530 | MANUAL CHECK - The Cisco router must be configured to implement replay-resistant authentication mechanisms for network access to privileged accounts."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000530
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001370 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001370 | MANUAL CHECK - The Cisco router must be configured to use at least two authentication servers for the purpose of authenticating users prior to granting administrativ"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001370
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001440 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001440 | MANUAL CHECK - The Cisco router must be configured to obtain its public key certificates from an appropriate certificate policy through an approved service provider."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the router to obtain its public key certificates from an appropriate certificate policy through an approved service provider as show in the example below. RP/0/0/CPU0:R3(config)#crypto ca..."
+  tags:
+    - CISC-ND-001440
+    - cat2
+    - authentication
+

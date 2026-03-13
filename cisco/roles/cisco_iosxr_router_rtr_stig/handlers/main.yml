@@ -1,0 +1,6 @@
+---
+- name: Save running configuration
+  cisco.iosxr.iosxr_config:
+    save_when: always
+  when: cisco_iosxr_router_rtr_stig_auto_save | default(true) | bool
+

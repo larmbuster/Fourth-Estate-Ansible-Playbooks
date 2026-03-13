@@ -1,0 +1,144 @@
+---
+# =========================================
+# Cisco IOS-XE Router RTR STIG - Network Services
+# 9 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000160 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000160 | The Cisco router must be configured to have IP directed broadcast disabled on all interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "no ip directed-broadcast"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000160
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000380 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000380 | The Cisco perimeter router must be configured to have Proxy ARP disabled on all external interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "no ip proxy-arp"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000380
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000700 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000700 | The Cisco PE router providing Virtual Private LAN Services (VPLS) must be configured to have traffic storm control thresholds on CE-facing interfaces."
+  cisco.ios.ios_config:
+    lines:
+      - "service instance 10 ethernet"
+      - "storm-control broadcast cir 12000000"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000700
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000710 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000710 | The Cisco PE router must be configured to implement Internet Group Management Protocol (IGMP) or Multicast Listener Discovery (MLD) snooping for each Virtual Private LAN Services (VPLS) bridge domain."
+  cisco.ios.ios_config:
+    lines:
+      - "ip igmp snooping"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000710
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000760 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000760 | The Cisco PE router must be configured to enforce a Quality-of-Service (QoS) policy to provide preferred treatment for mission-critical applications."
+  cisco.ios.ios_config:
+    lines:
+      - "class-map match-all C2_VOICE"
+      - "match ip dscp 47"
+      - "class-map match-all VOICE"
+      - "match ip dscp ef"
+      - "class-map match-all VIDEO"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000760
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000770 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000770 | The Cisco P router must be configured to enforce a Quality-of-Service (QoS) policy to provide preferred treatment for mission-critical applications."
+  cisco.ios.ios_config:
+    lines:
+      - "class-map match-all PREFERRED_DATA"
+      - "match ip dscp af33"
+      - "class-map match-all CONTROL_PLANE"
+      - "match ip dscp cs6"
+      - "class-map match-all VIDEO"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000770
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000780 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000780 | The Cisco PE router must be configured to enforce a Quality-of-Service (QoS) policy to limit the effects of packet flooding denial of service (DoS) attacks."
+  cisco.ios.ios_config:
+    lines:
+      - "class-map match-all SCAVENGER"
+      - "match ip dscp cs1"
+      - "policy-map QOS_POLICY"
+      - "no class class-default"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000780
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000850 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000850 | The Cisco multicast Rendezvous Point (RP) must be configured to rate limit the number of Protocol Independent Multicast (PIM) Register messages."
+  cisco.ios.ios_config:
+    lines:
+      - "ip pim register-rate-limit {{ numeric_value }}"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000850
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000880 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000880 | The Cisco multicast Designated Router (DR) must be configured to limit the number of mroute states resulting from Internet Group Management Protocol (IGMP) and Multicast Listener Discovery (MLD) Ho..."
+  cisco.ios.ios_config:
+    lines:
+      - "ip igmp limit 2"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000880
+    - cat2
+    - network_services
+

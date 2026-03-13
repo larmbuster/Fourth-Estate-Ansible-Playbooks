@@ -1,0 +1,110 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - Network Services
+# 7 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-000500 | Oracle Database must associate organization-defined types of security labels having organization-defined security label values with information in storage."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-000500
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# O19C-00-001800 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-001800 | MANUAL CHECK - Oracle Database must provide audit record generation capability for organization-defined auditable events within the database."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the DBMS's auditing to audit organization-defined auditable events. If preferred, use a third-party tool. The tool must provide the minimum capability to audit the required events. If usi..."
+  tags:
+    - O19C-00-001800
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# O19C-00-001900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-001900 | Oracle Database must allow designated organizational personnel to select which auditable events are to be audited by the database."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-001900
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# O19C-00-005600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-005600 | MANUAL CHECK - Oracle Database must include organization-defined additional, more detailed information in the audit records for audit events identified by type, location, or subject."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If the site-specific audit requirements are not covered by the default audit options, deploy and configure FGA. For details, refer to Oracle documentation, at the location below. For more informati..."
+  tags:
+    - O19C-00-005600
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# O19C-00-011200 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-011200 | Network access to Oracle Database must be restricted to authorized personnel."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-011200
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# O19C-00-011300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-011300 | Changes to configuration options must be audited."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "alter system set audit_sys_operations = TRUE scope = spfile;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-011300
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# O19C-00-011700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-011700 | Network client connections must be restricted to supported versions."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-011700
+    - cat2
+    - network_services
+

@@ -1,0 +1,57 @@
+---
+# =========================================
+# Palo Alto DISA STIG Hardening Playbook
+# Entry point for all Palo Alto STIG automation
+#
+# Usage:
+#   ansible-galaxy collection install -r requirements.yml
+#   ansible-playbook -i inventory stig_site.yml
+#   ansible-playbook -i inventory stig_site.yml --tags cat1
+# =========================================
+
+# --- Palo Alto PAN-OS STIGs ---
+- name: Palo Alto NDM STIG Hardening
+  hosts: panos_devices
+  gather_facts: false
+  roles:
+    - role: pan_ndm_stig
+
+- name: Palo Alto ALG STIG Hardening
+  hosts: panos_devices
+  gather_facts: false
+  roles:
+    - role: pan_alg_stig
+
+- name: Palo Alto IDPS STIG Hardening
+  hosts: panos_devices
+  gather_facts: false
+  roles:
+    - role: pan_idps_stig
+
+# --- Palo Alto Prisma Cloud STIG ---
+- name: Palo Alto Prisma Cloud Compute STIG Hardening
+  hosts: prisma_cloud
+  gather_facts: false
+  roles:
+    - role: pan_prisma_cloud_stig
+
+# =========================================
+# Summary Play
+# =========================================
+- name: Palo Alto STIG Hardening Summary
+  hosts: all
+  gather_facts: false
+  tags:
+    - always
+
+  tasks:
+    - name: Display hardening summary
+      ansible.builtin.debug:
+        msg:
+          - "================================================"
+          - "Palo Alto DISA STIG hardening complete"
+          - "Target: {{ inventory_hostname }}"
+          - "================================================"
+          - "Review any verification tasks that reported findings."
+          - "Manual checks require administrator review."
+          - "================================================"

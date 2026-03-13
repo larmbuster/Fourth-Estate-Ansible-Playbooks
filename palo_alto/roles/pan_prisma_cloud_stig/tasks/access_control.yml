@@ -1,0 +1,42 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud STIG - Access Control
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CNTR-PC-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000130 | Prisma Cloud Compute Collections must be used to partition views and enforce organizational-defined need-to-know access."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000130
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CNTR-PC-000140 - HIGH
+# -----------------------------------------
+
+- name: "CNTR-PC-000140 | Prisma Cloud Compute Cloud Native Network Firewall (CNNF) automatically monitors layer 4 (TCP) intercontainer communications. Enforcement policies must be created."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000140
+    - cat1
+    - access_control
+

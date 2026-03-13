@@ -1,0 +1,45 @@
+---
+# =========================================
+# F5 BIG-IP ALG STIG - Authorization
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-AP-300012 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300012 | The F5 BIG-IP appliance providing user access control intermediary services must enforce approved authorizations for logical access to information and system resources by employing identity-based, ..."
+  f5networks.f5_modules.bigip_device_syslog:
+    log_level: informational
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300012
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# F5BI-AP-300013 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300013 | The F5 BIG-IP appliance providing user access control intermediary services must implement attribute- and content-based inspection of the source, destination, headers, and/or content of the communi..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300013_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300013_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300013
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# F5BI-AP-300015 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300015 | MANUAL CHECK - The F5 BIG-IP appliance providing user access control intermediary services must display the Standard Mandatory DOD-approved Notice and Consent Banner before granting access to the network."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: From the BIG-IP GUI: 1. Access. 2. Profiles/Policies. 3. Access Profiles. 4. Click \"Edit...\" in the \"Per-Session Policy\" column for an Access Profile used for granting access. 5. Configure the ..."
+  tags:
+    - F5BI-AP-300015
+    - cat2
+    - authorization
+

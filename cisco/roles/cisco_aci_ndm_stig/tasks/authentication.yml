@@ -1,0 +1,131 @@
+---
+# =========================================
+# Cisco ACI NDM STIG - Authentication
+# 9 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-ND-000004 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000004 | The Cisco ACI must be configured to enforce the limit of three consecutive invalid logon attempts, after which time it must block any login attempt for 15 minutes."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_ndm_stig_caci_nd_000004_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_ndm_stig_caci_nd_000004_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000004
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CACI-ND-000006 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000006 | The Cisco ACI must conduct backups of the configuration weekly or at an organization-defined frequency and store on a separate device."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_ndm_stig_caci_nd_000006_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_ndm_stig_caci_nd_000006_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000006
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CACI-ND-000007 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000007 | The Cisco ACI must obtain its public key certificates from an appropriate certificate policy through an approved service provider."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_ndm_stig_caci_nd_000007_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_ndm_stig_caci_nd_000007_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000007
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CACI-ND-000008 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000008 | MANUAL CHECK - The Cisco ACI must use DOD-approved Network Time Protocol (NTP) sources that use authentication that is cryptographically based."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure NTP servers. Create an NTP policy: 1. Navigate to Fabric >> Quickstart, and then click \"Create an NTP Policy Link\". 2. Fill out the form. - Provide a name for the policy. - Set the Stat..."
+  tags:
+    - CACI-ND-000008
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CACI-ND-000009 - HIGH
+# -----------------------------------------
+
+- name: "CACI-ND-000009 | The Cisco APIC must be configured to use at least two authentication servers for the purpose of authenticating users prior to granting administrative access."
+  cisco.aci.aci_aaa_user:
+    aaa_user: "{{ cisco_aci_ndm_stig_aaa_user | default('admin') }}"
+    state: present
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000009
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CACI-ND-000014 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000014 | The Cisco ACI must be configured with only one local account to be used as the account of last resort in the event the authentication server is unavailable."
+  cisco.aci.aci_aaa_user:
+    aaa_user: "{{ cisco_aci_ndm_stig_aaa_user | default('admin') }}"
+    state: present
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000014
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CACI-ND-000043 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000043 | The Cisco ACI must be configured to allow user selection of long passwords and passphrases, including spaces and all printable characters, for password-based authentication."
+  cisco.aci.aci_aaa_user:
+    aaa_user: "{{ cisco_aci_ndm_stig_aaa_user | default('admin') }}"
+    state: present
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000043
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CACI-ND-000045 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000045 | MANUAL CHECK - The Cisco ACI must enforce a minimum 15-character password length."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: 1. Navigate to Admin >> AAA >> Security. 2. In the Work pane, choose Default Settings >> Edit 3. In the Properties section, verify \"Password Strength Check\" is checked. 4. In the dialog box that ..."
+  tags:
+    - CACI-ND-000045
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CACI-ND-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-ND-000060 | The Cisco ACI must limit the number of concurrent sessions to one for each administrator account."
+  cisco.aci.aci_aaa_user:
+    aaa_user: "{{ cisco_aci_ndm_stig_aaa_user | default('admin') }}"
+    state: present
+  notify: Commit ACI configuration
+  tags:
+    - CACI-ND-000060
+    - cat2
+    - authentication
+

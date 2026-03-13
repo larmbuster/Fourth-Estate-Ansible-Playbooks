@@ -1,0 +1,12 @@
+---
+# =========================================
+# Cisco ACI NDM DISA STIG V1 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+cisco_aci_ndm_stig_stig_version: "1"
+cisco_aci_ndm_stig_stig_release_info: "Release: 2 Benchmark Date: 05 Jan 2026"
+cisco_aci_ndm_stig_stig_benchmark_id: "Cisco_ACI_NDM_STIG"
+cisco_aci_ndm_stig_stig_total_rules: 26
+

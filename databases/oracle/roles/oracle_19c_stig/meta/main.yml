@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: oracle_19c_stig
+  author: Fourth Estate
+  description: >-
+    Oracle Database 19c Database DISA STIG V1 hardening role.
+    Implements 96 XCCDF rules across access control, authentication, authorization, backup recovery, encryption, logging, network services, session management, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - oracle
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

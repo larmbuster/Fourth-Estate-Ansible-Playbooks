@@ -1,0 +1,35 @@
+---
+# =========================================
+# Cisco ISE NAC STIG - Authentication
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NC-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000120 | The Cisco ISE must place client machines on the blacklist and terminate the agent connection when critical security issues are found that put the network at risk. This is required for compliance wi..."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000120
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CSCO-NC-000220 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000220 | VERIFY - The Cisco ISE must be configured with a secondary log server in case the primary log is unreachable. This is required for compliance with C2C Step 1."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DoD is not at C2C Step 1 or higher, this is not a finding. Review the configured Remote Logging Targets to ensure there are, at a minimum, two configured. From the Web Admin portal: 1. Choose Ad..."
+  tags:
+    - CSCO-NC-000220
+    - cat2
+    - authentication
+

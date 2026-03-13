@@ -1,0 +1,79 @@
+---
+# =========================================
+# Oracle Database 19c Database DISA STIG V1 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 96 (CAT I: 15, CAT II: 80, CAT III: 1)
+#
+# Usage:
+#   --tags access_control           (11 rules)
+#   --tags authentication           (23 rules)
+#   --tags authorization            (28 rules)
+#   --tags backup_recovery          (1 rules)
+#   --tags encryption               (3 rules)
+#   --tags logging                  (15 rules)
+#   --tags network_services         (7 rules)
+#   --tags session_management       (2 rules)
+#   --tags system_hardening         (6 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags O19C-00-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Oracle Database 19c"
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family is defined
+    fail_msg: >-
+      This role targets Oracle Database 19c only.
+    quiet: true
+  tags:
+    - always
+
+- name: "O19C-00 | Access Control (11 rules)"
+  ansible.builtin.import_tasks: access_control.yml
+  tags:
+    - access_control
+
+- name: "O19C-00 | Authentication (23 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "O19C-00 | Authorization (28 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "O19C-00 | Backup Recovery (1 rules)"
+  ansible.builtin.import_tasks: backup_recovery.yml
+  tags:
+    - backup_recovery
+
+- name: "O19C-00 | Encryption (3 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "O19C-00 | Logging (15 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "O19C-00 | Network Services (7 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "O19C-00 | Session Management (2 rules)"
+  ansible.builtin.import_tasks: session_management.yml
+  tags:
+    - session_management
+
+- name: "O19C-00 | System Hardening (6 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

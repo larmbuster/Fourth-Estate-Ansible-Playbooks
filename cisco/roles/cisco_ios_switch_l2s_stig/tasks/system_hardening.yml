@@ -1,0 +1,46 @@
+---
+# =========================================
+# Cisco IOS Switch L2S STIG - System Hardening
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000040 | The Cisco switch must manage excess bandwidth to limit the effects of packet-flooding types of denial-of-service (DoS) attacks."
+  cisco.ios.ios_config:
+    lines:
+      - "Enable QoS on the switch:"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000040
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-L2-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000140 | The Cisco switch must have IP Source Guard enabled on all user-facing or untrusted access switch ports."
+  cisco.ios.ios_config:
+    lines:
+      - "ip verify source"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000140
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-L2-000190 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000190 | MANUAL CHECK - The Cisco switch must enable Unidirectional Link Detection (UDLD) to protect against one-way connections."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-L2-000190
+    - cat2
+    - system_hardening
+

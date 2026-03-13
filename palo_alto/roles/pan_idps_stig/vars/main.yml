@@ -1,0 +1,12 @@
+---
+# =========================================
+# Palo Alto PAN-OS IDPS DISA STIG V3 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+pan_idps_stig_stig_version: "3"
+pan_idps_stig_stig_release_info: "Release: 2 Benchmark Date: 30 Jan 2025"
+pan_idps_stig_stig_benchmark_id: "Palo_Alto_Networks_IDPS_STIG"
+pan_idps_stig_stig_total_rules: 29
+

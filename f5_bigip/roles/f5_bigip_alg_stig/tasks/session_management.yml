@@ -1,0 +1,72 @@
+---
+# =========================================
+# F5 BIG-IP ALG STIG - Session Management
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-AP-300001 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300001 | The F5 BIG-IP appliance providing user access control intermediary services must limit the number of concurrent sessions to one or an organization-defined number for each access profile."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300001_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300001_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300001
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# F5BI-AP-300056 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300056 | The F5 BIG-IP appliance must terminate all network connections associated with a communications session at the end of the session or after 15 minutes of inactivity."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300056_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300056_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300056
+    - cat1
+    - session_management
+
+# -----------------------------------------
+# F5BI-AP-300156 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300156 | The F5 BIG-IP appliance must be configured to restrict a consistent inbound IP for the entire management session."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300156_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300156_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300156
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# F5BI-AP-300162 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300162 | MANUAL CHECK - The F5 BIG-IP appliance providing remote access intermediary services must be configured to route sessions to an IDPS for inspection."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure one of these two options: 1. Configure the network architecture to route traffic inline from the BIG-IP through an IDPS. 2. Configure a Protocol Inspection Profile on the Virtual Server. ..."
+  tags:
+    - F5BI-AP-300162
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# F5BI-AP-300164 - LOW
+# -----------------------------------------
+
+- name: "F5BI-AP-300164 | MANUAL CHECK - The F5 BIG-IP appliance must be configured to set the \"Max In Progress Sessions per Client IP\" value to 10 or an organizational-defined number."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: From the BIG-IP GUI: 1. Access. 2. Profiles/Policies. 3. Access Profiles. 4. Click the access profile name. 5. In the \"Settings\" section, set \"Max In Progress Sessions per Client IP\" to 10 or a..."
+  tags:
+    - F5BI-AP-300164
+    - cat3
+    - session_management
+

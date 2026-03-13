@@ -1,0 +1,21 @@
+---
+# =========================================
+# Palo Alto PAN-OS NDM STIG - Network Services
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-NM-000046 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-NM-000046 | The Palo Alto Networks security platform must be configured to prohibit the use of all unnecessary and/or nonsecure functions, ports, protocols, and/or services, as defined in the PPSM CAL and vuln..."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_ndm_stig_panw_nm_000046_xpath }}"
+    element: "{{ pan_ndm_stig_panw_nm_000046_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-NM-000046
+    - cat2
+    - network_services
+

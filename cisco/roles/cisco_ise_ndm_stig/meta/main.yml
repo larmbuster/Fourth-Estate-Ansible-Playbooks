@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: cisco_ise_ndm_stig
+  author: Fourth Estate
+  description: >-
+    Cisco ISE NDM DISA STIG V2 hardening role.
+    Implements 53 XCCDF rules across access control, authentication, authorization, encryption, logging, session management, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

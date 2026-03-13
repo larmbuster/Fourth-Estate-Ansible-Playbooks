@@ -1,0 +1,22 @@
+---
+# =========================================
+# Cisco IOS-XE Switch NDM STIG - Network Services
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-001030 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001030 | The Cisco switch must be configured to synchronize its clock with the primary and secondary time sources using redundant authoritative time sources."
+  cisco.ios.ios_ntp_global:
+    config:
+      servers:
+        - server: "{{ cisco_iosxe_switch_ndm_stig_ntp_server_primary }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001030
+    - cat2
+    - network_services
+

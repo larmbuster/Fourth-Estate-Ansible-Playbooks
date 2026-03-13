@@ -1,0 +1,90 @@
+---
+# =========================================
+# F5 BIG-IP ALG STIG - System Hardening
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-AP-300002 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300002 | The F5 BIG-IP appliance providing intermediary services for remote access communications traffic must ensure inbound and outbound traffic is monitored for compliance with remote access security pol..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300002_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300002_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300002
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# F5BI-AP-300041 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300041 | The F5 BIG-IP appliance that provides intermediary services for SMTP must inspect inbound and outbound SMTP and Extended SMTP communications traffic for protocol compliance and protocol anomalies."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300041_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300041_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300041
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# F5BI-AP-300045 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300045 | The F5 BIG-IP appliance must be configured to prohibit or restrict the use of unnecessary or prohibited functions, ports, protocols, and/or services, including those defined in the PPSM CAL and vul..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300045_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300045_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300045
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# F5BI-AP-300064 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300064 | The F5 BIG-IP appliance must check the validity of all data inputs except those specifically identified by the organization."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300064_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300064_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300064
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# F5BI-AP-300152 - LOW
+# -----------------------------------------
+
+- name: "F5BI-AP-300152 | The F5 BIG-IP appliance must be configured to enable the secure cookie flag."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300152_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300152_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300152
+    - cat3
+    - system_hardening
+
+# -----------------------------------------
+# F5BI-AP-300153 - LOW
+# -----------------------------------------
+
+- name: "F5BI-AP-300153 | The F5 BIG-IP appliance must be configured to disable the persistent cookie flag."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300153_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300153_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300153
+    - cat3
+    - system_hardening
+

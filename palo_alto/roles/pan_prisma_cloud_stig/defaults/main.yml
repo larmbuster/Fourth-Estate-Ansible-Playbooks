@@ -1,0 +1,24 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud DISA STIG V2 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+pan_prisma_cloud_stig_auto_commit: false
+
+# -----------------------------------------
+# Prisma Cloud API Connection
+# -----------------------------------------
+pan_prisma_cloud_stig_api_url: "https://prisma-cloud.example.com"
+pan_prisma_cloud_stig_api_token: "changeme"
+
+# -----------------------------------------
+# Session Management
+# -----------------------------------------
+pan_prisma_cloud_stig_session_timeout: 600
+

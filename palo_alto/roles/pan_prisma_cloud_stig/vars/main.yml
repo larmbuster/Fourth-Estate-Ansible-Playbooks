@@ -1,0 +1,12 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud DISA STIG V2 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+pan_prisma_cloud_stig_stig_version: "2"
+pan_prisma_cloud_stig_stig_release_info: "Release: 2 Benchmark Date: 30 Jan 2025"
+pan_prisma_cloud_stig_stig_benchmark_id: "PAN_Prisma_Cloud_Compute_STIG"
+pan_prisma_cloud_stig_stig_total_rules: 31
+

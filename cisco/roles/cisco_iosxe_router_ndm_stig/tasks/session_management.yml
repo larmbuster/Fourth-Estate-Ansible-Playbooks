@@ -1,0 +1,42 @@
+---
+# =========================================
+# Cisco IOS-XE Router NDM STIG - Session Management
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000010 | The Cisco router must be configured to limit the number of concurrent management sessions to an organization-defined number."
+  cisco.ios.ios_config:
+    lines:
+      - "ip http max-connections 2"
+      - "line vty 0 1"
+      - "transport input ssh"
+      - "line vty 2 4"
+      - "transport input none"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000010
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# CISC-ND-000720 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-000720 | The Cisco router must be configured to terminate all network connections associated with device management after five minutes of inactivity."
+  cisco.ios.ios_config:
+    lines:
+      - "line vty 0 1"
+      - "exec-timeout 5 0"
+      - "line con 0"
+      - "exec-timeout 5 0"
+      - "ip http timeout-policy idle 300 life {{ numeric_value }} requests {{ numeric_value }}"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000720
+    - cat1
+    - session_management
+

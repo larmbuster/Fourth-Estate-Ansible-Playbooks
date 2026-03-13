@@ -1,0 +1,46 @@
+---
+# =========================================
+# Cisco IOS-XR Router RTR STIG - Encryption
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000400 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000400 | The Cisco out-of-band management (OOBM) gateway router must be configured to transport management traffic to the Network Operations Center (NOC) via dedicated circuit, MPLS/VPN service, or IPsec tu..."
+  cisco.iosxr.iosxr_acls:
+    config: "{{ cisco_iosxr_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000400
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-RT-000460 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000460 | The Cisco router providing connectivity to the Network Operations Center (NOC) must be configured to forward all in-band management traffic via an IPsec tunnel."
+  cisco.iosxr.iosxr_acls:
+    config: "{{ cisco_iosxr_router_rtr_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000460
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-RT-000690 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000690 | MANUAL CHECK - The Cisco PE router must be configured to enforce the split-horizon rule for all pseudowires within a Virtual Private LAN Services (VPLS) bridge domai"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000690
+    - cat3
+    - encryption
+

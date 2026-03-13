@@ -1,0 +1,37 @@
+---
+# =========================================
+# Cisco NX-OS Switch NDM STIG - Session Management
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000010 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000010 | The Cisco switch must be configured to limit the number of concurrent management sessions to an organization-defined number."
+  cisco.nxos.nxos_config:
+    lines:
+      - "line vty"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000010
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# CISC-ND-000720 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-000720 | The Cisco switch must be configured to terminate all network connections associated with device management after five minutes of inactivity."
+  cisco.nxos.nxos_config:
+    lines:
+      - "line console"
+      - "exec-timeout 5"
+      - "line vty"
+      - "exec-timeout 5"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000720
+    - cat1
+    - session_management
+

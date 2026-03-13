@@ -1,0 +1,30 @@
+---
+# =========================================
+# F5 BIG-IP NDM STIG - Authorization
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DM-300014 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300014 | MANUAL CHECK - The F5 BIG-IP appliance must be configured to display the Standard Mandatory DOD Notice and Consent Banner upon access to the TMOS User Interface."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: From the BIG-IP GUI: 1. System. 2. Preferences. 3. Security Banner Text To Show On The Login Screen. 4. Enter the text below in the \"Security Banner Text To Show On The Login Screen\" under the \"..."
+  tags:
+    - F5BI-DM-300014
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# F5BI-DM-300098 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300098 | MANUAL CHECK - The F5 BIG-IP appliance must be configured to display the Standard Mandatory DOD Notice and Consent Banner when accessing via SSH."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: From the BIG-IP GUI: 1. System. 2. Configuration. 3. Device. 4. SSHD. 5. Check the box for \"Show The Security Banner On The Login Screen\". 6. Enter the following in the \"Security Banner Text To ..."
+  tags:
+    - F5BI-DM-300098
+    - cat2
+    - authorization
+

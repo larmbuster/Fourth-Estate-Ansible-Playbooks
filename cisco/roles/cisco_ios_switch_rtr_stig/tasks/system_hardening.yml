@@ -1,0 +1,51 @@
+---
+# =========================================
+# Cisco IOS Switch RTR STIG - System Hardening
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000090 | The Cisco switch must not be configured to have any zero-touch deployment feature enabled when connected to an operational network."
+  cisco.ios.ios_config:
+    lines:
+      - "no boot network"
+      - "no service config"
+      - "no cns config initial"
+      - "no cns exec"
+      - "no cns image"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000090
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000750 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000750 | The Cisco PE switch must be configured to ignore or drop all packets with any IP options."
+  cisco.ios.ios_config:
+    lines:
+      - "ip options ignore"
+      - "ip options drop"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000750
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000235 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000235 | MANUAL CHECK - The Cisco switch must be configured to have Cisco Express Forwarding enabled."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000235
+    - cat2
+    - system_hardening
+

@@ -1,0 +1,12 @@
+---
+# =========================================
+# MS SQL Server 2022 Instance DISA STIG V1 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+mssql_2022_instance_stig_stig_version: "1"
+mssql_2022_instance_stig_stig_release_info: "Release: 3 Benchmark Date: 05 Jan 2026"
+mssql_2022_instance_stig_stig_benchmark_id: "MS_SQL_Server_2022_Instance_STIG"
+mssql_2022_instance_stig_stig_total_rules: 80
+

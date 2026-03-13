@@ -1,0 +1,12 @@
+---
+# =========================================
+# Oracle MySQL 8.0 Database DISA STIG V2 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+oracle_mysql80_stig_stig_version: "2"
+oracle_mysql80_stig_stig_release_info: "Release: 2 Benchmark Date: 24 Oct 2024"
+oracle_mysql80_stig_stig_benchmark_id: "Oracle_MySQL_8.0_STIG"
+oracle_mysql80_stig_stig_total_rules: 100
+

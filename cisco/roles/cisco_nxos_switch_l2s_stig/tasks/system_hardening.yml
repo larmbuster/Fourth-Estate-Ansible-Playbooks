@@ -1,0 +1,20 @@
+---
+# =========================================
+# Cisco NX-OS Switch L2S STIG - System Hardening
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000190 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000190 | The Cisco switch must enable Unidirectional Link Detection (UDLD) to protect against one-way connections."
+  cisco.nxos.nxos_config:
+    lines:
+      - "feature udld"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000190
+    - cat2
+    - system_hardening
+

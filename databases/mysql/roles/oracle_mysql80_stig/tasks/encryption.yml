@@ -1,0 +1,123 @@
+---
+# =========================================
+# Oracle MySQL 8.0 Database STIG - Encryption
+# 8 rules
+# =========================================
+
+# -----------------------------------------
+# MYS8-00-006200 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-006200 | The MySQL Database Server 8.0 must use NIST FIPS 140-2 or 140-3 validated cryptographic modules for cryptographic operations."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-006200
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# MYS8-00-007000 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-007000 | The MySQL Database Server 8.0 must maintain the authenticity of communications sessions by guarding against man-in-the-middle attacks that guess at Session ID values."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "set persist require_secure_transport=ON;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-007000
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# MYS8-00-008100 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-008100 | MANUAL CHECK - The MySQL Database Server 8.0 must protect its audit configuration from unauthorized modification."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Verify that the audit log file and audit configuration are protected from unauthorized modification. Check file permissions on the audit log directory and ensure only the mysql user has write access."
+  tags:
+    - MYS8-00-008100
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# MYS8-00-011300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-011300 | The MySQL Database Server 8.0 must maintain the confidentiality and integrity of information during preparation for transmission."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "set persist require_secure_transport=ON;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-011300
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# MYS8-00-011500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-011500 | The MySQL Database Server 8.0 must use NSA-approved cryptography to protect classified information in accordance with the data owner's requirements."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-011500
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# MYS8-00-011600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-011600 | The MySQL Database Server 8.0 must implement NIST FIPS 140-2 or 140-3 validated cryptographic modules to provision digital signatures."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-011600
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# MYS8-00-011700 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-011700 | The MySQL Database Server 8.0 must implement NIST FIPS 140-2 or 140-3 validated cryptographic modules to generate and validate cryptographic hashes."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-011700
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# MYS8-00-011800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-011800 | The MySQL Database Server 8.0 must implement NIST FIPS 140-2 or 140-3 validated cryptographic modules to protect unclassified information requiring confidentiality and cryptographic protection, in ..."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-011800
+    - cat2
+    - encryption
+

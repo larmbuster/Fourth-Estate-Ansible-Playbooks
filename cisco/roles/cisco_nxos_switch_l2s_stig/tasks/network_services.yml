@@ -1,0 +1,46 @@
+---
+# =========================================
+# Cisco NX-OS Switch L2S STIG - Network Services
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000130 | The Cisco switch must have DHCP snooping for all user VLANs to validate DHCP messages from untrusted sources."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000130
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-L2-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000140 | The Cisco switch must have IP Source Guard enabled on all user-facing or untrusted access switch ports."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip verify source dhcp-snooping-vlan"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000140
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-L2-000170 - LOW
+# -----------------------------------------
+
+- name: "CISC-L2-000170 | The Cisco switch must have IGMP or MLD Snooping configured on all VLANs."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000170
+    - cat3
+    - network_services
+

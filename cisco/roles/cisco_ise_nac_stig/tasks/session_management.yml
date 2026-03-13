@@ -1,0 +1,18 @@
+---
+# =========================================
+# Cisco ISE NAC STIG - Session Management
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NC-000030 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NC-000030 | VERIFY - The Cisco ISE must be configured to profile endpoints connecting to the network. This is required for compliance with C2C Step 4."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DoD is not at C2C Step 4 or higher, this is not a finding. Verify the profiling service is configured and enabled. 1. Choose Administration >> System >> Deployment. 2. View the Deployment Nodes...."
+  tags:
+    - CSCO-NC-000030
+    - cat1
+    - session_management
+

@@ -1,0 +1,6 @@
+---
+- name: Commit ACI configuration
+  ansible.builtin.debug:
+    msg: "ACI changes applied via APIC REST -- no explicit save needed."
+  when: cisco_aci_rtr_stig_auto_save | default(true) | bool
+

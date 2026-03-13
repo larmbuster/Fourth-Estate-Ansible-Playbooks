@@ -1,0 +1,19 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG STIG - Session Management
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-AG-000052 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000052 | The Palo Alto Networks security platform must terminate communications sessions after 15 minutes of inactivity."
+  paloaltonetworks.panos.panos_mgtconfig:
+    provider: "{{ panos_provider }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000052
+    - cat2
+    - session_management
+

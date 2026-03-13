@@ -1,0 +1,51 @@
+---
+# =========================================
+# Palo Alto PAN-OS IDPS STIG - Network Services
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-IP-000001 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000001 | The Palo Alto Networks security platform must enable Antivirus, Anti-spyware, and Vulnerability Protection for all authorized traffic."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000001_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000001_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000001
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# PANW-IP-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000020 | The Palo Alto Networks security platform must detect and deny any prohibited mobile or otherwise malicious code at the enclave boundary."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000020_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000020_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000020
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# PANW-IP-000026 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000026 | The Palo Alto Networks security platform must detect and drop any prohibited mobile or otherwise malicious code at internal boundaries."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_idps_stig_panw_ip_000026_xpath }}"
+    element: "{{ pan_idps_stig_panw_ip_000026_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-IP-000026
+    - cat2
+    - network_services
+

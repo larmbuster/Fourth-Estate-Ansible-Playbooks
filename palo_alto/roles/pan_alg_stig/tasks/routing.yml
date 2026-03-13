@@ -1,0 +1,21 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG STIG - Routing
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-AG-000127 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000127 | The Palo Alto Networks security platform must block traceroutes and ICMP probes originating from untrusted networks (e.g., ISP and other non-DoD networks)."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000127_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000127_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000127
+    - cat2
+    - routing
+

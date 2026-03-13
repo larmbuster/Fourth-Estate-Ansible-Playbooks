@@ -1,0 +1,12 @@
+---
+# =========================================
+# F5 NGINX Web Server DISA STIG V1 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+f5_nginx_stig_stig_version: "1"
+f5_nginx_stig_stig_release_info: "Release: 1 Benchmark Date: 25 Nov 2025"
+f5_nginx_stig_stig_benchmark_id: "F5_NGINX_STIG"
+f5_nginx_stig_stig_total_rules: 32
+

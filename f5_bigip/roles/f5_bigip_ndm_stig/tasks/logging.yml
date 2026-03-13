@@ -1,0 +1,70 @@
+---
+# =========================================
+# F5 BIG-IP NDM STIG - Logging
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DM-300012 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300012 | The F5 BIG-IP appliance must be configured to audit the execution of privileged functions such as accounts additions and changes."
+  f5networks.f5_modules.bigip_device_syslog:
+    log_level: informational
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300012
+    - cat2
+    - logging
+
+# -----------------------------------------
+# F5BI-DM-300033 - LOW
+# -----------------------------------------
+
+- name: "F5BI-DM-300033 | The F5 BIG-IP appliance must manage local audit storage capacity in accordance with organization-defined audit record storage requirements."
+  f5networks.f5_modules.bigip_device_syslog:
+    log_level: informational
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300033
+    - cat3
+    - logging
+
+# -----------------------------------------
+# F5BI-DM-300034 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DM-300034 | The F5 BIG-IP appliance must generate audit records and send records to redundant central syslog servers that are separate from the appliance."
+  f5networks.f5_modules.bigip_remote_syslog:
+    remote_host: "{{ f5_bigip_ndm_stig_syslog_server }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300034
+    - cat1
+    - logging
+
+# -----------------------------------------
+# F5BI-DM-300037 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300037 | The F5 BIG-IP appliance must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC)."
+  f5networks.f5_modules.bigip_device_syslog:
+    log_level: informational
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300037
+    - cat2
+    - logging
+
+# -----------------------------------------
+# F5BI-DM-300060 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300060 | MANUAL CHECK - The F5 BIG-IP appliance must conduct backups of the configuration at a weekly or organization-defined frequency and store on a separate device."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Document this process in the system security plan (SSP) and perform periodic manual backups. This process backs up the current configuration. Backups must be weekly or a documented organization-def..."
+  tags:
+    - F5BI-DM-300060
+    - cat2
+    - logging
+

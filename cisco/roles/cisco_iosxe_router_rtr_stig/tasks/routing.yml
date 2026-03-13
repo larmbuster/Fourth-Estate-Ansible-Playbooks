@@ -1,0 +1,486 @@
+---
+# =========================================
+# Cisco IOS-XE Router RTR STIG - Routing
+# 33 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000050 | The Cisco router must be configured to enable routing protocol authentication using FIPS 198-1 algorithms with keys not exceeding 180 days of lifetime."
+  cisco.ios.ios_config:
+    lines:
+      - "key chain <KEY-CHAIN-NAME> tcp"
+      - "key <KEY-ID>"
+      - "router bgp <ASN>"
+      - "no synchronization"
+      - "key chain OSPF_KEY_CHAIN"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000050
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000290 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000290 | The Cisco perimeter router must be configured to not be a Border Gateway Protocol (BGP) peer to an alternate gateway service provider."
+  cisco.ios.ios_config:
+    lines:
+      - "ip route 0.0.0.0 0.0.0.0 {{ peer_address }}"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000290
+    - cat1
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000300 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000300 | The Cisco perimeter router must be configured to not redistribute static routes to an alternate gateway service provider into BGP or an Interior Gateway Protocol (IGP) peering with the NIPRNet or t..."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list ISP_PREFIX permit {{ network_address }}"
+      - "route-map FILTER_ISP_STATIC deny 10"
+      - "match ip address prefix-list ISP_PREFIX"
+      - "route-map FILTER_ISP_STATIC permit 20"
+      - "router eigrp 1"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000300
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000420 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000420 | The Cisco out-of-band management (OOBM) gateway router must be configured to have separate Interior Gateway Protocol (IGP) instances for the managed network and management network."
+  cisco.ios.ios_config:
+    lines:
+      - "router ospf 1 vrf MGMT"
+      - "router ospf 2 vrf PROD"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000420
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000430 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000430 | The Cisco out-of-band management (OOBM) gateway router must be configured to not redistribute routes between the management network routing domain and the managed network routing domain."
+  cisco.ios.ios_config:
+    lines:
+      - "ip vrf MGMT"
+      - "no route-target import 8:8"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000430
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000490 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000490 | The Cisco BGP router must be configured to reject inbound route advertisements for any Bogon prefixes."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER deny 0.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER deny 10.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER deny 100.64.0.0/10 le 32"
+      - "ip prefix-list PREFIX_FILTER deny 127.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER deny 169.254.0.0/16 le 32"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000490
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000500 | The Cisco BGP router must be configured to reject inbound route advertisements for any prefixes belonging to the local autonomous system (AS)."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER seq 74 deny {{ peer_address }}/24 le 32"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000500
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000510 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000510 | The Cisco BGP router must be configured to reject inbound route advertisements from a customer edge (CE) router for prefixes that are not allocated to that customer."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER_CUST1 permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list PREFIX_FILTER_CUST1 deny 0.0.0.0/0 ge 8"
+      - "ip prefix-list PREFIX_FILTER_CUST2 permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list PREFIX_FILTER_CUST2 deny 0.0.0.0/0 ge 8"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000510
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000520 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000520 | The Cisco BGP router must be configured to reject outbound route advertisements for any prefixes that do not belong to any customers or the local autonomous system (AS)."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS deny 0.0.0.0/0 ge 8"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000520
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000530 | The Cisco BGP router must be configured to reject outbound route advertisements for any prefixes belonging to the IP core."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list FILTER_CORE_PREFIXES deny {{ peer_address }}/24 le 32"
+      - "ip prefix-list FILTER _CORE_PREFIXES deny {{ peer_address }}/24 le 32"
+      - "ip prefix-list FILTER _CORE_PREFIXES permit 0.0.0.0/0 ge 8"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000530
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000540 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000540 | The Cisco BGP router must be configured to reject route advertisements from BGP peers that do not list their autonomous system (AS) number as the first AS in the AS_PATH attribute."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000540
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000560 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000560 | The Cisco BGP router must be configured to use the maximum prefixes feature to protect against route table flooding and prefix de-aggregation attacks."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000560
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000570 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000570 | The Cisco BGP router must be configured to limit the prefix size on any inbound route advertisement to /24, or the least significant prefixes issued to the customer."
+  cisco.ios.ios_config:
+    lines:
+      - "ip prefix-list FILTER_PREFIX_LENGTH permit 0.0.0.0/0 ge 8 le 24"
+      - "ip prefix-list FILTER_PREFIX_LENGTH deny  0.0.0.0/0 le 32"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000570
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000580 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000580 | The Cisco BGP router must be configured to use its loopback address as the source address for iBGP peering sessions."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000580
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000590 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000590 | MANUAL CHECK - The Cisco MPLS router must be configured to use its loopback address as the source address for LDP peering sessions."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000590
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000600 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000600 | The Cisco MPLS router must be configured to synchronize Interior Gateway Protocol (IGP) and LDP to minimize packet loss when an IGP adjacency is established prior to LDP peers completing label exch..."
+  cisco.ios.ios_config:
+    lines:
+      - "router ospf 1"
+      - "router isis"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000600
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000610 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000610 | The MPLS router with RSVP-TE enabled must be configured with message pacing to adjust maximum burst and maximum number of RSVP messages to an output queue based on the link speed and input queue si..."
+  cisco.ios.ios_config:
+    lines:
+      - "ip rsvp signalling rate-limit burst 9  maxsize 2100 period 30 limit 50"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000610
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000620 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000620 | The Cisco MPLS router must be configured to have TTL Propagation disabled."
+  cisco.ios.ios_config:
+    lines:
+      - "no mpls ip propagate-ttl"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000620
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000630 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000630 | MANUAL CHECK - The Cisco PE router must be configured to have each Virtual Routing and Forwarding (VRF) instance bound to the appropriate physical or logical interfaces to maintain traffic separation between all ..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the PE router to have each VRF bound to the appropriate physical or logical interfaces to maintain traffic separation between all MPLS L3VPNs."
+  tags:
+    - CISC-RT-000630
+    - cat1
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000640 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000640 | The Cisco PE router must be configured to have each Virtual Routing and Forwarding (VRF) instance with the appropriate Route Target (RT)."
+  cisco.ios.ios_config:
+    lines:
+      - "ip vrf CUST1"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000640
+    - cat1
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000650 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000650 | The Cisco PE router must be configured to have each VRF with the appropriate Route Distinguisher (RD)."
+  cisco.ios.ios_config:
+    lines:
+      - "ip vrf CUST1"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000650
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000670 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000670 | MANUAL CHECK - The Cisco PE router providing MPLS Virtual Private Wire Service (VPWS) must be configured to have the appropriate virtual circuit identification (VC I"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000670
+    - cat1
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000680 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000680 | The Cisco PE router providing Virtual Private LAN Services (VPLS) must be configured to have all attachment circuits defined to the virtual forwarding instance (VFI) with the globally unique VPN ID..."
+  cisco.ios.ios_config:
+    lines:
+      - "service instance 10 ethernet"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000680
+    - cat1
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000690 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000690 | MANUAL CHECK - The Cisco PE router must be configured to enforce the split-horizon rule for all pseudowires within a Virtual Private LAN Services (VPLS) bridge domai"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000690
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000720 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000720 | MANUAL CHECK - The Cisco PE router must be configured to limit the number of MAC addresses it can learn for each Virtual Private LAN Services (VPLS) bridge domain."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000720
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000790 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000790 | The Cisco multicast router must be configured to disable Protocol Independent Multicast (PIM) on all interfaces that are not required to support multicast routing."
+  cisco.ios.ios_config:
+    lines:
+      - "no ip pim sparse-mode"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000790
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000940 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000940 | The Cisco Multicast Source Discovery Protocol (MSDP) router must be configured to limit the amount of source-active messages it accepts on a per-peer basis."
+  cisco.ios.ios_config:
+    lines:
+      - "ip msdp sa-limit {{ peer_address }} {{ numeric_value }}"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000940
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000950 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000950 | The Cisco Multicast Source Discovery Protocol (MSDP) router must be configured to use a loopback address as the source address when originating MSDP traffic."
+  cisco.ios.ios_config:
+    lines:
+      - "ip msdp peer {{ peer_address }} connect-source lo12 remote-as {{ numeric_value }}"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000950
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000470 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000470 | The Cisco BGP router must be configured to enable the Generalized TTL Security Mechanism (GTSM)."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000470
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000480 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000480 | The Cisco BGP router must be configured to use a unique key for each autonomous system (AS) that it peers with."
+  cisco.ios.ios_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000480
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000750 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000750 | The Cisco PE router must be configured to ignore or drop all packets with any IP options."
+  cisco.ios.ios_config:
+    lines:
+      - "ip options ignore"
+      - "ip options drop"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000750
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000235 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000235 | MANUAL CHECK - The Cisco router must be configured to have Cisco Express Forwarding enabled."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000235
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000236 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000236 | The Cisco router must be configured to advertise a hop limit of at least 32 in Router Advertisement messages for IPv6 stateless auto-configuration deployments."
+  cisco.ios.ios_config:
+    lines:
+      - "ipv6 hop-limit 128"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000236
+    - cat3
+    - routing
+

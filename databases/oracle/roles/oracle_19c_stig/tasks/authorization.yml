@@ -1,0 +1,450 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - Authorization
+# 28 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-001000 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-001000 | Oracle Database must enforce approved authorizations for logical access to the system in accordance with applicable policy."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-001000
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# O19C-00-006600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-006600 | The audit information produced by the Oracle Database must be protected from unauthorized access, modification, or deletion."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "REVOKE privilege-type ON [ TABLE ] { table-Name | view-Name } FROM grantees"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-006600
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-006900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-006900 | The system must protect audit tools from unauthorized access, modification, or deletion."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-006900
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-007300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-007300 | Oracle Database must support enforcement of logical access restrictions associated with changes to the database management system (DBMS) configuration and to the database itself."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-007300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-007700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-007700 | Database software, applications, and configuration files must be monitored to discover unauthorized changes."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-007700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-007900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-007900 | The OS must limit privileges to change the database management system (DBMS) software resident within software libraries (including privileged programs)."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-007900
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-008000 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-008000 | The Oracle Database software installation account must be restricted to authorized users."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-008000
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# O19C-00-008200 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-008200 | Database objects must be owned by accounts authorized for ownership."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-008200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-008300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-008300 | The role(s)/group(s) used to modify database structure (including but not necessarily limited to tables, indexes, storage, etc.) and logic modules (stored procedures, functions, triggers, links to ..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-008300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-008700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-008700 | Fixed user and PUBLIC Database links must be authorized for use."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "drop database link [link name];"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-008700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-009500 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-009500 | System privileges granted using the WITH ADMIN OPTION must not be granted to unauthorized user accounts."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "revoke [privilege name] from user [username];"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009500
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-009600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-009600 | System Privileges must not be granted to PUBLIC."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "REVOKE {{ oracle_19c_stig_revoke_privilege }} FROM PUBLIC;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009600
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-009700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-009700 | Oracle roles granted using the WITH ADMIN OPTION must not be granted to unauthorized accounts."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "revoke {{ role_name }} from {{ grantee }};"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-009800 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-009800 | Object permissions granted to PUBLIC must be restricted."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "revoke [privilege name] from [username] on [object name];"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-009800
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-010000 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-010000 | Application role permissions must not be assigned to the Oracle PUBLIC role."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "REVOKE {{ oracle_19c_stig_revoke_role }} FROM PUBLIC;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-010000
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-010100 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-010100 | Oracle application administration roles must be disabled if not required and authorized."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "alter user [username] default role all except [role];"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-010100
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-011500 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-011500 | The /diag subdirectory under the directory assigned to the DIAGNOSTIC_DEST parameter must be protected from unauthorized access."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-011500
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-011800 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-011800 | Database administrator (DBA) OS accounts must be granted only those host system privileges necessary for the administration of the Oracle Database."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-011800
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# O19C-00-012200 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-012200 | Oracle Database must be protected from unauthorized access by developers on shared production/development host systems."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-012200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-013200 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013200 | OS accounts used to run external procedures called by Oracle Database must have limited privileges."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-013200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-013300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013300 | Use of external executables must be authorized."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-013300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-013400 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013400 | Access to external executables must be disabled or restricted."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-013400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-016100 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-016100 | Oracle Database must separate user functionality (including user interface services) from database management functionality."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-016100
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-016900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-016900 | Oracle Database must implement cryptographic mechanisms to prevent unauthorized modification of organization-defined information at rest (to include, at a minimum, PII and classified information) o..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-016900
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-017400 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-017400 | Oracle Database contents must be protected from unauthorized and unintended information transfer by enforcement of a data-transfer policy."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-017400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-017600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-017600 | Access to Oracle Database files must be limited to relevant processes and to authorized, administrative users."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-017600
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# O19C-00-017700 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-017700 | MANUAL CHECK - Oracle Database must employ cryptographic mechanisms preventing the unauthorized disclosure of information during transmission unless the transmitted data is otherwise protected by alternative phys..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure DBMS and/or operating system to use cryptographic mechanisms to prevent unauthorized disclosure of information during transmission where physical measures are not being used."
+  tags:
+    - O19C-00-017700
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# O19C-00-018400 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-018400 | Oracle Database must restrict error messages so only authorized personnel may view them."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-018400
+    - cat2
+    - authorization
+

@@ -6,7 +6,7 @@ applicable **DISA Security Technical Implementation Guide (STIG)** findings and
 
 **Classification:** UNCLASSIFIED
 **Frameworks Covered:** DISA STIG, NIST 800-53 Rev 5, NIST 800-171, FedRAMP
-**Last Updated:** 2026-02-24
+**Last Updated:** 2026-03-13
 
 ---
 
@@ -39,6 +39,11 @@ applicable **DISA Security Technical Implementation Guide (STIG)** findings and
    - [Oracle Database STIG V2R4](#oracle-database-stig-v2r4)
    - [Ansible Automation Platform / RHEL Application STIG](#ansible-automation-platform--rhel-application-stig)
    - [OT/ICS Systems STIG](#otics-systems-stig)
+   - [Cisco IOS/IOS-XE/IOS-XR/NX-OS/ACI/ASA/ISE STIGs (24 roles)](#cisco-ios-router-ndm-stig-v3r6)
+   - [F5 BIG-IP/NGINX STIGs (6 roles)](#f5-big-ip-tmos-alg-stig-v1r2)
+   - [Palo Alto PAN-OS/Prisma STIGs (4 roles)](#palo-alto-alg-stig-v3r4)
+   - [Oracle Database 19c / MySQL 8.0 STIGs (2 roles)](#oracle-database-19c-stig-v1r4)
+   - [MS SQL Server 2016/2022 STIGs (4 roles)](#ms-sql-server-2022-instance-stig-v1r3)
 4. [Per-Platform Quick Reference](#per-platform-quick-reference)
 
 ---
@@ -577,6 +582,168 @@ Roles: `operational_technology/roles`, `dragos/roles`, `claroty/roles`
 
 ---
 
+### Cisco IOS Router NDM STIG V3R6
+
+Role: `cisco/roles/cisco_ios_router_ndm_stig` (43 rules: CAT I: 8, CAT II: 35)
+
+### Cisco IOS Router RTR STIG V3R4
+
+Role: `cisco/roles/cisco_ios_router_rtr_stig` (92 rules: CAT I: 9, CAT II: 56, CAT III: 27)
+
+### Cisco IOS Switch L2S STIG V3R1
+
+Role: `cisco/roles/cisco_ios_switch_l2s_stig` (22 rules: CAT I: 1, CAT II: 17, CAT III: 4)
+
+### Cisco IOS Switch NDM STIG V3R6
+
+Role: `cisco/roles/cisco_ios_switch_ndm_stig` (43 rules: CAT I: 8, CAT II: 35)
+
+### Cisco IOS Switch RTR STIG V3R2
+
+Role: `cisco/roles/cisco_ios_switch_rtr_stig` (53 rules: CAT I: 4, CAT II: 38, CAT III: 11)
+
+### Cisco IOS-XE Router NDM STIG V3R6
+
+Role: `cisco/roles/cisco_iosxe_router_ndm_stig` (42 rules: CAT I: 8, CAT II: 34)
+
+### Cisco IOS-XE Router RTR STIG V3R5
+
+Role: `cisco/roles/cisco_iosxe_router_rtr_stig` (97 rules: CAT I: 10, CAT II: 58, CAT III: 29)
+
+### Cisco IOS-XE Switch L2S STIG V3R2
+
+Role: `cisco/roles/cisco_iosxe_switch_l2s_stig` (22 rules: CAT I: 1, CAT II: 17, CAT III: 4)
+
+### Cisco IOS-XE Switch NDM STIG V3R5
+
+Role: `cisco/roles/cisco_iosxe_switch_ndm_stig` (42 rules: CAT I: 8, CAT II: 34)
+
+### Cisco IOS-XE Switch RTR STIG V3R3
+
+Role: `cisco/roles/cisco_iosxe_switch_rtr_stig` (88 rules: CAT I: 8, CAT II: 52, CAT III: 28)
+
+### Cisco IOS-XR Router NDM STIG V3R5
+
+Role: `cisco/roles/cisco_iosxr_router_ndm_stig` (27 rules: CAT I: 7, CAT II: 20)
+
+### Cisco IOS-XR Router RTR STIG V3R3
+
+Role: `cisco/roles/cisco_iosxr_router_rtr_stig` (96 rules: CAT I: 10, CAT II: 57, CAT III: 29)
+
+### Cisco NX-OS Switch L2S STIG V3R3
+
+Role: `cisco/roles/cisco_nxos_switch_l2s_stig` (22 rules: CAT I: 1, CAT II: 17, CAT III: 4)
+
+### Cisco NX-OS Switch NDM STIG V3R6
+
+Role: `cisco/roles/cisco_nxos_switch_ndm_stig` (42 rules: CAT I: 7, CAT II: 35)
+
+### Cisco NX-OS Switch RTR STIG V3R3
+
+Role: `cisco/roles/cisco_nxos_switch_rtr_stig` (78 rules: CAT I: 7, CAT II: 45, CAT III: 26)
+
+### Cisco ACI L2S STIG V1R2
+
+Role: `cisco/roles/cisco_aci_l2s_stig` (7 rules: CAT I: 1, CAT II: 4, CAT III: 2)
+
+### Cisco ACI NDM STIG V1R2
+
+Role: `cisco/roles/cisco_aci_ndm_stig` (26 rules: CAT I: 7, CAT II: 19)
+
+### Cisco ACI RTR STIG V1R2
+
+Role: `cisco/roles/cisco_aci_rtr_stig` (26 rules: CAT II: 18, CAT III: 8)
+
+### Cisco ASA Firewall STIG V2R1
+
+Role: `cisco/roles/cisco_asa_firewall_stig` (21 rules: CAT I: 2, CAT II: 19)
+
+### Cisco ASA IPS STIG V2R1
+
+Role: `cisco/roles/cisco_asa_ips_stig` (23 rules: CAT II: 23)
+
+### Cisco ASA NDM STIG V2R4
+
+Role: `cisco/roles/cisco_asa_ndm_stig` (47 rules: CAT I: 7, CAT II: 40)
+
+### Cisco ASA VPN STIG V2R2
+
+Role: `cisco/roles/cisco_asa_vpn_stig` (41 rules: CAT I: 10, CAT II: 28, CAT III: 3)
+
+### Cisco ISE NAC STIG V2R3
+
+Role: `cisco/roles/cisco_ise_nac_stig` (30 rules: CAT I: 8, CAT II: 21, CAT III: 1)
+
+### Cisco ISE NDM STIG V2R3
+
+Role: `cisco/roles/cisco_ise_ndm_stig` (53 rules: CAT I: 9, CAT II: 41, CAT III: 3)
+
+### F5 BIG-IP TMOS ALG STIG V1R2
+
+Role: `f5_bigip/roles/f5_bigip_alg_stig` (37 rules: CAT I: 9, CAT II: 23, CAT III: 5)
+
+### F5 BIG-IP TMOS DNS STIG V1R1
+
+Role: `f5_bigip/roles/f5_bigip_dns_stig` (12 rules: CAT I: 2, CAT II: 10)
+
+### F5 BIG-IP TMOS FW STIG V1R1
+
+Role: `f5_bigip/roles/f5_bigip_fw_stig` (14 rules: CAT I: 3, CAT II: 9, CAT III: 2)
+
+### F5 BIG-IP TMOS NDM STIG V1R2
+
+Role: `f5_bigip/roles/f5_bigip_ndm_stig` (29 rules: CAT I: 8, CAT II: 20, CAT III: 1)
+
+### F5 BIG-IP TMOS VPN STIG V1R1
+
+Role: `f5_bigip/roles/f5_bigip_vpn_stig` (12 rules: CAT I: 8, CAT II: 4)
+
+### F5 NGINX STIG V1R1
+
+Role: `f5_bigip/roles/f5_nginx_stig` (32 rules: CAT I: 2, CAT II: 30)
+
+### Palo Alto ALG STIG V3R4
+
+Role: `palo_alto/roles/pan_alg_stig` (50 rules: CAT I: 1, CAT II: 46, CAT III: 3)
+
+### Palo Alto IDPS STIG V3R2
+
+Role: `palo_alto/roles/pan_idps_stig` (29 rules: CAT II: 27, CAT III: 2)
+
+### Palo Alto NDM STIG V3R3
+
+Role: `palo_alto/roles/pan_ndm_stig` (34 rules: CAT I: 3, CAT II: 25, CAT III: 6)
+
+### Palo Alto Prisma Cloud Compute STIG V2R2
+
+Role: `palo_alto/roles/pan_prisma_cloud_stig` (31 rules: CAT I: 8, CAT II: 23)
+
+### Oracle Database 19c STIG V1R4
+
+Role: `databases/oracle/roles/oracle_19c_stig` (96 rules: CAT I: 15, CAT II: 80, CAT III: 1)
+
+### Oracle MySQL 8.0 STIG V2R2
+
+Role: `databases/mysql/roles/oracle_mysql80_stig` (100 rules: CAT I: 12, CAT II: 88)
+
+### MS SQL Server 2022 Instance STIG V1R3
+
+Role: `databases/mssql/roles/mssql_2022_instance_stig` (80 rules: CAT I: 14, CAT II: 66)
+
+### MS SQL Server 2022 Database STIG V1R2
+
+Role: `databases/mssql/roles/mssql_2022_database_stig` (22 rules: CAT I: 4, CAT II: 18)
+
+### MS SQL Server 2016 Instance STIG V3R6
+
+Role: `databases/mssql/roles/mssql_2016_instance_stig` (84 rules: CAT I: 13, CAT II: 69, CAT III: 2)
+
+### MS SQL Server 2016 Database STIG V3R4
+
+Role: `databases/mssql/roles/mssql_2016_database_stig` (23 rules: CAT I: 4, CAT II: 16, CAT III: 3)
+
+---
+
 ## Per-Platform Quick Reference
 
 The table below maps every top-level directory to its primary DISA STIG(s) and NIST 800-53
@@ -590,16 +757,17 @@ control families for rapid lookup.
 | `aws/` | DoD CC SRG / FedRAMP | AC, AU, CM, IA, SC, SI | IAM, VPC, EC2, EKS, S3 roles |
 | `azure/` | DoD CC SRG / FedRAMP | AC, AU, CM, IA, SC, SI | Azure AD, AKS, Key Vault, Sentinel roles |
 | `checkpoint/` | Firewall STIG | AC, AU, SC, SI | Access policy, threat prevention roles |
-| `cisco/` | IOS STIG V2R7, UCS STIG | AC, AU, CM, IA, SC | ISE identity, UCS hardening, AAA roles |
+| `cisco/` | IOS/IOS-XE/IOS-XR/NX-OS/ACI/ASA NDM/RTR/L2S/FW/VPN/IPS/NAC STIGs + UCS STIG | AC, AU, CM, IA, SC, SI | 24 STIG roles (1,083 rules), ISE identity, UCS hardening |
 | `claroty/` | ICS STIG | AU, CM, IA, SC, SI | OT asset mgmt, secure remote access roles |
 | `cohesity/` | General App STIG | CP, SC | Cluster config, protection, recovery roles |
 | `crowdstrike/` | Endpoint Security | RA, SI | EDR deployment, policy management |
 | `databases/postgresql/` | PostgreSQL STIG V2R1 | AC, AU, IA, SC | Install, replication, audit, security roles |
-| `databases/mysql/` | MySQL STIG V2R2 | AC, AU, IA, SC | Install, Galera, backup, security roles |
-| `databases/oracle/` | Oracle STIG V2R4 | AC, AU, IA, SC | Install, Data Guard, RMAN, security roles |
+| `databases/mysql/` | MySQL 8.0 STIG V2R2 | AC, AU, IA, SC | Install, Galera, backup, security, `oracle_mysql80_stig` (100 rules) |
+| `databases/mssql/` | MS SQL 2016/2022 Instance + Database STIGs | AC, AU, CM, IA, SC | 4 STIG roles (209 rules) |
+| `databases/oracle/` | Oracle 19c STIG V1R4 | AC, AU, IA, SC | Install, Data Guard, RMAN, security, `oracle_19c_stig` (96 rules) |
 | `dragos/` | ICS STIG | AU, IR, RA, SI | Threat detection, inventory, topology roles |
 | `elk_stack/` | General App STIG | AU, IR, SI | Elasticsearch, Logstash, Kibana, Filebeat |
-| `f5_bigip/` | F5 BIG-IP STIG | AC, AU, SC, SI | Load balancing, SSL, WAF, HA roles |
+| `f5_bigip/` | F5 BIG-IP ALG/DNS/FW/NDM/VPN + NGINX STIGs | AC, AU, CM, SC, SI | 6 STIG roles (136 rules), load balancing, SSL, WAF, HA |
 | `fortinet/` | FortiGate STIG | AC, AU, SC, SI | Firewall, VPN, IPS/AV, HA roles |
 | `google_cloud_platform/` | DoD CC SRG / FedRAMP | AC, AU, CM, IA, SC, SI | GCP IAM, VPC, GKE, BigQuery roles |
 | `hashicorp_vault/` | General App STIG | IA, SC | PKI, dynamic credentials, audit, secrets roles |
@@ -609,7 +777,7 @@ control families for rapid lookup.
 | `netapp/` | Storage STIG | CP, SC | ONTAP cluster, SVM, SnapMirror, SnapVault |
 | `openshift/` | Kubernetes STIG + OCP STIG V1R2 | AC, AU, CM, IA, SC, SI | OCP lifecycle, operators, GitOps, monitoring |
 | `operational_technology/` | ICS STIG, NERC CIP | AU, CM, IR, SC, SI | Firewall, IDPS, logging, firmware roles |
-| `palo_alto/` | PAN-OS STIG V2R2 | AC, AU, CM, SC, SI | Security rules, threat prevention, VPN roles |
+| `palo_alto/` | PAN-OS ALG/IDPS/NDM + Prisma Cloud STIGs | AC, AU, CM, SC, SI | 4 STIG roles (144 rules), security rules, threat prevention |
 | `policy_as_code/` | RHEL 8 STIG (direct) | AC, AU, CM, IA, SC, SI | Password policy, session timeout, audit, crypto |
 | `prometheus_grafana/` | General App STIG | AU, CA, IR, SI | Metrics, alerting, dashboarding roles |
 | `pure_storage/` | Storage STIG | CP, SC | FlashArray/FlashBlade provisioning, protection |

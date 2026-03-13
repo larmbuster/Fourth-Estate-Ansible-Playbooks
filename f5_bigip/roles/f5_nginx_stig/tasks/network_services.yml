@@ -1,0 +1,111 @@
+---
+# =========================================
+# F5 NGINX Web Server STIG - Network Services
+# 7 rules
+# =========================================
+
+# -----------------------------------------
+# NGNX-APP-000720 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000720 | NGINX must be configured to use a Certificate Revocation List (CRL) for certificate path validation and revocation. (Online Certificate Status Protocol [OCSP] is the preferred configuration.)"
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000720"
+    line: "# STIG NGNX-APP-000720 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000720
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# NGNX-APP-001070 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001070 | NGINX must generate error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001070"
+    line: "# STIG NGNX-APP-001070 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001070
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# NGNX-APP-001840 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001840 | NGINX must be configured to pass security attributes to proxies."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001840"
+    line: "# STIG NGNX-APP-001840 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001840
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# NGNX-APP-001940 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001940 | NGINX must protect against denial-of-service (DoS) attacks."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001940"
+    line: "# STIG NGNX-APP-001940 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001940
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# NGNX-APP-002620 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-002620 | NGINX must be configured to use Online Certificate Status Protocol (OCSP) for certificate path validation and revocation. (OCSP is the preferred configuration.)"
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-002620"
+    line: "# STIG NGNX-APP-002620 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-002620
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# NGNX-APP-003060 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-003060 | NGINX must separate API maintenance sessions from other network sessions within the system by logically separated communications paths."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-003060"
+    line: "# STIG NGNX-APP-003060 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-003060
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# NGNX-APP-003330 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-003330 | NGINX must revoke access tokens in accordance with organization-defined identification and authentication policy."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-003330"
+    line: "# STIG NGNX-APP-003330 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-003330
+    - cat2
+    - network_services
+

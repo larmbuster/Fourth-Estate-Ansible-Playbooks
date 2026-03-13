@@ -1,0 +1,161 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG STIG - Authorization
+# 11 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-AG-000038 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000038 | The Palo Alto Networks security platform must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000038_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000038_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000038
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000060 | MANUAL CHECK - The Palo Alto Networks security platform must update malicious code protection mechanisms and signature definitions whenever new releases are available in accordance with organizational configurati..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If the device has authorized connectivity to the Palo Alto site, automatic updates can be used. To schedule automatic updates: Go to Device >> Dynamic Updates. Select the text to the right of Sched..."
+  tags:
+    - PANW-AG-000060
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000107 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000107 | The Palo Alto Networks security platform must only allow incoming communications from organization-defined authorized sources forwarded to organization-defined authorized destinations."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000107_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000107_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000107
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000112 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000112 | The Palo Alto Networks security platform must detect use of network services that have not been authorized or approved by the ISSM and ISSO, at a minimum."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000112_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000112_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000112
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000113 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000113 | The Palo Alto Networks security platform must generate a log record when unauthorized network services are detected."
+  paloaltonetworks.panos.panos_syslog_profile:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_alg_stig_syslog_profile }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000113
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000115 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000115 | The Palo Alto Networks security platform must continuously monitor inbound communications traffic crossing internal security boundaries."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000115_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000115_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000115
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000116 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000116 | The Palo Alto Networks security platform must continuously monitor outbound communications traffic crossing internal security boundaries."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000116_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000116_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000116
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000119 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000119 | The Palo Alto Networks security platform must generate an alert to, at a minimum, the ISSO and ISSM when rootkits or other malicious software which allows unauthorized privileged access is detected."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000119_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000119_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000119
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000120 | The Palo Alto Networks security platform must generate an alert to, at a minimum, the ISSO and ISSM when rootkits or other malicious software that allows unauthorized nonprivileged access is detected."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000120_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000120_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000120
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000147 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000147 | MANUAL CHECK - The Palo Alto Networks security platform must inspect inbound and outbound SMTP and Extended SMTP communications traffic (if authorized) for protocol compliance and protocol anomalies."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If SMTP or ESMTP is authorized, configure a security policy to allow it and inspect it. Go to Policies >> Security Select \"Add\" to create a new security policy or select the name of the security ..."
+  tags:
+    - PANW-AG-000147
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# PANW-AG-000149 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000149 | MANUAL CHECK - The Palo Alto Networks security platform must inspect inbound and outbound HTTP traffic (if authorized) for protocol compliance and protocol anomalies."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If HTTP is authorized, configure a security policy to allow it and inspect it. Go to Policies >> Security Select \"Add\" to create a new security policy or select the name of the security policy to..."
+  tags:
+    - PANW-AG-000149
+    - cat2
+    - authorization
+

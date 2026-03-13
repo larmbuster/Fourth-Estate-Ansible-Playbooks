@@ -1,0 +1,48 @@
+---
+# =========================================
+# Oracle Database 19c Database DISA STIG V1 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+oracle_19c_stig_auto_restart_listener: false
+
+# -----------------------------------------
+# Database Connection
+# -----------------------------------------
+oracle_19c_stig_db_user: "SYS"
+oracle_19c_stig_db_password: "changeme"
+oracle_19c_stig_db_service: "ORCL"
+oracle_19c_stig_oracle_home: "/u01/app/oracle/product/19c/dbhome_1"
+oracle_19c_stig_sqlnet_ora_path: "{{ oracle_19c_stig_oracle_home }}/network/admin/sqlnet.ora"
+
+# -----------------------------------------
+# Password Policy
+# -----------------------------------------
+oracle_19c_stig_password_life_time: 60
+oracle_19c_stig_password_reuse_max: 5
+oracle_19c_stig_password_lock_time: "UNLIMITED"
+oracle_19c_stig_failed_login_attempts: 3
+
+# -----------------------------------------
+# Audit Configuration
+# -----------------------------------------
+oracle_19c_stig_audit_trail: "DB,EXTENDED"
+
+# -----------------------------------------
+# STIG-Specific Parameters (override per environment)
+# -----------------------------------------
+oracle_19c_stig_profile_name: "DEFAULT"
+oracle_19c_stig_inactive_account_time: 35
+oracle_19c_stig_target_username: "TODO_username"
+oracle_19c_stig_sessions_per_user: 10
+oracle_19c_stig_revoke_privilege: "TODO_privilege"
+oracle_19c_stig_revoke_role: "TODO_role"
+oracle_19c_stig_redo_log_group: 4
+oracle_19c_stig_redo_log_path: "/u01/app/oracle/oradata/redo04.log"
+oracle_19c_stig_redo_log_size: "100M"
+

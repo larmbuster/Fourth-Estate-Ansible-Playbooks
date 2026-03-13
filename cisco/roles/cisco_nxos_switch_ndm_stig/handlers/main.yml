@@ -1,0 +1,6 @@
+---
+- name: Save running configuration
+  cisco.nxos.nxos_config:
+    save_when: always
+  when: cisco_nxos_switch_ndm_stig_auto_save | default(true) | bool
+

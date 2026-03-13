@@ -1,0 +1,7 @@
+---
+- name: Restart SQL Server service
+  ansible.windows.win_service:
+    name: "{{ mssql_service_name | default('MSSQLSERVER') }}"
+    state: restarted
+  when: mssql_2022_instance_stig_auto_restart | default(false) | bool
+

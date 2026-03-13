@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: mssql_2016_instance_stig
+  author: Fourth Estate
+  description: >-
+    MS SQL Server 2016 Instance DISA STIG V3 hardening role.
+    Implements 84 XCCDF rules across authentication, authorization, encryption, logging, network services, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - mssql
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

@@ -1,0 +1,61 @@
+---
+# =========================================
+# Palo Alto PAN-OS NDM DISA STIG V3 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 34 (CAT I: 3, CAT II: 25, CAT III: 6)
+#
+# Usage:
+#   --tags authentication           (19 rules)
+#   --tags authorization            (1 rules)
+#   --tags logging                  (10 rules)
+#   --tags network_services         (1 rules)
+#   --tags session_management       (1 rules)
+#   --tags system_hardening         (2 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags PANW-NM-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Palo Alto PAN-OS"
+  ansible.builtin.assert:
+    that:
+      - ansible_connection == "local" or panos_provider is defined
+    fail_msg: >-
+      This role targets Palo Alto PAN-OS only.
+    quiet: true
+  tags:
+    - always
+
+- name: "PANW-NM | Authentication (19 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "PANW-NM | Authorization (1 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "PANW-NM | Logging (10 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "PANW-NM | Network Services (1 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "PANW-NM | Session Management (1 rules)"
+  ansible.builtin.import_tasks: session_management.yml
+  tags:
+    - session_management
+
+- name: "PANW-NM | System Hardening (2 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

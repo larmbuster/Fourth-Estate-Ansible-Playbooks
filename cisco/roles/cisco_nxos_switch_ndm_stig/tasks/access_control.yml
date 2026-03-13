@@ -1,0 +1,48 @@
+---
+# =========================================
+# Cisco NX-OS Switch NDM STIG - Access Control
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000140 | The Cisco switch must be configured to enforce approved authorizations for controlling the flow of management information within the device based on control policies."
+  cisco.nxos.nxos_acls:
+    config: "{{ cisco_nxos_switch_ndm_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000140
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-ND-000290 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000290 | The Cisco switch must produce audit records containing information to establish where the events occurred."
+  cisco.nxos.nxos_acls:
+    config: "{{ cisco_nxos_switch_ndm_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000290
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-ND-001220 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001220 | The Cisco switch must be configured to protect against known types of denial-of-service (DoS) attacks by employing organization-defined security safeguards."
+  cisco.nxos.nxos_acls:
+    config: "{{ cisco_nxos_switch_ndm_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001220
+    - cat2
+    - access_control
+

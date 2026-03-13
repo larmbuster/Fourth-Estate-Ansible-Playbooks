@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: mssql_2022_instance_stig
+  author: Fourth Estate
+  description: >-
+    MS SQL Server 2022 Instance DISA STIG V1 hardening role.
+    Implements 80 XCCDF rules across authentication, authorization, encryption, logging, network services, routing, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - mssql
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

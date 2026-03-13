@@ -1,0 +1,7 @@
+---
+- name: Restart MySQL service
+  ansible.builtin.service:
+    name: mysqld
+    state: restarted
+  when: oracle_mysql80_stig_auto_restart | default(false) | bool
+

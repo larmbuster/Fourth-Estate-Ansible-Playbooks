@@ -1,0 +1,38 @@
+---
+# =========================================
+# Cisco ISE NAC DISA STIG V2 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+cisco_ise_nac_stig_auto_save: true
+
+# -----------------------------------------
+# ISE Connection
+# -----------------------------------------
+cisco_ise_nac_stig_ise_hostname: "ise.example.com"
+cisco_ise_nac_stig_ise_username: "admin"
+cisco_ise_nac_stig_ise_password: "changeme"
+
+# -----------------------------------------
+# Banner Text
+# -----------------------------------------
+cisco_ise_nac_stig_banner_text: |
+  You are accessing a U.S. Government (USG) Information System (IS) that is
+  provided for USG-authorized use only.
+
+# -----------------------------------------
+# Logging
+# -----------------------------------------
+cisco_ise_nac_stig_syslog_server: "10.0.0.10"
+cisco_ise_nac_stig_ntp_server_primary: "10.0.0.20"
+
+# -----------------------------------------
+# Session Management
+# -----------------------------------------
+cisco_ise_nac_stig_session_timeout: 600
+

@@ -1,0 +1,46 @@
+---
+# =========================================
+# Cisco IOS-XE Switch RTR STIG - Logging
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000630 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000630 | MANUAL CHECK - The Cisco PE switch must be configured to have each Virtual Routing and Forwarding (VRF) instance bound to the appropriate physical or logical interfaces to maintain traffic separation between all ..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the PE switch to have each VRF bound to the appropriate physical or logical interfaces to maintain traffic separation between all MPLS L3VPNs."
+  tags:
+    - CISC-RT-000630
+    - cat1
+    - logging
+
+# -----------------------------------------
+# CISC-RT-000790 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000790 | The Cisco multicast switch must be configured to disable Protocol Independent Multicast (PIM) on all interfaces that are not required to support multicast routing."
+  cisco.ios.ios_config:
+    lines:
+      - "no ip pim sparse-mode"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000790
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-RT-000890 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000890 | The Cisco multicast Designated switch (DR) must be configured to set the shortest-path tree (SPT) threshold to infinity to minimalize source-group (S, G) state within the multicast topology where A..."
+  cisco.ios.ios_config:
+    lines:
+      - "ip pim spt-threshold infinity"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000890
+    - cat2
+    - logging
+

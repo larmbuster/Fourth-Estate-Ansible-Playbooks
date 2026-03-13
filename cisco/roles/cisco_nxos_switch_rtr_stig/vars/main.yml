@@ -1,0 +1,12 @@
+---
+# =========================================
+# Cisco NX-OS Switch RTR DISA STIG V3 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+cisco_nxos_switch_rtr_stig_stig_version: "3"
+cisco_nxos_switch_rtr_stig_stig_release_info: "Release: 3 Benchmark Date: 30 Jan 2025"
+cisco_nxos_switch_rtr_stig_stig_benchmark_id: "Cisco_NX-OS_Switch_RTR_STIG"
+cisco_nxos_switch_rtr_stig_stig_total_rules: 78
+

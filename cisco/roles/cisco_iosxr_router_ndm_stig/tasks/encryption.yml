@@ -1,0 +1,54 @@
+---
+# =========================================
+# Cisco IOS-XR Router NDM STIG - Encryption
+# 4 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-001130 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001130 | MANUAL CHECK - The Cisco router must be configured to authenticate SNMP messages using a FIPS-validated Keyed-Hash Message Authentication Code (HMAC)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001130
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001140 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001140 | MANUAL CHECK - The Cisco router must be configured to encrypt SNMP messages using a FIPS 140-2 approved algorithm."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001140
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001150 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001150 | MANUAL CHECK - The Cisco router must be configured to authenticate Network Time Protocol (NTP) sources using authentication with FIPS-compliant algorithms."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001150
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CISC-ND-001200 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001200 | MANUAL CHECK - The Cisco router must be configured to use FIPS-validated Keyed-Hash Message Authentication Code (HMAC) to protect the integrity of remote maintenance"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001200
+    - cat1
+    - encryption
+

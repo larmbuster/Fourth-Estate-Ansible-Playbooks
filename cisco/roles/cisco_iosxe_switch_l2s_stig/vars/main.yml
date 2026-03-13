@@ -1,0 +1,12 @@
+---
+# =========================================
+# Cisco IOS-XE Switch L2S DISA STIG V3 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+cisco_iosxe_switch_l2s_stig_stig_version: "3"
+cisco_iosxe_switch_l2s_stig_stig_release_info: "Release: 2 Benchmark Date: 02 Jul 2025"
+cisco_iosxe_switch_l2s_stig_stig_benchmark_id: "Cisco_IOS_XE_Switch_L2S_STIG"
+cisco_iosxe_switch_l2s_stig_stig_total_rules: 22
+

@@ -1,0 +1,35 @@
+---
+# =========================================
+# Cisco IOS Switch L2S STIG - Network Services
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000130 | The Cisco switch must have DHCP snooping for all user VLANs to validate DHCP messages from untrusted sources."
+  cisco.ios.ios_config:
+    lines:
+      - "ip dhcp snooping"
+      - "ip dhcp snooping vlan 2,4-8,11"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000130
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-L2-000170 - LOW
+# -----------------------------------------
+
+- name: "CISC-L2-000170 | The Cisco switch must have IGMP or MLD Snooping configured on all VLANs."
+  cisco.ios.ios_config:
+    lines:
+      - "ip igmp snooping"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000170
+    - cat3
+    - network_services
+

@@ -1,0 +1,20 @@
+---
+# =========================================
+# Cisco ASA VPN STIG - Session Management
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-VN-000460 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000460 | The Cisco ASA remote access VPN server must be configured to display the Standard Mandatory DoD Notice and Consent Banner before granting access to the network."
+  cisco.asa.asa_config:
+    lines:
+      - "banner value I've read & consent to terms in IS user agreem't."
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000460
+    - cat2
+    - session_management
+

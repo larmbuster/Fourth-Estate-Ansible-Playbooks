@@ -1,0 +1,18 @@
+---
+# =========================================
+# Cisco IOS-XR Router RTR STIG - Authorization
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000237 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000237 | MANUAL CHECK - The Cisco router must not be configured to use IPv6 Site Local Unicast addresses."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000237
+    - cat2
+    - authorization
+

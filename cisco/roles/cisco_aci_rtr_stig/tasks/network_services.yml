@@ -1,0 +1,48 @@
+---
+# =========================================
+# Cisco ACI RTR STIG - Network Services
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CACI-RT-000031 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000031 | MANUAL CHECK - The multicast rendezvous point (RP) must be configured to rate limit the number of Protocol Independent Multicast (PIM) Register messages."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the switch to filter PIM register messages, rate limit the number of PIM register messages, and accept multicast packets only from known peers. Use the command \"ip pim register-rate-limi..."
+  tags:
+    - CACI-RT-000031
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CACI-RT-000032 - MEDIUM
+# -----------------------------------------
+
+- name: "CACI-RT-000032 | The Cisco ACI must be configured to limit the mroute states created by Internet Group Management Protocol (IGMP) and Multicast Listener Discovery (MLD) reports on a Cisco APIC Bridge Domain (BD) or..."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000032_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000032_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000032
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CACI-RT-000035 - LOW
+# -----------------------------------------
+
+- name: "CACI-RT-000035 | The Cisco ACI multicast must be configured to filter the Internet Group Management Protocol (IGMP) and Multicast Listener Discovery (MLD) Report messages to allow hosts to join only multicast group..."
+  cisco.aci.aci_rest:
+    path: "{{ cisco_aci_rtr_stig_caci_rt_000035_api_path | default('/api/mo/uni.json') }}"
+    method: post
+    content: "{{ cisco_aci_rtr_stig_caci_rt_000035_content | default({}) }}"
+  notify: Commit ACI configuration
+  tags:
+    - CACI-RT-000035
+    - cat3
+    - network_services
+

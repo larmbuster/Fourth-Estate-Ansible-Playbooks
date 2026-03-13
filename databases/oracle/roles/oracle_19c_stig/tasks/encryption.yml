@@ -1,0 +1,50 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - Encryption
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-015500 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-015500 | Oracle Database must use NIST-validated FIPS 140-2/140-3 compliant cryptography for authentication mechanisms."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-015500
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# O19C-00-016000 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-016000 | Oracle Database must implement NIST FIPS 140-2/140-3 validated cryptographic modules to protect unclassified information requiring confidentiality and cryptographic protection, in accordance with t..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-016000
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# O19C-00-016800 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-016800 | MANUAL CHECK - Oracle Database must take needed steps to protect data at rest and ensure confidentiality and integrity of application data."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Apply appropriate controls to protect the confidentiality and integrity of data at rest in the database. If no site-specific precautions are in place, use Oracle Advanced Security Option to encrypt..."
+  tags:
+    - O19C-00-016800
+    - cat1
+    - encryption
+

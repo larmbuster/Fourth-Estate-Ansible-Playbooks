@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Cisco IOS-XR Router RTR DISA STIG V3 hardening
+    description:
+      - Applies Cisco IOS-XR Router RTR STIG hardening configuration.
+    options:
+      cisco_iosxr_router_rtr_stig_auto_save:
+        type: bool
+        default: true
+        description: Automatically save configuration after changes.
+

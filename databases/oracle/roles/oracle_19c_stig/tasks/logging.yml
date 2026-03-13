@@ -1,0 +1,238 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - Logging
+# 15 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-000200 | Oracle Database must protect against or limit the effects of organization-defined types of denial-of-service (DoS) attacks."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-000200
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-001700 - LOW
+# -----------------------------------------
+
+- name: "O19C-00-001700 | MANUAL CHECK - Oracle Database must protect against an individual who uses a shared account falsely denying having performed a particular action."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Use accounts assigned to individual users. Configure DBMS to provide individual accountability at the DBMS level, and in audit logs, for actions performed under a shared database account. Modify ap..."
+  tags:
+    - O19C-00-001700
+    - cat3
+    - logging
+
+# -----------------------------------------
+# O19C-00-002000 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-002000 | Oracle Database must generate audit records for the DOD-selected list of auditable events, when successfully accessed, added, modified, or deleted, to the extent such information is available."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "CREATE AUDIT POLICY {{ policy_name }} ACTIONS GRANT;"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-002000
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-005700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-005700 | Oracle Database must allocate audit record storage capacity in accordance with organization-defined audit record storage requirements."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "exec sys.dbms_audit_mgmt.move_dbaudit_tables('{{ tablespace_name }}');"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-005700
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-005800 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-005800 | Oracle Database must off-load audit data to a separate log management facility; this must be continuous and in near-real-time for systems with a network connection to the storage facility, and week..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-005800
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-005900 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-005900 | The Oracle Database, or the logging or alerting mechanism the application uses, must provide a warning when allocated audit record storage volume record storage volume reaches 75 percent of maximum..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "select a.tablespace_name,sum(a.tots) Tot_Size,"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-005900
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-006000 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-006000 | Oracle Database must provide an immediate real-time alert to appropriate support staff of all audit log failures."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-006000
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-010400 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-010400 | The directories assigned to the LOG_ARCHIVE_DEST* parameters must be protected from unauthorized access."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-010400
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-010700 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-010700 | Use of the Oracle Database installation account must be logged."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-010700
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-010800 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-010800 | The Oracle Database data files, transaction logs and audit files must be stored in dedicated directories or disk partitions separate from software or other application files."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-010800
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-017100 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-017100 | MANUAL CHECK - Oracle Database must isolate security functions from nonsecurity functions by means of separate security domains."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Locate security-related database objects and code in a separate database, schema, or other separate security domain from database objects and code implementing application logic. (This is the defau..."
+  tags:
+    - O19C-00-017100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-018300 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-018300 | Oracle Database must only generate error messages that provide information necessary for corrective actions without revealing organization-defined sensitive or potentially harmful information in er..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-018300
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-018600 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-018600 | Oracle Database software must be evaluated and patched against newly found vulnerabilities."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-018600
+    - cat1
+    - logging
+
+# -----------------------------------------
+# O19C-00-020500 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-020500 | A minimum of three Oracle Control Files must be created and each stored on a separate physical and logical device."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-020500
+    - cat2
+    - logging
+
+# -----------------------------------------
+# O19C-00-020600 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-020600 | A minimum of three Oracle redo log groups/files must be defined and configured to be stored on separate, archived physical disks or archived directories on a RAID device. In addition, each Oracle r..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "ALTER DATABASE ADD LOGFILE GROUP {{ oracle_19c_stig_redo_log_group }} ('{{ oracle_19c_stig_redo_log_path }}') SIZE {{ oracle_19c_stig_redo_log_size }};"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-020600
+    - cat2
+    - logging
+

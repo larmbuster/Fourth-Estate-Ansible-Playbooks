@@ -1,0 +1,248 @@
+---
+# =========================================
+# MS SQL Server 2022 Instance STIG - Authentication
+# 16 rules
+# =========================================
+
+# -----------------------------------------
+# SQLI-22-003600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-003600 | MANUAL CHECK - SQL Server must limit the number of concurrent sessions to an organization-defined number per user for all accounts and/or account types."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If a trigger consumes too much CPU, an example alternative method for limiting the concurrent users is setting the max connection limit on SQL Server. In SQL Server Management Studio's Object Explo..."
+  tags:
+    - SQLI-22-003600
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-003700 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-003700 | MANUAL CHECK - SQL Server must integrate with an organization-level authentication/access mechanism providing account management and automation for all users, groups, roles, and any other principals."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If mixed mode is required, document the need and justification; describe the measures taken to ensure the use of SQL Server authentication is kept to a minimum; describe the measures taken to safeg..."
+  tags:
+    - SQLI-22-003700
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-004200 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-004200 | SQL Server must protect against a user falsely repudiating by ensuring only clearly unique Active Directory user accounts can connect to the instance."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-004200
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-007500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-007500 | Access to linked servers must be disabled or restricted, unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC sp_droplinkedsrvlogin 'LoginName', NULL;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-007500
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-007800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-007800 | SQL Server must uniquely identify and authenticate users (or processes acting on behalf of organizational users)."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      DROP USER [ IF EXISTS ] {{ user_name }};
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-007800
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-007900 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-007900 | If DBMS authentication using passwords is employed, SQL Server must enforce the DOD standards for password complexity and lifetime."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      ALTER LOGIN [LoginnameHere] WITH CHECK_EXPIRATION=ON;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-007900
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-008200 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-008200 | MANUAL CHECK - If passwords are used for authentication, SQL Server must transmit only encrypted representations of passwords."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure SQL Server to encrypt authentication data for remote connections using DOD-approved cryptography. Deploy encryption to the SQL Server Network Connections. From the search bar, open SQL Se..."
+  tags:
+    - SQLI-22-008200
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-018100 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-018100 | MANUAL CHECK - When using command-line tools such as SQLCMD in a mixed-mode authentication environment, users must use a logon method that does not expose the password."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Where possible, change the login mode to Windows-only: USE [master] GO EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\\Microsoft\\MSSQLServer\\MSSQLServer', N'LoginMode', REG_DWORD, 1;..."
+  tags:
+    - SQLI-22-018100
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-009700 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-009700 | The Master Key must be backed up and stored in a secure location that is not on the SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-009700
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-009600 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-009600 | The Service Master Key must be backed up and stored in a secure location that is not on the SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-009600
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-010500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-010500 | Use of credentials and proxies must be restricted to necessary cases only."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      DROP CREDENTIAL {{ credential_name }}
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-010500
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-014800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-014800 | MANUAL CHECK - SQL Server must generate audit records when successful and unsuccessful logons or connection attempts occur."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Add the required events to the server audit specification to audit denied actions. Refer to the supplemental file \"SQL2022Audit.sql\" script. Reference: https://learn.microsoft.com/en-us/sql/relat..."
+  tags:
+    - SQLI-22-014800
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-019500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-019500 | SQL Server must, for password-based authentication, require immediate selection of a new password upon account recovery."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-019500
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-016200 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-016200 | The SQL Server default account [sa] must be disabled."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      USE master;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-016200
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-016300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-016300 | The SQL Server default account [sa] must have its name changed."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      USE master;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-016300
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# SQLI-22-004250 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-004250 | MANUAL CHECK - SQL Server must protect against a user falsely repudiating by ensuring that only clearly unique Active Directory user accounts can connect to the database."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Ensure all logins are uniquely identifiable and authenticate all users who log on to the system. This likely would be done via a combination of Active Directory with unique accounts and the SQL Ser..."
+  tags:
+    - SQLI-22-004250
+    - cat2
+    - authentication
+

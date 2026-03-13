@@ -1,0 +1,32 @@
+---
+# =========================================
+# Cisco ASA NDM STIG - Authorization
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-ND-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000140 | The Cisco ASA must be configured to enforce approved authorizations for controlling the flow of management information within the Cisco ASA based on information flow control policies."
+  cisco.asa.asa_config:
+    lines:
+      - "ssh {{ network_address }} 255.255.255.0 INSIDE"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000140
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CASA-ND-000160 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000160 | MANUAL CHECK - The Cisco ASA must be configured to display the Standard Mandatory DoD Notice and Consent Banner before granting access to the device."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: ASA(config)# banner login You are accessing a U.S. Government (USG) Information System (IS) that is provided ASA(config)# banner login for USG-authorized use only. ASA(config)# banner login ASA(con..."
+  tags:
+    - CASA-ND-000160
+    - cat2
+    - authorization
+

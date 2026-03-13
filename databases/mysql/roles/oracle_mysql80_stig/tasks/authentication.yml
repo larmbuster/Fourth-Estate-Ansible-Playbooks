@@ -1,0 +1,208 @@
+---
+# =========================================
+# Oracle MySQL 8.0 Database STIG - Authentication
+# 14 rules
+# =========================================
+
+# -----------------------------------------
+# MYS8-00-000100 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-000100 | MANUAL CHECK - MySQL Database Server 8.0 must integrate with an organization-level authentication/access mechanism providing account management and automation for all users, groups, roles, and any other principals."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Integrate MySQL database server 8.0 security with an organization-level authentication/access mechanism using MySQL external authentication for Microsoft AD or LDAP, or Linux PAMs thus providing ac..."
+  tags:
+    - MYS8-00-000100
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-004700 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004700 | The MySQL Database Server 8.0, when utilizing PKI-based authentication, must validate certificates by performing RFC 5280-compliant certification path validation."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "set persist require_secure_transport=ON;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004700
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-004800 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-004800 | The MySQL Database Server 8.0 must enforce authorized access to all PKI private keys stored/utilized by the MySQL Database Server 8.0."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "select @@ssl_capath, @@ssl_crlpath, @@ssl_key, @@datadir;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004800
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-004900 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004900 | The MySQL Database Server 8.0 must map the PKI-authenticated identity to an associated user account."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_004900_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004900
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-005000 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-005000 | If Database Management System (DBMS) authentication using passwords is employed, the DBMS must enforce the DOD standards for password complexity and lifetime."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "set persist validate_password.check_user_name='ON';"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-005000
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-005100 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-005100 | MANUAL CHECK - If passwords are used for authentication, the MySQL Database Server 8.0 must store only hashed, salted representations of passwords."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Develop, document, and maintain a list of DBMS database objects, database configuration files, associated scripts, and applications defined within or external to the DBMS that access the database, ..."
+  tags:
+    - MYS8-00-005100
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-005200 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-005200 | If passwords are used for authentication, the MySQL Database Server 8.0 must transmit only encrypted representations of passwords."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "set persist require_secure_transport=ON;"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-005200
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-005300 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-005300 | The MySQL Database Server 8.0 must obscure feedback of authentication information during the authentication process to protect the information from possible exploitation/use by unauthorized individ..."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-005300
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-006100 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-006100 | The MySQL Database Server 8.0 must uniquely identify and authenticate organizational users (or processes acting on behalf of organizational users)."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_006100_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-006100
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-006300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-006300 | MANUAL CHECK - The MySQL Database Server 8.0 must uniquely identify and authenticate non-organizational users (or processes acting on behalf of non-organizational users)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure MySQL Database Server 8.0 settings to uniquely identify and authenticate all non-organizational users who log on to the system. Ensure all logins are uniquely identifiable and authenticat..."
+  tags:
+    - MYS8-00-006300
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-010300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-010300 | The MySQL Database Server 8.0 must prohibit the use of cached authenticators after an organization-defined time period."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "CREATE USER 'bredon@MYSQL.LOCAL'"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-010300
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-010400 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-010400 | The MySQL Database Server 8.0 must require users to reauthenticate when organization-defined circumstances or situations require reauthentication."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_010400_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-010400
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-011100 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-011100 | The MySQL Database Server 8.0 must automatically terminate a user session after organization-defined conditions or trigger events requiring session disconnect."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_011100_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-011100
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# MYS8-00-011900 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-011900 | MANUAL CHECK - The MySQL Database Server 8.0 must only accept end entity certificates issued by DoD PKI or DoD-approved PKI Certification Authorities (CAs) for the establishment of all encrypted sessions."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Remove any certificate that was not issued by a valid DoD certificate authority. Contact the organization's certificate issuer and request a new certificate that is issued by a valid DoD certificat..."
+  tags:
+    - MYS8-00-011900
+    - cat2
+    - authentication
+

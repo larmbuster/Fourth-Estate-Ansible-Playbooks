@@ -1,0 +1,111 @@
+---
+# =========================================
+# Cisco ASA Firewall STIG - Logging
+# 7 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-FW-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000050 | The Cisco ASA must be configured to generate traffic log entries containing information to establish when (date and time) the events occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "logging timestamp"
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000050
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-FW-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000090 | The Cisco ASA must be configured to queue log records locally in the event that the central audit server is down or not reachable."
+  cisco.asa.asa_config:
+    lines:
+      - "logging buffered informational"
+      - "logging queue 8192"
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000090
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-FW-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000100 | The Cisco ASA must be configured to use TCP when sending log records to the central audit server."
+  cisco.asa.asa_config:
+    lines:
+      - "logging host NDM_INTERFACE 10.1.22.2 6/1514"
+      - "logging permit-hostdown"
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-FW-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000200 | The Cisco ASA must be configured to send log data of denied traffic to a central audit server for analysis."
+  cisco.asa.asa_config:
+    lines:
+      - "logging host NDM_INTERFACE 10.1.48.10/1514"
+      - "logging trap notifications"
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000200
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-FW-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000210 | The Cisco ASA must be configured to generate a real-time alert to organization-defined personnel and/or the firewall administrator in the event communication with the central audit server is lost."
+  cisco.asa.asa_config:
+    lines:
+      - "logging mail 3"
+      - "logging recipient-address OurFWadmin@mail.mil"
+      - "logging recipient-address OurISSO@mail.mil"
+      - "logging from-address firewall@mail.mil"
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000210
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-FW-000280 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000280 | MANUAL CHECK - The Cisco ASA must be configured to inspect all inbound and outbound IPv6 traffic for unknown or out-of-order extension headers."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the firewall to inspect all inbound and outbound IPv6 traffic for unknown or out-of-order extension headers. Step 1 (optional): Configure an IPv6 inspect policy map. ASA(config)# policy-m..."
+  tags:
+    - CASA-FW-000280
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-FW-000300 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000300 | The Cisco ASA must be configured to generate an alert that can be forwarded to organization-defined personnel and/or the firewall administrator when denial-of-service (DoS) incidents are detected."
+  cisco.asa.asa_config:
+    lines:
+      - "logging mail 4"
+      - "logging recipient-address OurFWadmin@mail.mil"
+      - "logging recipient-address OurISSO@mail.mil"
+      - "logging from-address firewall@mail.mil"
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000300
+    - cat2
+    - logging
+

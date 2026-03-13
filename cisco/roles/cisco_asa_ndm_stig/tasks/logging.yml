@@ -1,0 +1,363 @@
+---
+# =========================================
+# Cisco ASA NDM STIG - Logging
+# 24 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-ND-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000090 | The Cisco ASA must be configured to automatically audit account creation."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000090
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000100 | The Cisco ASA must be configured to automatically audit account modification."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000110 | The Cisco ASA must be configured to automatically audit account-disabling actions."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000110
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000120 | The Cisco ASA must be configured to automatically audit account removal actions."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000120
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000210 | The Cisco ASA must be configured to protect against an individual (or process acting on behalf of an individual) falsely denying having performed organization-defined actions to be covered by non-r..."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000210
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000240 | The Cisco ASA must be configured to generate audit records when successful/unsuccessful attempts to access privileges occur."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000240
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000260 | The Cisco ASA must be configured to produce audit log records containing sufficient information to establish what type of event occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000260
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000270 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000270 | The Cisco ASA must be configured to produce audit records containing information to establish when (date and time) the events occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "logging timestamp"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000270
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000280 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000280 | The Cisco ASA must be configured to produce audit records containing information to establish where the events occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000280
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000290 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000290 | The Cisco ASA must be configured to produce audit log records containing information to establish the source of events."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000290
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000300 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000300 | The Cisco ASA must be configured to produce audit records that contain information to establish the outcome of the event."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000300
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000320 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000320 | The Cisco ASA must be configured to generate audit records containing the full-text recording of privileged commands."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000320
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000910 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000910 | The Cisco ASA must be configured to audit the execution of privileged functions."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000910
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000920 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000920 | The Cisco ASA must be configured to allocate audit record storage capacity in accordance with organization-defined audit record storage requirements."
+  cisco.asa.asa_config:
+    lines:
+      - "logging flash-maximum-allocation {{ numeric_value }}"
+      - "logging flash-minimum-free {{ numeric_value }}"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000920
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000930 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000930 | The Cisco ASA must be configured to generate an immediate real-time alert of all audit failure events requiring real-time alerts."
+  cisco.asa.asa_config:
+    lines:
+      - "logging host NDM_INTERFACE 10.1.48.10"
+      - "logging trap critical"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000930
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-000970 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000970 | The Cisco ASA must be configured to record time stamps for audit records that meet a granularity of one second for a minimum degree of precision."
+  cisco.asa.asa_config:
+    lines:
+      - "logging timestamp"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000970
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-001200 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001200 | The Cisco ASA must be configured to generate audit records when successful/unsuccessful attempts to modify administrator privileges occur."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001200
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-001210 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001210 | The Cisco ASA must be configured to generate audit records when successful/unsuccessful attempts to delete administrator privileges occur."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001210
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-001220 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001220 | The Cisco ASA must be configured to generate audit records when successful/unsuccessful logon attempts occur."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001220
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-001230 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001230 | The Cisco ASA must be configured to generate audit records for privileged activities or other system-level access."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001230
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-001240 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001240 | The Cisco ASA must be configured to generate audit records showing starting and ending time for administrator access to the system."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging timestamp"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001240
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-001250 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001250 | The Cisco ASA must be configured to generate audit records when concurrent logons from different workstations occur."
+  cisco.asa.asa_config:
+    lines:
+      - "logging enable"
+      - "logging buffered informational"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001250
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-001350 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001350 | MANUAL CHECK - The Cisco ASA must be configured to conduct backups of system-level information contained in the information system when changes occur."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-ND-001350
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-ND-001410 - HIGH
+# -----------------------------------------
+
+- name: "CASA-ND-001410 | The Cisco ASA must be configured to send log data to at least two central log servers for the purpose of forwarding alerts to organization-defined personnel and/or the firewall administrator."
+  cisco.asa.asa_config:
+    lines:
+      - "logging host NDM_INTERFACE 10.1.48.10 6/1514"
+      - "logging host NDM_INTERFACE 10.1.48.11 6/1514"
+      - "logging trap notifications"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001410
+    - cat1
+    - logging
+

@@ -1,0 +1,185 @@
+---
+# =========================================
+# Cisco DISA STIG Hardening Playbook
+# Entry point for all Cisco STIG automation
+#
+# Usage:
+#   ansible-galaxy collection install -r requirements.yml
+#   ansible-playbook -i inventory stig_site.yml
+#   ansible-playbook -i inventory stig_site.yml --tags cat1
+#   ansible-playbook -i inventory stig_site.yml --limit cisco_ios_routers
+# =========================================
+
+# --- Cisco IOS Router STIGs ---
+- name: Cisco IOS Router NDM STIG Hardening
+  hosts: cisco_ios_routers
+  gather_facts: false
+  roles:
+    - role: cisco_ios_router_ndm_stig
+
+- name: Cisco IOS Router RTR STIG Hardening
+  hosts: cisco_ios_routers
+  gather_facts: false
+  roles:
+    - role: cisco_ios_router_rtr_stig
+
+# --- Cisco IOS Switch STIGs ---
+- name: Cisco IOS Switch L2S STIG Hardening
+  hosts: cisco_ios_switches
+  gather_facts: false
+  roles:
+    - role: cisco_ios_switch_l2s_stig
+
+- name: Cisco IOS Switch NDM STIG Hardening
+  hosts: cisco_ios_switches
+  gather_facts: false
+  roles:
+    - role: cisco_ios_switch_ndm_stig
+
+- name: Cisco IOS Switch RTR STIG Hardening
+  hosts: cisco_ios_switches
+  gather_facts: false
+  roles:
+    - role: cisco_ios_switch_rtr_stig
+
+# --- Cisco IOS-XE Router STIGs ---
+- name: Cisco IOS-XE Router NDM STIG Hardening
+  hosts: cisco_iosxe_routers
+  gather_facts: false
+  roles:
+    - role: cisco_iosxe_router_ndm_stig
+
+- name: Cisco IOS-XE Router RTR STIG Hardening
+  hosts: cisco_iosxe_routers
+  gather_facts: false
+  roles:
+    - role: cisco_iosxe_router_rtr_stig
+
+# --- Cisco IOS-XE Switch STIGs ---
+- name: Cisco IOS-XE Switch L2S STIG Hardening
+  hosts: cisco_iosxe_switches
+  gather_facts: false
+  roles:
+    - role: cisco_iosxe_switch_l2s_stig
+
+- name: Cisco IOS-XE Switch NDM STIG Hardening
+  hosts: cisco_iosxe_switches
+  gather_facts: false
+  roles:
+    - role: cisco_iosxe_switch_ndm_stig
+
+- name: Cisco IOS-XE Switch RTR STIG Hardening
+  hosts: cisco_iosxe_switches
+  gather_facts: false
+  roles:
+    - role: cisco_iosxe_switch_rtr_stig
+
+# --- Cisco IOS-XR Router STIGs ---
+- name: Cisco IOS-XR Router NDM STIG Hardening
+  hosts: cisco_iosxr_routers
+  gather_facts: false
+  roles:
+    - role: cisco_iosxr_router_ndm_stig
+
+- name: Cisco IOS-XR Router RTR STIG Hardening
+  hosts: cisco_iosxr_routers
+  gather_facts: false
+  roles:
+    - role: cisco_iosxr_router_rtr_stig
+
+# --- Cisco NX-OS Switch STIGs ---
+- name: Cisco NX-OS Switch L2S STIG Hardening
+  hosts: cisco_nxos_switches
+  gather_facts: false
+  roles:
+    - role: cisco_nxos_switch_l2s_stig
+
+- name: Cisco NX-OS Switch NDM STIG Hardening
+  hosts: cisco_nxos_switches
+  gather_facts: false
+  roles:
+    - role: cisco_nxos_switch_ndm_stig
+
+- name: Cisco NX-OS Switch RTR STIG Hardening
+  hosts: cisco_nxos_switches
+  gather_facts: false
+  roles:
+    - role: cisco_nxos_switch_rtr_stig
+
+# --- Cisco ACI STIGs ---
+- name: Cisco ACI L2S STIG Hardening
+  hosts: aci_devices
+  gather_facts: false
+  roles:
+    - role: cisco_aci_l2s_stig
+
+- name: Cisco ACI NDM STIG Hardening
+  hosts: aci_devices
+  gather_facts: false
+  roles:
+    - role: cisco_aci_ndm_stig
+
+- name: Cisco ACI RTR STIG Hardening
+  hosts: aci_devices
+  gather_facts: false
+  roles:
+    - role: cisco_aci_rtr_stig
+
+# --- Cisco ASA STIGs ---
+- name: Cisco ASA Firewall STIG Hardening
+  hosts: asa_devices
+  gather_facts: false
+  roles:
+    - role: cisco_asa_firewall_stig
+
+- name: Cisco ASA IPS STIG Hardening
+  hosts: asa_devices
+  gather_facts: false
+  roles:
+    - role: cisco_asa_ips_stig
+
+- name: Cisco ASA NDM STIG Hardening
+  hosts: asa_devices
+  gather_facts: false
+  roles:
+    - role: cisco_asa_ndm_stig
+
+- name: Cisco ASA VPN STIG Hardening
+  hosts: asa_devices
+  gather_facts: false
+  roles:
+    - role: cisco_asa_vpn_stig
+
+# --- Cisco ISE STIGs ---
+- name: Cisco ISE NAC STIG Hardening
+  hosts: ise_servers
+  gather_facts: false
+  roles:
+    - role: cisco_ise_nac_stig
+
+- name: Cisco ISE NDM STIG Hardening
+  hosts: ise_servers
+  gather_facts: false
+  roles:
+    - role: cisco_ise_ndm_stig
+
+# =========================================
+# Summary Play
+# =========================================
+- name: Cisco STIG Hardening Summary
+  hosts: all
+  gather_facts: false
+  tags:
+    - always
+
+  tasks:
+    - name: Display hardening summary
+      ansible.builtin.debug:
+        msg:
+          - "================================================"
+          - "Cisco DISA STIG hardening complete"
+          - "Target: {{ inventory_hostname }}"
+          - "================================================"
+          - "Review any verification tasks that reported findings."
+          - "Manual checks require administrator review."
+          - "================================================"

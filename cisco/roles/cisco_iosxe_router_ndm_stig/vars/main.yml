@@ -1,0 +1,12 @@
+---
+# =========================================
+# Cisco IOS-XE Router NDM DISA STIG V3 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+cisco_iosxe_router_ndm_stig_stig_version: "3"
+cisco_iosxe_router_ndm_stig_stig_release_info: "Release: 6 Benchmark Date: 05 Jan 2026"
+cisco_iosxe_router_ndm_stig_stig_benchmark_id: "Cisco_IOS-XE_Router_NDM_STIG"
+cisco_iosxe_router_ndm_stig_stig_total_rules: 42
+

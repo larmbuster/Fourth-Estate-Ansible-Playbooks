@@ -1,0 +1,8 @@
+---
+- name: Restart Oracle listener
+  ansible.builtin.command:
+    cmd: "lsnrctl reload"
+  become: true
+  become_user: oracle
+  when: oracle_19c_stig_auto_restart_listener | default(false) | bool
+

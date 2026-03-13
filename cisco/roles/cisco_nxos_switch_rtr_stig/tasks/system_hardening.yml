@@ -1,0 +1,46 @@
+---
+# =========================================
+# Cisco NX-OS Switch RTR STIG - System Hardening
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000080 | The Cisco switch must not be configured to have any feature enabled that calls home to the vendor."
+  cisco.nxos.nxos_config:
+    lines:
+      - "no enable"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000080
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000620 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000620 | The Cisco MPLS switch must be configured to have TTL Propagation disabled."
+  cisco.nxos.nxos_config:
+    lines:
+      - "no mpls ip propagate-ttl"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000620
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000670 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000670 | MANUAL CHECK - The Cisco PE switch providing MPLS Virtual Private Wire Service (VPWS) must be configured to have the appropriate virtual circuit identification (VC I"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000670
+    - cat1
+    - system_hardening
+

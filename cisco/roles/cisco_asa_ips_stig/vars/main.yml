@@ -1,0 +1,12 @@
+---
+# =========================================
+# Cisco ASA IPS DISA STIG V2 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+cisco_asa_ips_stig_stig_version: "2"
+cisco_asa_ips_stig_stig_release_info: "Release: 1 Benchmark Date: 24 Jul 2024"
+cisco_asa_ips_stig_stig_benchmark_id: "Cisco_ASA_IPS_STIG"
+cisco_asa_ips_stig_stig_total_rules: 23
+

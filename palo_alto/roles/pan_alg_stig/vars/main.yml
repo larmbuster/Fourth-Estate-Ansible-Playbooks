@@ -1,0 +1,12 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG DISA STIG V3 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+pan_alg_stig_stig_version: "3"
+pan_alg_stig_stig_release_info: "Release: 4 Benchmark Date: 02 Apr 2025"
+pan_alg_stig_stig_benchmark_id: "Palo_Alto_Networks_ALG_STIG"
+pan_alg_stig_stig_total_rules: 50
+

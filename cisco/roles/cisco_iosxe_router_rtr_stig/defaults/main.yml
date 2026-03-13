@@ -1,0 +1,55 @@
+---
+# =========================================
+# Cisco IOS-XE Router RTR DISA STIG V3 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+cisco_iosxe_router_rtr_stig_auto_save: true
+
+# -----------------------------------------
+# Banner Text
+# -----------------------------------------
+cisco_iosxe_router_rtr_stig_banner_text: |
+  You are accessing a U.S. Government (USG) Information System (IS) that is
+  provided for USG-authorized use only. By using this IS (which includes any
+  device attached to this IS), you consent to the following conditions:
+  -The USG routinely intercepts and monitors communications on this IS.
+  -At any time, the USG may inspect and seize data stored on this IS.
+  -Communications using, or data stored on, this IS are not private.
+  -Any use of this IS constitutes consent to monitoring, interception,
+   recording, and search.
+  -Any communications or data transiting or stored on this IS may be
+   disclosed or used for any USG-authorized purpose.
+
+# -----------------------------------------
+# Authentication / AAA
+# -----------------------------------------
+cisco_iosxe_router_rtr_stig_aaa_server_primary: "10.0.0.1"
+cisco_iosxe_router_rtr_stig_aaa_server_secondary: "10.0.0.2"
+cisco_iosxe_router_rtr_stig_session_timeout: 600
+cisco_iosxe_router_rtr_stig_max_sessions: 2
+
+# -----------------------------------------
+# Logging
+# -----------------------------------------
+cisco_iosxe_router_rtr_stig_syslog_server: "10.0.0.10"
+cisco_iosxe_router_rtr_stig_syslog_severity: "informational"
+
+# -----------------------------------------
+# Network Services
+# -----------------------------------------
+cisco_iosxe_router_rtr_stig_ntp_server_primary: "10.0.0.20"
+cisco_iosxe_router_rtr_stig_ntp_server_secondary: "10.0.0.21"
+cisco_iosxe_router_rtr_stig_snmp_community: ""
+
+# -----------------------------------------
+# Encryption
+# -----------------------------------------
+cisco_iosxe_router_rtr_stig_ssh_timeout: 60
+cisco_iosxe_router_rtr_stig_ssh_retries: 3
+

@@ -1,0 +1,47 @@
+---
+# =========================================
+# Palo Alto PAN-OS IDPS DISA STIG V3 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+pan_idps_stig_auto_commit: false
+
+# -----------------------------------------
+# PAN-OS Connection
+# -----------------------------------------
+panos_provider:
+  ip_address: "{{ ansible_host }}"
+  username: "{{ ansible_user | default('admin') }}"
+  password: "{{ ansible_password }}"
+
+# -----------------------------------------
+# Banner Text
+# -----------------------------------------
+pan_idps_stig_banner_text: |
+  You are accessing a U.S. Government (USG) Information System (IS) that is
+  provided for USG-authorized use only.
+
+# -----------------------------------------
+# Session Management
+# -----------------------------------------
+pan_idps_stig_idle_timeout: 10
+pan_idps_stig_session_timeout: 600
+
+# -----------------------------------------
+# Authentication
+# -----------------------------------------
+pan_idps_stig_admin_user: "admin"
+pan_idps_stig_lockout_attempts: 3
+pan_idps_stig_lockout_time: 0
+
+# -----------------------------------------
+# Logging
+# -----------------------------------------
+pan_idps_stig_syslog_profile: "stig-syslog-profile"
+pan_idps_stig_syslog_server: "10.0.0.10"
+

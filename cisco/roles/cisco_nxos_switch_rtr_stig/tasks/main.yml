@@ -1,0 +1,73 @@
+---
+# =========================================
+# Cisco NX-OS Switch RTR DISA STIG V3 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 78 (CAT I: 7, CAT II: 45, CAT III: 26)
+#
+# Usage:
+#   --tags access_control           (35 rules)
+#   --tags authentication           (4 rules)
+#   --tags authorization            (1 rules)
+#   --tags logging                  (2 rules)
+#   --tags network_services         (10 rules)
+#   --tags routing                  (21 rules)
+#   --tags switching                (2 rules)
+#   --tags system_hardening         (3 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CISC-RT-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco NX-OS Switch"
+  ansible.builtin.assert:
+    that:
+      - ansible_network_os == "cisco.nxos.nxos"
+    fail_msg: >-
+      This role targets Cisco NX-OS Switch only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CISC-RT | Access Control (35 rules)"
+  ansible.builtin.import_tasks: access_control.yml
+  tags:
+    - access_control
+
+- name: "CISC-RT | Authentication (4 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "CISC-RT | Authorization (1 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "CISC-RT | Logging (2 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "CISC-RT | Network Services (10 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "CISC-RT | Routing (21 rules)"
+  ansible.builtin.import_tasks: routing.yml
+  tags:
+    - routing
+
+- name: "CISC-RT | Switching (2 rules)"
+  ansible.builtin.import_tasks: switching.yml
+  tags:
+    - switching
+
+- name: "CISC-RT | System Hardening (3 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

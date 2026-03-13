@@ -1,0 +1,42 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud STIG - Session Management
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CNTR-PC-000020 - HIGH
+# -----------------------------------------
+
+- name: "CNTR-PC-000020 | Prisma Cloud Compute Console must use TLS 1.2 for user interface and API access. Communication TCP ports must adhere to the Ports, Protocols, and Services Management Category Assurance Levels (PSSM..."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000020
+    - cat1
+    - session_management
+
+# -----------------------------------------
+# CNTR-PC-001250 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-001250 | Prisma Cloud Compute Defender must reestablish communication to the Console via mutual TLS v1.2 WebSocket session."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001250
+    - cat2
+    - session_management
+

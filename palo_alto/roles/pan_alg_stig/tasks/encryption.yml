@@ -1,0 +1,105 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG STIG - Encryption
+# 7 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-AG-000016 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000016 | The Palo Alto Networks security platform, if used as a TLS gateway/decryption point or VPN concentrator, must use encryption services that implement NIST FIPS-validated cryptography to protect the ..."
+  paloaltonetworks.panos.panos_decryption_rule:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_alg_stig_decryption_rule | default('stig-decrypt-rule') }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000016
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# PANW-AG-000017 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000017 | The Palo Alto Networks security platform that stores secret or private keys must use FIPS-approved key management technology and processes in the production and control of private/secret cryptograp..."
+  paloaltonetworks.panos.panos_syslog_profile:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_alg_stig_syslog_profile }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000017
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# PANW-AG-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000020 | The Palo Alto Networks security platform, if used as a TLS gateway/decryption point or VPN concentrator, must use NIST FIPS-validated cryptography to protect the integrity of remote access sessions."
+  paloaltonetworks.panos.panos_decryption_rule:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_alg_stig_decryption_rule | default('stig-decrypt-rule') }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000020
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# PANW-AG-000078 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000078 | The Palo Alto Networks security platform, if used as a TLS gateway/decryption point or VPN concentrator, must control remote access methods (inspect and filter traffic)."
+  paloaltonetworks.panos.panos_decryption_rule:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_alg_stig_decryption_rule | default('stig-decrypt-rule') }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000078
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# PANW-AG-000079 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000079 | The Palo Alto Networks security, if used as a TLS gateway/decryption point or VPN concentrator, must provide the capability to immediately disconnect or disable remote access to the information sys..."
+  paloaltonetworks.panos.panos_decryption_rule:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_alg_stig_decryption_rule | default('stig-decrypt-rule') }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000079
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# PANW-AG-000141 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000141 | The Palo Alto Networks security platform providing encryption intermediary services must implement NIST FIPS-validated cryptography to generate cryptographic hashes."
+  paloaltonetworks.panos.panos_config_element:
+    provider: "{{ panos_provider }}"
+    xpath: "{{ pan_alg_stig_panw_ag_000141_xpath }}"
+    element: "{{ pan_alg_stig_panw_ag_000141_element }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000141
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# PANW-AG-000143 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000143 | The Palo Alto Networks security platform, if used for TLS/SSL decryption, must use NIST FIPS-validated cryptography to implement encryption."
+  paloaltonetworks.panos.panos_decryption_rule:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_alg_stig_decryption_rule | default('stig-decrypt-rule') }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000143
+    - cat2
+    - encryption
+

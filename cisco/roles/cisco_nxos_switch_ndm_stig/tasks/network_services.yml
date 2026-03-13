@@ -1,0 +1,22 @@
+---
+# =========================================
+# Cisco NX-OS Switch NDM STIG - Network Services
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-001030 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001030 | The Cisco switch must be configured to synchronize its clock with the primary and secondary time sources using redundant authoritative time sources."
+  cisco.nxos.nxos_config:
+    lines:
+      - "feature ntp"
+      - "ntp server 10.1.12.10"
+      - "ntp server 10.1.22.13"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001030
+    - cat2
+    - network_services
+

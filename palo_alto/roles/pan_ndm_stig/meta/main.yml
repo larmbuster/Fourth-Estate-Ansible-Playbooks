@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: pan_ndm_stig
+  author: Fourth Estate
+  description: >-
+    Palo Alto PAN-OS NDM DISA STIG V3 hardening role.
+    Implements 34 XCCDF rules across authentication, authorization, logging, network services, session management, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - palo_alto
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

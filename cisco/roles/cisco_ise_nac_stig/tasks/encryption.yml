@@ -1,0 +1,42 @@
+---
+# =========================================
+# Cisco ISE NAC STIG - Encryption
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NC-000010 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NC-000010 | VERIFY - The Cisco ISE must use TLS 1.2, at a minimum, to protect the confidentiality of information passed between the endpoint agent and the Cisco ISE. This is This is required for compliance with C2C Ste..."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DoD is not at C2C Step 1 or higher, this is not a finding. Verify that only TLS 1.2 is enabled. From the Web Admin portal: 1. Navigate to Administration >> System >> Settings >> Security Setting..."
+  tags:
+    - CSCO-NC-000010
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CSCO-NC-000290 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000290 | VERIFY - Before establishing a connection with a Network Time Protocol (NTP) server, the Cisco ISE must authenticate using a bidirectional, cryptographically based authentication method that uses a FIPS-val..."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DoD is not at C2C Step 1 or higher, this is not a finding. Verify NTP setting to ensure NTP will be authenticated. From the CLI: 1. Type \"show running-config | in ntp\". 2. Verify that each def..."
+  tags:
+    - CSCO-NC-000290
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CSCO-NC-000300 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000300 | VERIFY - Before establishing a local, remote, and/or network connection with any endpoint device, the Cisco ISE must use a bidirectional authentication mechanism configured with a FIPS-validated Advanced En..."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DoD is not at C2C Step 1 or higher, this is not a finding. From the Web Admin portal: 1. Navigate to Administration >> System >> Settings >> Security Settings. 2. Ensure \"Allow TLS1.0\", \"Allo..."
+  tags:
+    - CSCO-NC-000300
+    - cat2
+    - encryption
+

@@ -1,0 +1,36 @@
+---
+# =========================================
+# Oracle Database 19c DISA STIG Hardening Playbook
+#
+# Usage:
+#   ansible-galaxy collection install -r requirements.yml
+#   ansible-playbook -i inventory stig_site.yml
+#   ansible-playbook -i inventory stig_site.yml --tags cat1
+# =========================================
+
+- name: Oracle Database 19c STIG Hardening
+  hosts: oracle_db_servers
+  gather_facts: true
+  roles:
+    - role: oracle_19c_stig
+
+# =========================================
+# Summary Play
+# =========================================
+- name: Oracle STIG Hardening Summary
+  hosts: oracle_db_servers
+  gather_facts: false
+  tags:
+    - always
+
+  tasks:
+    - name: Display hardening summary
+      ansible.builtin.debug:
+        msg:
+          - "================================================"
+          - "Oracle Database 19c DISA STIG hardening complete"
+          - "Target: {{ inventory_hostname }}"
+          - "================================================"
+          - "Review any verification tasks that reported findings."
+          - "Manual checks require administrator review."
+          - "================================================"

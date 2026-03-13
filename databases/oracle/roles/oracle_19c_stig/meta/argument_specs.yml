@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Oracle Database 19c Database DISA STIG V1 hardening
+    description:
+      - Applies Oracle Database 19c Database STIG hardening configuration.
+    options:
+      oracle_19c_stig_auto_restart_listener:
+        type: bool
+        default: false
+        description: Automatically restart Oracle listener after changes.
+

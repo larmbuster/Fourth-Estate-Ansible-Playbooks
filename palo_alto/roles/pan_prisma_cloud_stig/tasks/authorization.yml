@@ -1,0 +1,78 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud STIG - Authorization
+# 4 rules
+# =========================================
+
+# -----------------------------------------
+# CNTR-PC-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000030 | Access to Prisma Cloud Compute must be managed based on user need and least privileged using external identity providers for authentication and grouping to role-based assignments when possible."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000030
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CNTR-PC-000430 - HIGH
+# -----------------------------------------
+
+- name: "CNTR-PC-000430 | Prisma Cloud Compute host compliance baseline policies must be set."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000430
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# CNTR-PC-000850 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000850 | Prisma Cloud Compute must prevent unauthorized and unintended information transfer."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000850
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CNTR-PC-001350 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-001350 | Prisma Cloud Compute Defender containers must run as root."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001350
+    - cat2
+    - authorization
+

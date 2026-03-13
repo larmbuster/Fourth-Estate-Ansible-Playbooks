@@ -1,0 +1,325 @@
+---
+# =========================================
+# Cisco NX-OS Switch RTR STIG - Routing
+# 21 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000020 | The Cisco switch must be configured to implement message authentication for all control plane protocols."
+  cisco.nxos.nxos_config:
+    lines:
+      - "key chain EIGRP_KEY"
+      - "key 1"
+      - "router eigrp 1"
+      - "ip authentication mode eigrp 1 md5"
+      - "ip authentication key-chain eigrp 1 {{ secret_key }}"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000020
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000040 | The Cisco switch must be configured to use encryption for routing protocol authentication."
+  cisco.nxos.nxos_config:
+    lines:
+      - "router eigrp 1"
+      - "ip authentication mode eigrp 1 md5"
+      - "ip ospf authentication message-digest"
+      - "ip ospf message-digest-key 1 md5 {{ secret_key }}"
+      - "ip rip authentication mode md5"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000040
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000350 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000350 | The Cisco perimeter switch must be configured to block all packets with any IP options."
+  cisco.nxos.nxos_config:
+    lines:
+      - "no ip source-route"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000350
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000470 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000470 | The Cisco BGP switch must be configured to check whether a single-hop eBGP peer is directly connected."
+  cisco.nxos.nxos_config:
+    lines:
+      - "router bgp xx"
+      - "no disable-connected-check"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000470
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000480 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000480 | The Cisco BGP switch must be configured to use a unique key for each autonomous system (AS) that it peers with."
+  cisco.nxos.nxos_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000480
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000490 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000490 | The Cisco BGP switch must be configured to reject inbound route advertisements for any Bogon prefixes."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER seq 5 deny 0.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER seq 10 deny 10.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER seq 15 deny 100.64.0.0/10 le 32"
+      - "ip prefix-list PREFIX_FILTER seq 20 deny 127.0.0.0/8 le 32"
+      - "ip prefix-list PREFIX_FILTER seq 25 deny 169.254.0.0/16 le 32"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000490
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000500 | The Cisco BGP switch must be configured to reject inbound route advertisements for any prefixes belonging to the local autonomous system (AS)."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER seq 74 deny {{ peer_address }}/24 le 32"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000500
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000510 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000510 | The Cisco BGP switch must be configured to reject inbound route advertisements from a customer edge (CE) switch for prefixes that are not allocated to that customer."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip prefix-list PREFIX_FILTER_CUST1 permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list PREFIX_FILTER_CUST1 deny 0.0.0.0/0 ge 8"
+      - "ip prefix-list PREFIX_FILTER_CUST2 permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list PREFIX_FILTER_CUST2 deny 0.0.0.0/0 ge 8"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000510
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000520 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000520 | The Cisco BGP switch must be configured to reject outbound route advertisements for any prefixes that do not belong to any customers or the local autonomous system (AS)."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS permit {{ peer_address }}/24 le 32"
+      - "ip prefix-list CE_PREFIX_ADVERTISEMENTS deny 0.0.0.0/0 ge 8"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000520
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000530 | The Cisco BGP switch must be configured to reject outbound route advertisements for any prefixes belonging to the IP core."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip prefix-list FILTER_CORE_PREFIXES deny {{ peer_address }}/24 le 32"
+      - "ip prefix-list FILTER _CORE_PREFIXES deny {{ peer_address }}/24 le 32"
+      - "ip prefix-list FILTER _CORE_PREFIXES permit 0.0.0.0/0 ge 8"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000530
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000540 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000540 | The Cisco BGP switch must be configured to reject route advertisements from BGP peers that do not list their autonomous system (AS) number as the first AS in the AS_PATH attribute."
+  cisco.nxos.nxos_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000540
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000560 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000560 | The Cisco BGP switch must be configured to use the maximum prefixes feature to protect against route table flooding and prefix de-aggregation attacks."
+  cisco.nxos.nxos_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000560
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000570 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000570 | The Cisco BGP switch must be configured to limit the prefix size on any inbound route advertisement to /24, or the least significant prefixes issued to the customer."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip prefix-list FILTER_PREFIX_LENGTH permit 0.0.0.0/0 ge 8 le 24"
+      - "ip prefix-list FILTER_PREFIX_LENGTH deny 0.0.0.0/0 le 32"
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000570
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000580 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000580 | The Cisco BGP switch must be configured to use its loopback address as the source address for iBGP peering sessions."
+  cisco.nxos.nxos_config:
+    lines:
+      - "router bgp xx"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000580
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000590 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000590 | MANUAL CHECK - The Cisco MPLS switch must be configured to use its loopback address as the source address for LDP peering sessions."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000590
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000600 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000600 | The Cisco MPLS switch must be configured to synchronize Interior Gateway Protocol (IGP) and LDP to minimize packet loss when an IGP adjacency is established prior to LDP peers completing label exch..."
+  cisco.nxos.nxos_config:
+    lines:
+      - "router ospf 1"
+      - "router isis"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000600
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000610 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000610 | The MPLS switch with RSVP-TE enabled must be configured with message pacing to adjust maximum burst and maximum number of RSVP messages to an output queue based on the link speed and input queue si..."
+  cisco.nxos.nxos_config:
+    lines:
+      - "router ospf 1"
+      - "router isis"
+      - "ip rsvp"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000610
+    - cat3
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000640 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000640 | MANUAL CHECK - The Cisco PE switch must be configured to have each Virtual Routing and Forwarding (VRF) instance with the appropriate Route Target (RT)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000640
+    - cat1
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000650 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000650 | MANUAL CHECK - The Cisco PE switch must be configured to have each VRF with the appropriate Route Distinguisher (RD)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000650
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000750 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000750 | The Cisco PE switch must be configured to ignore or drop all packets with any IP options."
+  cisco.nxos.nxos_config:
+    lines:
+      - "no ip source-route"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000750
+    - cat2
+    - routing
+
+# -----------------------------------------
+# CISC-RT-000890 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000890 | The Cisco multicast Designated switch (DR) must be configured to set the shortest-path tree (SPT) threshold to infinity to minimalize source-group (S, G) state within the multicast topology where A..."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip prefix-list SPT_GROUPS permit 233.0.0.0/8"
+      - "ip pim spt-threshold infinity group prefix-list SPT_GROUPS"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000890
+    - cat2
+    - routing
+

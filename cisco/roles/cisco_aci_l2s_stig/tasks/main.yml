@@ -1,0 +1,37 @@
+---
+# =========================================
+# Cisco ACI L2S DISA STIG V1 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 7 (CAT I: 1, CAT II: 4, CAT III: 2)
+#
+# Usage:
+#   --tags authentication           (1 rules)
+#   --tags switching                (6 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CACI-L2-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco ACI"
+  ansible.builtin.assert:
+    that:
+      - ansible_network_os is defined
+    fail_msg: >-
+      This role targets Cisco ACI only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CACI-L2 | Authentication (1 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "CACI-L2 | Switching (6 rules)"
+  ansible.builtin.import_tasks: switching.yml
+  tags:
+    - switching

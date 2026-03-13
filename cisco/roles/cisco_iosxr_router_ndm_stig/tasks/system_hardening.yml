@@ -1,0 +1,18 @@
+---
+# =========================================
+# Cisco IOS-XR Router NDM STIG - System Hardening
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000470 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-000470 | MANUAL CHECK - The Cisco router must be configured to be configured to prohibit the use of all unnecessary and nonsecure functions and services."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000470
+    - cat1
+    - system_hardening
+

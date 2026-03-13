@@ -1,0 +1,49 @@
+---
+# =========================================
+# Cisco ASA VPN DISA STIG V2 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 41 (CAT I: 10, CAT II: 28, CAT III: 3)
+#
+# Usage:
+#   --tags authentication           (8 rules)
+#   --tags encryption               (23 rules)
+#   --tags logging                  (9 rules)
+#   --tags session_management       (1 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CASA-VN-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco ASA"
+  ansible.builtin.assert:
+    that:
+      - ansible_network_os == "cisco.asa.asa"
+    fail_msg: >-
+      This role targets Cisco ASA only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CASA-VN | Authentication (8 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "CASA-VN | Encryption (23 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "CASA-VN | Logging (9 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "CASA-VN | Session Management (1 rules)"
+  ansible.builtin.import_tasks: session_management.yml
+  tags:
+    - session_management

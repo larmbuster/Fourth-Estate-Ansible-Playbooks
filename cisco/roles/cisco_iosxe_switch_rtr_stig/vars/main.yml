@@ -1,0 +1,12 @@
+---
+# =========================================
+# Cisco IOS-XE Switch RTR DISA STIG V3 - Internal Variables
+# These are STIG-mandated constants that should
+# not normally be overridden.
+# =========================================
+
+cisco_iosxe_switch_rtr_stig_stig_version: "3"
+cisco_iosxe_switch_rtr_stig_stig_release_info: "Release: 3 Benchmark Date: 01 Oct 2025"
+cisco_iosxe_switch_rtr_stig_stig_benchmark_id: "Cisco_IOS_XE_Switch_RTR_STIG"
+cisco_iosxe_switch_rtr_stig_stig_total_rules: 88
+

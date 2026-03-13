@@ -18,5 +18,23 @@ collections:
   - name: ansible.posix
     version: ">=1.5.0"
 
+  - name: cisco.ios
+    version: ">=11.0.0"
+
+  - name: cisco.iosxr
+    version: ">=12.0.0"
+
+  - name: cisco.nxos
+    version: ">=11.0.0"
+
+  - name: cisco.aci
+    version: ">=2.10.0"
+
+  - name: cisco.asa
+    version: ">=5.0.0"
+
+  - name: ansible.netcommon
+    version: ">=7.0.0"
+
 # Python dependencies (install separately):
 # pip install ciscoisesdk ucsmsdk intersight

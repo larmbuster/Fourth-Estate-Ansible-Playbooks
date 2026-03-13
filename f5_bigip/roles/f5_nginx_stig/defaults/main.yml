@@ -1,0 +1,23 @@
+---
+# =========================================
+# F5 NGINX Web Server DISA STIG V1 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+f5_nginx_stig_auto_reload: true
+
+# -----------------------------------------
+# NGINX Configuration
+# -----------------------------------------
+f5_nginx_stig_config_path: "/etc/nginx/nginx.conf"
+f5_nginx_stig_ssl_protocols: "TLSv1.2 TLSv1.3"
+f5_nginx_stig_ssl_ciphers: "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+f5_nginx_stig_worker_connections: 1024
+f5_nginx_stig_keepalive_timeout: 65
+f5_nginx_stig_client_max_body_size: "1m"
+

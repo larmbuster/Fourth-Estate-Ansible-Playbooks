@@ -1,0 +1,20 @@
+---
+# =========================================
+# F5 BIG-IP DNS STIG - Authentication
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DN-300017 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DN-300017 | The digital signature algorithm used for DNSSEC-enabled zones must be set to use RSA/SHA256 or RSA/SHA512."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300017
+    - cat1
+    - authentication
+

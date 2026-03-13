@@ -1,0 +1,192 @@
+---
+# =========================================
+# Cisco ASA IPS STIG - Logging
+# 14 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-IP-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000040 | The Cisco ASA must be configured to produce audit records containing sufficient information to establish what type of event occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "Enable logging for connection events."
+      - "Enable logging for Intrusion events."
+  notify: Save running configuration
+  tags:
+    - CASA-IP-000040
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000050 | The Cisco ASA must be configured to produce audit records containing information to establish when the events occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "Enable logging for connection events."
+      - "Enable logging for Intrusion events."
+  notify: Save running configuration
+  tags:
+    - CASA-IP-000050
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000060 | The Cisco ASA must be configured to produce audit records containing information to establish where the event was detected."
+  cisco.asa.asa_config:
+    lines:
+      - "Enable logging for connection events."
+      - "Enable logging for Intrusion events."
+  notify: Save running configuration
+  tags:
+    - CASA-IP-000060
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000070 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000070 | The Cisco ASA must be configured to produce audit records containing information to establish the source of the event."
+  cisco.asa.asa_config:
+    lines:
+      - "Enable logging for connection events."
+      - "Enable logging for Intrusion events."
+  notify: Save running configuration
+  tags:
+    - CASA-IP-000070
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000080 | The Cisco ASA must be configured to produce audit records containing information to establish the outcome of events associated with detected harmful or potentially harmful traffic."
+  cisco.asa.asa_config:
+    lines:
+      - "Enable logging for connection events."
+      - "Enable logging for Intrusion events."
+  notify: Save running configuration
+  tags:
+    - CASA-IP-000080
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000090 | The Cisco ASA must be configured to log events based on policy access control rules, signatures, and anomaly analysis."
+  cisco.asa.asa_config:
+    lines:
+      - "Enable logging for connection events."
+      - "Enable logging for Intrusion events."
+  notify: Save running configuration
+  tags:
+    - CASA-IP-000090
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000110 | MANUAL CHECK - The Cisco ASA must be configured to off-load log records to a centralized log server."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000110
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000120 | MANUAL CHECK - The Cisco ASA must be configured to send log records to the syslog server for specific facility and severity level."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000120
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000130 | MANUAL CHECK - The Cisco ASA must be configured to queue log records locally In the event that the central audit server is down or not reachable."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000130
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000280 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000280 | MANUAL CHECK - The Cisco ASA must be configured to send an alert to organization-defined personnel and/or the firewall administrator when malicious code is detected."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000280
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000520 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000520 | MANUAL CHECK - The Cisco ASA must be configured to send an alert to organization-defined personnel and/or the firewall administrator when intrusion events are detect"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000520
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000530 | MANUAL CHECK - The Cisco ASA must be configured to send an alert to organization-defined personnel and/or the firewall administrator when threats are detected."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000530
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000560 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000560 | MANUAL CHECK - The Cisco ASA must be configured to send an alert to organization-defined personnel and/or the firewall administrator when DoS incidents are detected."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000560
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-IP-000570 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-IP-000570 | MANUAL CHECK - The Cisco ASA must generate an alert to organization-defined personnel and/or the firewall administrator when active propagation of malware or malicio"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-IP-000570
+    - cat2
+    - logging
+

@@ -1,0 +1,55 @@
+---
+# =========================================
+# Cisco NX-OS Switch L2S DISA STIG V3 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 22 (CAT I: 1, CAT II: 17, CAT III: 4)
+#
+# Usage:
+#   --tags access_control           (3 rules)
+#   --tags authentication           (3 rules)
+#   --tags network_services         (3 rules)
+#   --tags switching                (12 rules)
+#   --tags system_hardening         (1 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CISC-L2-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco NX-OS Switch"
+  ansible.builtin.assert:
+    that:
+      - ansible_network_os == "cisco.nxos.nxos"
+    fail_msg: >-
+      This role targets Cisco NX-OS Switch only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CISC-L2 | Access Control (3 rules)"
+  ansible.builtin.import_tasks: access_control.yml
+  tags:
+    - access_control
+
+- name: "CISC-L2 | Authentication (3 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "CISC-L2 | Network Services (3 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "CISC-L2 | Switching (12 rules)"
+  ansible.builtin.import_tasks: switching.yml
+  tags:
+    - switching
+
+- name: "CISC-L2 | System Hardening (1 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

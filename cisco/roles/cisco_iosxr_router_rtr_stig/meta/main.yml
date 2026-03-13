@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: cisco_iosxr_router_rtr_stig
+  author: Fourth Estate
+  description: >-
+    Cisco IOS-XR Router RTR DISA STIG V3 hardening role.
+    Implements 96 XCCDF rules across access control, authentication, authorization, encryption, logging, network services, routing, switching, system hardening.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

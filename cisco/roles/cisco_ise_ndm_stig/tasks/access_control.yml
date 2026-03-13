@@ -1,0 +1,23 @@
+---
+# =========================================
+# Cisco ISE NDM STIG - Access Control
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NM-000550 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000550 | The Cisco ISE must configure the control plane to protect against or limit the effects of common types of Denial of Service (DoS) attacks on the device itself by configuring applicable system optio..."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000550
+    - cat2
+    - access_control
+

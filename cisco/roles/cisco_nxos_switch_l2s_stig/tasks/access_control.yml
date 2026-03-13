@@ -1,0 +1,43 @@
+---
+# =========================================
+# Cisco NX-OS Switch L2S STIG - Access Control
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000060 | MANUAL CHECK - The Cisco switch must be configured for authorized users to select a user session to capture."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-L2-000060
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-L2-000070 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000070 | MANUAL CHECK - The Cisco switch must be configured for authorized users to remotely view, in real time, all content related to an established user session from a com"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-L2-000070
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CISC-L2-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000240 | The Cisco switch must not use the default VLAN for management traffic."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000240
+    - cat2
+    - access_control
+

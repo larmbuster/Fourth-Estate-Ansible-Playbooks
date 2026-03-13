@@ -1,0 +1,207 @@
+---
+# =========================================
+# Cisco IOS Router NDM STIG - Logging
+# 14 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000090 | The Cisco router must be configured to automatically audit account creation."
+  cisco.ios.ios_config:
+    lines:
+      - "logging enable"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000090
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000100 | The Cisco router must be configured to automatically audit account modification."
+  cisco.ios.ios_config:
+    lines:
+      - "logging enable"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000110 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000110 | The Cisco router must be configured to automatically audit account disabling actions."
+  cisco.ios.ios_config:
+    lines:
+      - "logging enable"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000110
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000120 | The Cisco router must be configured to automatically audit account removal actions."
+  cisco.ios.ios_config:
+    lines:
+      - "logging enable"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000120
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000210 | The Cisco device must be configured to audit all administrator activity."
+  cisco.ios.ios_config:
+    lines:
+      - "logging userinfo"
+      - "logging enable"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000210
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000280 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000280 | The Cisco router must produce audit records containing information to establish when (date and time) the events occurred."
+  cisco.ios.ios_config:
+    lines:
+      - "service timestamps log datetime localtime"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000280
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000330 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000330 | The Cisco router must be configured to generate audit records containing the full-text recording of privileged commands."
+  cisco.ios.ios_config:
+    lines:
+      - "logging enable"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000330
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000880 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000880 | The Cisco router must be configured to automatically audit account enabling actions."
+  cisco.ios.ios_config:
+    lines:
+      - "logging enable"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000880
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-000980 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000980 | The Cisco router must be configured to allocate audit record storage capacity in accordance with organization-defined audit record storage requirements."
+  cisco.ios.ios_config:
+    lines:
+      - "logging buffered {{ secret_key }} informational"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000980
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001000 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001000 | The Cisco router must be configured to generate an alert for all audit failure events."
+  cisco.ios.ios_config:
+    lines:
+      - "logging trap critical"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001000
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001250 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001250 | The Cisco router must be configured to generate log records when administrator privileges are deleted."
+  cisco.ios.ios_logging_global:
+    config:
+      hosts:
+        - hostname: "{{ cisco_ios_router_ndm_stig_syslog_server }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001250
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001270 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001270 | The Cisco router must be configured to generate log records for privileged activities."
+  cisco.ios.ios_logging_global:
+    config:
+      hosts:
+        - hostname: "{{ cisco_ios_router_ndm_stig_syslog_server }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001270
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001410 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001410 | MANUAL CHECK - The Cisco router must be configured to back up the configuration when changes occur."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001410
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-ND-001450 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001450 | The Cisco router must be configured to send log data to at least two syslog servers for the purpose of forwarding alerts to the administrators and the ISSO."
+  cisco.ios.ios_logging_global:
+    config:
+      hosts:
+        - hostname: "{{ cisco_ios_router_ndm_stig_syslog_server }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001450
+    - cat1
+    - logging
+

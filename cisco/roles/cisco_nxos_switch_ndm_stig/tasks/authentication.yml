@@ -1,0 +1,249 @@
+---
+# =========================================
+# Cisco NX-OS Switch NDM STIG - Authentication
+# 16 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000150 | The Cisco switch must be configured to enforce the limit of three consecutive invalid logon attempts, after which time it must disconnect the session."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ssh login-attempts 3"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000150
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000210 | The Cisco switch must be configured to protect against an individual falsely denying having performed organization-defined actions to be covered by non-repudiation."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000210
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000330 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000330 | The Cisco switch must be configured to generate audit records containing the full-text recording of privileged commands."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000330
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000490 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000490 | The Cisco switch must be configured with only one local account to be used as the account of last resort in the event the authentication server is unavailable."
+  cisco.nxos.nxos_config:
+    lines:
+      - "username {{ secret_key }} password {{ secret_key }} role priv-9"
+      - "aaa authentication login default group RADIUS_SERVERS"
+      - "aaa authentication login default fallback error local"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000490
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000570 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000570 | MANUAL CHECK - The Cisco switch must be configured to enforce password complexity by requiring that at least one uppercase character be used."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000570
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000580 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000580 | MANUAL CHECK - The Cisco switch must be configured to enforce password complexity by requiring that at least one lower-case character be used."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000580
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000590 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000590 | MANUAL CHECK - The Cisco switch must be configured to enforce password complexity by requiring that at least one numeric character be used."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000590
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000600 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000600 | MANUAL CHECK - The Cisco switch must be configured to enforce password complexity by requiring that at least one special character be used."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-000600
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000880 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000880 | The Cisco switch must be configured to automatically audit account enabling actions."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000880
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000940 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000940 | The Cisco switch must be configured to audit the execution of privileged functions."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000940
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001150 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001150 | The Cisco switch must be configured to authenticate Network Time Protocol (NTP) sources using authentication with FIPS-compliant algorithms."
+  cisco.nxos.nxos_ntp_global:
+    config:
+      servers:
+        - server: "{{ cisco_nxos_switch_ndm_stig_ntp_server_primary }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001150
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001240 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001240 | The Cisco switch must be configured to generate log records when administrator privileges are modified."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001240
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001250 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001250 | The Cisco switch must be configured to generate log records when administrator privileges are deleted."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001250
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001270 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001270 | The Cisco switch must be configured to generate log records for privileged activities."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10"
+      - "radius-server host 10.1.48.12"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa accounting default group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001270
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001370 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001370 | The Cisco switch must be configured to use at least two authentication servers for the purpose of authenticating users prior to granting administrative access."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.48.10 key {{ secret_key }}"
+      - "radius-server host 10.1.48.11 key {{ secret_key }}"
+      - "aaa group server radius RADIUS_SERVERS"
+      - "aaa authentication login default group RADIUS_SERVERS"
+      - "aaa authentication login console group RADIUS_SERVERS"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001370
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001440 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001440 | MANUAL CHECK - The Cisco switch must be configured to obtain its public key certificates from an appropriate certificate policy through an approved service provider."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-ND-001440
+    - cat2
+    - authentication
+

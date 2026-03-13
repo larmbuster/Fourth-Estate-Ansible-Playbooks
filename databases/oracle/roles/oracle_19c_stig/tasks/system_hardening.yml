@@ -1,0 +1,98 @@
+---
+# =========================================
+# Oracle Database 19c Database STIG - System Hardening
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# O19C-00-007400 - HIGH
+# -----------------------------------------
+
+- name: "O19C-00-007400 | Oracle Database products must be a version supported by the vendor."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-007400
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# O19C-00-008100 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-008100 | Database software directories, including database management system (DBMS) configuration files, must be stored in dedicated directories, or DASD pools, separate from the host OS and other applicati..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-008100
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# O19C-00-013100 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013100 | Unused database components that are integrated in the database management system (DBMS) and cannot be uninstalled must be disabled."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-013100
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# O19C-00-013500 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-013500 | MANUAL CHECK - Oracle Database must be configured to prohibit or restrict the use of organization-defined functions, ports, protocols, and/or services, as defined in the Ports, Protocols, and Services Management ..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Disable functions, ports, protocols, and services that are not approved. - - - - - Change the SQLNET.ora, LISTENER.ora, and TNSNAMES.ora files to reflect the proper use of ports, protocols, and ser..."
+  tags:
+    - O19C-00-013500
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# O19C-00-018000 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-018000 | The database management system (DBMS) and associated applications must reserve the use of dynamic code execution for situations that require it."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-018000
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# O19C-00-018100 - MEDIUM
+# -----------------------------------------
+
+- name: "O19C-00-018100 | The database management system (DBMS) and associated applications, when making use of dynamic code execution, must take steps against invalid values that may be used in a SQL injection attack, ther..."
+  community.general.oracle_sql:
+    username: "{{ oracle_19c_stig_db_user }}"
+    password: "{{ oracle_19c_stig_db_password }}"
+    service_name: "{{ oracle_19c_stig_db_service }}"
+    sql: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart Oracle listener
+  tags:
+    - O19C-00-018100
+    - cat2
+    - system_hardening
+

@@ -1,0 +1,114 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud STIG - System Hardening
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# CNTR-PC-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000240 | Prisma Cloud Compute Defender must be deployed to containerization nodes that are to be monitored."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000240
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CNTR-PC-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000260 | Prisma Cloud Compute must be configured for forensic data collection."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000260
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CNTR-PC-000450 - HIGH
+# -----------------------------------------
+
+- name: "CNTR-PC-000450 | The configuration integrity of the container platform must be ensured and compliance policies must be configured."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000450
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CNTR-PC-001170 - HIGH
+# -----------------------------------------
+
+- name: "CNTR-PC-001170 | The configuration integrity of the container platform must be ensured and vulnerabilities policies must be configured."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001170
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CNTR-PC-001220 - HIGH
+# -----------------------------------------
+
+- name: "CNTR-PC-001220 | Prisma Cloud Compute must be configured to scan images that have not been instantiated as containers."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001220
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CNTR-PC-001380 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-001380 | Prisma Cloud Compute must run within a defined/separate namespace (e.g., Twistlock)."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001380
+    - cat2
+    - system_hardening
+

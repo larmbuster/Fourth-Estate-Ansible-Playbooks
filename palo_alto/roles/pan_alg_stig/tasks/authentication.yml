@@ -1,0 +1,20 @@
+---
+# =========================================
+# Palo Alto PAN-OS ALG STIG - Authentication
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-AG-000101 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-AG-000101 | The Palo Alto Networks security platform being used for TLS/SSL decryption using PKI-based user authentication must only accept end entity certificates issued by DoD PKI or DoD-approved PKI Certifi..."
+  paloaltonetworks.panos.panos_decryption_rule:
+    provider: "{{ panos_provider }}"
+    name: "{{ pan_alg_stig_decryption_rule | default('stig-decrypt-rule') }}"
+  notify: Commit PAN-OS configuration
+  tags:
+    - PANW-AG-000101
+    - cat2
+    - authentication
+

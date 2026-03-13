@@ -1,0 +1,333 @@
+---
+# =========================================
+# MS SQL Server 2022 Instance STIG - Authorization
+# 21 rules
+# =========================================
+
+# -----------------------------------------
+# SQLI-22-003900 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-003900 | MANUAL CHECK - SQL Server must enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Use GRANT, REVOKE, DENY, ALTER SERVER ROLE … ADD MEMBER … and/or ALTER SERVER ROLE …. DROP MEMBER statements to add and remove permissions on server-level securables, bringing them into line with t..."
+  tags:
+    - SQLI-22-003900
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-004100 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-004100 | SQL Server must protect against a user falsely repudiating by ensuring the NT AUTHORITY SYSTEM account is not used for administration."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      USE Master;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-004100
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-004400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-004400 | SQL Server must allow only the information system security manager (ISSM) (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      CREATE SERVER ROLE SERVER_AUDIT_MAINTAINERS;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-004400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-005900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-005900 | MANUAL CHECK - The audit information produced by SQL Server must be protected from unauthorized access, modification, and deletion."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Modify audit file permissions to meet the requirement to protect against unauthorized access. Application event log and security log permissions are covered in the Windows Server STIGs. Reference t..."
+  tags:
+    - SQLI-22-005900
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-006300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-006300 | SQL Server must protect its audit configuration from authorized and unauthorized access and modification."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      USE master;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-006300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-006500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-006500 | SQL Server must limit privileges to change software modules and links to software external to SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-006500
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-006700 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-006700 | MANUAL CHECK - SQL Server software installation account must be restricted to authorized users."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: From a command prompt, open lusrmgr.msc. Navigate to \"Users\" and right-click \"Individual User\". Select \"Properties\", then \"Member Of\". Configure SQL Server and OS settings and access contro..."
+  tags:
+    - SQLI-22-006700
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-017200 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-017200 | The \"Remote Access\" feature must be disabled unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC SP_CONFIGURE 'remote access', 0;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-017200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-007300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-007300 | Access to common language runtime (CLR) code must be disabled or restricted unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC SP_CONFIGURE 'clr enabled', 0;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-007300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-009500 - HIGH
+# -----------------------------------------
+
+- name: "SQLI-22-009500 | MANUAL CHECK - SQL Server must protect the confidentiality and integrity of all information at rest."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Apply appropriate controls to protect the confidentiality and integrity of data on a secondary device. Where encryption is required, this can be done by full-disk encryption or by database encrypti..."
+  tags:
+    - SQLI-22-009500
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-009900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-009900 | MANUAL CHECK - SQL Server must prevent unauthorized and unintended information transfer via Instant File Initialization (IFI)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: If IFI is not documented as being required, disable instant file initialization for the instance of SQL Server by removing the SQL Service SID and/or service account from the \"Perform volume maint..."
+  tags:
+    - SQLI-22-009900
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-009800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-009800 | SQL Server must prevent unauthorized and unintended information transfer via shared system resources."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC SP_CONFIGURE 'show advanced options', 1;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-009800
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-010000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-010000 | Access to database files must be limited to relevant processes and to authorized, administrative users."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-010000
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-010100 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-010100 | MANUAL CHECK - SQL Server must reveal detailed error messages only to documented and approved individuals or roles."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure audit logging, tracing, and/or custom code in the database or application to record detailed error messages generated by SQL Server for review by authorized personnel. If any nonauthorize..."
+  tags:
+    - SQLI-22-010100
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-010400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-010400 | SQL Server must prevent nonprivileged users from executing privileged functions, to include disabling, circumventing, or altering implemented security safeguards/countermeasures."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-010400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-011500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-011500 | Windows must enforce access restrictions associated with changes to the configuration of the SQL Server instance."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-011500
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-011400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-011400 | SQL Server must enforce access restrictions associated with changes to the configuration of the instance."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      ALTER SERVER ROLE {{ mssql_2022_instance_stig_server_role }} DROP MEMBER {{ mssql_2022_instance_stig_login_name }};
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-011400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-012300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-012300 | SQL Server must maintain a separate execution domain for each executing process."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      EXEC SP_CONFIGURE 'clr enabled', 0;
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-012300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-016700 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-016700 | SQL Server execute permissions to access the registry must be revoked unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      USE master
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-016700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-017000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-017000 | The Ole Automation Procedures feature must be disabled unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-017000
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQLI-22-017100 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLI-22-017100 | The SQL Server User Options feature must be disabled unless specifically required and approved."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_instance_stig_db_user }}"
+    login_password: "{{ mssql_2022_instance_stig_db_password }}"
+    login_host: "{{ mssql_2022_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLI-22-017100
+    - cat2
+    - authorization
+

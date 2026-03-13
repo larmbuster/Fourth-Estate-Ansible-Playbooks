@@ -1,0 +1,47 @@
+---
+# =========================================
+# F5 BIG-IP NDM STIG - Session Management
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DM-300001 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300001 | The F5 BIG-IP appliance must be configured to limit the number of concurrent sessions to the Configuration Utility to 10 or an organization-defined number."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_ndm_stig_f5bi_dm_300001_key }}"
+    value: "{{ f5_bigip_ndm_stig_f5bi_dm_300001_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300001
+    - cat2
+    - session_management
+
+# -----------------------------------------
+# F5BI-DM-300057 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DM-300057 | The F5 BIG-IP appliance must set the idle time before automatic logout to five minutes of inactivity except to fulfill documented and validated mission requirements."
+  f5networks.f5_modules.bigip_device_syslog:
+    log_level: informational
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300057
+    - cat1
+    - session_management
+
+# -----------------------------------------
+# F5BI-DM-300099 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DM-300099 | The F5 BIG-IP appliance must be configured to restrict a consistent inbound IP for the entire management session."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_ndm_stig_f5bi_dm_300099_key }}"
+    value: "{{ f5_bigip_ndm_stig_f5bi_dm_300099_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DM-300099
+    - cat2
+    - session_management
+

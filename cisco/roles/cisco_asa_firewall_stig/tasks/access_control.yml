@@ -1,0 +1,144 @@
+---
+# =========================================
+# Cisco ASA Firewall STIG - Access Control
+# 10 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-FW-000010 - HIGH
+# -----------------------------------------
+
+- name: "CASA-FW-000010 | The Cisco ASA must be configured to filter outbound traffic, allowing only authorized ports and services."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000010
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000020 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000020 | The Cisco ASA must immediately use updates made to policy enforcement mechanisms such as firewall rules, security policies, and security zones."
+  cisco.asa.asa_config:
+    lines:
+      - "no asp rule-engine transactional-commit access-group"
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000020
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000030 | The Cisco ASA must be configured to restrict VPN traffic according to organization-defined filtering rules."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000030
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000040 | The Cisco ASA must be configured to generate traffic log entries containing information to establish what type of events occurred."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000040
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000170 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000170 | The Cisco ASA perimeter firewall must be configured to filter traffic destined to the enclave in accordance with the specific traffic that is approved and registered in the Ports, Protocols, and Se..."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000170
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000230 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000230 | The Cisco ASA must be configured to filter inbound traffic on all external interfaces."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000230
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000240 | The Cisco ASA must be configured to filter outbound traffic on all internal interfaces."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000240
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000250 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000250 | The Cisco ASA perimeter firewall must be configured to block all outbound management traffic."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000250
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000270 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000270 | MANUAL CHECK - The Cisco ASA must be configured to inspect all inbound and outbound traffic at the application layer."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the firewall to inspect all inbound and outbound traffic at the application layer. ASA(config)# service-policy global_policy global ASA(config)# end"
+  tags:
+    - CASA-FW-000270
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# CASA-FW-000290 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000290 | The Cisco ASA must be configured to restrict it from accepting outbound packets that contain an illegitimate address in the source address field via an egress filter or by enabling Unicast Reverse ..."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000290
+    - cat2
+    - access_control
+

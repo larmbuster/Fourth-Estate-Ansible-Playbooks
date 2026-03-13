@@ -1,0 +1,37 @@
+---
+# =========================================
+# F5 BIG-IP VPN DISA STIG V1 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 12 (CAT I: 8, CAT II: 4, CAT III: 0)
+#
+# Usage:
+#   --tags authentication           (1 rules)
+#   --tags encryption               (11 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags F5BI-VN-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is F5 BIG-IP"
+  ansible.builtin.assert:
+    that:
+      - ansible_connection == "local" or ansible_connection == "httpapi"
+    fail_msg: >-
+      This role targets F5 BIG-IP only.
+    quiet: true
+  tags:
+    - always
+
+- name: "F5BI-VN | Authentication (1 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "F5BI-VN | Encryption (11 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption

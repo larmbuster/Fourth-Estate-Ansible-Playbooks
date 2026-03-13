@@ -1,0 +1,86 @@
+---
+# =========================================
+# Cisco ASA NDM STIG - Encryption
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-ND-000470 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-000470 | The Cisco ASA must be configured to implement replay-resistant authentication mechanisms for network access to privileged accounts."
+  cisco.asa.asa_config:
+    lines:
+      - "ssh cipher encryption fips"
+      - "ssh key-exchange group dh-group14-sha"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-000470
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-ND-001050 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001050 | The Cisco ASA must be configured to authenticate Simple Network Management Protocol (SNMP) messages using a FIPS-validated Keyed-Hash Message Authentication Code (HMAC)."
+  cisco.asa.asa_config:
+    lines:
+      - "snmp-server group NETOPS v3 priv"
+      - "snmp-server user FWADMIN NETOPS v3 auth sha {{ secret_key }}"
+      - "snmp-server host NDM_INTERFACE 10.1.48.10  version 3 FWADMIN"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001050
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-ND-001070 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-ND-001070 | The Cisco ASA must be configured to encrypt Simple Network Management Protocol (SNMP) messages using a FIPS 140-2 approved algorithm."
+  cisco.asa.asa_config:
+    lines:
+      - "snmp-server group NETOPS v3 priv"
+      - "snmp-server user FWADMIN NETOPS v3 auth sha {{ secret_key }} priv aes {{ secret_key }}"
+      - "snmp-server host NDM_INTERFACE 10.1.48.10  version 3 FWADMIN"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001070
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# CASA-ND-001140 - HIGH
+# -----------------------------------------
+
+- name: "CASA-ND-001140 | The Cisco ASA must be configured to use FIPS-validated Keyed-Hash Message Authentication Code (HMAC) to protect the integrity of non-local maintenance and diagnostic communications."
+  cisco.asa.asa_config:
+    lines:
+      - "ssh cipher encryption fips"
+      - "ssh key-exchange group dh-group14-sha"
+      - "snmp-server group NETOPS v3 auth"
+      - "snmp-server user FWADMIN NETOPS v3 auth sha {{ secret_key }}"
+      - "snmp-server host NDM_INTERFACE 10.1.48.10  version 3 FWADMIN"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001140
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# CASA-ND-001150 - HIGH
+# -----------------------------------------
+
+- name: "CASA-ND-001150 | The Cisco ASA must be configured to implement cryptographic mechanisms using a FIPS 140-2 approved algorithm to protect the confidentiality of remote maintenance sessions."
+  cisco.asa.asa_config:
+    lines:
+      - "ssh cipher encryption fips"
+      - "ssh key-exchange group dh-group14-sha"
+  notify: Save running configuration
+  tags:
+    - CASA-ND-001150
+    - cat1
+    - encryption
+

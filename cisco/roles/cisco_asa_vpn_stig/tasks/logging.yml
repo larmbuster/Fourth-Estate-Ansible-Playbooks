@@ -1,0 +1,154 @@
+---
+# =========================================
+# Cisco ASA VPN STIG - Logging
+# 9 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-VN-000010 - LOW
+# -----------------------------------------
+
+- name: "CASA-VN-000010 | The Cisco ASA must be configured to generate log records containing information to establish what type of VPN events occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "logging class vpn trap notifications"
+      - "logging class vpnc trap notifications"
+      - "logging class vpnfo trap notifications"
+      - "logging class webvpn trap notifications"
+      - "logging class webfo trap notifications"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000010
+    - cat3
+    - logging
+
+# -----------------------------------------
+# CASA-VN-000020 - LOW
+# -----------------------------------------
+
+- name: "CASA-VN-000020 | The Cisco ASA must be configured to generate log records containing information to establish when the events occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "logging timestamp"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000020
+    - cat3
+    - logging
+
+# -----------------------------------------
+# CASA-VN-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000080 | The Cisco ASA must be configured to queue log records locally in the event that the central audit server is down or not reachable."
+  cisco.asa.asa_config:
+    lines:
+      - "logging permit-hostdown"
+      - "logging queue 8192"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000080
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-VN-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000090 | The Cisco ASA must be configured to generate an alert that can be forwarded as an alert to organization-defined personnel and/or firewall administrator of all log failure events."
+  cisco.asa.asa_config:
+    lines:
+      - "logging host NDM_INTERFACE 10.1.48.10 6/1514"
+      - "logging trap critical"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000090
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-VN-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000500 | The Cisco ASA remote access VPN server must be configured to generate log records containing information that establishes the identity of any individual or process associated with the event."
+  cisco.asa.asa_config:
+    lines:
+      - "logging class vpn trap notifications"
+      - "logging class vpnc trap notifications"
+      - "logging class vpnfo trap notifications"
+      - "logging class webvpn trap notifications"
+      - "logging class webfo trap notifications"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000500
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-VN-000510 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000510 | The Cisco ASA remote access VPN server must be configured to generate log records containing information to establish where the events occurred."
+  cisco.asa.asa_config:
+    lines:
+      - "logging class vpn trap notifications"
+      - "logging class vpnc trap notifications"
+      - "logging class vpnfo trap notifications"
+      - "logging class webvpn trap notifications"
+      - "logging class webfo trap notifications"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000510
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-VN-000520 - LOW
+# -----------------------------------------
+
+- name: "CASA-VN-000520 | The Cisco ASA remote access VPN server must be configured to generate log records containing information to establish the source of the events."
+  cisco.asa.asa_config:
+    lines:
+      - "logging class vpn trap notifications"
+      - "logging class vpnc trap notifications"
+      - "logging class vpnfo trap notifications"
+      - "logging class webvpn trap notifications"
+      - "logging class webfo trap notifications"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000520
+    - cat3
+    - logging
+
+# -----------------------------------------
+# CASA-VN-000530 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000530 | The Cisco ASA remote access VPN server must be configured to produce log records containing information to establish the outcome of the events."
+  cisco.asa.asa_config:
+    lines:
+      - "logging class vpn trap notifications"
+      - "logging class vpnc trap notifications"
+      - "logging class vpnfo trap notifications"
+      - "logging class webvpn trap notifications"
+      - "logging class webfo trap notifications"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000530
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CASA-VN-000720 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000720 | The Cisco ASA VPN remote access server must be configured to generate log records when successful and/or unsuccessful VPN connection attempts occur."
+  cisco.asa.asa_config:
+    lines:
+      - "logging class svc trap notifications"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000720
+    - cat2
+    - logging
+

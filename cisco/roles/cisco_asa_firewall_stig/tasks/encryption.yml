@@ -1,0 +1,20 @@
+---
+# =========================================
+# Cisco ASA Firewall STIG - Encryption
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-FW-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-FW-000260 | The Cisco ASA must be configured to forward management traffic to the Network Operations Center (NOC) via an IPsec tunnel."
+  cisco.asa.asa_acls:
+    config: "{{ cisco_asa_firewall_stig_acl_config | default([]) }}"
+    state: merged
+  notify: Save running configuration
+  tags:
+    - CASA-FW-000260
+    - cat2
+    - encryption
+

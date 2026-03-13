@@ -1,0 +1,126 @@
+---
+# =========================================
+# Cisco IOS-XR Router RTR STIG - Network Services
+# 10 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000160 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000160 | MANUAL CHECK - The Cisco router must be configured to have IP directed broadcast disabled on all interfaces."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device as required."
+  tags:
+    - CISC-RT-000160
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000380 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000380 | MANUAL CHECK - The Cisco perimeter router must be configured to have Proxy ARP disabled on all external interfaces."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device as required."
+  tags:
+    - CISC-RT-000380
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000700 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000700 | MANUAL CHECK - The Cisco PE router providing Virtual Private LAN Services (VPLS) must be configured to have traffic storm control thresholds on CE-facing interfaces."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device as required."
+  tags:
+    - CISC-RT-000700
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000710 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000710 | MANUAL CHECK - The Cisco PE router must be configured to implement Internet Group Management Protocol (IGMP) or Multicast Listener Discovery (MLD) snooping for each"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000710
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000760 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000760 | MANUAL CHECK - The Cisco PE router must be configured to enforce a Quality-of-Service (QoS) policy to provide preferred treatment for mission-critical applications."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000760
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000770 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000770 | MANUAL CHECK - The Cisco P router must be configured to enforce a Quality-of-Service (QoS) policy to provide preferred treatment for mission-critical applications."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000770
+    - cat3
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000780 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000780 | MANUAL CHECK - The Cisco PE router must be configured to enforce a Quality-of-Service (QoS) policy to limit the effects of packet flooding denial-of-service (DoS) at"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000780
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000850 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000850 | MANUAL CHECK - The Cisco multicast Rendezvous Point (RP) must be configured to rate limit the number of Protocol Independent Multicast (PIM) Register messages."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000850
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000880 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000880 | MANUAL CHECK - The Cisco multicast Designated Router (DR) must be configured to limit the number of mroute states resulting from Internet Group Management Protocol ("
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000880
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# CISC-RT-000950 - LOW
+# -----------------------------------------
+
+- name: "CISC-RT-000950 | MANUAL CHECK - The Cisco Multicast Source Discovery Protocol (MSDP) router must be configured to use a loopback address as the source address when originating MSDP t"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000950
+    - cat3
+    - network_services
+

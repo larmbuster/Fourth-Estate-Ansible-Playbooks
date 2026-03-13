@@ -1,0 +1,487 @@
+---
+# =========================================
+# Oracle MySQL 8.0 Database STIG - Authorization
+# 32 rules
+# =========================================
+
+# -----------------------------------------
+# MYS8-00-001200 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-001200 | The audit information produced by the MySQL Database Server 8.0 must be protected from unauthorized read access."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT audit_log_encryption_password_set(password);"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-001200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-001300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-001300 | The audit information produced by the MySQL Database Server 8.0 must be protected from unauthorized modification."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT audit_log_encryption_password_set(password);"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-001300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-001400 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-001400 | The audit information produced by the MySQL Database Server 8.0 must be protected from unauthorized deletion."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT audit_log_encryption_password_set(password);"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-001400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-001700 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-001700 | The MySQL Database Server 8.0 must allow only the Information System Security Manager (ISSM) (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited."
+  community.mysql.mysql_role:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_001700_role }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-001700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-001800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-001800 | The MySQL Database Server 8.0 must be able to generate audit records when privileges/permissions are retrieved."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-001800
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-001900 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-001900 | The MySQL Database Server 8.0 must be able to generate audit records when unsuccessful attempts to retrieve privileges/permissions occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-001900
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-002100 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002100 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to access security objects occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002100
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-002400 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002400 | The MySQL Database Server 8.0 must generate audit records when privileges/permissions are added."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-002500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002500 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to add privileges/permissions occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002500
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-002600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002600 | The MySQL Database Server 8.0 must generate audit records when privileges/permissions are modified."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002600
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-002700 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-002700 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to modify privileges/permissions occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-002700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-003200 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003200 | The MySQL Database Server 8.0 must generate audit records when privileges/permissions are deleted."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-003300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-003300 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to delete privileges/permissions occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-003300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-004000 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004000 | The MySQL Database Server 8.0 must generate audit records for all privileged activities or other system-level access."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004000
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-004100 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-004100 | The MySQL Database Server 8.0 must generate audit records when unsuccessful attempts to execute privileged activities or other system-level access occur."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-004100
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-005400 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-005400 | MANUAL CHECK - The MySQL Database Server 8.0 must enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the MySQL Database Server 8.0 settings and access controls to permit user access only to objects and data that the user is authorized to view or interact with, and to prevent access to al..."
+  tags:
+    - MYS8-00-005400
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-006400 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-006400 | The MySQL Database Server 8.0 must separate user functionality (including user interface services) from database management functionality."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_006400_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-006400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-006500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-006500 | The MySQL Database Server 8.0 must isolate security functions from non-security functions."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-006500
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-006600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-006600 | Database contents must be protected from unauthorized and unintended information transfer by enforcement of a data-transfer policy."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-006600
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-006800 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-006800 | Access to database files must be limited to relevant processes and to authorized, administrative users."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_006800_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-006800
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-008000 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-008000 | The MySQL Database Server 8.0 must protect its audit features from unauthorized access."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "REVOKE AUDIT_ADMIN on *.* FROM {{ user }};"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-008000
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-008200 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-008200 | The MySQL Database Server 8.0 must protect its audit features from unauthorized removal."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-008200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-008300 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-008300 | The MySQL Database Server 8.0 must limit privileges to change software modules, to include stored procedures, functions and triggers, and links to software external to the MySQL Database Server 8.0."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-008300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-008400 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-008400 | The MySQL Database Server 8.0 software installation account must be restricted to authorized users."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_008400_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-008400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-008700 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-008700 | The role(s)/group(s) used to modify database structure (including but not necessarily limited to tables, indexes, storage, etc.) and logic modules (stored procedures, functions, triggers, links to ..."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_008700_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-008700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-009100 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-009100 | The MySQL Database Server 8.0 must prohibit user installation of logic modules (stored procedures, functions, triggers, views, etc.) without explicit privileged status."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_009100_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-009100
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-009200 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-009200 | MANUAL CHECK - The MySQL Database Server 8.0 must enforce access restrictions associated with changes to the configuration of the MySQL Database Server 8.0 or database(s)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review MySQL user grants and revoke unnecessary configuration privileges. Ensure only authorized users have SUPER, SET_USER_ID, or SYSTEM_VARIABLES_ADMIN privileges."
+  tags:
+    - MYS8-00-009200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-010500 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-010500 | The MySQL Database Server 8.0 must enforce discretionary access control policies, as defined by the data owner, over defined subjects and objects."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '{{ oracle_mysql80_stig_revoke_user }}'@'{{ oracle_mysql80_stig_revoke_host }}';"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-010500
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-010600 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-010600 | Execution of software modules (to include stored procedures, functions, and triggers) with elevated privileges must be restricted to necessary cases only."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "DROP PROCEDURE {{ proc_name }};"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-010600
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-010700 - MEDIUM
+# -----------------------------------------
+
+- name: "MYS8-00-010700 | The MySQL Database Server 8.0 must prevent non-privileged users from executing privileged functions, to include disabling, circumventing, or altering implemented security safeguards/countermeasures."
+  community.mysql.mysql_user:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    name: "{{ oracle_mysql80_stig_mys8_00_010700_username }}"
+    state: present
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-010700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-012000 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-012000 | The MySQL Database Server 8.0 must implement cryptographic mechanisms to prevent unauthorized modification of organization-defined information at rest (to include, at a minimum, PII and classified ..."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "ALTER TABLESPACE {{ tablespacename }} ENCRYPTION = 'Y';"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-012000
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# MYS8-00-012100 - HIGH
+# -----------------------------------------
+
+- name: "MYS8-00-012100 | The MySQL Database Server 8.0 must implement cryptographic mechanisms preventing the unauthorized disclosure of organization-defined information at rest on organization-defined information system c..."
+  community.mysql.mysql_query:
+    login_user: "{{ oracle_mysql80_stig_db_user }}"
+    login_password: "{{ oracle_mysql80_stig_db_password }}"
+    query: "ALTER TABLESPACE {{ tablespacename }} ENCRYPTION = 'Y';"
+  notify: Restart MySQL service
+  tags:
+    - MYS8-00-012100
+    - cat1
+    - authorization
+

@@ -1,0 +1,81 @@
+---
+# =========================================
+# MS SQL Server 2016 Instance STIG - Encryption
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# SQL6-D0-008300 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-008300 | MANUAL CHECK - Confidentiality of information during transmission is controlled through the use of an approved TLS version."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Important Note: Incorrectly modifying the Windows Registry can result in serious system errors. Before making any modifications, ensure you have a recent backup of the system and registry settings...."
+  tags:
+    - SQL6-D0-008300
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# SQL6-D0-008400 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-008400 | SQL Server must enforce authorized access to all PKI private keys stored/utilized by SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-008400
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# SQL6-D0-008700 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-008700 | MANUAL CHECK - SQL Server must use NIST FIPS 140-2/140-3-validated cryptographic operations for encryption, hashing, and signing."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: In Windows, open Administrative Tools >> Local Security Policy. Expand Local Policies >> Security Options. In the right-side pane, double-click \"System cryptography: Use FIPS compliant algorithms ..."
+  tags:
+    - SQL6-D0-008700
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# SQL6-D0-016500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-016500 | SQL Server Mirroring endpoint must utilize AES encryption."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      ALTER ENDPOINT {{ endpoint_name }}
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-016500
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# SQL6-D0-016600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-016600 | SQL Server Service Broker endpoint must utilize AES encryption."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      ALTER ENDPOINT {{ endpointname }}
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-016600
+    - cat2
+    - encryption
+

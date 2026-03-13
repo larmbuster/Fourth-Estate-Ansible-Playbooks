@@ -1,0 +1,55 @@
+---
+# =========================================
+# Cisco NX-OS Switch L2S STIG - Authentication
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000020 - HIGH
+# -----------------------------------------
+
+- name: "CISC-L2-000020 | The Cisco switch must uniquely identify all network-connected endpoint devices before establishing any connection."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.1.1 key {{ secret_key }}"
+      - "radius-server host 10.2.1.1 key {{ secret_key }}"
+      - "aaa group server radius RADIUS_GROUP"
+      - "aaa authentication dot1x default group RADIUS_GROUP"
+      - "dot1x port-control auto"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000020
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CISC-L2-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000030 | The Cisco switch must authenticate all VLAN Trunk Protocol (VTP) messages with a hash function using the most secured cryptographic algorithm available."
+  cisco.nxos.nxos_vlans:
+    state: present
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000030
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-L2-000080 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000080 | The Cisco switch must authenticate all endpoint devices before establishing any connection."
+  cisco.nxos.nxos_config:
+    lines:
+      - "radius-server host 10.1.1.1 key {{ secret_key }}"
+      - "radius-server host 10.2.1.1 key {{ secret_key }}"
+      - "aaa group server radius RADIUS_GROUP"
+      - "aaa authentication dot1x default group RADIUS_GROUP"
+      - "dot1x port-control auto"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000080
+    - cat2
+    - authentication
+

@@ -1,0 +1,20 @@
+---
+# =========================================
+# F5 BIG-IP DNS STIG - Session Management
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DN-300036 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-DN-300036 | The F5 BIG-IP DNS implementation must protect the authenticity of communications sessions for zone transfers."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300036
+    - cat1
+    - session_management
+

@@ -1,0 +1,89 @@
+---
+# =========================================
+# Cisco IOS-XE Switch RTR STIG - System Hardening
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000090 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000090 | The Cisco switch must not be configured to have any zero-touch deployment feature enabled when connected to an operational network."
+  cisco.ios.ios_config:
+    lines:
+      - "no boot network"
+      - "no service config"
+      - "no cns config initial"
+      - "no cns exec"
+      - "no cns image"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000090
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000120 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000120 | MANUAL CHECK - The Cisco switch must be configured to protect against or limit the effects of denial-of-service (DoS) attacks by employing control plane protection."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000120
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000620 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000620 | The Cisco MPLS switch must be configured to have TTL Propagation disabled."
+  cisco.ios.ios_config:
+    lines:
+      - "no mpls ip propagate-ttl"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000620
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000670 - HIGH
+# -----------------------------------------
+
+- name: "CISC-RT-000670 | MANUAL CHECK - The Cisco PE switch providing MPLS Virtual Private Wire Service (VPWS) must be configured to have the appropriate virtual circuit identification (VC I"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000670
+    - cat1
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000750 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000750 | The Cisco PE switch must be configured to ignore or drop all packets with any IP options."
+  cisco.ios.ios_config:
+    lines:
+      - "ip options ignore"
+      - "ip options drop"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000750
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# CISC-RT-000235 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000235 | MANUAL CHECK - The Cisco switch must be configured to have Cisco Express Forwarding enabled."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000235
+    - cat2
+    - system_hardening
+

@@ -1,0 +1,18 @@
+---
+# =========================================
+# Palo Alto PAN-OS IDPS STIG - System Hardening
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# PANW-IP-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "PANW-IP-000030 | MANUAL CHECK - The Palo Alto Networks security platform must block outbound ICMP Destination Unreachable, Redirect, and Address Mask reply messages."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Create a zone protection profile for each outgoing zone that drops any ICMP Destination Unreachable, Redirect, and Address Mask reply messages. 1. Navigate to the \"Zone Protection Profile\" config..."
+  tags:
+    - PANW-IP-000030
+    - cat2
+    - system_hardening
+

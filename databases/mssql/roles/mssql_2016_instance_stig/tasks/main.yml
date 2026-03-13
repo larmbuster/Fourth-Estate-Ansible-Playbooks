@@ -1,0 +1,61 @@
+---
+# =========================================
+# MS SQL Server 2016 Instance DISA STIG V3 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 84 (CAT I: 13, CAT II: 69, CAT III: 2)
+#
+# Usage:
+#   --tags authentication           (16 rules)
+#   --tags authorization            (30 rules)
+#   --tags encryption               (5 rules)
+#   --tags logging                  (13 rules)
+#   --tags network_services         (4 rules)
+#   --tags system_hardening         (16 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags SQL6-D0-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is MS SQL Server 2016"
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == "Windows"
+    fail_msg: >-
+      This role targets MS SQL Server 2016 only.
+    quiet: true
+  tags:
+    - always
+
+- name: "SQL6-D0 | Authentication (16 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "SQL6-D0 | Authorization (30 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "SQL6-D0 | Encryption (5 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "SQL6-D0 | Logging (13 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "SQL6-D0 | Network Services (4 rules)"
+  ansible.builtin.import_tasks: network_services.yml
+  tags:
+    - network_services
+
+- name: "SQL6-D0 | System Hardening (16 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

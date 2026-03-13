@@ -1,0 +1,74 @@
+---
+# =========================================
+# F5 BIG-IP ALG STIG - Network Services
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-AP-300042 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300042 | The F5 BIG-IP appliance that intermediary services for FTP must inspect inbound and outbound FTP communications traffic for protocol compliance and protocol anomalies."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300042_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300042_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300042
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-AP-300043 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300043 | MANUAL CHECK - The F5 BIG-IP appliance that provides intermediary services for HTTP must inspect inbound and outbound HTTP traffic for protocol compliance and protocol anomalies."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Application Security Policy: From the BIG-IP GUI: 1. Security. 2. Application Security. 3. Policy Building. 4. Learning and Blocking Settings. 5. Select the correct policy from the drop-down in the..."
+  tags:
+    - F5BI-AP-300043
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-AP-300059 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300059 | The F5 BIG-IP appliance providing content filtering must employ rate-based attack prevention behavior analysis."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300059_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300059_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300059
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-AP-300061 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300061 | The F5 BIG-IP appliance providing content filtering must protect against or limit the effects of known and unknown types of denial-of-service (DoS) attacks by employing pattern recognition pre-proc..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300061_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300061_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300061
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-AP-300151 - LOW
+# -----------------------------------------
+
+- name: "F5BI-AP-300151 | When the Access Profile Type is LTM+APM and it is not using any connectivity resources (such as Network Access, Portal Access, etc.) in the VPE, the F5 BIG-IP appliance must be configured to enable..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300151_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300151_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300151
+    - cat3
+    - network_services
+

@@ -1,0 +1,64 @@
+---
+# =========================================
+# Cisco ISE NAC STIG - Access Control
+# 4 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NC-000020 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NC-000020 | The Cisco ISE must enforce approved access by employing authorization policies with specific attributes; such as resource groups, device type, certificate attributes, or any other attributes that a..."
+  cisco.ise.authorization_profile:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_auth_profile | default('stig-profile') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000020
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CSCO-NC-000040 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NC-000040 | VERIFY - The Cisco ISE must verify host-based firewall software is running on posture required clients defined in the NAC System Security Plan (SSP) prior to granting trusted network access. This is require..."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DoD is not at C2C Step 4 or higher, this is not a finding. If host-based firewall is not required by the NAC SSP, this is not a finding. Verify that the posture policy will verify that a host-ba..."
+  tags:
+    - CSCO-NC-000040
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CSCO-NC-000050 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NC-000050 | VERIFY - The Cisco ISE must verify anti-malware software is installed and up to date on posture required clients defined in the NAC System Security Plan (SSP) prior to granting trusted network access. This ..."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DOD is not at C2C Step 4 or higher, this is not a finding. Verify the posture policy will verify that anti-malware software is installed and up to date. If not required by the NAC SSP, this is n..."
+  tags:
+    - CSCO-NC-000050
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# CSCO-NC-000260 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000260 | The Cisco ISE must deny network connection for endpoints that cannot be authenticated using an approved method. This is required for compliance with C2C Step 4."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000260
+    - cat2
+    - access_control
+

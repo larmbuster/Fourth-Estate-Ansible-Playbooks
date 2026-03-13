@@ -1,0 +1,69 @@
+---
+# =========================================
+# MS SQL Server 2016 Instance STIG - Network Services
+# 4 rules
+# =========================================
+
+# -----------------------------------------
+# SQL6-D0-003800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-003800 | SQL Server must be configured to utilize the most-secure authentication method available."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-003800
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# SQL6-D0-006600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-006600 | SQL Server must limit privileges to change software modules, to include stored procedures, functions and triggers, and links to software external to SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-006600
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# SQL6-D0-012400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-012400 | MANUAL CHECK - SQL Server services must be configured to run under unique dedicated user accounts."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure SQL Server services to have a documented, dedicated account. For non-domain servers, consider using virtual service accounts (VSA). See https://msdn.microsoft.com/en-us/library/ms143504.a..."
+  tags:
+    - SQL6-D0-012400
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# SQL6-D0-016100 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-016100 | SQL Server must configure SQL Server Usage and Error Reporting Auditing."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-016100
+    - cat2
+    - network_services
+

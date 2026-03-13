@@ -1,0 +1,111 @@
+---
+# =========================================
+# F5 NGINX Web Server STIG - Authentication
+# 7 rules
+# =========================================
+
+# -----------------------------------------
+# NGNX-APP-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000140 | The NGINX service account must be configured to not have shell access."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000140"
+    line: "# STIG NGNX-APP-000140 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000140
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# NGNX-APP-000590 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000590 | NGINX must implement replay-resistant authentication mechanisms for network access."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000590"
+    line: "# STIG NGNX-APP-000590 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000590
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# NGNX-APP-000730 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-000730 | NGINX, when using PKI-based authentication, must enforce authorized access to the corresponding private key."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-000730"
+    line: "# STIG NGNX-APP-000730 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-000730
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# NGNX-APP-001650 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001650 | NGINX must accept Personal Identity Verification (PIV) credentials."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001650"
+    line: "# STIG NGNX-APP-001650 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001650
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# NGNX-APP-001690 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001690 | NGINX must be configured to expire cached authenticators after an organization-defined time period."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001690"
+    line: "# STIG NGNX-APP-001690 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001690
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# NGNX-APP-001900 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-001900 | NGINX must only allow using DOD approved certificate authorities for PKI."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-001900"
+    line: "# STIG NGNX-APP-001900 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-001900
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# NGNX-APP-003040 - MEDIUM
+# -----------------------------------------
+
+- name: "NGNX-APP-003040 | The NGINX service account must be configured to lock changes to the password."
+  ansible.builtin.lineinfile:
+    path: "{{ f5_nginx_stig_config_path }}"
+    regexp: "^# STIG NGNX-APP-003040"
+    line: "# STIG NGNX-APP-003040 applied"
+  notify: Reload NGINX
+  tags:
+    - NGNX-APP-003040
+    - cat2
+    - authentication
+

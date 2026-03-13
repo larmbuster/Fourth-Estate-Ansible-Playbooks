@@ -1,0 +1,144 @@
+---
+# =========================================
+# MS SQL Server 2016 Database STIG - Authorization
+# 9 rules
+# =========================================
+
+# -----------------------------------------
+# SQL6-D0-000300 - HIGH
+# -----------------------------------------
+
+- name: "SQL6-D0-000300 | MANUAL CHECK - SQL Server must enforce approved authorizations for logical access to database information and system resources in accordance with applicable access control policies."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Use GRANT, REVOKE, DENY, ALTER ROLE … ADD MEMBER … and/or ALTER ROLE …. DROP MEMBER statements to add and remove permissions on database-level securables, bringing them into line with the documente..."
+  tags:
+    - SQL6-D0-000300
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# SQL6-D0-000700 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-000700 | SQL Server must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_database_stig_db_user }}"
+    login_password: "{{ mssql_2016_database_stig_db_password }}"
+    login_host: "{{ mssql_2016_database_stig_db_host }}"
+    script: |
+      CREATE ROLE DATABASE_AUDIT_MAINTAINERS;
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-000700
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQL6-D0-001200 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-001200 | SQL Server must limit privileges to change software modules, to include stored procedures, functions, and triggers, and links to software external to SQL Server."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_database_stig_db_user }}"
+    login_password: "{{ mssql_2016_database_stig_db_password }}"
+    login_host: "{{ mssql_2016_database_stig_db_host }}"
+    script: |
+      ALTER AUTHORIZATION ON SCHEMA::[{{ schema_name }}] TO [{{ principal_name }}]
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-001200
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQL6-D0-001300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-001300 | Database objects (including but not limited to tables, indexes, storage, stored procedures, functions, triggers, links to software external to SQL Server, etc.) must be owned by database/DBMS princ..."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_database_stig_db_user }}"
+    login_password: "{{ mssql_2016_database_stig_db_password }}"
+    login_host: "{{ mssql_2016_database_stig_db_host }}"
+    script: |
+      USE AdventureWorks2012;
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-001300
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQL6-D0-001400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-001400 | MANUAL CHECK - The role(s)/group(s) used to modify database structure (including but not necessarily limited to tables, indexes, storage, etc.) and logic modules (stored procedures, functions, triggers, links to ..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Document and obtain approval for any nonadministrative users who require the ability to modify database structure and logic modules. REVOKE ALTER ON [<Object Name>] TO [<Principal Name>]"
+  tags:
+    - SQL6-D0-001400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQL6-D0-001900 - LOW
+# -----------------------------------------
+
+- name: "SQL6-D0-001900 | SQL Server must isolate security functions from non-security functions."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_database_stig_db_user }}"
+    login_password: "{{ mssql_2016_database_stig_db_password }}"
+    login_host: "{{ mssql_2016_database_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-001900
+    - cat3
+    - authorization
+
+# -----------------------------------------
+# SQL6-D0-002000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-002000 | Database contents must be protected from unauthorized and unintended information transfer by enforcement of a data-transfer policy."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_database_stig_db_user }}"
+    login_password: "{{ mssql_2016_database_stig_db_password }}"
+    login_host: "{{ mssql_2016_database_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-002000
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQL6-D0-002400 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-002400 | MANUAL CHECK - SQL Server must provide non-privileged users with error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Adjust database code to remove any information not required for explaining the error to an end user. Consider enabling trace flag 3625 to mask certain system-level error information returned to non..."
+  tags:
+    - SQL6-D0-002400
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# SQL6-D0-002800 - LOW
+# -----------------------------------------
+
+- name: "SQL6-D0-002800 | SQL Server must enforce discretionary access control policies, as defined by the data owner, over defined subjects and objects."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_database_stig_db_user }}"
+    login_password: "{{ mssql_2016_database_stig_db_password }}"
+    login_host: "{{ mssql_2016_database_stig_db_host }}"
+    script: |
+      ALTER AUTHORIZATION ON {{ securable }} TO {{ principal }}
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-002800
+    - cat3
+    - authorization
+

@@ -1,0 +1,34 @@
+---
+# =========================================
+# Cisco IOS Switch RTR STIG - Logging
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000790 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000790 | The Cisco multicast switch must be configured to disable Protocol Independent Multicast (PIM) on all interfaces that are not required to support multicast routing."
+  cisco.ios.ios_config:
+    lines:
+      - "no ip pim sparse-mode"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000790
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CISC-RT-000890 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000890 | The Cisco multicast Designated switch (DR) must be configured to set the shortest-path tree (SPT) threshold to infinity to minimalize source-group (S, G) state within the multicast topology where A..."
+  cisco.ios.ios_config:
+    lines:
+      - "ip pim spt-threshold infinity"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000890
+    - cat2
+    - logging
+

@@ -1,0 +1,30 @@
+---
+# =========================================
+# Cisco IOS-XR Router RTR STIG - Authentication
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000660 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000660 | MANUAL CHECK - The Cisco PE router providing MPLS Layer 2 Virtual Private Network (L2VPN) services must be configured to authenticate targeted Label Distribution Pro"
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000660
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-RT-000910 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000910 | MANUAL CHECK - The Cisco Multicast Source Discovery Protocol (MSDP) router must be configured to authenticate all received MSDP packets."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the device CLI as required."
+  tags:
+    - CISC-RT-000910
+    - cat2
+    - authentication
+

@@ -1,0 +1,57 @@
+---
+# =========================================
+# MS SQL Server 2022 Database STIG - System Hardening
+# 3 rules
+# =========================================
+
+# -----------------------------------------
+# SQLD-22-000600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-000600 | SQL Server must protect against a user falsely repudiating by ensuring databases are not in a trust relationship."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      ALTER DATABASE [{{ database_name }}] SET TRUSTWORTHY OFF;
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-000600
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLD-22-002100 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-002100 | SQL Server must check the validity of all data inputs except those specifically identified by the organization."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-002100
+    - cat2
+    - system_hardening
+
+# -----------------------------------------
+# SQLD-22-002900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-002900 | Execution of stored procedures and functions that use execute as must be restricted to necessary cases only."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-002900
+    - cat2
+    - system_hardening
+

@@ -1,0 +1,115 @@
+---
+# =========================================
+# Cisco ASA VPN STIG - Authentication
+# 8 rules
+# =========================================
+
+# -----------------------------------------
+# CASA-VN-000120 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000120 | MANUAL CHECK - The Cisco ASA must be configured to validate certificates via a trustpoint that identifies a DoD or DoD-approved certificate authority."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-VN-000120
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-VN-000390 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000390 | MANUAL CHECK - The Cisco ASA remote access VPN server must be configured to use a separate authentication server than that used for administrative access."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Review STIG fixtext and configure the ASA as required."
+  tags:
+    - CASA-VN-000390
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-VN-000400 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000400 | The Cisco ASA remote access VPN server must be configured to use LDAP over SSL to determine authorization for granting access to the network."
+  cisco.asa.asa_config:
+    lines:
+      - "tunnel-group ANY_CONNECT general-attributes"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000400
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-VN-000410 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000410 | The Cisco ASA remote access VPN server must be configured to identify and authenticate users before granting access to the network."
+  cisco.asa.asa_config:
+    lines:
+      - "tunnel-group ANY_CONNECT webvpn-attributes"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000410
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-VN-000440 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000440 | The Cisco ASA remote access VPN server must be configured to enforce certificate-based authentication before granting access to the network."
+  cisco.asa.asa_config:
+    lines:
+      - "tunnel-group ANY_CONNECT webvpn-attributes"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000440
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CASA-VN-000450 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000450 | The Cisco ASA remote access VPN server must be configured to map the distinguished name (DN) from the client’s certificate to entries in the authentication server to determine authorization to acce..."
+  cisco.asa.asa_config:
+    lines:
+      - "tunnel-group ANY_CONNECT general-attributes"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000450
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-VN-000660 - MEDIUM
+# -----------------------------------------
+
+- name: "CASA-VN-000660 | The Cisco VPN remote access server must be configured to accept Common Access Card (CAC) credential credentials."
+  cisco.asa.asa_config:
+    lines:
+      - "tunnel-group ANY_CONNECT webvpn-attributes"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000660
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CASA-VN-000130 - HIGH
+# -----------------------------------------
+
+- name: "CASA-VN-000130 | The Cisco ASA must be configured to not accept certificates that have been revoked when using PKI for authentication."
+  cisco.asa.asa_config:
+    lines:
+      - "crypto ca trustpoint CA_X"
+      - "crypto ca trustpoint CA_X"
+  notify: Save running configuration
+  tags:
+    - CASA-VN-000130
+    - cat1
+    - authentication
+

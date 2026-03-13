@@ -1,0 +1,36 @@
+---
+# =========================================
+# MS SQL Server 2022 Database DISA STIG V1 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+mssql_2022_database_stig_auto_restart: false
+
+# -----------------------------------------
+# Database Connection
+# -----------------------------------------
+mssql_2022_database_stig_db_user: "sa"
+mssql_2022_database_stig_db_password: "changeme"
+mssql_2022_database_stig_db_host: "localhost"
+mssql_2022_database_stig_instance_name: "MSSQLSERVER"
+
+# -----------------------------------------
+# Audit Configuration
+# -----------------------------------------
+mssql_2022_database_stig_audit_name: "STIG_Audit"
+mssql_2022_database_stig_audit_filepath: "C:\\SQLAudit\\"
+
+# -----------------------------------------
+# STIG-Specific Parameters (override per environment)
+# -----------------------------------------
+mssql_2022_database_stig_temporal_table_name: "TODO_table_name"
+mssql_2022_database_stig_target_database: "TODO_database_name"
+mssql_2022_database_stig_master_key_password: "TODO_ComplexPassword1!"
+mssql_2022_database_stig_role_name: "TODO_role_name"
+mssql_2022_database_stig_member_name: "TODO_member_name"
+

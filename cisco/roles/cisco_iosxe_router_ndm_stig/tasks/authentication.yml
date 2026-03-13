@@ -1,0 +1,164 @@
+---
+# =========================================
+# Cisco IOS-XE Router NDM STIG - Authentication
+# 11 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-ND-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000150 | The Cisco router must be configured to enforce the limit of three consecutive invalid logon attempts, after which time it must lock out the user account from accessing the device for 15 minutes."
+  cisco.ios.ios_config:
+    lines:
+      - "login block-for 900 attempts 3 within 120"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000150
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000490 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000490 | The Cisco router must be configured with only one local account to be used as the account of last resort in the event the authentication server is unavailable."
+  cisco.ios.ios_config:
+    lines:
+      - "username {{ secret_key }} privilege {{ numeric_value }} secret {{ secret_key }}"
+      - "aaa authentication login default group tacacs+ local"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000490
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000550 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000550 | The Cisco router must be configured to enforce a minimum 15-character password length."
+  cisco.ios.ios_config:
+    lines:
+      - "aaa common-criteria policy PASSWORD_POLICY"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000550
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000570 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000570 | The Cisco router must be configured to enforce password complexity by requiring that at least one uppercase character be used."
+  cisco.ios.ios_config:
+    lines:
+      - "aaa common-criteria policy PASSWORD_POLICY"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000570
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000580 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000580 | The Cisco router must be configured to enforce password complexity by requiring that at least one lowercase character be used."
+  cisco.ios.ios_config:
+    lines:
+      - "aaa common-criteria policy PASSWORD_POLICY"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000580
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000590 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000590 | The Cisco router must be configured to enforce password complexity by requiring that at least one numeric character be used."
+  cisco.ios.ios_config:
+    lines:
+      - "aaa common-criteria policy PASSWORD_POLICY"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000590
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000600 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000600 | The Cisco router must be configured to enforce password complexity by requiring that at least one special character be used."
+  cisco.ios.ios_config:
+    lines:
+      - "aaa common-criteria policy PASSWORD_POLICY"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000600
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-000610 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-000610 | The Cisco router must be configured to require that when a password is changed, the characters are changed in at least eight of the positions within the password."
+  cisco.ios.ios_config:
+    lines:
+      - "aaa common-criteria policy PASSWORD_POLICY"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-000610
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001260 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001260 | The Cisco router must be configured to generate audit records when successful/unsuccessful logon attempts occur."
+  cisco.ios.ios_config:
+    lines:
+      - "login on-failure log"
+      - "login on-success log"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001260
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001370 - HIGH
+# -----------------------------------------
+
+- name: "CISC-ND-001370 | The Cisco router must be configured to use at least two authentication servers for the purpose of authenticating users prior to granting administrative access."
+  cisco.ios.ios_config:
+    lines:
+      - "radius host 10.1.48.2 key {{ secret_key }}"
+      - "radius host 10.1.48.3 key {{ secret_key }}"
+      - "aaa authentication CONSOLE group radius local"
+      - "aaa authentication login LOGIN_AUTHENTICATION group radius local"
+      - "line vty 0 1"
+  notify: Save running configuration
+  tags:
+    - CISC-ND-001370
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CISC-ND-001440 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-ND-001440 | MANUAL CHECK - The Cisco router must be configured to obtain its public key certificates from an appropriate certificate policy through an approved service provider."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Configure the router to obtain its public key certificates from an appropriate certificate policy through an approved service provider as shown in the example below. R2(config)# crypto pki trustpoi..."
+  tags:
+    - CISC-ND-001440
+    - cat2
+    - authentication
+

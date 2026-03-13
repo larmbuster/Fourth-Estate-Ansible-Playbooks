@@ -1,0 +1,33 @@
+---
+# =========================================
+# F5 BIG-IP ALG STIG - Logging
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-AP-300018 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300018 | The F5 BIG-IP appliance must generate event log records that can be forwarded to the centralized events log."
+  f5networks.f5_modules.bigip_device_syslog:
+    log_level: informational
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300018
+    - cat2
+    - logging
+
+# -----------------------------------------
+# F5BI-AP-300065 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300065 | The F5 BIG-IP appliance providing content filtering must automatically update malicious code protection mechanisms."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300065_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300065_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300065
+    - cat2
+    - logging
+

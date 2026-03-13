@@ -1,0 +1,132 @@
+---
+# =========================================
+# F5 BIG-IP DNS STIG - Network Services
+# 9 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-DN-300011 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300011 | The F5 BIG-IP DNS implementation must prohibit recursion on authoritative name servers."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300011
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-DN-300012 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300012 | The validity period for the RRSIGs covering a zone's DNSKEY RRSet must be no less than two days and no more than one week."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300012
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-DN-300013 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300013 | An authoritative name server must be configured to enable DNSSEC Resource Records."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300013
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-DN-300014 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300014 | Primary authoritative name servers must be configured to only receive zone transfer requests from specified secondary name servers."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_dns_stig_f5bi_dn_300014_key }}"
+    value: "{{ f5_bigip_dns_stig_f5bi_dn_300014_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300014
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-DN-300015 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300015 | The F5 BIG-IP DNS must use valid root name servers in the local root zone file."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300015
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-DN-300016 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300016 | The platform on which the name server software is hosted must be configured to respond to DNS traffic only."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300016
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-DN-300020 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300020 | The F5 BIG-IP DNS server implementation must validate the binding of the other DNS server's identity to the DNS information for a server-to-server transaction (e.g., zone transfer)."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300020
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-DN-300028 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300028 | A BIG-IP DNS server implementation must provide additional data origin artifacts along with the authoritative data the system returns in response to external name/address resolution queries."
+  f5networks.f5_modules.bigip_dns_resolver:
+    name: "{{ f5_bigip_dns_stig_dns_resolver | default('stig-resolver') }}"
+    state: present
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300028
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# F5BI-DN-300030 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-DN-300030 | The validity period for the RRSIGs covering the DS RR for a zones delegated children must be no less than two days and no more than one week."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_dns_stig_f5bi_dn_300030_key }}"
+    value: "{{ f5_bigip_dns_stig_f5bi_dn_300030_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-DN-300030
+    - cat2
+    - network_services
+

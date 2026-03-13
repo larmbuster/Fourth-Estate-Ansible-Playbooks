@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Oracle MySQL 8.0 Database DISA STIG V2 hardening
+    description:
+      - Applies Oracle MySQL 8.0 Database STIG hardening configuration.
+    options:
+      oracle_mysql80_stig_auto_restart:
+        type: bool
+        default: false
+        description: Automatically restart service after changes.
+

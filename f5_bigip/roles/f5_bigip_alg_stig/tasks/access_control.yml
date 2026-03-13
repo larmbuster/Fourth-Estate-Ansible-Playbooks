@@ -1,0 +1,61 @@
+---
+# =========================================
+# F5 BIG-IP ALG STIG - Access Control
+# 4 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-AP-300007 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300007 | To protect against data mining, the F5 BIG-IP appliance providing content filtering must prevent code injection attacks launched against application objects including, at a minimum, application URL..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300007_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300007_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300007
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-AP-300008 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300008 | To protect against data mining, the F5 BIG-IP appliance providing content filtering must prevent SQL injection attacks launched against data storage objects, including, at a minimum, databases, dat..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300008_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300008_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300008
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-AP-300068 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300068 | The F5 BIG-IP appliance providing content filtering must detect use of network services that have not been authorized or approved by the information system security manager (ISSM) and information s..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300068_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300068_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300068
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-AP-300069 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300069 | The F5 BIG-IP appliance providing content filtering must generate a log record when unauthorized network services are detected."
+  f5networks.f5_modules.bigip_remote_syslog:
+    remote_host: "{{ f5_bigip_alg_stig_syslog_server }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300069
+    - cat2
+    - access_control
+

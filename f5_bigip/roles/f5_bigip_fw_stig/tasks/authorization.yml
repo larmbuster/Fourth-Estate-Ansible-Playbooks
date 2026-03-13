@@ -1,0 +1,20 @@
+---
+# =========================================
+# F5 BIG-IP Firewall STIG - Authorization
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-FW-300017 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-FW-300017 | The F5 BIG-IP appliance must employ filters that prevent or limit the effects of all types of commonly known denial-of-service (DoS) attacks, including flooding, packet sweeps, and unauthorized por..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_fw_stig_f5bi_fw_300017_key }}"
+    value: "{{ f5_bigip_fw_stig_f5bi_fw_300017_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300017
+    - cat1
+    - authorization
+

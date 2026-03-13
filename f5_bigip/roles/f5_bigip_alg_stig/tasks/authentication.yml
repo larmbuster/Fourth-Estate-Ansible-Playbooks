@@ -1,0 +1,111 @@
+---
+# =========================================
+# F5 BIG-IP ALG STIG - Authentication
+# 8 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-AP-300006 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300006 | To protect against data mining, the F5 BIG-IP appliance providing content filtering must prevent code injection attacks from being launched against data storage objects, including, at a minimum, da..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300006_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300006_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300006
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-AP-300047 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300047 | The F5 BIG-IP appliance providing user authentication intermediary services must uniquely identify and authenticate users using redundant authentication servers and multifactor authentication (MFA)."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300047
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# F5BI-AP-300052 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300052 | The F5 BIG-IP appliance must configure certification path validation to ensure revoked machine credentials are prohibited from establishing an allowed session."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300052_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300052_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300052
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# F5BI-AP-300054 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300054 | The F5 BIG-IP appliance providing user authentication intermediary services using PKI-based user authentication must implement a local cache of revocation data to support path discovery and validat..."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300054
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-AP-300154 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-AP-300154 | The F5 BIG-IP appliance must configure certificate path validation to ensure revoked user credentials are prohibited from establishing an allowed session."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_alg_stig_f5bi_ap_300154_key }}"
+    value: "{{ f5_bigip_alg_stig_f5bi_ap_300154_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300154
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# F5BI-AP-300155 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300155 | MANUAL CHECK - The F5 BIG-IP appliance must not use the On-demand Cert Auth VPE agent as part of the APM Policy Profiles."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: From the BIG-IP GUI: 1. Access. 2. Profiles/Policies. 3. Access Profiles. 4. Click \"Edit\" under \"Per-Session Policy\" for the Access Profile. 5. Remove any \"On-Demand Cert Auth\" agents in the ..."
+  tags:
+    - F5BI-AP-300155
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# F5BI-AP-300157 - LOW
+# -----------------------------------------
+
+- name: "F5BI-AP-300157 | MANUAL CHECK - The F5 BIG-IP appliance must be configured to limit authenticated client sessions to initial session source IP."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Note: Setting must be tested. If there are operational impacts that prevent the use of this setting, document the impacts, and obtain approval from the AO if this requirement will not be implemente..."
+  tags:
+    - F5BI-AP-300157
+    - cat3
+    - authentication
+
+# -----------------------------------------
+# F5BI-AP-300160 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-AP-300160 | The F5 BIG-IP must be configured to identify and authenticate all endpoint devices or peers before establishing a connection."
+  f5networks.f5_modules.bigip_device_auth:
+    type: tacacs
+  notify: Save F5 configuration
+  tags:
+    - F5BI-AP-300160
+    - cat2
+    - authentication
+

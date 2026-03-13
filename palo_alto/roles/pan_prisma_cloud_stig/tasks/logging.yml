@@ -1,0 +1,96 @@
+---
+# =========================================
+# Palo Alto Prisma Cloud Compute Cloud STIG - Logging
+# 5 rules
+# =========================================
+
+# -----------------------------------------
+# CNTR-PC-000290 - HIGH
+# -----------------------------------------
+
+- name: "CNTR-PC-000290 | The configuration integrity of the container platform must be ensured and runtime policies must be configured."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000290
+    - cat1
+    - logging
+
+# -----------------------------------------
+# CNTR-PC-000310 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000310 | Prisma Cloud Compute must be configured to send events to the hosts' syslog."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000310
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CNTR-PC-000880 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-000880 | Prisma Cloud Compute must not write sensitive data to event logs."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-000880
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CNTR-PC-001030 - MEDIUM
+# -----------------------------------------
+
+- name: "CNTR-PC-001030 | The node that runs Prisma Cloud Compute containers must have sufficient disk space to allocate audit record storage capacity in accordance with organization-defined audit record storage requirements."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001030
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CNTR-PC-001390 - HIGH
+# -----------------------------------------
+
+- name: "CNTR-PC-001390 | Prisma Cloud Compute must protect the confidentiality and integrity of transmitted information."
+  ansible.builtin.uri:
+    url: "{{ pan_prisma_cloud_stig_api_url }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ pan_prisma_cloud_stig_api_token }}"
+    body_format: json
+    body: {}
+  notify: Commit Prisma Cloud configuration
+  tags:
+    - CNTR-PC-001390
+    - cat1
+    - logging
+

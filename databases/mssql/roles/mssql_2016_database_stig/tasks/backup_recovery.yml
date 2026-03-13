@@ -1,0 +1,18 @@
+---
+# =========================================
+# MS SQL Server 2016 Database STIG - Backup Recovery
+# 1 rules
+# =========================================
+
+# -----------------------------------------
+# SQL6-D0-001500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-001500 | MANUAL CHECK - In the event of a system failure, hardware loss or disk failure, SQL Server must be able to restore necessary databases with least disruption to mission processes."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Modify the system security plan, to include whether the database is static, the correct recovery model to be used, the backup schedule, and the plan for testing database restoration. In SQL Server ..."
+  tags:
+    - SQL6-D0-001500
+    - cat2
+    - backup_recovery
+

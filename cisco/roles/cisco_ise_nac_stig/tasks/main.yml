@@ -1,0 +1,67 @@
+---
+# =========================================
+# Cisco ISE NAC DISA STIG V2 - Task Orchestrator
+# Imports all category task files with tags
+# for selective execution (import_tasks enables
+# individual STIG ID tag filtering).
+#
+# Total rules: 30 (CAT I: 8, CAT II: 21, CAT III: 1)
+#
+# Usage:
+#   --tags access_control           (4 rules)
+#   --tags authentication           (2 rules)
+#   --tags authorization            (7 rules)
+#   --tags encryption               (3 rules)
+#   --tags logging                  (8 rules)
+#   --tags session_management       (1 rules)
+#   --tags system_hardening         (5 rules)
+#   --tags cat1                All CAT I (high) findings
+#   --tags cat2                All CAT II (medium) findings
+#   --tags cat3                All CAT III (low) findings
+#   --tags CSCO-NC-NNNNNN   Single specific finding
+# =========================================
+
+- name: "Pre-flight | Verify target is Cisco ISE"
+  ansible.builtin.assert:
+    that:
+      - ise_hostname is defined
+    fail_msg: >-
+      This role targets Cisco ISE only.
+    quiet: true
+  tags:
+    - always
+
+- name: "CSCO-NC | Access Control (4 rules)"
+  ansible.builtin.import_tasks: access_control.yml
+  tags:
+    - access_control
+
+- name: "CSCO-NC | Authentication (2 rules)"
+  ansible.builtin.import_tasks: authentication.yml
+  tags:
+    - authentication
+
+- name: "CSCO-NC | Authorization (7 rules)"
+  ansible.builtin.import_tasks: authorization.yml
+  tags:
+    - authorization
+
+- name: "CSCO-NC | Encryption (3 rules)"
+  ansible.builtin.import_tasks: encryption.yml
+  tags:
+    - encryption
+
+- name: "CSCO-NC | Logging (8 rules)"
+  ansible.builtin.import_tasks: logging.yml
+  tags:
+    - logging
+
+- name: "CSCO-NC | Session Management (1 rules)"
+  ansible.builtin.import_tasks: session_management.yml
+  tags:
+    - session_management
+
+- name: "CSCO-NC | System Hardening (5 rules)"
+  ansible.builtin.import_tasks: system_hardening.yml
+  tags:
+    - system_hardening

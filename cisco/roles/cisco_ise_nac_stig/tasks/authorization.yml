@@ -1,0 +1,121 @@
+---
+# =========================================
+# Cisco ISE NAC STIG - Authorization
+# 7 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NC-000060 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NC-000060 | VERIFY - The Cisco ISE must verify host-based IDS/IPS software is authorized and running on posture required clients defined in the NAC System Security Plan (SSP) prior to granting trusted network access. T..."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DoD is not at C2C Step 4 or higher, this is not a finding. If not required by the NAC SSP, this is not a finding. Verify that the posture policy will verify that a host-based IPS is running. 1. ..."
+  tags:
+    - CSCO-NC-000060
+    - cat1
+    - authorization
+
+# -----------------------------------------
+# CSCO-NC-000070 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000070 | For endpoints that require automated remediation, the Cisco ISE must be configured to redirect endpoints to a logically separate VLAN for remediation services. This is required for compliance with ..."
+  cisco.ise.syslog_server:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_syslog_server }}"
+    host: "{{ cisco_ise_nac_stig_syslog_server }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000070
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CSCO-NC-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000130 | The Cisco ISE must be configured so client machines do not communicate with other network devices in the DMZ or subnet except as needed to perform an access client assessment or to identify themsel..."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000130
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CSCO-NC-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000140 | The Cisco ISE must deny or restrict access for endpoints that fail required posture checks. This is required for compliance with C2C Step 4."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000140
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CSCO-NC-000270 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000270 | The Cisco ISE must authenticate all endpoint devices before establishing a connection and proceeding with posture assessment. This is required for compliance with C2C Step 4."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000270
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CSCO-NC-000280 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000280 | The Cisco ISE must be configured to dynamically apply restricted access of endpoints that are granted access using MAC Authentication Bypass (MAB). This is required for compliance with C2C Step 4."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000280
+    - cat2
+    - authorization
+
+# -----------------------------------------
+# CSCO-NC-000310 - HIGH
+# -----------------------------------------
+
+- name: "CSCO-NC-000310 | The Cisco ISE must enforce posture status assessment for posture required clients defined in the NAC System Security Plan (SSP). This is required for compliance with C2C Step 3."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000310
+    - cat1
+    - authorization
+

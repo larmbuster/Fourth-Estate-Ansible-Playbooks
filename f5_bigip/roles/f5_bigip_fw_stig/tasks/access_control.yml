@@ -1,0 +1,147 @@
+---
+# =========================================
+# F5 BIG-IP Firewall STIG - Access Control
+# 10 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-FW-300001 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300001 | The F5 BIG-IP appliance that filters traffic from the VPN access points must be configured with organization-defined filtering rules that apply to the monitoring of remote access traffic."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_fw_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_fw_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300001
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300002 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-FW-300002 | The F5 BIG-IP appliance must be configured to use filters that use packet headers and packet attributes, including source and destination IP addresses and ports, to prevent the flow of unauthorized..."
+  f5networks.f5_modules.bigip_firewall_rule:
+    name: "{{ f5_bigip_fw_stig_rule_name | default('stig-rule') }}"
+    parent_policy: "{{ f5_bigip_fw_stig_firewall_policy | default('stig-policy') }}"
+    action: accept
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300002
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300005 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300005 | The F5 BIG-IP appliance must generate traffic log entries containing information to establish the details of the event, including success or failure of the application of the firewall rule."
+  f5networks.f5_modules.bigip_remote_syslog:
+    remote_host: "{{ f5_bigip_fw_stig_syslog_server }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300005
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300015 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300015 | The F5 BIG-IP appliance must be configured to restrict itself from accepting outbound packets that contain an illegitimate address in the source address field via an egress filter or by enabling Un..."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_fw_stig_f5bi_fw_300015_key }}"
+    value: "{{ f5_bigip_fw_stig_f5bi_fw_300015_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300015
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300020 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-FW-300020 | The F5 BIG-IP appliance must deny network communications traffic by default and allow network communications traffic by exception (i.e., deny all, permit by exception)."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_fw_stig_f5bi_fw_300020_key }}"
+    value: "{{ f5_bigip_fw_stig_f5bi_fw_300020_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300020
+    - cat1
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300028 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300028 | MANUAL CHECK - The F5 BIG-IP appliance must be configured to inspect all inbound and outbound traffic at the application layer."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: From the BIG-IP GUI: 1. Security. 2. Network Firewall. 3. Policies. 4. <Policy Name> 5. Configure rules to use packet headers and packet attributes, including source and destination IP addresses an..."
+  tags:
+    - F5BI-FW-300028
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300029 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300029 | The F5 BIG-IP appliance must be configured to filter inbound traffic on all external interfaces."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_fw_stig_f5bi_fw_300029_key }}"
+    value: "{{ f5_bigip_fw_stig_f5bi_fw_300029_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300029
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300030 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300030 | The F5 BIG-IP appliance must be configured to filter outbound traffic on all internal interfaces."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_fw_stig_f5bi_fw_300030_key }}"
+    value: "{{ f5_bigip_fw_stig_f5bi_fw_300030_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300030
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300031 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300031 | The F5 BIG-IP appliance must be configured to block all outbound management traffic."
+  f5networks.f5_modules.bigip_sys_db:
+    key: "{{ f5_bigip_fw_stig_f5bi_fw_300031_key }}"
+    value: "{{ f5_bigip_fw_stig_f5bi_fw_300031_value }}"
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300031
+    - cat2
+    - access_control
+
+# -----------------------------------------
+# F5BI-FW-300033 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-FW-300033 | The BIG-IP appliance perimeter firewall must be configured to filter traffic destined to the enclave in accordance with the specific traffic that is approved and registered in the Ports, Protocols,..."
+  f5networks.f5_modules.bigip_firewall_rule:
+    name: "{{ f5_bigip_fw_stig_rule_name | default('stig-rule') }}"
+    parent_policy: "{{ f5_bigip_fw_stig_firewall_policy | default('stig-policy') }}"
+    action: accept
+  notify: Save F5 configuration
+  tags:
+    - F5BI-FW-300033
+    - cat2
+    - access_control
+

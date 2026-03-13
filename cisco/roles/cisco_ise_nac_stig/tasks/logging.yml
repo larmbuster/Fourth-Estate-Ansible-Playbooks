@@ -1,0 +1,140 @@
+---
+# =========================================
+# Cisco ISE NAC STIG - Logging
+# 8 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NC-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000100 | The Cisco ISE must send an alert to the Information System Security Manager (ISSM) and System Administrator (SA), at a minimum, when security issues are found that put the network at risk. This is ..."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NC-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000150 | The Cisco ISE must generate a log record when an endpoint fails authentication. This is This is required for compliance with C2C Step 1."
+  cisco.ise.syslog_server:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_syslog_server }}"
+    host: "{{ cisco_ise_nac_stig_syslog_server }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000150
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NC-000160 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000160 | The Cisco ISE must generate a log record when the client machine fails posture assessment because required security software is missing or has been deleted. This is This is required for compliance ..."
+  cisco.ise.syslog_server:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_syslog_server }}"
+    host: "{{ cisco_ise_nac_stig_syslog_server }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000160
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NC-000170 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000170 | The Cisco ISE must send an alert to the system administrator, at a minimum, when endpoints fail the policy assessment checks for organization-defined infractions. This is required for compliance wi..."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000170
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NC-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000200 | The Cisco ISE must generate a critical alert to be sent to the ISSO and SA (at a minimum) in the event of an audit processing failure. This is required for compliance with C2C Step 1."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000200
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NC-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000210 | The Cisco ISE must provide an alert to, at a minimum, the SA and ISSO of all audit failure events where the detection and/or prevention function is unable to write events to either local storage or..."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000210
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NC-000230 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000230 | The Cisco ISE must generate a critical alert to be sent to the ISSO and SA (at a minimum) if it is unable to communicate with the central event log. This is required for compliance with C2C Step 1."
+  cisco.ise.syslog_server:
+    ise_hostname: "{{ cisco_ise_nac_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_nac_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_nac_stig_ise_password }}"
+    name: "{{ cisco_ise_nac_stig_syslog_server }}"
+    host: "{{ cisco_ise_nac_stig_syslog_server }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NC-000230
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NC-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NC-000240 | VERIFY - The Cisco ISE must continue to queue traffic log records locally when communication with the central log server is lost and there is an audit archival failure. This is required for compliance with ..."
+  ansible.builtin.debug:
+    msg: "VERIFY: If DoD is not at C2C Step 1 or higher, this is not a finding. Verify that logging targets are configured to buffer syslog messages when the server is down. From the Web Admin portal: 1. Choose Admi..."
+  tags:
+    - CSCO-NC-000240
+    - cat2
+    - logging
+

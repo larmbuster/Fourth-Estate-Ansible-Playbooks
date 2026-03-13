@@ -1,0 +1,369 @@
+---
+# =========================================
+# Cisco ISE NDM STIG - Logging
+# 22 rules
+# =========================================
+
+# -----------------------------------------
+# CSCO-NM-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000030 | For the local web-based account of last resort, the Cisco ISE must automatically audit account creation."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000030
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000040 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000040 | For the local web-based account of last resort and the default local CLI account, the Cisco ISE must automatically audit account modification."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000040
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000050 | For the local web-based account of last resort, the Cisco ISE must automatically audit account disabling actions."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000050
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000060 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000060 | For the local account of last resort, the Cisco ISE must automatically audit account removal actions."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000060
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000070 - LOW
+# -----------------------------------------
+
+- name: "CSCO-NM-000070 | The Cisco ISE must automatically audit account enabling actions."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000070
+    - cat3
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000100 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000100 | The Cisco ISE must audit the execution of privileged functions."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000130 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000130 | VERIFY - The Cisco ISE must protect against an individual (or process acting on behalf of an individual) falsely denying having performed organization-defined actions to be covered by non-repudiation."
+  ansible.builtin.debug:
+    msg: "VERIFY: To view remote logging targets, complete the following steps: 1. From the ISE Administration Interface, choose Administration >> System >> Logging >> Remote Logging Targets. 2. The Remote Logging T..."
+  tags:
+    - CSCO-NM-000130
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000140 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000140 | The Cisco ISE must generate audit records when successful attempts to access privileges occur."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000140
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000150 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000150 | The Cisco ISE must generate audit records when successful attempts to modify administrator privileges occur."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000150
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000160 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000160 | The Cisco ISE must generate audit records when successful attempts to delete administrator privileges occur."
+  cisco.ise.admin_user:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_admin_username | default('admin') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000160
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000170 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000170 | The Cisco ISE must generate audit records when successful logon attempts occur."
+  cisco.ise.syslog_server:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_syslog_server }}"
+    host: "{{ cisco_ise_ndm_stig_syslog_server }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000170
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000180 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000180 | The Cisco ISE must generate audit records for privileged activities or other system-level access."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000180
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000190 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000190 | The Cisco ISE must generate audit records when concurrent logons from different workstations occur."
+  cisco.ise.syslog_server:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_syslog_server }}"
+    host: "{{ cisco_ise_ndm_stig_syslog_server }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000190
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000200 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000200 | The Cisco ISE must limit audit record storage capacity for all locally stored logs."
+  cisco.ise.syslog_server:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_syslog_server }}"
+    host: "{{ cisco_ise_ndm_stig_syslog_server }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000200
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000210 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000210 | VERIFY - The Cisco ISE must configure a remote syslog where audit records are stored on a centralized logging target that is different from the system being audited."
+  ansible.builtin.debug:
+    msg: "VERIFY: To view remote logging targets, complete the following steps: 1. From the ISE Administration Interface, choose Administration >> System >> Logging >> Remote Logging Targets. 2. The Remote Logging T..."
+  tags:
+    - CSCO-NM-000210
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000220 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000220 | The Cisco ISE must send an alarm to one or more individuals when the monitoring collector process has an error or failure."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000220
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000240 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000240 | The Cisco ISE must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC)."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000240
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000300 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000300 | The Cisco ISE must generate log records for a locally developed list of auditable events."
+  cisco.ise.syslog_server:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_syslog_server }}"
+    host: "{{ cisco_ise_ndm_stig_syslog_server }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000300
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000330 - LOW
+# -----------------------------------------
+
+- name: "CSCO-NM-000330 | The Cisco ISE must conduct configuration and operational backups when changes are made or must schedule backups weekly, at a minimum."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000330
+    - cat3
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000560 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000560 | VERIFY - The Cisco ISE must be configured to send log data to at least two central log servers for the purpose of forwarding alerts to the administrators and the information system security officer (ISSO)."
+  ansible.builtin.debug:
+    msg: "VERIFY: To view remote logging targets, complete the following steps: 1. From the ISE Administration Interface, choose Administration >> System >> Logging >> Remote Logging Targets. 2. The Remote Logging T..."
+  tags:
+    - CSCO-NM-000560
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000650 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000650 | The Cisco ISE must initiate session auditing upon startup."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000650
+    - cat2
+    - logging
+
+# -----------------------------------------
+# CSCO-NM-000720 - MEDIUM
+# -----------------------------------------
+
+- name: "CSCO-NM-000720 | The Cisco ISE must generate audit records containing the full-text recording of privileged commands."
+  cisco.ise.network_device:
+    ise_hostname: "{{ cisco_ise_ndm_stig_ise_hostname }}"
+    ise_username: "{{ cisco_ise_ndm_stig_ise_username }}"
+    ise_password: "{{ cisco_ise_ndm_stig_ise_password }}"
+    name: "{{ cisco_ise_ndm_stig_network_device | default('stig-device') }}"
+    state: present
+  notify: Commit ISE configuration
+  tags:
+    - CSCO-NM-000720
+    - cat2
+    - logging
+

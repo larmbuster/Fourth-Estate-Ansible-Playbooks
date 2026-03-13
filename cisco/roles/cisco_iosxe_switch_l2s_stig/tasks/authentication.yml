@@ -1,0 +1,38 @@
+---
+# =========================================
+# Cisco IOS-XE Switch L2S STIG - Authentication
+# 2 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-L2-000020 - HIGH
+# -----------------------------------------
+
+- name: "CISC-L2-000020 | The Cisco switch must uniquely identify and authenticate all network-connected endpoint devices before establishing any connection."
+  cisco.ios.ios_config:
+    lines:
+      - "radius server RADIUS_1"
+      - "key {{ secret_key }}"
+      - "radius server RADIUS_2"
+      - "key {{ secret_key }}"
+      - "aaa new-model"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000020
+    - cat1
+    - authentication
+
+# -----------------------------------------
+# CISC-L2-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-L2-000030 | The Cisco switch must authenticate all VLAN Trunk Protocol (VTP) messages with a hash function using the most secured cryptographic algorithm available."
+  cisco.ios.ios_config:
+    lines:
+      - "vtp password {{ secret_key }}"
+  notify: Save running configuration
+  tags:
+    - CISC-L2-000030
+    - cat2
+    - authentication
+

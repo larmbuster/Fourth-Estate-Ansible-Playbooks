@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Cisco ASA Firewall DISA STIG V2 hardening
+    description:
+      - Applies Cisco ASA Firewall STIG hardening configuration.
+    options:
+      cisco_asa_firewall_stig_auto_save:
+        type: bool
+        default: true
+        description: Automatically save configuration after changes.
+

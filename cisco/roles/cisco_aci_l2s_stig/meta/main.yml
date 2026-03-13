@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: cisco_aci_l2s_stig
+  author: Fourth Estate
+  description: >-
+    Cisco ACI L2S DISA STIG V1 hardening role.
+    Implements 7 XCCDF rules across authentication, switching.
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Generic
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - stig
+    - disa
+    - hardening
+    - security
+    - compliance
+
+dependencies: []
+

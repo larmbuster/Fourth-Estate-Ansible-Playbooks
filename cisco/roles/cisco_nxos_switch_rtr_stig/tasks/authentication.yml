@@ -1,0 +1,70 @@
+---
+# =========================================
+# Cisco NX-OS Switch RTR STIG - Authentication
+# 4 rules
+# =========================================
+
+# -----------------------------------------
+# CISC-RT-000030 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000030 | The Cisco switch must be configured to use keys with a duration not exceeding 180 days for authenticating routing protocol messages."
+  cisco.nxos.nxos_config:
+    lines:
+      - "key chain OSPF_KEY"
+      - "key 1"
+      - "key 2"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000030
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-RT-000050 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000050 | The Cisco switch must be configured to authenticate all routing protocol messages using NIST-validated FIPS 198-1 message authentication code algorithm."
+  cisco.nxos.nxos_config:
+    lines:
+      - "key chain OSPF_KEY"
+      - "key 1"
+      - "key 2"
+      - "ip ospf authentication key-chain OSPF_KEY"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000050
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-RT-000660 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000660 | The Cisco PE switch providing MPLS Layer 2 Virtual Private Network (L2VPN) services must be configured to authenticate targeted Label Distribution Protocol (LDP) sessions used to exchange virtual c..."
+  cisco.nxos.nxos_config:
+    lines:
+      - "key chain LDP_KEY"
+      - "key 1"
+      - "ip prefix-list LDP_NBR1 permit 10.1.22.2/32"
+      - "ip prefix-list LDP_NBR2 permit 10.1.12.4/32"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000660
+    - cat2
+    - authentication
+
+# -----------------------------------------
+# CISC-RT-000910 - MEDIUM
+# -----------------------------------------
+
+- name: "CISC-RT-000910 | The Cisco Multicast Source Discovery Protocol (MSDP) switch must be configured to authenticate all received MSDP packets."
+  cisco.nxos.nxos_config:
+    lines:
+      - "ip msdp password {{ peer_address }} {{ secret_key }}"
+  notify: Save running configuration
+  tags:
+    - CISC-RT-000910
+    - cat2
+    - authentication
+

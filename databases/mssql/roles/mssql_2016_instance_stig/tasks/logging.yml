@@ -1,0 +1,222 @@
+---
+# =========================================
+# MS SQL Server 2016 Instance STIG - Logging
+# 13 rules
+# =========================================
+
+# -----------------------------------------
+# SQL6-D0-004000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-004000 | SQL Server must protect against a user falsely repudiating by ensuring all accounts are individual, unique, and not shared."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-004000
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-004300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-004300 | SQL Server must be configured to generate audit records for DoD-defined auditable events within all DBMS/database components."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-004300
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-004700 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-004700 | SQL Server must initiate session auditing upon startup."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      ALTER SERVER AUDIT [{{ server_audit_name }}] WITH STATE = ON
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-004700
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-005500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-005500 | SQL Server must include additional, more detailed, organization-defined information in the audit records for audit events identified by type, location, or subject."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-005500
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-005600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-005600 | SQL Server must by default shut down upon audit failure, to include the unavailability of space for more audit log records; or must be configurable to shut down upon audit failure."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      ALTER SERVER AUDIT [AuditNameHere] WITH (STATE = OFF);
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-005600
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-005700 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-005700 | SQL Server must be configurable to overwrite audit log records, oldest first (First-In-First-Out - FIFO), in the event of unavailability of space for more audit log records."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      ALTER SERVER AUDIT [AuditName] WITH (STATE = OFF);
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-005700
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-010900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-010900 | SQL Server must allocate audit record storage capacity in accordance with organization-defined audit record storage requirements."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-010900
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-011000 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-011000 | SQL Server must provide a warning to appropriate support staff when allocated audit record storage volume reaches 75% of maximum audit record storage capacity."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-011000
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-011100 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-011100 | SQL Server must provide an immediate real-time alert to appropriate support staff of all audit log failures."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-011100
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-011200 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-011200 | MANUAL CHECK - SQL Server must record time stamps in audit records and application data that can be mapped to Coordinated Universal Time (UTC, formerly GMT)."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Where possible, configure the operating system to automatic synchronize with an official time server, using NTP. Where there is reason not to implement automatic synchronization with an official ti..."
+  tags:
+    - SQL6-D0-011200
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-013800 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-013800 | SQL Server must generate audit records when successful and unsuccessful attempts to modify security objects occur."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      USE [master];
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-013800
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-015500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-015500 | SQL Server must generate audit records for all direct access to the database(s)."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-015500
+    - cat2
+    - logging
+
+# -----------------------------------------
+# SQL6-D0-015900 - MEDIUM
+# -----------------------------------------
+
+- name: "SQL6-D0-015900 | The system SQL Server must off-load audit data to a separate log management facility; this must be continuous and in near real time for systems with a network connection to the storage facility and..."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2016_instance_stig_db_user }}"
+    login_password: "{{ mssql_2016_instance_stig_db_password }}"
+    login_host: "{{ mssql_2016_instance_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQL6-D0-015900
+    - cat2
+    - logging
+

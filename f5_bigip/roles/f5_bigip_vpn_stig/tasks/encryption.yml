@@ -1,0 +1,182 @@
+---
+# =========================================
+# F5 BIG-IP VPN STIG - Encryption
+# 11 rules
+# =========================================
+
+# -----------------------------------------
+# F5BI-VN-300004 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-VN-300004 | The F5 BIG-IP appliance must be configured to use a Diffie-Hellman (DH) Group of 16 or greater for Internet Key Exchange (IKE) Phase 1."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300004
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300005 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-VN-300005 | The F5 BIG-IP appliance IPsec VPN Gateway must use AES256 or higher encryption for the Internet Key Exchange (IKE) proposal to protect confidentiality of remote access sessions."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300005
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300006 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-VN-300006 | The F5 BIG-IP appliance IPsec VPN must use AES256 or greater encryption for the IPsec proposal."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300006
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300009 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-VN-300009 | The F5 BIG-IP appliance IPsec VPN must ensure inbound and outbound traffic is configured with a security policy."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300009
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300021 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-VN-300021 | The F5 BIG-IP appliance IPsec VPN Gateway must use Internet Key Exchange (IKE) for IPsec VPN Security Associations (SAs)."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300021
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300024 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-VN-300024 | The IPsec BIG-IP appliance must use IKEv2 for IPsec VPN security associations."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300024
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300025 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-VN-300025 | The F5 BIG-IP appliance IPsec VPN Gateway must renegotiate the IPsec Phase 1 security association after eight hours or less."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300025
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300026 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-VN-300026 | The F5 BIG-IP appliance IPsec VPN must renegotiate the IKE Phase 2 security association after eight hours or less."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300026
+    - cat2
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300040 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-VN-300040 | The F5 BIG-IP appliance IPsec VPN must use cryptographic algorithms approved by NSA to protect NSS when transporting classified traffic across an unclassified network."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300040
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300041 - HIGH
+# -----------------------------------------
+
+- name: "F5BI-VN-300041 | The F5 BIG-IP appliance IPsec VPN must be configured to use FIPS-validated SHA-2 or higher for Internet Key Exchange (IKE)."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300041
+    - cat1
+    - encryption
+
+# -----------------------------------------
+# F5BI-VN-300044 - MEDIUM
+# -----------------------------------------
+
+- name: "F5BI-VN-300044 | The F5 BIG-IP appliance IPsec VPN Gateway must specify Perfect Forward Secrecy (PFS) during Internet Key Exchange (IKE) negotiation."
+  f5networks.f5_modules.bigip_ike_peer:
+    name: "{{ f5_bigip_vpn_stig_ike_peer | default('stig-ike-peer') }}"
+    remote_address: "{{ f5_bigip_vpn_stig_ike_remote_address }}"
+    version:
+      - v2
+  notify: Save F5 configuration
+  tags:
+    - F5BI-VN-300044
+    - cat2
+    - encryption
+

@@ -1,0 +1,102 @@
+---
+# =========================================
+# MS SQL Server 2022 Database STIG - Network Services
+# 6 rules
+# =========================================
+
+# -----------------------------------------
+# SQLD-22-000500 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-000500 | SQL Server must protect against a user falsely repudiating by using system-versioned tables (Temporal Tables)."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      ALTER TABLE {{ mssql_2022_database_stig_temporal_table_name }}
+      ADD PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime);
+      ALTER TABLE {{ mssql_2022_database_stig_temporal_table_name }}
+      SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.{{ mssql_2022_database_stig_temporal_table_name }}_History));
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-000500
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# SQLD-22-001300 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-001300 | MANUAL CHECK - Database objects (including but not limited to tables, indexes, storage, stored procedures, functions, triggers, links to software external to SQL Server, etc.) must be owned by database/DBMS princ..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Document and obtain approval for any account(s) authorized for object ownership. If necessary, use the ALTER AUTHORIZATION command to change object ownership to an authorized account. Example provi..."
+  tags:
+    - SQLD-22-001300
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# SQLD-22-001600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-001600 | The Database Master Key encryption password must meet DOD password complexity requirements."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      USE {{ mssql_2022_database_stig_target_database }};
+      ALTER MASTER KEY REGENERATE WITH ENCRYPTION BY PASSWORD = '{{ mssql_2022_database_stig_master_key_password }}';
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-001600
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# SQLD-22-002600 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-002600 | SQL Server must associate organization-defined types of security labels having organization-defined security label values with information in process, transit, or storage."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      SELECT 1 -- TODO: Review STIG fixtext and implement appropriate SQL
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-002600
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# SQLD-22-003100 - MEDIUM
+# -----------------------------------------
+
+- name: "SQLD-22-003100 | SQL Server must enforce access restrictions associated with changes to the configuration of the database(s)."
+  community.general.mssql_script:
+    login_user: "{{ mssql_2022_database_stig_db_user }}"
+    login_password: "{{ mssql_2022_database_stig_db_password }}"
+    login_host: "{{ mssql_2022_database_stig_db_host }}"
+    script: |
+      ALTER ROLE {{ mssql_2022_database_stig_role_name }} DROP MEMBER {{ mssql_2022_database_stig_member_name }};
+  notify: Restart SQL Server service
+  tags:
+    - SQLD-22-003100
+    - cat2
+    - network_services
+
+# -----------------------------------------
+# SQLD-22-003300 - HIGH
+# -----------------------------------------
+
+- name: "SQLD-22-003300 | MANUAL CHECK - SQL Server must implement cryptographic mechanisms to prevent unauthorized modification or disclosure of organization-defined information at rest (to include, at a minimum, PII and classified infor..."
+  ansible.builtin.debug:
+    msg: "MANUAL CHECK: Where full-disk encryption is required, configure Windows and/or the storage system to provide this. Where TDE is required, create a master key, obtain a certificate protected by the master key, cr..."
+  tags:
+    - SQLD-22-003300
+    - cat1
+    - network_services
+

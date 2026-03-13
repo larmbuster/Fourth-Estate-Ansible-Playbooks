@@ -1,0 +1,41 @@
+---
+# =========================================
+# F5 BIG-IP ALG DISA STIG V1 - Default Variables
+# Override these in group_vars, host_vars,
+# or via -e on the command line.
+# All values are pre-set to STIG-compliant defaults.
+# =========================================
+
+# -----------------------------------------
+# Behavior Flags
+# -----------------------------------------
+f5_bigip_alg_stig_auto_save: true
+
+# -----------------------------------------
+# Authentication
+# -----------------------------------------
+f5_bigip_alg_stig_ssh_timeout: 600
+f5_bigip_alg_stig_session_timeout: 600
+
+# -----------------------------------------
+# Logging
+# -----------------------------------------
+f5_bigip_alg_stig_syslog_server: "10.0.0.10"
+
+# -----------------------------------------
+# Network Services
+# -----------------------------------------
+f5_bigip_alg_stig_ntp_server_primary: "10.0.0.20"
+
+# -----------------------------------------
+# Encryption
+# -----------------------------------------
+f5_bigip_alg_stig_tls_ciphers: "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256"
+
+# -----------------------------------------
+# Firewall / VPN
+# -----------------------------------------
+f5_bigip_alg_stig_firewall_policy: "stig-policy"
+f5_bigip_alg_stig_ike_remote_address: "10.0.0.50"
+f5_bigip_alg_stig_admin_user: "admin"
+
