@@ -150,7 +150,18 @@ argument_specs:
         type: str
         default: "22621.380"
         description: Minimum required OS build for verification.
-      win11_stig_auto_reboot:
-        type: bool
-        default: false
-        description: Automatically reboot after changes that require it.
+      win11_stig_reboot_strategy:
+        type: str
+        default: "notify"
+        description: >-
+          Reboot strategy after STIG changes (never, notify, scheduled, immediate).
+        choices:
+          - never
+          - notify
+          - scheduled
+          - immediate
+      win11_stig_scheduled_reboot_time:
+        type: str
+        default: "02:00"
+        description: >-
+          Time for scheduled reboot in 24h format (used when strategy is scheduled).

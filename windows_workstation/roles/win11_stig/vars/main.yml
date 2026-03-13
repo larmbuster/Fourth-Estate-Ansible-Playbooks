@@ -6,6 +6,6 @@
 # =========================================
 
 win11_stig_version: "V2R6"
-win11_stig_release_date: "2025-01-22"
+win11_stig_release_info: "Release: 6 Benchmark Date: 22 Jan 2025"
 win11_stig_benchmark_id: "5471"
 win11_stig_total_rules: 263

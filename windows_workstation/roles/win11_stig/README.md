@@ -4,17 +4,27 @@ Ansible role implementing the **DISA STIG for Microsoft Windows 11 V2R6** on dom
 
 Covers **263 XCCDF rules** across 7 STIG categories with a tag-based execution model that lets operators run everything, a single category, a single severity level, or a single finding.
 
+## STIG Reference
+
+| Field | Value |
+|-------|-------|
+| STIG Title | Microsoft Windows 11 |
+| Version / Release | V2R6 |
+| Benchmark ID | 5471 |
+| Release Info | Release: 6 Benchmark Date: 22 Jan 2025 |
+| Total Rules | 263 |
+
 ## STIG Coverage
 
 | Task File | STIG IDs | Rules | Tag | Description |
 |-----------|----------|-------|-----|-------------|
-| `general_checks.yml` | WN11-00-*, WN11-RG-* | 45 | `general_checks` | OS verification, features, services, firewall |
-| `account_policies.yml` | WN11-AC-* | 9 | `account_policies` | Password and lockout policies |
-| `audit_policy.yml` | WN11-AU-* | 52 | `audit_policy` | Audit subcategory configuration |
-| `admin_templates.yml` | WN11-CC-*, WN11-EP-*, WN11-UC-* | 81 | `admin_templates` | Registry-based GPO settings |
-| `security_options.yml` | WN11-SO-* | 44 | `security_options` | Security option settings |
-| `user_rights.yml` | WN11-UR-* | 28 | `user_rights` | User rights assignment |
-| `public_key.yml` | WN11-PK-* | 4 | `public_key` | DoD certificate verification |
+| `general_checks.yml` | WN11-00-\*, WN11-RG-\* | 45 | `general_checks` | OS verification, features, services, firewall |
+| `account_policies.yml` | WN11-AC-\* | 9 | `account_policies` | Password and lockout policies |
+| `audit_policy.yml` | WN11-AU-\* | 52 | `audit_policy` | Audit subcategory configuration |
+| `admin_templates.yml` | WN11-CC-\*, WN11-EP-\*, WN11-UC-\* | 81 | `admin_templates` | Registry-based GPO settings |
+| `security_options.yml` | WN11-SO-\* | 44 | `security_options` | Security option settings |
+| `user_rights.yml` | WN11-UR-\* | 28 | `user_rights` | User rights assignment |
+| `public_key.yml` | WN11-PK-\* | 4 | `public_key` | DoD certificate verification |
 
 ## Requirements
 
@@ -30,6 +40,10 @@ Install collections:
 ```bash
 ansible-galaxy collection install -r requirements.yml
 ```
+
+## Dependencies
+
+None.
 
 ## Role Variables
 
@@ -71,16 +85,36 @@ All tunable values are in `defaults/main.yml` with STIG-compliant defaults pre-s
 |----------|---------|-----------|-------------|
 | `win11_stig_network_access_groups` | `[Administrators, Remote Desktop Users]` | WN11-UR-000010 | Network access groups |
 | `win11_stig_logon_locally_groups` | `[Administrators, Users]` | WN11-UR-000025 | Local logon groups |
-| `win11_stig_deny_network_access_groups` | `[Guests, Local account]` | WN11-UR-000070 | Deny network access |
-| `win11_stig_deny_rdp_groups` | `[Guests, Local account]` | WN11-UR-000090 | Deny RDP logon |
+| `win11_stig_deny_network_access_groups` | `[Enterprise Admins, Domain Admins, Guests, Local account]` | WN11-UR-000070 | Deny network access |
+| `win11_stig_deny_batch_logon_groups` | `[Enterprise Admins, Domain Admins, Guests]` | WN11-UR-000075 | Deny batch logon |
+| `win11_stig_deny_service_logon_groups` | `[Enterprise Admins, Domain Admins]` | WN11-UR-000080 | Deny service logon |
+| `win11_stig_deny_local_logon_groups` | `[Enterprise Admins, Domain Admins, Guests]` | WN11-UR-000085 | Deny local logon |
+| `win11_stig_deny_rdp_groups` | `[Enterprise Admins, Domain Admins, Guests, Local account]` | WN11-UR-000090 | Deny RDP logon |
 | `win11_stig_remote_shutdown_groups` | `[Administrators]` | WN11-UR-000100 | Remote shutdown |
+
+### General Checks
+
+| Variable | Default | STIG Rule | Description |
+|----------|---------|-----------|-------------|
+| `win11_stig_min_os_build` | `"22621.380"` | WN11-00-000040 | Minimum OS build for verification |
 
 ### Behavior
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `win11_stig_auto_reboot` | `false` | Automatically reboot if required |
-| `win11_stig_min_os_build` | `"22621.380"` | Minimum OS build for verification |
+| `win11_stig_reboot_strategy` | `"notify"` | Reboot strategy: `never`, `notify`, `scheduled`, `immediate` |
+| `win11_stig_scheduled_reboot_time` | `"02:00"` | Time for scheduled reboot (24h format) |
+
+## Reboot Strategy
+
+The role supports four reboot strategies controlled by `win11_stig_reboot_strategy`:
+
+| Strategy | Behavior |
+|----------|----------|
+| `never` | Suppress reboot; set a fact for summary reporting only |
+| `notify` | Warn logged-in users via `msg.exe` and set a registry flag at `HKLM:\SOFTWARE\FourthEstate\STIG\RebootPending` |
+| `scheduled` | Create a one-time scheduled task to reboot at `win11_stig_scheduled_reboot_time` and warn users |
+| `immediate` | Reboot immediately after the play completes |
 
 ## Tags
 
@@ -123,6 +157,8 @@ ansible-playbook site.yml -i inventory --tags WN11-AC-000035
       vars:
         win11_stig_min_password_length: 16
         win11_stig_lockout_duration: 30
+        win11_stig_reboot_strategy: scheduled
+        win11_stig_scheduled_reboot_time: "03:00"
         win11_stig_legal_notice_caption: "ACME Corp Notice"
 ```
 

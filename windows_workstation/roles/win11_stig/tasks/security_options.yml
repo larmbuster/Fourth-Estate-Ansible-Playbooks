@@ -14,6 +14,7 @@
   ansible.windows.win_user:
     name: Guest
     account_disabled: true
+  notify: Reboot required
   tags:
     - WN11-SO-000010
     - cat2
@@ -29,6 +30,7 @@
     name: LimitBlankPasswordUse
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000015
     - cat2
@@ -43,6 +45,7 @@
     section: System Access
     key: NewAdministratorName
     value: "{{ win11_stig_renamed_admin_account }}"
+  notify: Reboot required
   tags:
     - WN11-SO-000020
     - cat2
@@ -57,6 +60,7 @@
     section: System Access
     key: NewGuestName
     value: "{{ win11_stig_renamed_guest_account }}"
+  notify: Reboot required
   tags:
     - WN11-SO-000025
     - cat2
@@ -72,6 +76,7 @@
     name: SCENoApplyLegacyAuditPolicy
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000030
     - cat2
@@ -87,6 +92,7 @@
     name: RequireSignOrSeal
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000035
     - cat2
@@ -102,6 +108,7 @@
     name: SealSecureChannel
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000040
     - cat2
@@ -117,6 +124,7 @@
     name: SignSecureChannel
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000045
     - cat2
@@ -132,6 +140,7 @@
     name: DisablePasswordChange
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000050
     - cat3
@@ -147,6 +156,7 @@
     name: MaximumPasswordAge
     data: 30
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000055
     - cat3
@@ -162,6 +172,7 @@
     name: RequireStrongKey
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000060
     - cat2
@@ -177,6 +188,7 @@
     name: InactivityTimeoutSecs
     data: "{{ win11_stig_inactivity_timeout }}"
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000070
     - cat2
@@ -192,6 +204,7 @@
     name: LegalNoticeText
     data: "{{ win11_stig_legal_notice_text }}"
     type: string
+  notify: Reboot required
   tags:
     - WN11-SO-000075
     - cat2
@@ -207,6 +220,7 @@
     name: LegalNoticeCaption
     data: "{{ win11_stig_legal_notice_caption }}"
     type: string
+  notify: Reboot required
   tags:
     - WN11-SO-000080
     - cat3
@@ -222,6 +236,7 @@
     name: CachedLogonsCount
     data: "{{ win11_stig_cached_logons }}"
     type: string
+  notify: Reboot required
   tags:
     - WN11-SO-000085
     - cat3
@@ -237,6 +252,7 @@
     name: SCRemoveOption
     data: "1"
     type: string
+  notify: Reboot required
   tags:
     - WN11-SO-000095
     - cat2
@@ -252,6 +268,7 @@
     name: RequireSecuritySignature
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000100
     - cat2
@@ -267,6 +284,7 @@
     name: EnablePlainTextPassword
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000110
     - cat2
@@ -282,6 +300,7 @@
     name: RequireSecuritySignature
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000120
     - cat2
@@ -296,6 +315,7 @@
     section: System Access
     key: LSAAnonymousNameLookup
     value: 0
+  notify: Reboot required
   tags:
     - WN11-SO-000140
     - cat1
@@ -311,6 +331,7 @@
     name: RestrictAnonymousSAM
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000145
     - cat1
@@ -326,6 +347,7 @@
     name: RestrictAnonymous
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000150
     - cat1
@@ -341,6 +363,7 @@
     name: EveryoneIncludesAnonymous
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000160
     - cat2
@@ -356,6 +379,7 @@
     name: RestrictNullSessAccess
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000165
     - cat1
@@ -371,6 +395,7 @@
     name: RestrictRemoteSAM
     data: "O:BAG:BAD:(A;;RC;;;BA)"
     type: string
+  notify: Reboot required
   tags:
     - WN11-SO-000167
     - cat2
@@ -386,6 +411,7 @@
     name: allownullsessionfallback
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000180
     - cat2
@@ -401,6 +427,7 @@
     name: AllowOnlineID
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000185
     - cat2
@@ -416,6 +443,7 @@
     name: SupportedEncryptionTypes
     data: 2147483640
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000190
     - cat2
@@ -431,6 +459,7 @@
     name: NoLMHash
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000195
     - cat1
@@ -446,6 +475,7 @@
     name: LmCompatibilityLevel
     data: 5
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000205
     - cat1
@@ -461,6 +491,7 @@
     name: LDAPClientIntegrity
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000210
     - cat2
@@ -476,6 +507,7 @@
     name: NTLMMinClientSec
     data: 537395200
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000215
     - cat2
@@ -491,6 +523,7 @@
     name: NTLMMinServerSec
     data: 537395200
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000220
     - cat2
@@ -506,6 +539,7 @@
     name: Enabled
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000230
     - cat2
@@ -521,6 +555,7 @@
     name: ProtectionMode
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000240
     - cat3
@@ -536,6 +571,7 @@
     name: FilterAdministratorToken
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000245
     - cat2
@@ -551,6 +587,7 @@
     name: ConsentPromptBehaviorAdmin
     data: 2
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000250
     - cat2
@@ -578,6 +615,7 @@
     name: ConsentPromptBehaviorUser
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000255
     - cat2
@@ -593,6 +631,7 @@
     name: EnableInstallerDetection
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000260
     - cat2
@@ -608,6 +647,7 @@
     name: EnableSecureUIAPaths
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000265
     - cat2
@@ -623,6 +663,7 @@
     name: EnableLUA
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000270
     - cat2
@@ -638,6 +679,7 @@
     name: EnableVirtualization
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-SO-000275
     - cat2

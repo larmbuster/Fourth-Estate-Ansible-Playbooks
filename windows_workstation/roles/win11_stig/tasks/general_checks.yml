@@ -16,6 +16,7 @@
       (Get-WindowsEdition -Online).Edition
   register: wn11_00_000005_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000005
@@ -41,6 +42,7 @@
       Get-Tpm | Select-Object TpmPresent, TpmReady, TpmEnabled
   register: wn11_00_000010_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000010
@@ -64,6 +66,8 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control
     name: PEFirmwareType
   register: wn11_00_000015_result
+  check_mode: false
+  failed_when: false
   tags:
     - WN11-00-000015
     - cat2
@@ -88,6 +92,7 @@
       Confirm-SecureBootUEFI
   register: wn11_00_000020_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000020
@@ -125,6 +130,7 @@
       Get-BitLockerVolume | Select-Object MountPoint, VolumeStatus, EncryptionPercentage, ProtectionStatus
   register: wn11_00_000030_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000030
@@ -149,6 +155,7 @@
     name: UseAdvancedStartup
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000031
     - cat1
@@ -160,6 +167,7 @@
     name: UseTPMPIN
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000031
     - cat1
@@ -171,6 +179,7 @@
     name: UseTPMKeyPIN
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000031
     - cat1
@@ -186,6 +195,7 @@
     name: MinimumPIN
     data: "{{ win11_stig_bitlocker_min_pin }}"
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000032
     - cat2
@@ -215,6 +225,7 @@
       "$($ver.DisplayVersion) (OS Build $($ver.CurrentBuildNumber).$($ver.UBR))"
   register: wn11_00_000040_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000040
@@ -240,6 +251,7 @@
       Get-MpComputerStatus | Select-Object AntivirusEnabled, RealTimeProtectionEnabled, AntivirusSignatureLastUpdated
   register: wn11_00_000045_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000045
@@ -265,6 +277,7 @@
       Get-Volume | Where-Object { $_.DriveLetter } | Select-Object DriveLetter, FileSystemType
   register: wn11_00_000050_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000050
@@ -302,6 +315,7 @@
       Get-SmbShare | Where-Object { $_.Name -notin @('ADMIN$','C$','IPC$') } | Select-Object Name, Path
   register: wn11_00_000060_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000060
@@ -339,6 +353,7 @@
       Get-LocalGroupMember -Group Administrators | Select-Object Name, ObjectClass, PrincipalSource
   register: wn11_00_000070_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000070
@@ -364,6 +379,7 @@
       Get-LocalGroupMember -Group 'Backup Operators' -ErrorAction SilentlyContinue | Select-Object Name, ObjectClass
   register: wn11_00_000075_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000075
@@ -389,6 +405,7 @@
       Get-LocalGroupMember -Group 'Hyper-V Administrators' -ErrorAction SilentlyContinue | Select-Object Name, ObjectClass
   register: wn11_00_000080_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000080
@@ -426,6 +443,7 @@
       Get-LocalUser | Where-Object { $_.Enabled -eq $true } | Select-Object Name, PasswordExpires, PasswordNeverExpires
   register: wn11_00_000090_result
   check_mode: false
+  changed_when: false
   failed_when: false
   tags:
     - WN11-00-000090
@@ -532,6 +550,7 @@
     name: TurnOffWindowsCopilot
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000125
     - cat2
@@ -547,6 +566,7 @@
     name: DisableUserAuth
     data: 1
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000126
     - cat2
@@ -567,6 +587,8 @@
     recurse: true
     get_checksum: false
   register: wn11_00_000130_result
+  check_mode: false
+  failed_when: false
   tags:
     - WN11-00-000130
     - cat2
@@ -591,6 +613,7 @@
       - Domain
       - Private
       - Public
+  notify: Reboot required
   tags:
     - WN11-00-000135
     - cat2
@@ -618,6 +641,7 @@
     name: DisableExceptionChainValidation
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000150
     - cat1
@@ -661,6 +685,7 @@
     name: SMB1
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000165
     - cat2
@@ -676,6 +701,7 @@
     name: Start
     data: 4
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000170
     - cat2
@@ -690,6 +716,7 @@
     name: seclogon
     start_mode: disabled
     state: stopped
+  notify: Reboot required
   tags:
     - WN11-00-000175
     - cat2
@@ -717,6 +744,7 @@
     name: AllowBluetooth
     data: 0
     type: dword
+  notify: Reboot required
   tags:
     - WN11-00-000210
     - cat2

@@ -1,0 +1,64 @@
+---
+# =========================================
+# Event-Driven Ansible Rulebook
+# Splunk-Triggered Windows 11 STIG Hardening
+#
+# Listens for Splunk webhook alerts indicating a Windows
+# workstation has powered on (Event ID 6005), then triggers
+# an AAP job template to apply STIG hardening to that host.
+#
+# Splunk-side integration (choose one):
+#   A) Red Hat EDA Add-on for Splunk (recommended)
+#      https://splunkbase.splunk.com/app/7868
+#      Install from Splunkbase, configure its webhook
+#      transport to point at this endpoint.
+#   B) Generic Splunk webhook alert action (fallback)
+#      Use Splunk's built-in Add Actions > Webhook and
+#      set the URL to this endpoint.
+#
+# Both approaches deliver the same Splunk alert payload
+# to ansible.eda.webhook, so this rulebook works with
+# either one unchanged.
+#
+# Splunk alert payload format:
+#   {
+#     "result": { "host": "WORKSTATION01", ... },
+#     "sid": "scheduler_admin_search_...",
+#     "search_name": "Workstation Power-On Detection",
+#     "owner": "admin",
+#     "app": "search"
+#   }
+#
+# Required variables (pass via --vars or EDA Controller):
+#   EDA_WEBHOOK_TOKEN    - Bearer token for webhook auth
+#   JOB_TEMPLATE_NAME    - AAP job template name
+#   AAP_ORGANIZATION     - AAP organization name
+#
+# Usage (CLI):
+#   ansible-rulebook --rulebook rulebook.yml \
+#     --vars vars.yml \
+#     --controller-url https://aap.example.com \
+#     --controller-token <token>
+# =========================================
+
+- name: STIG Hardening on Workstation Power-On
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5001
+        token: "{{ EDA_WEBHOOK_TOKEN }}"
+
+  rules:
+    - name: Workstation powered on - run STIG hardening
+      condition: event.payload.result.host is defined
+      action:
+        run_job_template:
+          name: "{{ JOB_TEMPLATE_NAME | default('Win11 STIG Hardening') }}"
+          organization: "{{ AAP_ORGANIZATION | default('Default') }}"
+          job_args:
+            limit: "{{ event.payload.result.host }}"
+            extra_vars:
+              eda_triggered: true
+              splunk_search_name: "{{ event.payload.search_name }}"
+              splunk_sid: "{{ event.payload.sid }}"

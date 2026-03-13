@@ -14,6 +14,7 @@
     section: System Access
     key: LockoutDuration
     value: "{{ win11_stig_lockout_duration }}"
+  notify: Reboot required
   tags:
     - WN11-AC-000005
     - cat2
@@ -28,6 +29,7 @@
     section: System Access
     key: LockoutBadCount
     value: "{{ win11_stig_lockout_threshold }}"
+  notify: Reboot required
   tags:
     - WN11-AC-000010
     - cat2
@@ -42,6 +44,7 @@
     section: System Access
     key: ResetLockoutCount
     value: "{{ win11_stig_lockout_reset_counter }}"
+  notify: Reboot required
   tags:
     - WN11-AC-000015
     - cat2
@@ -56,6 +59,7 @@
     section: System Access
     key: PasswordHistorySize
     value: "{{ win11_stig_password_history }}"
+  notify: Reboot required
   tags:
     - WN11-AC-000020
     - cat2
@@ -70,6 +74,7 @@
     section: System Access
     key: MaximumPasswordAge
     value: "{{ win11_stig_max_password_age }}"
+  notify: Reboot required
   tags:
     - WN11-AC-000025
     - cat2
@@ -84,6 +89,7 @@
     section: System Access
     key: MinimumPasswordAge
     value: "{{ win11_stig_min_password_age }}"
+  notify: Reboot required
   tags:
     - WN11-AC-000030
     - cat2
@@ -98,6 +104,7 @@
     section: System Access
     key: MinimumPasswordLength
     value: "{{ win11_stig_min_password_length }}"
+  notify: Reboot required
   tags:
     - WN11-AC-000035
     - cat2
@@ -112,6 +119,7 @@
     section: System Access
     key: PasswordComplexity
     value: 1
+  notify: Reboot required
   tags:
     - WN11-AC-000040
     - cat2
@@ -126,6 +134,7 @@
     section: System Access
     key: ClearTextPassword
     value: 0
+  notify: Reboot required
   tags:
     - WN11-AC-000045
     - cat1

@@ -39,6 +39,14 @@
     - always
 
   tasks:
+    - name: Display reboot notice
+      ansible.builtin.debug:
+        msg:
+          - "*** REBOOT PENDING ***"
+          - "STIG changes require a restart of {{ inventory_hostname }}."
+          - "Strategy: {{ win11_stig_reboot_strategy }}"
+      when: win11_stig_reboot_pending | default(false)
+
     - name: Display hardening summary
       ansible.builtin.debug:
         msg:

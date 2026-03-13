@@ -143,5 +143,12 @@ win11_stig_min_os_build: "22621.380"
 # Behavior Flags
 # -----------------------------------------
 
-# Automatically reboot after changes that require it
-win11_stig_auto_reboot: false
+# Reboot strategy after STIG changes that require it:
+#   never     - suppress reboot; set a fact for summary reporting only
+#   notify    - warn logged-in users via msg.exe and set a registry flag (default)
+#   scheduled - create a one-time scheduled task to reboot at the specified time
+#   immediate - reboot immediately (original behavior)
+win11_stig_reboot_strategy: "notify"
+
+# Time for scheduled reboot (24h format), used when strategy is "scheduled"
+win11_stig_scheduled_reboot_time: "02:00"

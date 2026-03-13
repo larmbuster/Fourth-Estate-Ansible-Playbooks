@@ -1,6 +1,69 @@
 ---
-- name: Reboot required
+- name: Track reboot pending (never)
+  ansible.builtin.set_fact:
+    win11_stig_reboot_pending: true
+  listen: Reboot required
+  when: win11_stig_reboot_strategy == "never"
+
+- name: Notify users of pending reboot
+  ansible.windows.win_powershell:
+    script: |
+      msg.exe * "STIG hardening on $env:COMPUTERNAME requires a reboot. Please save your work and restart at your earliest convenience."
+  listen: Reboot required
+  changed_when: false
+  failed_when: false
+  when: win11_stig_reboot_strategy == "notify"
+
+- name: Set reboot pending registry flag
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\FourthEstate\STIG
+    name: RebootPending
+    data: 1
+    type: dword
+  listen: Reboot required
+  when: win11_stig_reboot_strategy == "notify"
+
+- name: Set reboot pending fact (notify)
+  ansible.builtin.set_fact:
+    win11_stig_reboot_pending: true
+  listen: Reboot required
+  when: win11_stig_reboot_strategy == "notify"
+
+- name: Warn users of scheduled reboot
+  ansible.windows.win_powershell:
+    script: |
+      msg.exe * "STIG hardening on $env:COMPUTERNAME requires a reboot. A reboot has been scheduled for {{ win11_stig_scheduled_reboot_time }}. Please save your work."
+  listen: Reboot required
+  changed_when: false
+  failed_when: false
+  when: win11_stig_reboot_strategy == "scheduled"
+
+- name: Schedule reboot
+  community.windows.win_scheduled_task:
+    name: FourthEstate_STIG_Reboot
+    description: One-time reboot scheduled by STIG hardening role
+    actions:
+      - path: shutdown.exe
+        arguments: /r /f /t 60 /d p:4:1 /c "Scheduled reboot for STIG compliance"
+    triggers:
+      - type: time
+        start_boundary: "{{ '%Y-%m-%d' | strftime }}T{{ win11_stig_scheduled_reboot_time }}:00"
+    username: SYSTEM
+    run_level: highest
+    state: present
+    enabled: true
+  listen: Reboot required
+  when: win11_stig_reboot_strategy == "scheduled"
+
+- name: Set reboot pending fact (scheduled)
+  ansible.builtin.set_fact:
+    win11_stig_reboot_pending: true
+  listen: Reboot required
+  when: win11_stig_reboot_strategy == "scheduled"
+
+- name: Reboot now
   ansible.windows.win_reboot:
     reboot_timeout: 600
-    msg: "STIG hardening requires a reboot."
-  when: win11_stig_auto_reboot | default(false) | bool
+    msg: "STIG hardening requires an immediate reboot."
+  listen: Reboot required
+  when: win11_stig_reboot_strategy == "immediate"
