@@ -30,6 +30,7 @@
       Detected OS family '{{ ansible_os_family | default("unknown") }}'
       with domain role '{{ ansible_windows_domain_role | default("unknown") }}'.
     quiet: true
+  when: not (win11_stig_skip_domain_check | default(false) | bool)
   tags:
     - always
 

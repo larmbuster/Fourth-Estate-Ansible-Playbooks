@@ -1,0 +1,130 @@
+name: Windows Workstation Role Test (Azure Win11 Ephemeral)
+
+on:
+  pull_request:
+    branches: [ main, master ]
+    types: [opened, synchronize, reopened]
+    paths:
+      - "windows_workstation/**"
+      - ".github/workflow-suites/windows-workstation/**"
+      - ".github/workflows/windows-workstation-azure-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  packages: read
+
+concurrency:
+  group: windows-workstation-azure-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  AZ_LOCATION: eastus
+  AZ_VM_SIZE: Standard_D4s_v5
+  AZ_IMAGE: MicrosoftWindowsDesktop:windows-11:win11-22h2-pro:latest
+  INVENTORY_PATH: windows_workstation/inventory.ci
+  WIN_ADMIN_USER: ciadmin
+  # Execution Environment image containing ansible-core, ansible.windows,
+  # community.windows, pywinrm, and requests-credssp.
+  # Build with ansible-builder and push to ghcr.io before this workflow
+  # will pass. See: https://ansible.readthedocs.io/projects/builder/
+  EE_IMAGE: ghcr.io/<org>/ee-windows-stig:latest
+
+jobs:
+  win11-role-test:
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
+    environment: ci-windows
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Install ansible-navigator
+        run: pip install "ansible-navigator>=24.0,<25"
+
+      - name: Pull Execution Environment
+        run: docker pull "${EE_IMAGE}"
+
+      - name: Generate ephemeral admin password
+        run: |
+          PASS="$(openssl rand -base64 48 | tr -d '\n' | head -c 32)Aa1!"
+          echo "::add-mask::$PASS"
+          echo "WIN_ADMIN_PASS=$PASS" >> "$GITHUB_ENV"
+
+      - name: Provision Win11 VM and bootstrap WinRM
+        run: |
+          chmod +x .github/workflow-suites/windows-workstation/provision-and-bootstrap.sh
+          .github/workflow-suites/windows-workstation/provision-and-bootstrap.sh
+
+      - name: Build dynamic inventory
+        run: |
+          chmod +x .github/workflow-suites/windows-workstation/create-inventory.sh
+          .github/workflow-suites/windows-workstation/create-inventory.sh
+
+      - name: Validate connectivity
+        run: |
+          ansible-navigator exec \
+            --eei "${EE_IMAGE}" \
+            --mode stdout \
+            -- ansible windows_workstations \
+              -i "${INVENTORY_PATH}" \
+              -m ansible.windows.win_ping \
+              -vv
+
+      - name: Run Windows 11 STIG role playbook
+        env:
+          ANSIBLE_FORCE_COLOR: "1"
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        run: |
+          ansible-navigator run windows_workstation/site.yml \
+            --eei "${EE_IMAGE}" \
+            --mode stdout \
+            -i "${INVENTORY_PATH}" \
+            -e win11_stig_skip_domain_check=true \
+            -e win11_stig_reboot_strategy=never \
+            -- -vv 2>&1 | tee /tmp/stig-run.log
+
+      - name: Run playbook again (idempotency check)
+        env:
+          ANSIBLE_FORCE_COLOR: "1"
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        run: |
+          ansible-navigator run windows_workstation/site.yml \
+            --eei "${EE_IMAGE}" \
+            --mode stdout \
+            -i "${INVENTORY_PATH}" \
+            -e win11_stig_skip_domain_check=true \
+            -e win11_stig_reboot_strategy=never \
+            -- -vv 2>&1 | tee /tmp/idempotency.log
+          CHANGED=$(grep -c '"changed": true' /tmp/idempotency.log || true)
+          if [ "$CHANGED" -gt 0 ]; then
+            echo "::warning::Idempotency check: $CHANGED changed tasks on second run"
+          fi
+
+      - name: Upload Ansible logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ansible-logs
+          path: /tmp/*.log
+          retention-days: 7
+
+      - name: Cleanup Azure resource group
+        if: always()
+        run: |
+          if [ -n "${RG_NAME:-}" ]; then
+            az group delete --name "${RG_NAME}" --yes --no-wait
+          fi

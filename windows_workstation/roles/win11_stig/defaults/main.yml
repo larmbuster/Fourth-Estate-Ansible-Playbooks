@@ -152,3 +152,7 @@ win11_stig_reboot_strategy: "notify"
 
 # Time for scheduled reboot (24h format), used when strategy is "scheduled"
 win11_stig_scheduled_reboot_time: "02:00"
+
+# Skip the domain-join pre-flight check (CI/testing only).
+# WARNING: Many STIG controls assume domain membership.
+win11_stig_skip_domain_check: false

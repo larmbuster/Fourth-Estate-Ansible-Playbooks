@@ -165,3 +165,9 @@ argument_specs:
         default: "02:00"
         description: >-
           Time for scheduled reboot in 24h format (used when strategy is scheduled).
+      win11_stig_skip_domain_check:
+        type: bool
+        default: false
+        description: >-
+          Skip the domain-join pre-flight check. Use only for CI/testing on
+          standalone workstations. Many STIG controls assume domain membership.
